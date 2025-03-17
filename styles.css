@@ -5,7 +5,14 @@ body {
     color: white;
     font-family: 'Roboto Condensed', sans-serif;
 }
-
+.synapse-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100px;
+    z-index: -1;
+}
 .header {
     position: fixed;
     top: 0;
