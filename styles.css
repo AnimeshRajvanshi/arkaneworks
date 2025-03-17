@@ -64,6 +64,8 @@ body {
     margin: 10px 0;
 }
 .main-content {
+    position: relative;
+    z-index: 1;
     padding-top: 120px;
     padding-left: 20px;
     padding-right: 20px;
