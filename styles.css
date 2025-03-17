@@ -4,6 +4,7 @@ body {
     background-color: black;
     color: white;
     font-family: 'Roboto Condensed', sans-serif;
+    overflow-x: hidden; /* Prevents horizontal scroll */
 }
 .header {
     position: fixed;
@@ -13,6 +14,7 @@ body {
     height: 100px;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 10;
+    transition: left 0.3s ease; /* Smooth slide with page */
 }
 .website-name {
     position: absolute;
@@ -35,7 +37,7 @@ body {
     margin: 6px 0;
 }
 .navigation {
-    position: absolute;
+    position: fixed; /* Changed to fixed for consistent positioning */
     top: 0;
     left: -200px;
     width: 200px;
@@ -44,6 +46,7 @@ body {
     color: white;
     padding: 20px;
     transition: left 0.3s ease;
+    z-index: 15; /* Above header */
 }
 .navigation ul {
     list-style: none;
@@ -53,24 +56,36 @@ body {
     margin: 10px 0;
 }
 .navigation .sub-item {
-    margin-left: 20px; /* Indents project sub-links */
+    margin-left: 20px; /* Indents sub-links */
 }
 .navigation a {
     color: white;
     text-decoration: none;
     display: block;
 }
-.main-content {
+.page-container {
     position: relative;
     z-index: 5;
+    transition: transform 0.3s ease; /* Slides right */
+}
+.page-container.menu-open {
+    transform: translateX(200px); /* Moves page right by menu width */
+}
+.main-content {
     padding-top: 120px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 20px;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 40px;
     min-height: calc(100vh - 120px);
+    background-color: rgba(0, 0, 0, 0.7);
+    text-align: left; /* All text left-aligned */
+}
+.main-content h1 {
+    margin: 0 0 20px 0;
+    font-size: 28px;
+}
+.main-content p {
+    margin: 0 0 20px 0;
 }
 .project-list {
     list-style: none;
@@ -88,8 +103,6 @@ body {
     text-decoration: underline;
 }
 .project-content {
-    position: relative;
-    z-index: 5;
     padding-top: 120px;
     padding-left: 40px;
     padding-right: 40px;
@@ -99,25 +112,24 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    text-align: left; /* All text left-aligned */
 }
 .project-content h1 {
     margin: 0 0 20px 0;
-    text-align: left;
     font-size: 28px;
 }
 .project-content p {
     margin: 0 0 20px 0;
-    text-align: left;
-    max-width: 50%; /* Limits text width */
+    max-width: 50%;
 }
 .project-content .project-image {
-    width: 300px; /* Larger for individual pages */
+    width: 300px;
     height: auto;
     align-self: flex-end;
 }
 .profile-pic {
     width: 200px;
-    height: 200px;
-    border-radius: 50%;
+    height: auto; /* No circle, keeps aspect ratio */
+    align-self: flex-end;
     margin-top: 20px;
 }
