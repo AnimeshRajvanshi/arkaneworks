@@ -4,7 +4,15 @@ body {
     background-color: black;
     color: white;
     font-family: 'Roboto Condensed', sans-serif;
-    overflow-x: hidden; /* Prevents horizontal scroll */
+    overflow-x: hidden;
+}
+.page-container {
+    position: relative;
+    z-index: 5;
+    transition: transform 0.3s ease;
+}
+.page-container.menu-open {
+    transform: translateX(200px); /* Slides everything right */
 }
 .header {
     position: fixed;
@@ -14,7 +22,6 @@ body {
     height: 100px;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 10;
-    transition: left 0.3s ease; /* Smooth slide with page */
 }
 .website-name {
     position: absolute;
@@ -30,14 +37,24 @@ body {
     height: 30px;
     cursor: pointer;
 }
-.line {
+.menu-button .line {
     width: 30px;
     height: 2px;
     background-color: white;
     margin: 6px 0;
+    transition: all 0.3s ease;
+}
+.menu-button.open .line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px); /* Top line of X */
+}
+.menu-button.open .line:nth-child(2) {
+    opacity: 0; /* Middle line disappears */
+}
+.menu-button.open .line:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px); /* Bottom line of X */
 }
 .navigation {
-    position: fixed; /* Changed to fixed for consistent positioning */
+    position: fixed;
     top: 0;
     left: -200px;
     width: 200px;
@@ -46,7 +63,10 @@ body {
     color: white;
     padding: 20px;
     transition: left 0.3s ease;
-    z-index: 15; /* Above header */
+    z-index: 15;
+}
+.navigation.open {
+    left: 0; /* Slides in */
 }
 .navigation ul {
     list-style: none;
@@ -56,20 +76,12 @@ body {
     margin: 10px 0;
 }
 .navigation .sub-item {
-    margin-left: 20px; /* Indents sub-links */
+    margin-left: 20px;
 }
 .navigation a {
     color: white;
     text-decoration: none;
     display: block;
-}
-.page-container {
-    position: relative;
-    z-index: 5;
-    transition: transform 0.3s ease; /* Slides right */
-}
-.page-container.menu-open {
-    transform: translateX(200px); /* Moves page right by menu width */
 }
 .main-content {
     padding-top: 120px;
@@ -78,7 +90,7 @@ body {
     padding-bottom: 40px;
     min-height: calc(100vh - 120px);
     background-color: rgba(0, 0, 0, 0.7);
-    text-align: left; /* All text left-aligned */
+    text-align: left;
 }
 .main-content h1 {
     margin: 0 0 20px 0;
@@ -112,7 +124,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    text-align: left; /* All text left-aligned */
+    text-align: left;
 }
 .project-content h1 {
     margin: 0 0 20px 0;
@@ -129,7 +141,7 @@ body {
 }
 .profile-pic {
     width: 200px;
-    height: auto; /* No circle, keeps aspect ratio */
+    height: auto;
     align-self: flex-end;
     margin-top: 20px;
 }
