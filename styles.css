@@ -105,7 +105,7 @@ body {
     padding-right: 40px;
     padding-bottom: 40px;
     min-height: calc(100vh - 120px);
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.5);
     text-align: left;
 }
 .main-content h1 {
@@ -136,11 +136,11 @@ body {
     padding-right: 40px;
     padding-bottom: 40px;
     min-height: calc(100vh - 120px);
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.5);
     text-align: left;
 }
 .project-content h1 {
-    margin: 0 0 10px 0; /* Reduced gap */
+    margin: 0 0 10px 0;
     font-size: 28px;
 }
 .project-content p {
@@ -151,9 +151,9 @@ body {
     position: fixed;
     bottom: 40px;
     right: 40px;
-    width: 400px; /* Bigger size */
+    width: 400px;
     height: auto;
-    z-index: 0; /* Above background, below sliding content */
+    z-index: 20; /* Above header (10) and navigation (15) */
 }
 .profile-pic {
     width: 200px;
