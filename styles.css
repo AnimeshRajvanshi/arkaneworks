@@ -41,13 +41,13 @@ body {
 }
 .website-name {
     position: absolute;
-    top: 20px;
+    top: 30px; /* Lowered from 20px */
     left: 100px;
     font-size: 24px;
 }
 .menu-button {
     position: absolute;
-    top: 20px;
+    top: 30px; /* Lowered from 20px */
     left: 50px;
     width: 30px;
     height: 30px;
@@ -105,7 +105,7 @@ body {
     padding-right: 40px;
     padding-bottom: 40px;
     min-height: calc(100vh - 120px);
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5); /* Updated per your change */
     text-align: left;
 }
 .main-content h1 {
@@ -135,8 +135,7 @@ body {
     padding-left: 40px;
     padding-right: 40px;
     padding-bottom: 40px;
-    min-height: calc(100vh - 120px);
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5); /* Updated per your change */
     text-align: left;
 }
 .project-content h1 {
@@ -148,12 +147,11 @@ body {
     max-width: 50%;
 }
 .project-image {
-    position: fixed;
-    bottom: 40px;
+    position: absolute; /* Changed from fixed */
     right: 40px;
     width: 400px;
     height: auto;
-    z-index: 20; /* Above header (10) and navigation (15) */
+    z-index: 20; /* Still above header and navigation */
 }
 .profile-pic {
     width: 200px;
