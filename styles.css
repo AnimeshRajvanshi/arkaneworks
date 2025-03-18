@@ -12,10 +12,15 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('synapse1.jpg');
     background-size: cover;
     background-position: center;
-    z-index: -1; /* Stays behind everything */
+    z-index: -1;
+}
+.background-image[data-image="synapse1.jpg"] {
+    background-image: url('synapse1.jpg');
+}
+.background-image[data-image="synapse2.jpg"] {
+    background-image: url('synapse2.jpg');
 }
 .page-container {
     position: relative;
@@ -132,23 +137,23 @@ body {
     padding-bottom: 40px;
     min-height: calc(100vh - 120px);
     background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     text-align: left;
 }
 .project-content h1 {
-    margin: 0 0 20px 0;
+    margin: 0 0 10px 0; /* Reduced gap */
     font-size: 28px;
 }
 .project-content p {
     margin: 0 0 20px 0;
     max-width: 50%;
 }
-.project-content .project-image {
-    width: 300px;
+.project-image {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 400px; /* Bigger size */
     height: auto;
-    align-self: flex-end;
+    z-index: 0; /* Above background, below sliding content */
 }
 .profile-pic {
     width: 200px;
