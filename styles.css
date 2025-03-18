@@ -41,13 +41,13 @@ body {
 }
 .website-name {
     position: absolute;
-    top: 30px; /* Lowered from 20px */
+    top: 30px;
     left: 100px;
     font-size: 24px;
 }
 .menu-button {
     position: absolute;
-    top: 30px; /* Lowered from 20px */
+    top: 30px;
     left: 50px;
     width: 30px;
     height: 30px;
@@ -105,7 +105,7 @@ body {
     padding-right: 40px;
     padding-bottom: 40px;
     min-height: calc(100vh - 120px);
-    background-color: rgba(0, 0, 0, 0.5); /* Updated per your change */
+    background-color: rgba(0, 0, 0, 0.5);
     text-align: left;
 }
 .main-content h1 {
@@ -131,11 +131,13 @@ body {
     text-decoration: underline;
 }
 .project-content {
+    position: relative; /* Added for absolute positioning context */
     padding-top: 120px;
     padding-left: 40px;
     padding-right: 40px;
     padding-bottom: 40px;
-    background-color: rgba(0, 0, 0, 0.5); /* Updated per your change */
+    min-height: calc(100vh - 120px); /* Restored for full overlay */
+    background-color: rgba(0, 0, 0, 0.5);
     text-align: left;
 }
 .project-content h1 {
@@ -147,11 +149,12 @@ body {
     max-width: 50%;
 }
 .project-image {
-    position: absolute; /* Changed from fixed */
+    position: absolute;
+    bottom: 40px; /* Pinned to bottom on load */
     right: 40px;
     width: 400px;
     height: auto;
-    z-index: 20; /* Still above header and navigation */
+    z-index: 20;
 }
 .profile-pic {
     width: 200px;
