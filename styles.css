@@ -3,7 +3,7 @@ body {
     padding: 0;
     background-color: black;
     color: white;
-    font-family: 'Barlow', sans-serif; /* Changed to Barlow for lunar page */
+    font-family: 'Barlow', sans-serif; /* Barlow for lunar page */
     overflow-x: hidden;
 }
 .background-image {
@@ -78,11 +78,13 @@ body {
     background-color: black;
     color: white;
     padding: 20px;
-    transition: left 0.3s ease;
+    opacity: 0; /* Hidden when closed */
+    transition: left 0.3s ease, opacity 0.3s ease; /* Added opacity transition */
     z-index: 15;
 }
 .navigation.open {
     left: 0;
+    opacity: 1; /* Visible when open */
 }
 .navigation ul {
     list-style: none;
@@ -188,19 +190,4 @@ body {
 }
 .references h2 {
     font-size: 22px;
-    margin-bottom: 15px;
-}
-.references ul {
-    list-style: none;
-    padding: 0;
-}
-.references li {
-    margin: 10px 0;
-}
-.references a {
-    color: #ccc;
-    text-decoration: none;
-}
-.references a:hover {
-    text-decoration: underline;
-}
+    margin-bottom: 1
