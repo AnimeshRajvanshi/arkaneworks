@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ocean Sentinel CubeSat - ARKANE WORKS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+    <title>Gorgon CubeSat - ARKANE WORKS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="script.js" defer></script>
 </head>
@@ -19,9 +19,51 @@
             </div>
         </div>
         <div class="project-content">
-            <h1>Ocean Sentinel CubeSat</h1>
-            <p>From July 2021 to July 2022, I managed the Hyperspectral CubeSat project at ASU’s Sun Devil Satellite Laboratory, leading a team of engineering students to design a CubeSat with a hyperspectral camera aimed at cataloging ocean plastic pollution. I established the scientific mission, delegated tasks like camera integration and structural design, and revamped our sponsorship package to secure funding. I also supported the lab’s board by managing the workshop, planning outreach events, and ensuring resource allocation, delivering a small satellite with a bold environmental vision.</p>
-            <img src="project2.jpg" alt="Ocean Sentinel CubeSat" class="project-image">
+            <h1>Gorgon CubeSat</h1>
+            <p>The Gorgon CubeSat is a proposed 12U CubeSat mission I’ve been developing since my time with Arizona State University’s Sun Devil Satellite Laboratory (SDSL) in 2023, where my talented team of engineering students laid the groundwork with significant contributions. After leaving SDSL, I’ve continued refining this concept independently, aiming to catalog ocean plastic pollution from orbit using a hyperspectral camera in the 1000-1700 nm range, targeting macroplastics in zones like the Great Pacific Garbage Patch. The secondary goal is to integrate a modified Starlink ground terminal for data relay to Starlink satellites, eliminating traditional ground stations. This research-based proposal envisions scalable marine monitoring, though it remains purely conceptual with no simulations or hardware development yet undertaken.</p>
+            
+            <p><strong>Problem Statement</strong><br>
+            Ocean plastic pollution is a critical issue, with 8-12 million tonnes entering annually, primarily as macroplastics that threaten marine ecosystems through entanglement and ingestion. Current monitoring—limited to in-situ surveys and aerial observations—falls short of the coverage needed to address this crisis. The “Missing Plastic Problem” reveals only 269,000 tonnes on the surface versus millions inputted yearly, underscoring the need for advanced remote sensing to map distribution and explore sinks.</p>
+            
+            <p><strong>Approach</strong><br>
+            At SDSL, our team collaboratively explored CubeSat concepts for environmental monitoring, with my peers contributing key insights into payload and orbit design. Post-SDSL, I’ve expanded this into a research proposal featuring a hyperspectral camera for plastic detection, leveraging SWIR absorption peaks (e.g., 1215 nm, 1410 nm) against water’s low reflectance. The innovative addition of a Starlink terminal for space-to-space communication emerged from my independent research, inspired by its bandwidth potential. This remains a theoretical framework, drawing from literature and existing technologies.</p>
+            
+            <p><strong>Design and Research</strong><br>
+            The proposed 12U platform (20x20x30 cm, ~24 kg) includes:<br>
+            - <strong>Hyperspectral Camera</strong>: A custom SWIR imager (1000-1700 nm, 10 nm resolution, 50 m GSD, 50 km swath), inspired by Headwall Photonics’ Hyperspec SWIR, sized at 2U, 15 W—conceptual only.<br>
+            - <strong>ADCS</strong>: Blue Canyon XACT-50 (0.5U, 0.85 kg, 5 W), targeting <0.1° pointing accuracy—placeholder based on specs.<br>
+            - <strong>OBC</strong>: Unibap iX5-100 (9x9x2 cm, 0.2 kg, 3 W), for potential onboard processing—researched, not implemented.<br>
+            - <strong>EPS</strong>: DHV Technology 12U solar panels (25 W, 1.5 kg) and GOMspace NanoPower BPX battery (100 Wh, 0.8 kg)—theoretical power design.<br>
+            - <strong>Communications</strong>: A modified Starlink terminal (1.5U, 2.5 kg, 20 W, Ku-band, 100 Mbps)—a conceptual adaptation requiring development.<br>
+            - <strong>Structure</strong>: ISISpace 12U frame (1.2 kg) with passive thermal control—standard design consideration.<br>
+            No modeling or simulations have been performed; this is a research synthesis of potential components.</p>
+            
+            <p><strong>Feasibility and Safety</strong><br>
+            The 12U size supports the proposed payload and subsystems, aligning with rideshare launch options. The hyperspectral camera’s 50 m GSD is theoretically viable at 500 km altitude, and the Starlink terminal concept leverages existing technology, though it demands space qualification and regulatory approval—unproven without testing. As a research proposal, it poses no physical risks, with feasibility resting on future hardware realization.</p>
+            
+            <p><strong>Results and Impact</strong><br>
+            As a conceptual proposal, no results exist, but it envisions mapping macroplastics across 50 km swaths to address the “Missing Plastic” issue. The Starlink relay could potentially offer 100 Mbps downlink, bypassing ground stations if feasible—though this remains speculative. If executed, Gorgon could enhance marine pollution monitoring, but its impact hinges on transitioning from research to development, a step yet to be taken.</p>
+            <img src="project2.jpg" alt="Gorgon CubeSat" class="project-image">
+        </div>
+        <div class="references">
+            <div class="references-content">
+                <h2>References</h2>
+                <ul>
+                    <li><a href="https://github.com/animeshrajvanshi/arkaneworks/blob/main/A_Resume.pdf" target="_blank">User's Resume</a> - Source of SDSL involvement.</li>
+                    <li>"CubeSat Proposal: Marine Plastic Detection Using Hyperspectral Imaging" - Initial draft for objectives and context.</li>
+                    <li><a href="https://www.science.org/doi/10.1126/science.1260352" target="_blank">Jambeck et al., 2015</a> - Plastic input statistics (8 million tonnes/year).</li>
+                    <li><a href="https://www.nature.com/articles/s41598-018-22939-w" target="_blank">Lebreton et al., 2018</a> - GPGP data (1.8 trillion particles).</li>
+                    <li><a href="https://www.pnas.org/doi/10.1073/pnas.1314705111" target="_blank">Cózar et al., 2014</a> - Surface plastic mass (269,000 tonnes).</li>
+                    <li><a href="https://www.nature.com/articles/s41598-020-62215-8" target="_blank">Biermann et al., 2020</a> - Hyperspectral plastic signatures (1215 nm, 1410 nm).</li>
+                    <li><a href="https://bluecanyontech.com/products/xact" target="_blank">Blue Canyon XACT-50</a> - ADCS specs.</li>
+                    <li><a href="https://unibap.com/products/ix5-100" target="_blank">Unibap iX5-100</a> - OBC details.</li>
+                    <li><a href="https://dhvtechnology.com/products/cubesat-solar-panels" target="_blank">DHV Technology Solar Panels</a> - EPS solar panel info.</li>
+                    <li><a href="https://gomspace.com/shop/subsystems/power-systems/nanopower-bpx.aspx" target="_blank">GOMspace NanoPower BPX</a> - Battery specs.</li>
+                    <li><a href="https://en.wikipedia.org/wiki/Starlink" target="_blank">Starlink Wikipedia</a> - Basis for communication concept.</li>
+                    <li><a href="https://www.isispace.nl/product/12u-cubesat-structure" target="_blank">ISISpace 12U Structure</a> - Structural details.</li>
+                    <li><a href="https://www.headwallphotonics.com/hyperspectral-imaging-systems/swir" target="_blank">Headwall Photonics Hyperspec SWIR</a> - Hyperspectral camera inspiration.</li>
+                </ul>
+            </div>
         </div>
     </div>
     <div class="navigation">
@@ -29,10 +71,10 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="projects.html">Projects</a></li>
             <li class="sub-item"><a href="lunar.html">Lunar Power Grid</a></li>
-            <li class="sub-item"><a href="cubesat.html">Ocean Sentinel CubeSat</a></li>
-            <li class="sub-item"><a href="nano.html">Nano-Probe Vanguard</a></li>
-            <li class="sub-item"><a href="heat.html">Cool Haven Prototype</a></li>
-            <li class="sub-item"><a href="wrongway.html">Wrong-Way Interceptor</a></li>
+            <li class="sub-item"><a href="cubesat.html">Gorgon CubeSat</a></li>
+            <li class="sub-item"><a href="nano.html">Nanoelectronics Metrology</a></li>
+            <li class="sub-item"><a href="heat.html">Heat Resilience Challenge</a></li>
+            <li class="sub-item"><a href="wrongway.html">Mechanical Wrong-Way Driving Prevention System</a></li>
             <li><a href="about.html">About Me</a></li>
         </ul>
     </div>
