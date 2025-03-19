@@ -3,7 +3,7 @@ body {
     padding: 0;
     background-color: black;
     color: white;
-    font-family: 'Barlow', sans-serif; /* Barlow for lunar page */
+    font-family: 'Barlow', sans-serif; /* Barlow site-wide */
     overflow-x: hidden;
 }
 .background-image {
@@ -78,13 +78,13 @@ body {
     background-color: black;
     color: white;
     padding: 20px;
-    opacity: 0; /* Hidden when closed */
-    transition: left 0.3s ease, opacity 0.3s ease; /* Added opacity transition */
+    opacity: 0;
+    transition: left 0.3s ease, opacity 0.3s ease;
     z-index: 15;
 }
 .navigation.open {
     left: 0;
-    opacity: 1; /* Visible when open */
+    opacity: 1;
 }
 .navigation ul {
     list-style: none;
