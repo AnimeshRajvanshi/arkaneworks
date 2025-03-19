@@ -105,7 +105,7 @@ body {
     padding-right: 40px;
     padding-bottom: 40px;
     min-height: calc(100vh - 120px);
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
     text-align: left;
 }
 .main-content h1 {
@@ -136,8 +136,8 @@ body {
     padding-left: 40px;
     padding-right: 40px;
     padding-bottom: 40px;
-    min-height: calc(100vh - 120px);
-    background-color: rgba(0, 0, 0, 0.5);
+    min-height: calc(100vh - 120px); /* Full initial viewport */
+    background-color: rgba(0, 0, 0, 0.6);
     text-align: left;
 }
 .project-content h1 {
@@ -163,14 +163,16 @@ body {
     margin-top: 20px;
 }
 .references {
-    margin-top: 40px;
-    padding-bottom: 80px; /* Extra space for scrolling */
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.6); /* Matches overlay */
     opacity: 0; /* Hidden on load */
     transition: opacity 0.5s ease; /* Fade-in effect */
     max-width: 50%;
+    position: relative;
+    z-index: 5; /* Matches page-container */
 }
 .references.visible {
-    opacity: 1; /* Visible when scrolled into view */
+    opacity: 1; /* Visible when scrolled past image */
 }
 .references h2 {
     font-size: 22px;
