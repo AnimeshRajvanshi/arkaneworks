@@ -4,7 +4,7 @@ body {
     background-color: black;
     color: white;
     font-family: 'Barlow', sans-serif;
-    font-weight: 300; /* Finer body text */
+    font-weight: 300; /* Thinner body text (was 400) */
     overflow-x: hidden;
 }
 .background-image {
@@ -44,7 +44,8 @@ body {
     position: absolute;
     top: 30px;
     left: 100px;
-    font-size: 24px; /* Unchanged, defaults to 400 */
+    font-size: 24px;
+    font-weight: 600; /* Slightly thicker header (was 400) */
 }
 .menu-button {
     position: absolute;
@@ -101,7 +102,6 @@ body {
     color: white;
     text-decoration: none;
     display: block;
-    font-weight: 300; /* Fine navigation text */
 }
 .main-content {
     padding-top: 120px;
@@ -113,13 +113,12 @@ body {
     text-align: left;
 }
 .main-content h1 {
-    margin: 0 0 10px 0;
+    margin: 0 0 20px 0;
     font-size: 28px;
-    font-weight: 700; /* Thicker h1 */
+    font-weight: 500; /* Thinner headings (was bolder, likely 700) */
 }
 .main-content p {
     margin: 0 0 20px 0;
-    font-weight: 300; /* Fine body text */
 }
 .project-list {
     list-style: none;
@@ -132,7 +131,6 @@ body {
     color: white;
     text-decoration: none;
     font-size: 18px;
-    font-weight: 300; /* Fine project list text */
 }
 .project-list a:hover {
     text-decoration: underline;
@@ -150,12 +148,11 @@ body {
 .project-content h1 {
     margin: 0 0 10px 0;
     font-size: 28px;
-    font-weight: 700; /* Thicker h1 */
+    font-weight: 500; /* Thinner headings (was bolder, likely 700) */
 }
 .project-content p {
     margin: 0 0 20px 0;
     max-width: 50%;
-    font-weight: 300; /* Fine body text */
 }
 .project-image {
     position: absolute;
@@ -198,7 +195,7 @@ body {
 .references h2 {
     font-size: 22px;
     margin-bottom: 15px;
-    font-weight: 600; /* Thicker h2 */
+    font-weight: 500; /* Thinner headings (was bolder, likely 700) */
 }
 .references ul {
     list-style: none;
@@ -206,12 +203,10 @@ body {
 }
 .references li {
     margin: 10px 0;
-    font-weight: 300; /* Fine references text */
 }
 .references a {
     color: #ccc;
     text-decoration: none;
-    font-weight: 300; /* Fine references links */
 }
 .references a:hover {
     text-decoration: underline;
