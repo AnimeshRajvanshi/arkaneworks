@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuButton = document.querySelector('.menu-button');
     const navigation = document.querySelector('.navigation');
     const pageContainer = document.querySelector('.page-container');
-    const projectImage = document.querySelector('.project-image');
     const references = document.querySelector('.references');
     let isMenuOpen = false;
 
@@ -30,15 +29,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Show references when scrolling past the project image
-    if (projectImage && references) {
+    // Show references when references section enters viewport
+    if (references) {
         const observer = new IntersectionObserver((entries) => {
-            if (!entries[0].isIntersecting) {
-                references.classList.add('visible');
-            } else {
-                references.classList.remove('visible');
-            }
-        }, { threshold: 0 });
-        observer.observe(projectImage);
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    references.classList.add('visible');
+                } else {
+                    references.classList.remove('visible');
+                }
+            });
+        }, { rootMargin: '0px 0px -100px 0px', threshold: 0.1 });
+        observer.observe(references);
     }
 });
