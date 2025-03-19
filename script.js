@@ -32,13 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Show references when scrolling past the project image
     if (projectImage && references) {
-        window.addEventListener('scroll', () => {
-            const imageRect = projectImage.getBoundingClientRect();
-            if (imageRect.bottom <= 0) { // Image is fully out of view
+        const observer = new IntersectionObserver((entries) => {
+            if (!entries[0].isIntersecting) {
                 references.classList.add('visible');
             } else {
-                references.classList.remove('visible'); // Hide if scrolling back up
+                references.classList.remove('visible');
             }
-        });
+        }, { threshold: 0 });
+        observer.observe(projectImage);
     }
 });
