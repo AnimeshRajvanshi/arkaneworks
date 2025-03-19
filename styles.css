@@ -131,12 +131,12 @@ body {
     text-decoration: underline;
 }
 .project-content {
-    position: relative; /* Added for absolute positioning context */
+    position: relative;
     padding-top: 120px;
     padding-left: 40px;
     padding-right: 40px;
     padding-bottom: 40px;
-    min-height: calc(100vh - 120px); /* Restored for full overlay */
+    min-height: calc(100vh - 120px);
     background-color: rgba(0, 0, 0, 0.5);
     text-align: left;
 }
@@ -150,7 +150,7 @@ body {
 }
 .project-image {
     position: absolute;
-    bottom: 40px; /* Pinned to bottom on load */
+    bottom: 40px;
     right: 40px;
     width: 400px;
     height: auto;
@@ -161,4 +161,32 @@ body {
     height: auto;
     align-self: flex-end;
     margin-top: 20px;
+}
+.references {
+    margin-top: 40px;
+    padding-bottom: 80px; /* Extra space for scrolling */
+    opacity: 0; /* Hidden on load */
+    transition: opacity 0.5s ease; /* Fade-in effect */
+    max-width: 50%;
+}
+.references.visible {
+    opacity: 1; /* Visible when scrolled into view */
+}
+.references h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+.references ul {
+    list-style: none;
+    padding: 0;
+}
+.references li {
+    margin: 10px 0;
+}
+.references a {
+    color: #ccc;
+    text-decoration: none;
+}
+.references a:hover {
+    text-decoration: underline;
 }
