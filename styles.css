@@ -190,4 +190,19 @@ body {
 }
 .references h2 {
     font-size: 22px;
-    margin-bottom: 1
+    margin-bottom: 15px;
+}
+.references ul {
+    list-style: none;
+    padding: 0;
+}
+.references li {
+    margin: 10px 0;
+}
+.references a {
+    color: #ccc;
+    text-decoration: none;
+}
+.references a:hover {
+    text-decoration: underline;
+}
