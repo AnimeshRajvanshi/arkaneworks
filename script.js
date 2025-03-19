@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuButton = document.querySelector('.menu-button');
     const navigation = document.querySelector('.navigation');
     const pageContainer = document.querySelector('.page-container');
+    const projectImage = document.querySelector('.project-image');
     const references = document.querySelector('.references');
     let isMenuOpen = false;
 
@@ -29,13 +30,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Show references on scroll
-    if (references) {
+    // Show references when scrolling past the project image
+    if (projectImage && references) {
         window.addEventListener('scroll', () => {
-            const rect = references.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-            if (rect.top <= windowHeight - 100) { // Trigger 100px before fully in view
+            const imageRect = projectImage.getBoundingClientRect();
+            if (imageRect.bottom <= 0) { // Image is fully out of view
                 references.classList.add('visible');
+            } else {
+                references.classList.remove('visible'); // Hide if scrolling back up
             }
         });
     }
