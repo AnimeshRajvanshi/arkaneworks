@@ -105,7 +105,7 @@ body {
     padding-right: 40px;
     padding-bottom: 40px;
     min-height: calc(100vh - 120px);
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.6); /* Updated to 0.6 */
     text-align: left;
 }
 .main-content h1 {
@@ -136,8 +136,8 @@ body {
     padding-left: 40px;
     padding-right: 40px;
     padding-bottom: 40px;
-    min-height: calc(100vh - 120px); /* Full initial viewport */
-    background-color: rgba(0, 0, 0, 0.6);
+    min-height: calc(100vh - 120px);
+    background-color: rgba(0, 0, 0, 0.6); /* Updated to 0.6 */
     text-align: left;
 }
 .project-content h1 {
@@ -163,16 +163,28 @@ body {
     margin-top: 20px;
 }
 .references {
-    padding: 40px;
-    background-color: rgba(0, 0, 0, 0.6); /* Matches overlay */
-    opacity: 0; /* Hidden on load */
-    transition: opacity 0.5s ease; /* Fade-in effect */
-    max-width: 50%;
     position: relative;
-    z-index: 5; /* Matches page-container */
+    padding: 40px 0; /* Adjusted padding */
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 5;
 }
 .references.visible {
-    opacity: 1; /* Visible when scrolled past image */
+    opacity: 1;
+}
+.references-content {
+    padding: 0 40px; /* Matches project-content padding */
+    max-width: 50%;
+}
+.references::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Full-width overlay, updated to 0.6 */
+    z-index: -1; /* Behind text */
 }
 .references h2 {
     font-size: 22px;
