@@ -4,7 +4,7 @@ body {
     background-color: black;
     color: white;
     font-family: 'Barlow', sans-serif;
-    font-weight: 300; /* Thinner body text (was 400) */
+    font-weight: 300;
     overflow-x: hidden;
 }
 .background-image {
@@ -21,7 +21,7 @@ body {
     background-image: url('synapse1.jpg');
 }
 .background-image[data-image="synapse2.jpg"] {
-    background-image: url('synapse2.jpg');
+    background-image: url('synapse1.jpg'); /* Fallback to synapse1.jpg */
 }
 .page-container {
     position: relative;
@@ -45,7 +45,7 @@ body {
     top: 30px;
     left: 100px;
     font-size: 24px;
-    font-weight: 600; /* Slightly thicker header (was 400) */
+    font-weight: 600;
 }
 .menu-button {
     position: absolute;
@@ -115,7 +115,7 @@ body {
 .main-content h1 {
     margin: 0 0 20px 0;
     font-size: 28px;
-    font-weight: 500; /* Thinner headings (was bolder, likely 700) */
+    font-weight: 500;
 }
 .main-content p {
     margin: 0 0 20px 0;
@@ -148,7 +148,7 @@ body {
 .project-content h1 {
     margin: 0 0 10px 0;
     font-size: 28px;
-    font-weight: 500; /* Thinner headings (was bolder, likely 700) */
+    font-weight: 500;
 }
 .project-content p {
     margin: 0 0 20px 0;
@@ -156,10 +156,11 @@ body {
 }
 .project-image {
     position: absolute;
-    bottom: 40px;
+    bottom: 0; /* Adjusted from 40px to 0 for full visibility */
     right: 40px;
     width: 400px;
-    height: auto;
+    max-height: calc(100vh - 120px - 40px); /* Fits within viewport minus header and padding */
+    object-fit: contain; /* Preserves aspect ratio */
     z-index: 20;
 }
 .profile-pic {
@@ -195,7 +196,7 @@ body {
 .references h2 {
     font-size: 22px;
     margin-bottom: 15px;
-    font-weight: 500; /* Thinner headings (was bolder, likely 700) */
+    font-weight: 500;
 }
 .references ul {
     list-style: none;
