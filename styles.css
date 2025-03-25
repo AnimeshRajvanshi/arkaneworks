@@ -166,8 +166,8 @@ body {
 .profile-pic {
     position: absolute;
     bottom: 0; /* Aligns to bottom */
-    left: 40px; /* Positions at left with padding */
-    width: 300px; /* Larger size for "relatively big" */
+    right: 40px; /* Positions at right with padding (changed from left) */
+    width: 400px; /* Bigger size, matching project images */
     max-height: calc(100vh - 120px - 40px); /* Fits within viewport minus header and padding */
     object-fit: contain; /* Preserves aspect ratio */
     z-index: 20;
