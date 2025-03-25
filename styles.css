@@ -21,7 +21,7 @@ body {
     background-image: url('synapse1.jpg');
 }
 .background-image[data-image="synapse2.jpg"] {
-    background-image: url('synapse1.jpg'); /* Fallback to synapse1.jpg */
+    background-image: url('synapse1.jpg');
 }
 .page-container {
     position: relative;
@@ -156,18 +156,21 @@ body {
 }
 .project-image {
     position: absolute;
-    bottom: 0; /* Adjusted from 40px to 0 for full visibility */
+    bottom: 0;
     right: 40px;
     width: 400px;
-    max-height: calc(100vh - 120px - 40px); /* Fits within viewport minus header and padding */
-    object-fit: contain; /* Preserves aspect ratio */
+    max-height: calc(100vh - 120px - 40px);
+    object-fit: contain;
     z-index: 20;
 }
 .profile-pic {
-    width: 200px;
-    height: auto;
-    align-self: flex-end;
-    margin-top: 20px;
+    position: absolute;
+    bottom: 0; /* Aligns to bottom */
+    left: 40px; /* Positions at left with padding */
+    width: 300px; /* Larger size for "relatively big" */
+    max-height: calc(100vh - 120px - 40px); /* Fits within viewport minus header and padding */
+    object-fit: contain; /* Preserves aspect ratio */
+    z-index: 20;
 }
 .references {
     position: relative;
