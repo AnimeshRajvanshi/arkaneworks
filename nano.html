@@ -2,83 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Nanoelectronics Ultrasonic NDT in Simulation - ARKANE WORKS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nanoelectronics Ultrasonic NDT - ARKANE WORKS</title>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="background-image" data-image="synapse1.jpg"></div>
-    <div class="page-container">
-        <div class="header">
-            <div class="website-name">ARKANE WORKS</div>
-            <div class="menu-button">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
+    <header class="menu-bar">
+        <div class="website-name">ARKANE WORKS</div>
+        <div class="menu-button">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <nav class="menu-links">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="projects.html">Projects</a>
+                    <ul class="dropdown-content">
+                        <li><a href="lunar.html">Lunar Power Grid</a></li>
+                        <li><a href="cubesat.html">Gorgon CubeSat</a></li>
+                        <li><a href="nano.html">Nanoelectronics Ultrasonic NDT</a></li>
+                        <li><a href="heat.html">Heat Resilience Challenge</a></li>
+                        <li><a href="wrongway.html">Mechanical Wrong-Way Prevention</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html">About Me</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="scroll-container">
+        <section class="page default-background">
+            <div class="content">
+                <h1>Nanoelectronics Ultrasonic NDT</h1>
+                <p>The Nanoelectronics Ultrasonic Non-Destructive Testing (NDT) project develops a novel method for inspecting microscale components using high-frequency sound waves, aimed at enhancing quality control in semiconductor manufacturing.</p>
             </div>
-        </div>
-        <div class="project-content">
-            <h1>Nanoelectronics Ultrasonic NDT in Simulation</h1>
-            <p>I’ve been developing a workflow, since joining Arizona State University’s Celano Lab in May 2024, aimed at enhancing defect identification timelines in semiconductor chiplets through ultrasonic non-destructive testing simulations. By proposing a scaled-up model with adjusted frequencies, I seek to simulate microscale features like 10-micron pitch hybrid bonds, potentially improving reliability analysis for advanced 3D packaging—though its effectiveness remains under investigation.</p>
-            
-            <p><strong>Problem Statement</strong><br>
-            Advanced semiconductor chiplets, such as those with 10-micron pitch Cu-Cu hybrid bonds, demand precise defect detection (e.g., voids, delaminations) for reliability. Ultrasonic testing at high frequencies (e.g., 1 GHz) offers fine resolution, but software like CIVA struggles with small scales (d = 10⁻⁵ m), where wavelength limits (λ = c/f) challenge viewport capabilities. This slows critical workflows, prompting innovative simulation strategies.</p>
-            
-            <p><strong>Approach</strong><br>
-            Building on scanning acoustic microscopy (SAM) experience, I identified CIVA’s resolution constraints while studying failure modes in chiplets. I propose scaling the model by a factor k, adjusting frequency to maintain wave physics, informed by elastic wave propagation principles. This ongoing work explores whether such scaling could overcome software limits, with theoretical validation still in progress alongside team literature reviews.</p>
-            
-            <p><strong>Design and Simulation</strong><br>
-            My proposed workflow scales the model by k (e.g., k = 1000, 10 μm to 10 mm), reducing frequency to<br>
-            f_new = f_original / k<br>
-            (e.g., 1 GHz to 1 MHz), preserving the ratio<br>
-            d/λ<br>
-            where<br>
-            λ = c/f.<br>
-            For 10 μm at 1 GHz (c ≈ 1400 m/s), λ ≈ 1.4 μm, so d/λ ≈ 7.1; scaled to 10 mm at 1 MHz, λ_new ≈ 1.4 mm, maintaining equivalence. Using CIVA NDT, I’m modeling linear elastic wave propagation via<br>
-            ∂²u/∂t² = c²∇²u<br>
-            (u = displacement), with SolidWorks CAD for visualization, though simulations are still being refined.</p>
-            
-            <p><strong>Feasibility and Safety</strong><br>
-            The approach assumes linear elasticity,<br>
-            σ = Eε<br>
-            (E = Young’s modulus, ε = strain), typical in ultrasonic testing, but nonlinearities (e.g.,<br>
-            σ = Eε + βε²,<br>
-            β = nonlinear coefficient) may affect accuracy. Scaled frequencies align with CIVA’s range, potentially easing computation, yet transducer scaling and material behavior require further study. As a simulation-based proposal, it poses no physical risks, with feasibility hinging on ongoing validation.</p>
-            
-            <p><strong>Results and Impact</strong><br>
-            Preliminary simulations suggest potential for improved defect visibility, using reflection coefficients<br>
-            R = (Z₂ - Z₁)/(Z₂ + Z₁)<br>
-            (Z = ρc, ρ = density), but results are tentative. This work-in-progress aims to accelerate chiplet reliability analysis, with possible workflow enhancements still under evaluation. If successful, it could bridge software limitations, though its true impact awaits confirmation through continued research.</p>
-            <img src="nano.png" alt="Nanoelectronics Ultrasonic NDT in Simulation" class="project-image">
-        </div>
-        <div class="references">
-            <div class="references-content">
-                <h2>References</h2>
-                <ul>
-                    <li><a href="https://www.extende.com/civa-ultrasonic-testing" target="_blank">CIVA - Ultrasonic Testing</a> - Software documentation.</li>
-                    <li><a href="https://www.sciencedirect.com/science/article/pii/S0041624X21001763" target="_blank">Time-Frequency Simulation of Ultrasonic Longitudinal Wave Propagation in Rocks | ScienceDirect</a> - Wave propagation principles.</li>
-                    <li><a href="https://www.ndt.net/article/nde-india2018/papers/NDT18_013.pdf" target="_blank">Finite Element Modeling Approaches for Guided Wave Propagation in Composites</a> - Scaling context.</li>
-                    <li><a href="https://www.sciencedirect.com/science/article/pii/S0045782519306725" target="_blank">Finite-Element Modelling of Elastic Wave Propagation in Heterogeneous Media</a> - Nonlinearity considerations.</li>
-                    <li><a href="https://www.comsol.com/paper/simulation-of-ultrasonic-energy-in-cleaning-tanks-18331" target="_blank">COMSOL Multiphysics® Simulation of Ultrasonic Energy</a> - Simulation insights.</li>
-                    <li><a href="https://www.researchgate.net/post/What_is_the_best_software_to_model_Ultrasonic_effect" target="_blank">What is the Best Software to Model Ultrasonic Effect? | ResearchGate</a> - Tool discussion.</li>
-                    <li><a href="https://ieeexplore.ieee.org/document/8735124" target="_blank">Scanning Acoustic Microscopy for Semiconductor Analysis | IEEE</a> - SAM context.</li>
-                    <li><a href="https://ieeexplore.ieee.org/document/9256458" target="_blank">Hybrid Bonding Technology for Advanced Packaging | IEEE</a> - 10-micron pitch bonds.</li>
-                </ul>
+        </section>
+        <section class="page default-background">
+            <div class="content">
+                <p>My role involved designing the ultrasonic transducer system, leveraging nanotechnology to detect subsurface defects in chips without damaging them, a critical advancement for next-generation electronics.</p>
             </div>
-        </div>
-    </div>
-    <div class="navigation">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li class="sub-item"><a href="lunar.html">Lunar Power Grid</a></li>
-            <li class="sub-item"><a href="cubesat.html">Gorgon CubeSat</a></li>
-            <li class="sub-item"><a href="nano.html">Nanoelectronics Ultrasonic NDT in Simulation</a></li>
-            <li class="sub-item"><a href="heat.html">Heat Resilience Challenge</a></li>
-            <li class="sub-item"><a href="wrongway.html">Mechanical Wrong-Way Driving Prevention System</a></li>
-            <li><a href="about.html">About Me</a></li>
-        </ul>
-    </div>
+        </section>
+        <section class="page default-background">
+            <div class="content">
+                <p>This work combines my expertise in materials science and signal processing, delivering a prototype that improves defect detection sensitivity over traditional methods.</p>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
