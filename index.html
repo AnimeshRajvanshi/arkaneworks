@@ -2,43 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARKANE WORKS</title>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="background-image" data-image="synapse1.jpg"></div>
-    <div class="page-container">
-        <div class="header">
-            <div class="website-name">ARKANE WORKS</div>
-            <div class="menu-button">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
+    <header class="menu-bar">
+        <div class="website-name">ARKANE WORKS</div>
+        <div class="menu-button">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <nav class="menu-links">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="projects.html">Projects</a>
+                    <ul class="dropdown-content">
+                        <li><a href="lunar.html">Lunar Power Grid</a></li>
+                        <li><a href="cubesat.html">Gorgon CubeSat</a></li>
+                        <li><a href="nano.html">Nanoelectronics Ultrasonic NDT</a></li>
+                        <li><a href="heat.html">Heat Resilience Challenge</a></li>
+                        <li><a href="wrongway.html">Mechanical Wrong-Way Prevention</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html">About Me</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="scroll-container">
+        <section class="page default-background">
+            <div class="content">
+                <h1>Welcome to Arkane Works</h1>
+                <p>Arkane Works is a personal portfolio showcasing innovative engineering projects, as I work to attempt to comprehend more of our universe.</p>
             </div>
-        </div>
-        <div class="main-content">
-            <h1>Welcome to Arkane Works</h1>
-            <p>Arkane Works is a personal portfolio showcasing innovative engineering projects, as I work to attempt to comprehend more of our universe. Explore solutions designed to contribute constructively toward that pursuit.</p>
-        </div>
-        <div class="references">
-            <div class="references-content">
-                <p>Also, I despise LinkedIn. So, here we are.</p>
-            </div>
-        </div>
-    </div>
-    <div class="navigation">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li class="sub-item"><a href="lunar.html">Lunar Power Grid</a></li>
-            <li class="sub-item"><a href="cubesat.html">Gorgon CubeSat</a></li>
-            <li class="sub-item"><a href="nano.html">Nanoelectronics Ultrasonic NDT in Simulation</a></li>
-            <li class="sub-item"><a href="heat.html">Heat Resilience Challenge</a></li>
-            <li class="sub-item"><a href="wrongway.html">Mechanical Wrong-Way Driving Prevention System</a></li>
-            <li><a href="about.html">About Me</a></li>
-        </ul>
-    </div>
+        </section>
+    </main>
 </body>
 </html>
