@@ -2,45 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - ARKANE WORKS</title>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="background-image" data-image="synapse1.jpg"></div>
-    <div class="page-container">
-        <div class="header">
-            <div class="website-name">ARKANE WORKS</div>
-            <div class="menu-button">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
+    <header class="menu-bar">
+        <div class="website-name">ARKANE WORKS</div>
+        <div class="menu-button">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
         </div>
-        <div class="main-content">
-            <h1>Projects</h1>
-            <p>Here’s a collection of my engineering endeavors, each designed to tackle unique challenges with innovative solutions. Click below to dive into the details!</p>
-            <ul class="project-list">
-                <li><a href="lunar.html">Lunar Power Grid</a></li>
-                <li><a href="cubesat.html">Gorgon CubeSat</a></li>
-                <li><a href="nano.html">Nanoelectronics Ultrasonic NDT in Simulation</a></li>
-                <li><a href="heat.html">Heat Resilience Challenge</a></li>
-                <li><a href="wrongway.html">Mechanical Wrong-Way Driving Prevention System</a></li>
+        <nav class="menu-links">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="projects.html">Projects</a>
+                    <ul class="dropdown-content">
+                        <li><a href="lunar.html">Lunar Power Grid</a></li>
+                        <li><a href="cubesat.html">Gorgon CubeSat</a></li>
+                        <li><a href="nano.html">Nanoelectronics Ultrasonic NDT</a></li>
+                        <li><a href="heat.html">Heat Resilience Challenge</a></li>
+                        <li><a href="wrongway.html">Mechanical Wrong-Way Prevention</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html">About Me</a></li>
             </ul>
-        </div>
-    </div>
-    <div class="navigation">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li class="sub-item"><a href="lunar.html">Lunar Power Grid</a></li>
-            <li class="sub-item"><a href="cubesat.html">Gorgon CubeSat</a></li>
-            <li class="sub-item"><a href="nano.html">Nanoelectronics Ultrasonic NDT in Simulation</a></li>
-            <li class="sub-item"><a href="heat.html">Heat Resilience Challenge</a></li>
-            <li class="sub-item"><a href="wrongway.html">Mechanical Wrong-Way Driving Prevention System</a></li>
-            <li><a href="about.html">About Me</a></li>
-        </ul>
-    </div>
+        </nav>
+    </header>
+    <main class="scroll-container">
+        <section class="page default-background">
+            <div class="content">
+                <h1>Projects</h1>
+                <p>Explore my portfolio of innovative engineering projects, each designed to solve unique challenges in aerospace, nanotechnology, and sustainable systems.</p>
+            </div>
+        </section>
+        <section class="page default-background">
+            <div class="content">
+                <h2>Featured Projects</h2>
+                <ul>
+                    <li><a href="lunar.html">Lunar Power Grid</a></li>
+                    <li><a href="cubesat.html">Gorgon CubeSat</a></li>
+                    <li><a href="nano.html">Nanoelectronics Ultrasonic NDT</a></li>
+                    <li><a href="heat.html">Heat Resilience Challenge</a></li>
+                    <li><a href="wrongway.html">Mechanical Wrong-Way Prevention</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
