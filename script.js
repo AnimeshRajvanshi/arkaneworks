@@ -1,45 +1,50 @@
 document.addEventListener('DOMContentLoaded', () => {
     const menuButton = document.querySelector('.menu-button');
-    const navigation = document.querySelector('.navigation');
-    const pageContainer = document.querySelector('.page-container');
-    const references = document.querySelector('.references');
-    let isMenuOpen = false;
+    const menuLinks = document.querySelector('.menu-links');
+    const dropdowns = document.querySelectorAll('.dropdown');
+    const video1 = document.querySelector('.video-1');
+    const video2 = document.querySelector('.video-2');
+    const cadSection = document.querySelector('.cad-section');
 
-    // Toggle menu on hamburger/X click
+    // Menu toggle
     menuButton.addEventListener('click', () => {
-        isMenuOpen = !isMenuOpen;
-        if (isMenuOpen) {
-            navigation.classList.add('open');
-            pageContainer.classList.add('menu-open');
-            menuButton.classList.add('open');
-        } else {
-            navigation.classList.remove('open');
-            pageContainer.classList.remove('menu-open');
-            menuButton.classList.remove('open');
-        }
+        menuButton.classList.toggle('open');
+        menuLinks.classList.toggle('open');
     });
 
-    // Close menu on outside click
-    document.addEventListener('click', (event) => {
-        if (isMenuOpen && !navigation.contains(event.target) && !menuButton.contains(event.target)) {
-            isMenuOpen = false;
-            navigation.classList.remove('open');
-            pageContainer.classList.remove('menu-open');
-            menuButton.classList.remove('open');
-        }
+    // Dropdown toggle for mobile
+    dropdowns.forEach(dropdown => {
+        dropdown.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                dropdown.classList.toggle('open');
+                e.preventDefault();
+            }
+        });
     });
 
-    // Show references when references section enters viewport
-    if (references) {
+    // Video looping
+    if (video1 && video2) {
+        video1.addEventListener('ended', () => {
+            video1.style.display = 'none';
+            video2.style.display = 'block';
+            video2.play();
+        });
+        video2.addEventListener('ended', () => {
+            video2.style.display = 'none';
+            video1.style.display = 'block';
+            video1.play();
+        });
+    }
+
+    // CAD animation on scroll
+    if (cadSection) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    references.classList.add('visible');
-                } else {
-                    references.classList.remove('visible');
+                    entry.target.classList.add('visible');
                 }
             });
-        }, { rootMargin: '0px 0px -100px 0px', threshold: 0.1 });
-        observer.observe(references);
+        }, { threshold: 0.5 });
+        observer.observe(cadSection);
     }
 });
