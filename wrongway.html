@@ -2,68 +2,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mechanical Wrong-Way Driving Prevention System - ARKANE WORKS</title>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="background-image" data-image="synapse1.jpg"></div>
-    <div class="page-container">
-        <div class="header">
-            <div class="website-name">ARKANE WORKS</div>
-            <div class="menu-button">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
+    <header class="menu-bar">
+        <div class="website-name">ARKANE WORKS</div>
+        <div class="menu-button">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <nav class="menu-links">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="projects.html">Projects</a>
+                    <ul class="dropdown-content">
+                        <li><a href="lunar.html">Lunar Power Grid</a></li>
+                        <li><a href="cubesat.html">Gorgon CubeSat</a></li>
+                        <li><a href="nano.html">Nanoelectronics Ultrasonic NDT</a></li>
+                        <li><a href="heat.html">Heat Resilience Challenge</a></li>
+                        <li><a href="wrongway.html">Mechanical Wrong-Way Prevention</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html">About Me</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="scroll-container">
+        <section class="page video-background">
+            <video class="background-video video-1" autoplay muted loop playsinline>
+                <source src="wrongway-video1.mp4" type="video/mp4">
+            </video>
+            <video class="background-video video-2" muted loop playsinline>
+                <source src="wrongway-video2.mp4" type="video/mp4">
+            </video>
+            <div class="content">
+                <h1>Mechanical Wrong-Way Driving Prevention System</h1>
+                <p>The Mechanical Wrong-Way Driving Prevention System is a robust solution designed to mitigate the lethal risks of wrong-way driving on highways, developed during my Mechanical Engineering capstone at Arizona State University in 2024.</p>
             </div>
-        </div>
-        <div class="project-content">
-            <h1>Mechanical Wrong-Way Driving Prevention System</h1>
-            <p>The Mechanical Wrong-Way Driving Prevention System is a robust solution designed to mitigate the lethal risks of wrong-way driving on highways, developed during my Mechanical Engineering capstone at Arizona State University in 2024. As part of a seven-member team, I collaborated on the design and prototyping of a speed hump system, taking sole responsibility for its electrical components to alert impaired drivers through tactile and electronic feedback, enhancing road safety without disrupting normal traffic.</p>
-            
-            <p><strong>Problem Statement</strong><br>
-            Wrong-way driving, though only 1% of highway accidents, has a 25% fatality rate, claiming 300-400 lives annually in Arizona, according to the Arizona Department of Transportation. Predominantly caused by impaired drivers (65% of cases) at night, these incidents demand more effective deterrents than traditional signs. Our challenge was to create a cost-effective, durable system to alert drivers while preserving vehicle and road integrity.</p>
-            
-            <p><strong>Approach</strong><br>
-            Our team explored passive traffic calming measures before settling on a pointed, hinged speed hump design to maximize driver awareness. We collectively utilized SolidWorks for CAD modeling and ANSYS for finite element analysis (FEA) to ensure structural reliability, transitioning from a plywood proof-of-concept to a steel prototype. I spearheaded the integration of an active electronic system, using an Arduino-based circuit to detect driving direction, all within a $700 budget.</p>
-            
-            <p><strong>Design and Prototyping</strong><br>
-            The system features steel plates forming depressible ramps, connected by integrated hinges and shoulder bolts, a design refined through team-wide CAD efforts in SolidWorks. The initial plywood prototype evolved into a steel version for enhanced durability, costing $401.85. I independently designed and implemented the electrical system, employing aluminum foil contact switches beneath the plates, connected to an Arduino Uno R3, to signal direction via LED alerts. Team-conducted FEA confirmed safety factors of 2.5-3.3 under 1000 lbf loads, validated by low-speed tests.</p>
-            
-            <p><strong>Feasibility and Safety</strong><br>
-            Engineered for heavy use and weathering, the steel structure withstands stress with springs and rollers, while my electrical system enhances detection without additional infrastructure. The passive humps provide tactile feedback, and the active electronics—my contribution—ensure visibility, all installable with minimal road changes. Tests confirmed functionality without vehicle damage, with future fatigue analysis planned for higher speeds.</p>
-            
-            <p><strong>Results and Impact</strong><br>
-            Live demonstrations proved the system’s efficacy: the mechanical humps jolted drivers, and my electrical circuit accurately triggered LED signals for wrong-way detection. With safety factors above 2.5 and 57.4% budget utilization, this project offers a scalable, affordable safety solution, blending team-driven mechanical design with my electrical innovation, poised to reduce highway fatalities.</p>
-            <img src="wrongway.png" alt="Mechanical Wrong-Way Driving Prevention System" class="project-image">
-        </div>
-        <div class="references">
-            <div class="references-content">
-                <h2>References</h2>
+        </section>
+        <section class="page default-background cad-section">
+            <div class="content">
+                <div class="cad-showcase">
+                    <img src="cad-model.png" alt="CAD Model" class="cad-image">
+                </div>
+                <p>As part of a seven-member team, I collaborated on the design and prototyping of a speed hump system, taking sole responsibility for its electrical components to alert impaired drivers through tactile and electronic feedback, enhancing road safety without disrupting normal traffic.</p>
+            </div>
+        </section>
+        <section class="page default-background references">
+            <div class="content">
+                <h2>References and Credits</h2>
+                <p>Team Members: [List names here]</p>
                 <ul>
-                    <li><a href="https://dmcantor.com/blog/arizona-wrong-way-drivers-causes-possible-charges-defenses" target="_blank">DM Cantor: Wrong-Way Crashes in Arizona</a> - Statistics on wrong-way driving.</li>
-                    <li><a href="https://highways.dot.gov/safety/speed-management/traffic-calming-eprimer" target="_blank">Federal Highway Administration: Traffic Calming ePrimer</a> - Traffic calming context.</li>
-                    <li><a href="https://azdot.gov/motor-vehicles/statistics/wrong-way-driving" target="_blank">Arizona Department of Transportation: Wrong-Way Driving Data</a> - Fatality statistics (assumed source).</li>
-                    <li><a href="https://www.mheducation.com/highered/product/shigley-s-mechanical-engineering-design-budynas-nisbett/M9780073398204.html" target="_blank">Shigley’s Mechanical Design 10th Edition, Chapter 10</a> - Mechanical design principles (Budynas, 2015).</li>
-                    <li><a href="https://www.kobakant.at/DIY/?p=8906" target="_blank">Paper + Aluminum Foil Contact Switch | Koba Kant</a> - Inspiration for switch design.</li>
-                    <li><a href="https://www.solidworks.com/support/finite-element-analysis" target="_blank">SolidWorks: Finite Element Analysis Guide</a> - Team FEA tool documentation.</li>
-                    <li><a href="https://www.arduino.cc/en/Tutorial/BuiltInExamples" target="_blank">Arduino: Basic Circuit Design</a> - Basis for electrical system.</li>
+                    <li><a href="https://dmcantor.com/blog/arizona-wrong-way-drivers-causes-possible-charges-defenses" target="_blank">DM Cantor: Wrong-Way Crashes in Arizona</a></li>
+                    <li><a href="https://highways.dot.gov/safety/speed-management/traffic-calming-eprimer" target="_blank">Federal Highway Administration: Traffic Calming ePrimer</a></li>
+                    <li><a href="https://azdot.gov/motor-vehicles/statistics/wrong-way-driving" target="_blank">Arizona Department of Transportation: Wrong-Way Driving Data</a></li>
+                    <li><a href="https://www.mheducation.com/highered/product/shigley-s-mechanical-engineering-design-budynas-nisbett/M9780073398204.html" target="_blank">Shigley’s Mechanical Design 10th Edition, Chapter 10</a></li>
+                    <li><a href="https://www.kobakant.at/DIY/?p=8906" target="_blank">Paper + Aluminum Foil Contact Switch | Koba Kant</a></li>
+                    <li><a href="https://www.solidworks.com/support/finite-element-analysis" target="_blank">SolidWorks: Finite Element Analysis Guide</a></li>
+                    <li><a href="https://www.arduino.cc/en/Tutorial/BuiltInExamples" target="_blank">Arduino: Basic Circuit Design</a></li>
                 </ul>
             </div>
-        </div>
-    </div>
-    <div class="navigation">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li class="sub-item"><a href="lunar.html">Lunar Power Grid</a></li>
-            <li class="sub-item"><a href="cubesat.html">Gorgon CubeSat</a></li>
-            <li class="sub-item"><a href="nano.html">Nanoelectronics Ultrasonic NDT in Simulation</a></li>
-            <li class="sub-item"><a href="heat.html">Heat Resilience Challenge</a></li>
-            <li class="sub-item"><a href="wrongway.html">Mechanical Wrong-Way Driving Prevention System</a></li>
-            <li><a href="about.html">About Me</a></li>
-        </ul>
-    </div>
+        </section>
+    </main>
 </body>
 </html>
