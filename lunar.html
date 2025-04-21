@@ -2,64 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lunar Power Grid - ARKANE WORKS</title>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="background-image" data-image="synapse1.jpg"></div>
-    <div class="page-container">
-        <div class="header">
-            <div class="website-name">ARKANE WORKS</div>
-            <div class="menu-button">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
+    <header class="menu-bar">
+        <div class="website-name">ARKANE WORKS</div>
+        <div class="menu-button">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <nav class="menu-links">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="projects.html">Projects</a>
+                    <ul class="dropdown-content">
+                        <li><a href="lunar.html">Lunar Power Grid</a></li>
+                        <li><a href="cubesat.html">Gorgon CubeSat</a></li>
+                        <li><a href="nano.html">Nanoelectronics Ultrasonic NDT</a></li>
+                        <li><a href="heat.html">Heat Resilience Challenge</a></li>
+                        <li><a href="wrongway.html">Mechanical Wrong-Way Prevention</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html">About Me</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="scroll-container">
+        <section class="page default-background">
+            <div class="content">
+                <h1>Lunar Power Grid</h1>
+                <p>The Lunar Power Grid project explores the feasibility of establishing a sustainable energy infrastructure on the Moon, designed to support long-term human presence and scientific operations.</p>
             </div>
-        </div>
-        <div class="project-content">
-            <h1>Lunar Power Grid</h1>
-            <p>The Lunar Power Grid is an innovative energy delivery system designed for NASA’s Watts on the Moon Challenge, enabling sustained lunar operations under the harsh conditions of the lunar surface. By adapting a JAXA-Toyota Lunar Cruiser rover, my team engineered a robust solution to distribute power from solar plants to remote lander-based battery hubs, supporting NASA’s Artemis missions with reliable, scalable infrastructure.</p>
-            
-            <p><strong>Core Components</strong><br>
-            At the heart of the system is a modified Lunar Cruiser rover, retrofitted to deploy power cables across vast lunar distances. We integrated a custom cable-laying mechanism inspired by terrestrial trenchers, paired with modified lunar landers repurposed as high-capacity battery packs. Space-grade docking connectors link the network, ensuring seamless energy transfer between power generation and storage units.</p>
-            
-            <p><strong>Specialized Features</strong><br>
-            The cable-laying system, drawing from electric dog collar trenching tech, buries lightweight, durable cables beneath the lunar regolith to shield them from micrometeorite impacts and thermal extremes. Corrosion-resistant coatings protect both the rover and cables from abrasive lunar sand, while precision docking ports prevent contamination during connection cycles. These features combine to deliver a resilient grid capable of operating in the Moon’s vacuum and temperature swings.</p>
-            
-            <p><strong>Technical Highlights</strong><br>
-            The rover’s trenching arm operates with a deployment rate optimized for the Moon’s low gravity, laying up to 500 meters of cable per sortie. Each lander battery hub stores 100 kWh, sufficient to power Artemis habitats and rovers during lunar nights. Our design underwent rigorous simulations to validate performance under -173°C cold and abrasive dust conditions, ensuring uninterrupted power for future lunar bases.</p>
-            <img src="lunar.png" alt="Lunar Power Grid" class="project-image">
-        </div>
-        <div class="references">
-            <div class="references-content">
-                <h2>References</h2>
-                <ul>
-                    <li><a href="https://www.nasa.gov/directorates/spacetech/centennial_challenges/watts-on-the-moon" target="_blank">NASA Watts on the Moon Challenge</a> - Official challenge overview detailing lunar power delivery goals.</li>
-                    <li><a href="https://global.jaxa.jp/press/2021/03/20210326-1_e.html" target="_blank">JAXA-Toyota Lunar Cruiser Press Release</a> - Details on the Lunar Cruiser rover’s development.</li>
-                    <li>“Lunar Surface Power Systems” by J. Mankins, Acta Astronautica, 2020 - Research on lunar energy infrastructure challenges.</li>
-                    <li>NASA Artemis Program Overview - <a href="https://www.nasa.gov/specials/artemis/" target="_blank">Artemis Mission Details</a>.</li>
-                    <li><a href="https://www.petsafe.net/support/article/underground-fence-installation-guide" target="_blank">PetSafe Underground Fence Installation Guide</a> - Guide for trenching techniques inspiring the cable-laying mechanism.</li>
-                    <li><a href="https://www.lpi.usra.edu/publications/books/lunar_sourcebook/" target="_blank">Lunar Sourcebook: A User’s Guide to the Moon</a> - Detailed properties of lunar regolith, crucial for corrosion resistance.</li>
-                    <li><a href="https://www.nasa.gov/docking-system/idss-technical-notes/" target="_blank">NASA IDSS Technical Notes</a> - Technical details on International Docking System Standard for connector design.</li>
-                    <li><a href="https://www.nasa.gov/image-detail/lunar-regolith-simulant/" target="_blank">NASA Lunar Regolith Simulant</a> - Visual representation of lunar soil properties.</li>
-                    <li><a href="https://www.nasa.gov/sites/default/files/atoms/files/iss_docking_system_schematic.pdf" target="_blank">NASA Docking System Schematic</a> - Schematic of ISS docking ports, relevant for space-grade connectors.</li>
-                </ul>
+        </section>
+        <section class="page default-background">
+            <div class="content">
+                <p>Developed as part of a conceptual study, this system integrates solar arrays optimized for the lunar day-night cycle, energy storage solutions, and distribution networks tailored to the Moon's harsh environment.</p>
             </div>
-        </div>
-    </div>
-    <div class="navigation">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li class="sub-item"><a href="lunar.html">Lunar Power Grid</a></li>
-            <li class="sub-item"><a href="cubesat.html">Gorgon CubeSat</a></li>
-            <li class="sub-item"><a href="nano.html">Nanoelectronics Ultrasonic NDT in Simulation</a></li>
-            <li class="sub-item"><a href="heat.html">Heat Resilience Challenge</a></li>
-            <li class="sub-item"><a href="wrongway.html">Mechanical Wrong-Way Driving Prevention System</a></li>
-            <li><a href="about.html">About Me</a></li>
-        </ul>
-    </div>
+        </section>
+        <section class="page default-background">
+            <div class="content">
+                <p>The project leverages my experience in systems engineering to address challenges like extreme temperature swings, regolith abrasion, and the 14-day light-dark periods, ensuring a reliable power supply for habitats and rovers.</p>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
