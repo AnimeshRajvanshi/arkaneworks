@@ -2,41 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Me - ARKANE WORKS</title>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="background-image" data-image="synapse1.jpg"></div>
-    <div class="page-container">
-        <div class="header">
-            <div class="website-name">ARKANE WORKS</div>
-            <div class="menu-button">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
+    <header class="menu-bar">
+        <div class="website-name">ARKANE WORKS</div>
+        <div class="menu-button">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <nav class="menu-links">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="projects.html">Projects</a>
+                    <ul class="dropdown-content">
+                        <li><a href="lunar.html">Lunar Power Grid</a></li>
+                        <li><a href="cubesat.html">Gorgon CubeSat</a></li>
+                        <li><a href="nano.html">Nanoelectronics Ultrasonic NDT</a></li>
+                        <li><a href="heat.html">Heat Resilience Challenge</a></li>
+                        <li><a href="wrongway.html">Mechanical Wrong-Way Prevention</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html">About Me</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="scroll-container">
+        <section class="page default-background">
+            <div class="content">
+                <h1>About Me</h1>
+                <p>I'm a passionate engineer with a focus on innovative solutions in aerospace, nanotechnology, and sustainable systems. My work spans from designing lunar infrastructure to developing advanced NDT techniques for nanoelectronics.</p>
             </div>
-        </div>
-        <div class="main-content">
-            <h1>About Me</h1>
-            <p>Hey there! I’m a Mechanical Engineering student at Arizona State University, passionate about tackling complex challenges through innovative design and technology. My journey spans aerospace systems, environmental solutions, and community-focused engineering, with projects ranging from lunar power grids to ocean plastic monitoring.</p>
-            <p>I thrive on blending creativity with technical rigor, drawing from hands-on experience in CAD, simulation tools, and interdisciplinary teamwork. At ASU, I’ve contributed to student-led initiatives like the Sun Devil Satellite Laboratory and EPICS, while pursuing independent research to push engineering boundaries.</p>
-            <p>Arkane Works is my space to showcase these efforts—each project reflects a commitment to solving real-world problems with practical, forward-thinking solutions. Thanks for stopping by!</p>
-            <img src="profile-pic.png" alt="Profile Picture" class="profile-pic">
-        </div>
-    </div>
-    <div class="navigation">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li class="sub-item"><a href="lunar.html">Lunar Power Grid</a></li>
-            <li class="sub-item"><a href="cubesat.html">Gorgon CubeSat</a></li>
-            <li class="sub-item"><a href="nano.html">Nanoelectronics Ultrasonic NDT in Simulation</a></li>
-            <li class="sub-item"><a href="heat.html">Heat Resilience Challenge</a></li>
-            <li class="sub-item"><a href="wrongway.html">Mechanical Wrong-Way Driving Prevention System</a></li>
-            <li><a href="about.html">About Me</a></li>
-        </ul>
-    </div>
+        </section>
+        <section class="page default-background">
+            <div class="content">
+                <p>With a background in mechanical engineering, I thrive on challenges that require creative problem-solving and interdisciplinary collaboration. My projects reflect a commitment to pushing the boundaries of what's possible in engineering.</p>
+            </div>
+        </section>
+        <section class="page default-background">
+            <div class="content">
+                <p>Outside of engineering, I'm an avid stargazer and technology enthusiast, always exploring the intersection of science and practical application. This portfolio showcases my journey and the projects that drive my passion.</p>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
