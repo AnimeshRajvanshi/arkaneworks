@@ -2,9 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuButton = document.querySelector('.menu-button');
     const menuLinks = document.querySelector('.menu-links');
     const dropdowns = document.querySelectorAll('.dropdown');
-    const video1 = document.querySelector('.video-1');
-    const video2 = document.querySelector('.video-2');
-    const cadSection = document.querySelector('.cad-section');
+    const sections = document.querySelectorAll('.page');
 
     // Menu toggle
     menuButton.addEventListener('click', () => {
@@ -22,29 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Video looping
-    if (video1 && video2) {
-        video1.addEventListener('ended', () => {
-            video1.style.display = 'none';
-            video2.style.display = 'block';
-            video2.play();
+    // Fade-in animation on scroll
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
         });
-        video2.addEventListener('ended', () => {
-            video2.style.display = 'none';
-            video1.style.display = 'block';
-            video1.play();
-        });
-    }
+    }, { threshold: 0.1 });
 
-    // CAD animation on scroll
-    if (cadSection) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.5 });
-        observer.observe(cadSection);
-    }
+    sections.forEach(section => observer.observe(section));
 });
