@@ -63,9 +63,14 @@ body {
     padding: 40px;
     max-width: 50%;
     background: rgba(0, 0, 0, 0.6);
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.page:not(.visible) .content {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .page.visible .content {
