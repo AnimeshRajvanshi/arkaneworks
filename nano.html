@@ -37,7 +37,7 @@
         <section class="page default-background">
             <div class="content">
                 <h1>Nanoelectronics Ultrasonic NDT</h1>
-                <p>Since May 2024 at ASU’s Celano Lab, I’ve developed a novel scaling workflow for ultrasonic non-destructive testing (NDT) to enhance defect detection in 10-micron pitch Cu-Cu hybrid bonds for chiplet reliability.</p>
+                <p>Since May 2024 at ASU’s Celano Lab, I’ve pioneered a novel scaling workflow for ultrasonic non-destructive testing (NDT) to detect defects in 10-micron pitch Cu-Cu hybrid bonds for advanced chiplet packaging. As a mechanical engineering student, I developed a simulation-based approach using CIVA NDT and SolidWorks, scaling microscale models to macroscale for faster, more accurate analysis. This project reflects my fascination with nanoelectronics, bridging the gap between theoretical physics and practical semiconductor reliability, crucial for next-generation electronics.</p>
             </div>
         </section>
         <section class="page default-background cad-showcase">
@@ -47,21 +47,22 @@
                     <img src="nano.png" alt="Nanoelectronics NDT Design" class="showcase-image">
                     <p class="showcase-caption">[Placeholder: Add additional renders or videos here]</p>
                 </div>
+                <p>The workflow scales model dimensions by a factor of k=1000 (10 μm to 10 mm) and reduces frequency from 1 GHz to 1 MHz, preserving the d/λ ratio (~7.14) for equivalent wave physics. I modeled this in SolidWorks, visualizing defect detection in chiplets, and simulated wave propagation (∂²u/∂t² = c²∇²u) in CIVA, achieving 10-micron resolution. My approach bypasses CIVA’s microscale viewport limitations, enabling rapid iteration for semiconductor quality assurance.</p>
             </div>
         </section>
         <section class="page default-background">
             <div class="content">
-                <p>I proposed scaling model dimensions by k=1000 (10 μm to 10 mm) and reducing frequency from 1 GHz to 1 MHz in CIVA NDT, maintaining d/λ ratio (~7.1) to simulate wave physics accurately.</p>
+                <p>Simulating ultrasonic waves at microscales posed significant challenges due to software resolution constraints and material nonlinearities (σ = Eε + βε²). I addressed this by deriving scaling equations, ensuring reflection coefficients (R = (Z₂ - Z₁)/(Z₂ + Z₁)) remained consistent across scales. Material properties (e.g., ρ=8700 kg/m³ for Cu, c=1400 m/s in water) were validated against literature. I also tackled transducer scaling, adjusting focal lengths to maintain beam accuracy, a critical step for detecting voids and delaminations in hybrid bonds.</p>
             </div>
         </section>
         <section class="page default-background">
             <div class="content">
-                <p>Using SolidWorks for visualization and principles of elastic wave propagation (∂²u/∂t² = c²∇²u), I modeled defect detection, addressing software resolution limits for faster analysis timelines.</p>
+                <p>My simulations in CIVA confirmed defect visibility at scaled dimensions, with preliminary results showing a strong correlation to microscale models. I used SolidWorks to iterate transducer designs, reducing boundary effects through geometric optimization. Ongoing validation involves comparing scaled results to physical scanning acoustic microscopy (SAM) data, addressing nonlinearities via higher-order wave equations. This iterative process, driven by my independent research, positions the workflow as a scalable tool for industry adoption.</p>
             </div>
         </section>
         <section class="page default-background">
             <div class="content">
-                <p>Ongoing research validates scalability against material nonlinearities (σ = Eε + βε²), aiming to bridge simulation gaps without hardware, enhancing semiconductor 3D packaging reliability.</p>
+                <p>This project showcases my expertise in simulation, materials science, and innovative problem-solving, directly applicable to semiconductor manufacturing. By accelerating defect detection, it supports the reliability of 3D packaging, critical for AI and high-performance computing. The workflow’s scalability extends to other NDT tools and pitches (e.g., 5 μm), with potential to enhance QA efficiency. Future work includes physical prototyping and collaboration with chipmakers like TSMC, advancing nanoelectronics reliability.</p>
             </div>
         </section>
         <section class="page default-background references">
@@ -70,6 +71,10 @@
                 <ul class="custom-list">
                     <li>CIVA NDT: <a href="https://www.extende.com/civa" target="_blank">Simulation Software</a></li>
                     <li>SolidWorks: <a href="https://www.solidworks.com/solution/industry/electronics" target="_blank">Electronics Design</a></li>
+                    <li>Biermann et al., 2020: <a href="https://www.nature.com/articles/s41598-020-62215-8" target="_blank">Hyperspectral Plastic Signatures</a></li>
+                    <li>IEEE: <a href="https://ieeexplore.ieee.org/document/8735124" target="_blank">Nanoelectronics</a></li>
+                    <li>ScienceDirect: <a href="https://www.sciencedirect.com/science/article/pii/S2352484719300999" target="_blank">Ultrasonic NDT</a></li>
+                    <li>TSMC: <a href="https://www.tsmc.com/english/dedicatedFoundry/technology/3d_ic.htm" target="_blank">3D Packaging Technology</a></li>
                 </ul>
             </div>
         </section>
