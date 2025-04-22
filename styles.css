@@ -8,6 +8,24 @@ body {
     overflow-x: hidden;
 }
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: black;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
 .scroll-container {
     scroll-snap-type: y mandatory;
     overflow-y: auto;
@@ -116,7 +134,7 @@ a:hover {
     margin-top: 20px;
 }
 
-.showcase-video {
+.showcase-image, .showcase-video {
     width: 100%;
     max-width: 800px;
     height: auto;
@@ -142,7 +160,7 @@ a:hover {
     top: 0;
     left: 0;
     width: 100%;
-    height: 80px;
+    height: 60px;
     background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     align-items: center;
@@ -151,16 +169,17 @@ a:hover {
 }
 
 .website-name {
-    margin-left: 40px;
-    font-size: 24px;
+    margin-left: 20px;
+    font-size: 20px;
     font-weight: 600;
+    text-transform: uppercase;
 }
 
 .menu-button {
     display: none;
-    margin-right: 40px;
-    width: 30px;
-    height: 20px;
+    margin-right: 20px;
+    width: 24px;
+    height: 16px;
     cursor: pointer;
     flex-direction: column;
     justify-content: space-between;
@@ -186,7 +205,7 @@ a:hover {
 }
 
 .menu-links {
-    margin-right: 40px;
+    margin-right: 20px;
 }
 
 .menu-links ul {
@@ -194,23 +213,24 @@ a:hover {
     padding: 0;
     margin: 0;
     display: flex;
+    align-items: center;
 }
 
 .menu-links li {
     position: relative;
-    margin: 0 20px;
+    margin: 0 15px;
 }
 
 .menu-links a {
     color: white;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: opacity 0.3s ease;
 }
 
 .menu-links a:hover {
-    text-decoration: underline;
+    opacity: 0.7;
 }
 
 .dropdown-content {
@@ -223,6 +243,7 @@ a:hover {
     min-width: 200px;
     z-index: 1;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
 }
 
 .dropdown:hover .dropdown-content {
@@ -230,12 +251,13 @@ a:hover {
 }
 
 .dropdown-content li {
-    margin: 10px 0;
+    margin: 0;
 }
 
 .dropdown-content a {
     padding: 10px 20px;
     display: block;
+    font-size: 13px;
 }
 
 @media (max-width: 768px) {
@@ -246,10 +268,10 @@ a:hover {
     .menu-links {
         display: none;
         position: fixed;
-        top: 80px;
+        top: 60px;
         left: 0;
         width: 100%;
-        height: calc(100vh - 80px);
+        height: calc(100vh - 60px);
         background-color: rgba(0, 0, 0, 0.9);
         z-index: 10;
     }
@@ -272,6 +294,7 @@ a:hover {
         background-color: transparent;
         display: none;
         transform: none;
+        box-shadow: none;
     }
 
     .dropdown.open .dropdown-content {
@@ -282,7 +305,7 @@ a:hover {
         max-width: 80%;
     }
 
-    .showcase-video {
+    .showcase-image, .showcase-video {
         max-width: 100%;
     }
 
