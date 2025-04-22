@@ -24,15 +24,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fade-in and fade-out animation on scroll
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            const content = entry.target.querySelector('.content');
-            if (entry.isIntersecting) {
-                content.classList.add('visible');
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.1) {
+                entry.target.classList.add('visible');
             } else {
-                content.classList.remove('visible');
+                entry.target.classList.remove('visible');
             }
         });
     }, { 
-        threshold: [0.1, 0.3, 0.5, 0.7, 0.9],
+        threshold: 0.1,
         rootMargin: '0px'
     });
 
