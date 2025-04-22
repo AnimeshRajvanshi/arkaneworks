@@ -165,7 +165,7 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index: 10;
+    z-index: 1000;
 }
 
 .website-name {
@@ -173,6 +173,12 @@ a:hover {
     font-size: 20px;
     font-weight: 600;
     text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+}
+
+.website-name:hover {
+    opacity: 0.7;
 }
 
 .menu-button {
@@ -180,6 +186,8 @@ a:hover {
     margin-right: 20px;
     width: 24px;
     height: 16px;
+    background: none;
+    border: none;
     cursor: pointer;
     flex-direction: column;
     justify-content: space-between;
@@ -218,7 +226,6 @@ a:hover {
 
 .menu-links li {
     position: relative;
-    margin: 0 15px;
 }
 
 .menu-links a {
@@ -226,7 +233,8 @@ a:hover {
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
-    transition: opacity 0.3s ease;
+    padding: 10px 15px;
+    transition: opacity 0.2s ease;
 }
 
 .menu-links a:hover {
@@ -240,14 +248,19 @@ a:hover {
     left: 50%;
     transform: translateX(-50%);
     background-color: rgba(0, 0, 0, 0.9);
-    min-width: 200px;
+    min-width: 220px;
     z-index: 1;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
 }
 
 .dropdown:hover .dropdown-content {
     display: block;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .dropdown-content li {
@@ -272,8 +285,8 @@ a:hover {
         left: 0;
         width: 100%;
         height: calc(100vh - 60px);
-        background-color: rgba(0, 0, 0, 0.9);
-        z-index: 10;
+        background-color: rgba(0, 0, 0, 0.95);
+        z-index: 1000;
     }
 
     .menu-links.open {
@@ -283,22 +296,36 @@ a:hover {
     .menu-links ul {
         flex-direction: column;
         padding: 20px;
+        align-items: flex-start;
     }
 
     .menu-links li {
         margin: 15px 0;
     }
 
+    .menu-links a {
+        font-size: 16px;
+        padding: 10px 0;
+    }
+
     .dropdown-content {
+        display: none;
         position: static;
         background-color: transparent;
-        display: none;
-        transform: none;
         box-shadow: none;
+        min-width: 100%;
+        transform: none;
+        opacity: 1;
+        pointer-events: auto;
     }
 
     .dropdown.open .dropdown-content {
         display: block;
+    }
+
+    .dropdown-content a {
+        padding: 10px 20px;
+        font-size: 14px;
     }
 
     .content {
