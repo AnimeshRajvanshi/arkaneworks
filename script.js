@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dropdowns = document.querySelectorAll('.dropdown');
     const sections = document.querySelectorAll('.page');
 
-    // Menu toggle
+    // Menu toggle for mobile
     menuButton.addEventListener('click', () => {
         menuButton.classList.toggle('open');
         menuLinks.classList.toggle('open');
