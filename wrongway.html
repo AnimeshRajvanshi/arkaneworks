@@ -1,10 +1,9 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects - ARKANE WORKS</title>
+    <title>Mechanical Wrong-Way Driving Prevention System - ARKANE WORKS</title>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
@@ -35,25 +34,57 @@
         </nav>
     </header>
     <main class="scroll-container">
-        <section class="page default-background">
+        <section class="page video-background">
+            <video class="background-video" autoplay muted loop playsinline>
+                <source src="wrongway-video1.mp4" type="video/mp4">
+            </video>
             <div class="content">
-                <h1>Projects</h1>
-                <p>Explore my portfolio of innovative engineering projects, each designed to solve unique challenges in aerospace, nanotechnology, and sustainable systems.</p>
+                <h1>Mechanical Wrong-Way Driving Prevention System</h1>
+                <p>The Mechanical Wrong-Way Driving Prevention System, developed during my 2024 Mechanical Engineering capstone at Arizona State University, mitigates the lethal risks of wrong-way driving on highways. As part of a seven-member team, I collaborated on a speed hump system design, taking sole responsibility for its electrical components to alert impaired drivers through tactile and electronic feedback, enhancing safety without disrupting traffic.</p>
+            </div>
+        </section>
+        <section class="page default-background cad-showcase">
+            <div class="content">
+                <h2>CAD Showcase</h2>
+                <div class="showcase-container">
+                    <video class="showcase-video" autoplay muted loop playsinline controls>
+                        <source src="cad-placeholder.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p class="showcase-caption">[Placeholder: Add your CAD video or render here]</p>
+                </div>
             </div>
         </section>
         <section class="page default-background">
             <div class="content">
-                <h2>Featured Projects</h2>
-                <ul>
-                    <li><a href="lunar.html">Lunar Power Grid</a></li>
-                    <li><a href="cubesat.html">Gorgon CubeSat</a></li>
-                    <li><a href="nano.html">Nanoelectronics Ultrasonic NDT</a></li>
-                    <li><a href="heat.html">Heat Resilience Challenge</a></li>
-                    <li><a href="wrongway.html">Mechanical Wrong-Way Prevention</a></li>
+                <p>Wrong-way driving accounts for 1% of highway accidents but has a 25% fatality rate, claiming 300-400 lives annually in Arizona (Arizona Department of Transportation). Predominantly caused by impaired drivers (65% of cases) at night, our challenge was to design a cost-effective, durable system. We settled on a pointed, hinged speed hump, using SolidWorks for CAD and ANSYS for FEA, transitioning from plywood to a $401.85 steel prototype within a $700 budget.</p>
+            </div>
+        </section>
+        <section class="page default-background">
+            <div class="content">
+                <p>The system features steel plates forming depressible ramps with hinges and bolts, refined through team CAD efforts. I designed an Arduino-based electrical system with aluminum foil contact switches and LED alerts for direction detection. FEA confirmed safety factors of 2.5-3.3 under 1000 lbf, validated by low-speed tests. It withstands heavy use with springs and rollers, requiring minimal road changes.</p>
+            </div>
+        </section>
+        <section class="page default-background">
+            <div class="content">
+                <p>Live demonstrations proved efficacy: mechanical humps jolted drivers, and my electrical circuit triggered LED signals accurately. With safety factors above 2.5 and 57.4% budget utilization, this scalable solution blends team mechanical design with my electrical innovation, poised to reduce fatalities. Future fatigue analysis is planned for higher speeds.</p>
+            </div>
+        </section>
+        <section class="page default-background references">
+            <div class="content">
+                <h2>References and Credits</h2>
+                <p>Team Members: [List names here]</p>
+                <ul class="custom-list">
+                    <li>DM Cantor: <a href="https://dmcantor.com/blog/arizona-wrong-way-drivers-causes-possible-charges-defenses" target="_blank">Wrong-Way Crashes in Arizona</a></li>
+                    <li>Federal Highway Administration: <a href="https://highways.dot.gov/safety/speed-management/traffic-calming-eprimer" target="_blank">Traffic Calming ePrimer</a></li>
+                    <li>Arizona Department of Transportation: <a href="https://azdot.gov/motor-vehicles/statistics/wrong-way-driving" target="_blank">Wrong-Way Driving Data</a></li>
+                    <li>Shigley’s Mechanical Design: <a href="https://www.mheducation.com/highered/product/shigley-s-mechanical-engineering-design-budynas-nisbett/M9780073398204.html" target="_blank">10th Edition, Chapter 10</a></li>
+                    <li>Koba Kant: <a href="https://www.kobakant.at/DIY/?p=8906" target="_blank">Paper + Aluminum Foil Contact Switch</a></li>
+                    <li>SolidWorks: <a href="https://www.solidworks.com/support/finite-element-analysis" target="_blank">Finite Element Analysis Guide</a></li>
+                    <li>Arduino: <a href="https://www.arduino.cc/en/Tutorial/BuiltInExamples" target="_blank">Basic Circuit Design</a></li>
                 </ul>
             </div>
         </section>
     </main>
 </body>
 </html>
-```
