@@ -4,18 +4,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const dropdowns = document.querySelectorAll('.dropdown');
     const sections = document.querySelectorAll('.page');
 
-    // Menu toggle for mobile
+    // Mobile menu toggle
     menuButton.addEventListener('click', () => {
         menuButton.classList.toggle('open');
         menuLinks.classList.toggle('open');
     });
 
-    // Dropdown toggle for mobile
+    // Mobile dropdown toggle
     dropdowns.forEach(dropdown => {
-        dropdown.addEventListener('click', (e) => {
+        const link = dropdown.querySelector('a');
+        link.addEventListener('click', (e) => {
             if (window.innerWidth <= 768) {
-                dropdown.classList.toggle('open');
                 e.preventDefault();
+                dropdown.classList.toggle('open');
             }
         });
     });
