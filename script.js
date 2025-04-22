@@ -21,14 +21,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Fade-in animation on scroll
+    // Fade-in and fade-out animation on scroll
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
+            const content = entry.target.querySelector('.content');
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+                content.classList.add('visible');
+            } else {
+                content.classList.remove('visible');
             }
         });
-    }, { threshold: 0.1 });
+    }, { 
+        threshold: [0.1, 0.3, 0.5, 0.7, 0.9],
+        rootMargin: '0px'
+    });
 
     sections.forEach(section => observer.observe(section));
 });
