@@ -27,14 +27,12 @@ body {
 }
 
 .scroll-container {
-    scroll-snap-type: y mandatory;
     overflow-y: auto;
     height: 100vh;
 }
 
 .page {
-    height: 100vh;
-    scroll-snap-align: start;
+    min-height: 100vh;
     position: relative;
     display: flex;
     align-items: center;
@@ -66,12 +64,13 @@ body {
     max-width: 50%;
     background: rgba(0, 0, 0, 0.6);
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .page.visible .content {
     opacity: 1;
-    animation: fadeIn 0.5s ease;
+    transform: translateY(0);
 }
 
 @keyframes fadeIn {
