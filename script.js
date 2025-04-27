@@ -41,14 +41,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Scroll-driven video scrubbing
     if (video) {
         const secondPage = document.querySelectorAll('.page')[1];
-        const animationDuration = 3 * window.innerHeight; // Span pages 2-4
+        const animationDuration = 3.5 * window.innerHeight; // Span pages 2-4
         let secondPageTop = 0;
         let videoDuration = 10; // Default video duration in seconds
 
         // Calculate second page offset after DOM stabilization
         requestAnimationFrame(() => {
             secondPageTop = secondPage.offsetTop;
-            console.log(`Initial second page top: ${secondPageTop}, Animation duration: ${animationDuration}`);
+            if (secondPageTop <= 0) {
+                secondPageTop = secondPage.getBoundingClientRect().top + window.scrollY;
+            }
+            console.log(`Initial second page top: ${secondPageTop}, Animation duration: ${animationDuration}, Window innerHeight: ${window.innerHeight}`);
         });
 
         // Video event listeners
@@ -74,9 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Scroll handler
         const handleScroll = () => {
+            console.log('Scroll event fired');
             const scrollPosition = Math.max(0, window.scrollY - secondPageTop);
             const progress = Math.min(Math.max(scrollPosition / animationDuration, 0), 1);
-            console.log(`ScrollY: ${window.scrollY}, ScrollPosition: ${scrollPosition}, Progress: ${progress}, ReadyState: ${video.readyState}`);
+            console.log(`ScrollY: ${window.scrollY}, SecondPageTop: ${secondPageTop}, ScrollPosition: ${scrollPosition}, Progress: ${progress}, ReadyState: ${video.readyState}`);
             if (!isNaN(videoDuration) && video.readyState >= 2) {
                 try {
                     video.currentTime = progress * videoDuration;
@@ -86,11 +90,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } else {
                 console.warn('Video not ready for scrubbing:', { readyState: video.readyState, duration: videoDuration });
+                setTimeout(() => {
+                    if (video.readyState >= 2) {
+                        video.currentTime = progress * videoDuration;
+                        console.log(`Retry video time set to: ${video.currentTime}s`);
+                    }
+                }, 200);
             }
         };
 
         // Attach scroll listener
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
 
         // Force video load
         console.log('Loading video:', video.currentSrc || 'No source yet');
