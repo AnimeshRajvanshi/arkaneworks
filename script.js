@@ -42,16 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (video) {
         const secondPage = document.querySelectorAll('.page')[1];
         const animationDuration = 3 * window.innerHeight; // Span pages 2-4
-        let videoDuration = 10; // Default video duration in seconds
         let secondPageTop = 0;
+        let videoDuration = 10; // Default video duration in seconds
 
-        // Calculate second page offset
-        const updateOffsets = () => {
+        // Calculate second page offset once after load
+        setTimeout(() => {
             secondPageTop = secondPage.getBoundingClientRect().top + window.scrollY;
-            console.log(`Second page top: ${secondPageTop}, Animation duration: ${animationDuration}`);
-        };
-        updateOffsets();
-        window.addEventListener('resize', updateOffsets);
+            console.log(`Initial second page top: ${secondPageTop}, Animation duration: ${animationDuration}`);
+        }, 100);
 
         // Video event listeners
         video.addEventListener('loadedmetadata', () => {
@@ -59,11 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
             video.currentTime = 0;
             video.pause();
             console.log(`Video loaded, duration: ${videoDuration}s, readyState: ${video.readyState}, paused: ${video.paused}`);
-            // Briefly play to test
-            video.play().then(() => {
-                setTimeout(() => video.pause(), 100);
-                console.log('Video can play, paused after brief test');
-            }).catch(e => console.error('Play test failed:', e));
         });
 
         video.addEventListener('error', (e) => {
@@ -79,34 +72,31 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(`Video time updated: ${video.currentTime}s`);
         });
 
-        // Prevent auto-play
-        video.addEventListener('play', () => {
-            if (video.currentTime > 0 && !video.paused) {
-                video.pause();
-                console.log('Prevented unintended playback');
-            }
-        });
-
         // Scroll handler
         const handleScroll = () => {
             const scrollPosition = Math.max(0, window.scrollY - secondPageTop);
             const progress = Math.min(scrollPosition / animationDuration, 1);
+            console.log(`ScrollY: ${window.scrollY}, ScrollPosition: ${scrollPosition}, Progress: ${progress}, ReadyState: ${video.readyState}`);
             if (!isNaN(videoDuration) && video.readyState >= 2) {
-                video.currentTime = progress * videoDuration;
-                console.log(`ScrollY: ${window.scrollY}, ScrollPosition: ${scrollPosition}, Progress: ${progress}, Video time: ${video.currentTime}s`);
+                try {
+                    video.currentTime = progress * videoDuration;
+                    console.log(`Video time set to: ${video.currentTime}s`);
+                } catch (e) {
+                    console.error('Error setting video time:', e);
+                }
             } else {
-                console.warn('Video not ready:', { readyState: video.readyState, duration: videoDuration });
+                console.warn('Video not ready for scrubbing:', { readyState: video.readyState, duration: videoDuration });
                 // Retry after delay
                 setTimeout(() => {
                     if (video.readyState >= 2) {
                         video.currentTime = progress * videoDuration;
+                        console.log(`Retry video time set to: ${video.currentTime}s`);
                     }
                 }, 500);
             }
         };
 
         // Debounced scroll
-        let lastScroll = 0;
         const debounce = (func, wait) => {
             let timeout;
             return (...args) => {
@@ -114,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 timeout = setTimeout(() => func(...args), wait);
             };
         };
-        window.addEventListener('scroll', debounce(handleScroll, 10));
+        window.addEventListener('scroll', debounce(handleScroll, 50));
 
         // Force video load
         console.log('Loading video:', video.currentSrc || 'No source yet');
