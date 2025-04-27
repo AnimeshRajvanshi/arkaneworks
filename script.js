@@ -44,29 +44,49 @@ document.addEventListener('DOMContentLoaded', () => {
         const animationDuration = 3 * window.innerHeight; // Span pages 2-4
         let videoDuration = 10; // Default video duration in seconds
 
-        // Ensure video is loaded and get duration
+        // Log video loading status
         video.addEventListener('loadedmetadata', () => {
-            videoDuration = video.duration;
-            video.currentTime = 0; // Start at beginning
-            console.log(`Video loaded, duration: ${videoDuration}s`);
+            videoDuration = video.duration || 10;
+            video.currentTime = 0;
+            console.log(`Video loaded, duration: ${videoDuration}s, readyState: ${video.readyState}`);
+            video.play().catch(e => console.error('Video play failed:', e));
         });
 
-        // Log errors if video fails to load
+        // Log errors
         video.addEventListener('error', (e) => {
-            console.error('Video failed to load:', e);
+            console.error('Video error:', e, 'Source:', video.currentSrc);
         });
 
-        // Scroll event for scrubbing
-        window.addEventListener('scroll', () => {
-            const rect = secondPage.getBoundingClientRect();
-            const scrollPosition = Math.max(0, -rect.top); // Distance scrolled past second page
+        // Log when video can play
+        video.addEventListener('canplay', () => {
+            console.log('Video can play, readyState:', video.readyState);
+        });
+
+        // Debounced scroll handler
+        let lastScroll = 0;
+        const debounce = (func, wait) => {
+            let timeout;
+            return (...args) => {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func(...args), wait);
+            };
+        };
+
+        const handleScroll = debounce(() => {
+            const secondPageTop = secondPage.getBoundingClientRect().top + window.scrollY;
+            const scrollPosition = Math.max(0, window.scrollY - secondPageTop);
             const progress = Math.min(scrollPosition / animationDuration, 1);
-            if (!isNaN(videoDuration)) {
+            if (!isNaN(videoDuration) && video.readyState >= 2) {
                 video.currentTime = progress * videoDuration;
+                console.log(`Scroll progress: ${progress}, Video time: ${video.currentTime}s`);
             }
-        });
+        }, 10);
 
-        // Ensure video is preloaded
+        window.addEventListener('scroll', handleScroll);
+
+        // Force video load
         video.load();
+    } else {
+        console.error('Video element not found');
     }
 });
