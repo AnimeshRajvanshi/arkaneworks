@@ -41,15 +41,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // Scroll-driven video scrubbing
     if (video) {
         const secondPage = document.querySelectorAll('.page')[1];
-        const animationDuration = 3 * window.innerHeight; // Span pages 2-4
+        const fourthPage = document.querySelectorAll('.page')[3];
+        let secondPageTop = 0;
+        let animationDuration = 0;
         let videoDuration = 10; // Default video duration in seconds
 
-        // Log video loading status
+        // Calculate page offsets and duration
+        const updateOffsets = () => {
+            secondPageTop = secondPage.getBoundingClientRect().top + window.scrollY;
+            const fourthPageBottom = fourthPage.getBoundingClientRect().bottom + window.scrollY;
+            animationDuration = fourthPageBottom - secondPageTop; // Span pages 2-4
+            console.log(`Second page top: ${secondPageTop}, Animation duration: ${animationDuration}`);
+        };
+
+        // Initial offset calculation
+        updateOffsets();
+
+        // Recalculate on resize
+        window.addEventListener('resize', updateOffsets);
+
+        // Ensure video is loaded and paused
         video.addEventListener('loadedmetadata', () => {
             videoDuration = video.duration || 10;
             video.currentTime = 0;
+            video.pause();
             console.log(`Video loaded, duration: ${videoDuration}s, readyState: ${video.readyState}`);
-            video.play().catch(e => console.error('Video play failed:', e));
         });
 
         // Log errors
@@ -60,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Log when video can play
         video.addEventListener('canplay', () => {
             console.log('Video can play, readyState:', video.readyState);
+            video.pause(); // Ensure no automatic playback
         });
 
         // Debounced scroll handler
@@ -73,12 +90,13 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const handleScroll = debounce(() => {
-            const secondPageTop = secondPage.getBoundingClientRect().top + window.scrollY;
             const scrollPosition = Math.max(0, window.scrollY - secondPageTop);
             const progress = Math.min(scrollPosition / animationDuration, 1);
             if (!isNaN(videoDuration) && video.readyState >= 2) {
                 video.currentTime = progress * videoDuration;
-                console.log(`Scroll progress: ${progress}, Video time: ${video.currentTime}s`);
+                console.log(`ScrollY: ${window.scrollY}, Progress: ${progress}, Video time: ${video.currentTime}s`);
+            } else {
+                console.warn('Video not ready or invalid duration:', video.readyState, videoDuration);
             }
         }, 10);
 
