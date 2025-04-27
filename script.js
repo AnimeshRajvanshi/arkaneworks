@@ -45,11 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
         let secondPageTop = 0;
         let videoDuration = 10; // Default video duration in seconds
 
-        // Calculate second page offset once after load
-        setTimeout(() => {
-            secondPageTop = secondPage.getBoundingClientRect().top + window.scrollY;
+        // Calculate second page offset after DOM stabilization
+        requestAnimationFrame(() => {
+            secondPageTop = secondPage.offsetTop;
             console.log(`Initial second page top: ${secondPageTop}, Animation duration: ${animationDuration}`);
-        }, 100);
+        });
 
         // Video event listeners
         video.addEventListener('loadedmetadata', () => {
@@ -57,10 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
             video.currentTime = 0;
             video.pause();
             console.log(`Video loaded, duration: ${videoDuration}s, readyState: ${video.readyState}, paused: ${video.paused}`);
-        });
-
-        video.addEventListener('error', (e) => {
-            console.error('Video error:', e, 'Source:', video.currentSrc);
         });
 
         video.addEventListener('canplay', () => {
@@ -72,10 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(`Video time updated: ${video.currentTime}s`);
         });
 
+        video.addEventListener('error', (e) => {
+            console.error('Video error:', e, 'Source:', video.currentSrc);
+        });
+
         // Scroll handler
         const handleScroll = () => {
             const scrollPosition = Math.max(0, window.scrollY - secondPageTop);
-            const progress = Math.min(scrollPosition / animationDuration, 1);
+            const progress = Math.min(Math.max(scrollPosition / animationDuration, 0), 1);
             console.log(`ScrollY: ${window.scrollY}, ScrollPosition: ${scrollPosition}, Progress: ${progress}, ReadyState: ${video.readyState}`);
             if (!isNaN(videoDuration) && video.readyState >= 2) {
                 try {
@@ -86,25 +86,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } else {
                 console.warn('Video not ready for scrubbing:', { readyState: video.readyState, duration: videoDuration });
-                // Retry after delay
-                setTimeout(() => {
-                    if (video.readyState >= 2) {
-                        video.currentTime = progress * videoDuration;
-                        console.log(`Retry video time set to: ${video.currentTime}s`);
-                    }
-                }, 500);
             }
         };
 
-        // Debounced scroll
-        const debounce = (func, wait) => {
-            let timeout;
-            return (...args) => {
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func(...args), wait);
-            };
-        };
-        window.addEventListener('scroll', debounce(handleScroll, 50));
+        // Attach scroll listener
+        window.addEventListener('scroll', handleScroll);
 
         // Force video load
         console.log('Loading video:', video.currentSrc || 'No source yet');
