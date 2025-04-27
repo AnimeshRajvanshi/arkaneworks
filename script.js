@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('.page');
     const video = document.querySelector('.model-video');
 
+    // Debug video element
+    console.log('Video element:', video ? 'Found' : 'Not found', video);
+
     // Mobile menu toggle
     menuButton.addEventListener('click', () => {
         menuButton.classList.toggle('open');
@@ -38,10 +41,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     sections.forEach(section => observer.observe(section));
 
+    // Raw scroll event debug
+    window.addEventListener('scroll', () => {
+        console.log(`Raw scroll event: ${window.scrollY}`);
+    });
+
     // Scroll-driven video scrubbing
     if (video) {
         const secondPage = document.querySelectorAll('.page')[1];
-        const animationDuration = 3.5 * window.innerHeight; // Span pages 2-4
+        const animationDuration = 4 * window.innerHeight; // Span pages 2-4
         let secondPageTop = 0;
         let videoDuration = 10; // Default video duration in seconds
 
@@ -65,6 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
         video.addEventListener('canplay', () => {
             console.log('Video can play, readyState:', video.readyState);
             video.pause();
+            video.currentTime = 0; // Ensure initial frame
+            console.log('Forced initial seek to 0s');
         });
 
         video.addEventListener('timeupdate', () => {
@@ -83,6 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(`ScrollY: ${window.scrollY}, SecondPageTop: ${secondPageTop}, ScrollPosition: ${scrollPosition}, Progress: ${progress}, ReadyState: ${video.readyState}`);
             if (!isNaN(videoDuration) && video.readyState >= 2) {
                 try {
+                    console.log(`Attempting to set currentTime: ${progress * videoDuration}`);
                     video.currentTime = progress * videoDuration;
                     console.log(`Video time set to: ${video.currentTime}s`);
                 } catch (e) {
@@ -95,12 +106,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         video.currentTime = progress * videoDuration;
                         console.log(`Retry video time set to: ${video.currentTime}s`);
                     }
-                }, 200);
+                }, 100);
             }
         };
 
-        // Attach scroll listener
-        window.addEventListener('scroll', handleScroll, { passive: true });
+        // Attach scroll listeners
+        window.addEventListener('scroll', handleScroll);
+        document.addEventListener('scroll', handleScroll); // Fallback
 
         // Force video load
         console.log('Loading video:', video.currentSrc || 'No source yet');
