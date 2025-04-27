@@ -1,364 +1,95 @@
-body {
-    margin: 0;
-    padding: 0;
-    background-color: black;
-    color: white;
-    font-family: 'Barlow', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: black;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #333;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
-.scroll-container {
-    overflow-y: auto;
-    height: 100vh;
-}
-
-.page {
-    min-height: 100vh;
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.default-background {
-    background: url('synapse1.jpg') no-repeat center center/cover;
-}
-
-.video-background {
-    position: relative;
-}
-
-.background-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-    opacity: 0.8;
-}
-
-.model-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    z-index: 0;
-    opacity: 0.9; /* Slightly transparent to blend with background */
-}
-
-.content {
-    position: relative;
-    text-align: left;
-    padding: 40px;
-    max-width: 50%;
-    background: rgba(0, 0, 0, 0.7); /* Increased opacity for readability */
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    z-index: 1;
-}
-
-.page:not(.visible) .content {
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-.page.visible .content {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.content h1 {
-    font-size: 32px;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin: 0 0 20px;
-}
-
-.content h2 {
-    font-size: 24px;
-    font-weight: 500;
-    margin: 0 0 20px;
-}
-
-.content p {
-    font-size: 18px;
-    margin: 0 0 20px;
-}
-
-a {
-    color: white;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-.custom-list {
-    list-style: none;
-    padding: 0;
-    margin: 20px 0;
-}
-
-.custom-list li {
-    position: relative;
-    padding-left: 30px;
-    margin-bottom: 15px;
-    font-size: 16px;
-    line-height: 1.5;
-}
-
-.custom-list li::before {
-    content: '•';
-    position: absolute;
-    left: 0;
-    color: #00aaff;
-    font-size: 18px;
-}
-
-.showcase-container {
-    width: 100%;
-    text-align: center;
-    margin-top: 20px;
-}
-
-.showcase-image, .showcase-video {
-    width: 100%;
-    max-width: 800px;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
-
-.showcase-caption {
-    font-size: 14px;
-    color: #ccc;
-}
-
-.profile-image {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 300px;
-    height: auto;
-    z-index: 1;
-}
-
-.menu-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 1000;
-}
-
-.website-name {
-    margin-left: 20px;
-    font-size: 20px;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: white;
-    text-decoration: none;
-}
-
-.website-name:hover {
-    opacity: 0.7;
-}
-
-.menu-button {
-    display: none;
-    margin-right: 20px;
-    width: 24px;
-    height: 16px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.menu-button .line {
-    width: 100%;
-    height: 2px;
-    background-color: white;
-    transition: all 0.3s ease;
-}
-
-.menu-button.open .line:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-
-.menu-button.open .line:nth-child(2) {
-    opacity: 0;
-}
-
-.menu-button.open .line:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
-}
-
-.menu-links {
-    margin-right: 20px;
-}
-
-.menu-links ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-}
-
-.menu-links li {
-    position: relative;
-}
-
-.menu-links a {
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 10px 15px;
-    transition: opacity 0.2s ease;
-}
-
-.menu-links a:hover {
-    opacity: 0.7;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.9);
-    min-width: 220px;
-    z-index: 1;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    pointer-events: none;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.dropdown-content li {
-    margin: 0;
-}
-
-.dropdown-content a {
-    padding: 10px 20px;
-    display: block;
-    font-size: 13px;
-}
-
-@media (max-width: 768px) {
-    .menu-button {
-        display: flex;
-    }
-
-    .menu-links {
-        display: none;
-        position: fixed;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        height: calc(100vh - 60px);
-        background-color: rgba(0, 0, 0, 0.95);
-        z-index: 1000;
-    }
-
-    .menu-links.open {
-        display: block;
-    }
-
-    .menu-links ul {
-        flex-direction: column;
-        padding: 20px;
-        align-items: flex-start;
-    }
-
-    .menu-links li {
-        margin: 15px 0;
-    }
-
-    .menu-links a {
-        font-size: 16px;
-        padding: 10px 0;
-    }
-
-    .dropdown-content {
-        display: none;
-        position: static;
-        background-color: transparent;
-        box-shadow: none;
-        min-width: 100%;
-        transform: none;
-        opacity: 1;
-        pointer-events: auto;
-    }
-
-    .dropdown.open .dropdown-content {
-        display: block;
-    }
-
-    .dropdown-content a {
-        padding: 10px 20px;
-        font-size: 14px;
-    }
-
-    .content {
-        max-width: 80%;
-    }
-
-    .showcase-image, .showcase-video {
-        max-width: 100%;
-    }
-
-    .profile-image {
-        width: 200px;
-    }
-
-    .model-video {
-        object-fit: contain;
-        max-height: 80vh;
-    }
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mechanical Wrong-Way Driving Prevention System - ARKANE WORKS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="menu-bar">
+        <a href="index.html" class="website-name">ARKANE WORKS</a>
+        <button class="menu-button" aria-label="Toggle menu">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </button>
+        <nav class="menu-links">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="projects.html">Projects</a>
+                    <ul class="dropdown-content">
+                        <li><a href="lunar.html">Lunar Power Grid</a></li>
+                        <li><a href="cubesat.html">Gorgon CubeSat</a></li>
+                        <li><a href="nano.html">Nanoelectronics Ultrasonic NDT</a></li>
+                        <li><a href="heat.html">Heat Resilience Challenge</a></li>
+                        <li><a href="wrongway.html">Mechanical Wrong-Way Prevention</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html">About Me</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="scroll-container">
+        <section class="page video-background">
+            <video class="background-video" autoplay muted loop playsinline>
+                <source src="wrongway-video1.mp4" type="video/mp4">
+            </video>
+            <div class="content">
+                <h1>Mechanical Wrong-Way Driving Prevention System</h1>
+                <p>The Mechanical Wrong-Way Driving Prevention System, my 2024 Mechanical Engineering capstone at Arizona State University, addresses the critical issue of wrong-way driving on highways, a problem causing numerous fatalities annually in Arizona. As the electronics subsystem lead within a seven-member team, I designed and integrated an Arduino-based alerting system to complement the mechanical speed hump design. This project showcases my skills in electronics integration, mechanical design, and active collaboration, contributing to a team effort aimed at enhancing public safety through innovative engineering.</p>
+            </div>
+        </section>
+        <section class="page default-background cad-showcase">
+            <video class="model-video" muted playsinline preload="auto">
+                <source src="/assets/wrongway_animation.webm" type="video/webm">
+            </video>
+            <div class="content">
+                <h2>CAD Showcase</h2>
+                <div class="showcase-container">
+                    <p class="showcase-caption">Scroll-driven animation of the wrong-way mechanism</p>
+                </div>
+            </div>
+        </section>
+        <section class="page default-background">
+            <div class="content">
+                <p>Wrong-way crashes are a significant safety concern, often caused by impaired drivers at night (Arizona DOT). Our team designed a pointed, hinged speed hump using SolidWorks, featuring steel plates and shoulder bolts for durability. I took sole responsibility for the electrical subsystem, integrating Arduino-based contact switches and LED alerts to detect and signal wrong-way movement. The system was developed within a $700 budget, with a final estimated cost of approximately $400, reflecting efficient resource use.</p>
+            </div>
+        </section>
+        <section class="page default-background">
+            <div class="content">
+                <p>The mechanical system includes depressible ramps connected by hinges, validated through team-conducted finite element analysis (FEA) in ANSYS to ensure structural integrity under heavy loads. My electrical design utilized aluminum foil contact switches beneath the plates, wired to an Arduino Uno R3, to detect direction and activate LED alerts. I optimized the circuit for low power (5V, 20 mA) and reliability in harsh weather conditions. The steel prototype, evolved from an initial plywood model, was tested for durability and driver feedback in low-speed trials.</p>
+            </div>
+        </section>
+        <section class="page default-background">
+            <div class="content">
+                <p>Live demonstrations validated the system’s functionality: the humps provided a noticeable jolt to drivers, while my electrical circuit accurately signaled wrong-way detection via LEDs. Low-speed tests confirmed no vehicle damage, with springs and rollers enhancing durability. I contributed to data analysis, correlating FEA results with test outcomes, supporting the design’s potential for real-world use. Future testing could include fatigue analysis for high-speed scenarios, a tentative goal to refine the system further.</p>
+            </div>
+        </section>
+        <section class="page default-background references">
+            <div class="content">
+                <h2>Credits</h2>
+                <p>Team Members: Sultan Al Ali, Eric Baylon, Aleily Partida, Animesh Rajvanshi, Rachel Thomas, Amie Trescott</p>
+                <h2>References</h2>
+                <ul class="custom-list">
+                    <li>DM Cantor: <a href="https://dmcantor.com/blog/arizona-wrong-way-drivers-causes-possible-charges-defenses" target="_blank">Wrong-Way Crashes in Arizona</a></li>
+                    <li>Federal Highway Administration: <a href="https://highways.dot.gov/safety/speed-management/traffic-calming-eprimer" target="_blank">Traffic Calming ePrimer</a></li>
+                    <li>Arizona Department of Transportation: <a href="https://azdot.gov/motor-vehicles/statistics/wrong-way-driving" target="_blank">Wrong-Way Driving Data</a></li>
+                    <li>Shigley’s Mechanical Design: <a href="https://www.mheducation.com/highered/product/shigley-s-mechanical-engineering-design-budynas-nisbett/M9780073398204.html" target="_blank">10th Edition, Chapter 10</a></li>
+                    <li>Koba Kant: <a href="https://www.kobakant.at/DIY/?p=8906" target="_blank">Paper + Aluminum Foil Contact Switch</a></li>
+                    <li>SolidWorks: <a href="https://www.solidworks.com/support/finite-element-analysis" target="_blank">Finite Element Analysis Guide</a></li>
+                    <li>Arduino: <a href="https://www.arduino.cc/en/Tutorial/BuiltInExamples" target="_blank">Basic Circuit Design</a></li>
+                    <li>IEEE: <a href="https://ieeexplore.ieee.org/document/8735124" target="_blank">Transportation Safety</a></li>
+                    <li>ScienceDirect: <a href="https://www.sciencedirect.com/science/article/pii/S2352484719300999" target="_blank">Wrong-Way Driving Countermeasures</a></li>
+                    <li>National Highway Traffic Safety Administration: <a href="https://www.nhtsa.gov/road-safety" target="_blank">Road Safety Data</a></li>
+                    <li>ASU Engineering: <a href="https://engineering.asu.edu/" target="_blank">Capstone Project Resources</a></li>
+                    <li>ANSYS: <a href="https://www.ansys.com/applications/automotive" target="_blank">Automotive Simulation</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
