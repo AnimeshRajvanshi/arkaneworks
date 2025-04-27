@@ -41,19 +41,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // Scroll-driven video scrubbing
     if (video) {
         const secondPage = document.querySelectorAll('.page')[1];
-        const animationDuration = 2 * window.innerHeight; // Span pages 2-4
-        const videoDuration = 10; // Video duration in seconds
+        const animationDuration = 3 * window.innerHeight; // Span pages 2-4
+        let videoDuration = 10; // Default video duration in seconds
 
+        // Ensure video is loaded and get duration
+        video.addEventListener('loadedmetadata', () => {
+            videoDuration = video.duration;
+            video.currentTime = 0; // Start at beginning
+            console.log(`Video loaded, duration: ${videoDuration}s`);
+        });
+
+        // Log errors if video fails to load
+        video.addEventListener('error', (e) => {
+            console.error('Video failed to load:', e);
+        });
+
+        // Scroll event for scrubbing
         window.addEventListener('scroll', () => {
             const rect = secondPage.getBoundingClientRect();
-            const scrollPosition = -rect.top; // Distance scrolled past second page
-            const progress = Math.min(Math.max(scrollPosition / animationDuration, 0), 1);
-            video.currentTime = progress * videoDuration;
+            const scrollPosition = Math.max(0, -rect.top); // Distance scrolled past second page
+            const progress = Math.min(scrollPosition / animationDuration, 1);
+            if (!isNaN(videoDuration)) {
+                video.currentTime = progress * videoDuration;
+            }
         });
 
-        // Ensure video is ready
-        video.addEventListener('loadedmetadata', () => {
-            video.currentTime = 0; // Start at beginning
-        });
+        // Ensure video is preloaded
+        video.load();
     }
 });
