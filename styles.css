@@ -1,11 +1,12 @@
-body {
+html, body {
     margin: 0;
     padding: 0;
+    height: auto;
+    overflow-y: visible;
     background-color: black;
     color: white;
     font-family: 'Barlow', sans-serif;
     font-weight: 300;
-    overflow-x: hidden;
 }
 
 /* Custom Scrollbar */
@@ -27,8 +28,11 @@ body {
 }
 
 .scroll-container {
-    overflow-y: auto;
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    scroll-behavior: smooth;
 }
 
 .page {
@@ -156,11 +160,6 @@ a:hover {
     height: auto;
     border-radius: 10px;
     margin-bottom: 20px;
-}
-
-.showcase-caption {
-    font-size: 14px;
-    color: #ccc;
 }
 
 .profile-image {
