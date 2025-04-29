@@ -35,7 +35,7 @@
     </header>
     <main class="scroll-container">
         <section class="page video-background">
-            <video class="background-video" autoplay muted loop playsinline>
+            <video class="background-video" autoplay muted loop playsinline preload="auto">
                 <source src="/assets/wrongway-video1.mp4" type="video/mp4">
                 Your browser does not support the video tag. Please ensure your browser is up to date.
             </video>
@@ -44,24 +44,26 @@
                 <p>The Mechanical Wrong-Way Driving Prevention System, my 2024 Mechanical Engineering capstone at Arizona State University, addresses the critical issue of wrong-way driving on highways, a problem causing numerous fatalities annually in Arizona. As the electronics subsystem lead within a seven-member team, I designed and integrated an Arduino-based alerting system to complement the mechanical speed hump design. This project showcases my skills in electronics integration, mechanical design, and active collaboration, contributing to a team effort aimed at enhancing public safety through innovative engineering.</p>
             </div>
         </section>
-        <section class="page default-background animation-section">
-            <div class="canvas-container">
-                <canvas class="model-canvas"></canvas>
-            </div>
-            <div class="content blurb">
-                <p>Wrong-way crashes are a significant safety concern, often caused by impaired drivers at night (Arizona DOT). Our team designed a pointed, hinged speed hump using SolidWorks, featuring steel plates and shoulder bolts for durability. I took sole responsibility for the electrical subsystem, integrating Arduino-based contact switches and LED alerts to detect and signal wrong-way movement. The system was developed within a $700 budget, with a final estimated cost of approximately $400, reflecting efficient resource use.</p>
-            </div>
-        </section>
-        <section class="page default-background animation-section">
-            <div class="content blurb">
-                <p>The mechanical system includes depressible ramps connected by hinges, validated through team-conducted finite element analysis (FEA) in ANSYS to ensure structural integrity under heavy loads. My electrical design utilized aluminum foil contact switches beneath the plates, wired to an Arduino Uno R3, to detect direction and activate LED alerts. I optimized the circuit for low power (5V, 20 mA) and reliability in harsh weather conditions. The steel prototype, evolved from an initial plywood model, was tested for durability and driver feedback in low-speed trials.</p>
-            </div>
-        </section>
-        <section class="page default-background animation-section">
-            <div class="content blurb">
-                <p>Live demonstrations validated the system’s functionality: the humps provided a noticeable jolt to drivers, while my electrical circuit accurately signaled wrong-way detection via LEDs. Low-speed tests confirmed no vehicle damage, with springs and rollers enhancing durability. I contributed to data analysis, correlating FEA results with test outcomes, supporting the design’s potential for real-world use. Future testing could include fatigue analysis for high-speed scenarios, a tentative goal to refine the system further.</p>
-            </div>
-        </section>
+        <div class="animation-container">
+            <section class="page default-background animation-section">
+                <div class="canvas-container">
+                    <canvas class="model-canvas"></canvas>
+                </div>
+                <div class="content blurb">
+                    <p>Wrong-way crashes are a significant safety concern, often caused by impaired drivers at night (Arizona DOT). Our team designed a pointed, hinged speed hump using SolidWorks, featuring steel plates and shoulder bolts for durability. I took sole responsibility for the electrical subsystem, integrating Arduino-based contact switches and LED alerts to detect and signal wrong-way movement. The system was developed within a $700 budget, with a final estimated cost of approximately $400, reflecting efficient resource use.</p>
+                </div>
+            </section>
+            <section class="page default-background animation-section">
+                <div class="content blurb">
+                    <p>The mechanical system includes depressible ramps connected by hinges, validated through team-conducted finite element analysis (FEA) in ANSYS to ensure structural integrity under heavy loads. My electrical design utilized aluminum foil contact switches beneath the plates, wired to an Arduino Uno R3, to detect direction and activate LED alerts. I optimized the circuit for low power (5V, 20 mA) and reliability in harsh weather conditions. The steel prototype, evolved from an initial plywood model, was tested for durability and driver feedback in low-speed trials.</p>
+                </div>
+            </section>
+            <section class="page default-background animation-section">
+                <div class="content blurb">
+                    <p>Live demonstrations validated the system’s functionality: the humps provided a noticeable jolt to drivers, while my electrical circuit accurately signaled wrong-way detection via LEDs. Low-speed tests confirmed no vehicle damage, with springs and rollers enhancing durability. I contributed to data analysis, correlating FEA results with test outcomes, supporting the design’s potential for real-world use. Future testing could include fatigue analysis for high-speed scenarios, a tentative goal to refine the system further.</p>
+                </div>
+            </section>
+        </div>
         <section class="page default-background references">
             <div class="content">
                 <h2>Credits</h2>
