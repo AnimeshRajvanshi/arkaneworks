@@ -47,14 +47,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fade-in and fade-out animation for text
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if (entry.isIntersecting && entry.intersectionRatio >= 0.1) {
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
                 entry.target.classList.add('visible');
             } else {
                 entry.target.classList.remove('visible');
             }
         });
     }, { 
-        threshold: 0.1,
+        threshold: 0.3,
         rootMargin: '0px'
     });
 
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const context = canvas.getContext('2d', { willReadFrequently: true }); // Safari compatibility
         const secondPage = document.querySelectorAll('.page')[1];
         const totalFrames = 120; // 120 frames at 12 FPS
-        const animationDuration = Math.max(4.5 * window.innerHeight, 4500); // Span ~3 pages
+        const animationDuration = 2000; // Span pages 2 to 4 (~3 viewports)
         const images = [];
 
         // Preload images
