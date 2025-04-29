@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvasContainer = document.querySelector('.canvas-container');
     const scrollContainer = document.querySelector('.scroll-container');
     const video = document.querySelector('.background-video');
+    const playButton = document.querySelector('.video-play-button');
 
     // Debug elements and dimensions
     console.log('Canvas element:', canvas ? 'Found' : 'Not found', canvas);
@@ -16,12 +17,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Video debugging
     if (video) {
-        video.addEventListener('error', () => console.error('Video error:', video.error));
+        video.addEventListener('error', (e) => console.error('Video error:', e));
         video.addEventListener('loadeddata', () => console.log('Video loaded successfully'));
+        video.addEventListener('canplay', () => console.log('Video can play'));
         video.addEventListener('play', () => console.log('Video playing'));
+        video.addEventListener('pause', () => console.log('Video paused'));
         video.addEventListener('stalled', () => console.log('Video stalled'));
-        // Attempt to play video manually for debugging
-        video.play().catch(err => console.error('Video play failed:', err));
+        // Attempt to play video
+        video.play().catch(err => {
+            console.error('Video play failed:', err);
+            if (playButton) {
+                playButton.style.display = 'block'; // Show play button if autoplay fails
+            }
+        });
+    }
+
+    // Manual play button
+    if (playButton && video) {
+        playButton.addEventListener('click', () => {
+            if (video.paused) {
+                video.play().then(() => console.log('Video manually played'));
+                playButton.textContent = 'Pause';
+            } else {
+                video.pause();
+                console.log('Video manually paused');
+                playButton.textContent = 'Play';
+            }
+        });
     }
 
     // Raw scroll event debug
@@ -68,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, { 
         threshold: 0.1,
-        rootMargin: '0px' /* Faster trigger */
+        rootMargin: '0px' /* Fast trigger */
     });
 
     sections.forEach(section => observer.observe(section));
@@ -78,8 +100,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const context = canvas.getContext('2d', { willReadFrequently: true }); // Safari compatibility
         const secondPage = document.querySelectorAll('.page')[1];
         const fifthPage = document.querySelectorAll('.page')[4];
+        const animationContainer = document.querySelector('.animation-container');
         const totalFrames = 120; // 120 frames at 12 FPS
-        const animationDuration = 1200; // Span pages 2 to 4 (~3 viewports)
+        const animationDuration = 1170; // Span from page 2 to page 5 (~3 viewports)
         const images = [];
         let aspectRatio = 16 / 9; // Default aspect ratio, updated on first image load
 
