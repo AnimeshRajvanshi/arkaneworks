@@ -29,7 +29,7 @@ html, body {
 
 .scroll-container {
     height: auto;
-    min-height: 600vh; /* Ensures scrollable height for 5 pages */
+    min-height: 500vh; /* Ensures scrollable height for 5 pages */
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
     scroll-behavior: smooth;
@@ -44,8 +44,7 @@ html, body {
 
 .default-background {
     background: url('/assets/synapse1.jpg') no-repeat center center/cover;
-    /* Fallback if synapse1.jpg is missing */
-    background-color: #1a1a1a; /* Dark gray fallback */
+    background-color: #1a1a1a; /* Fallback if synapse1.jpg is missing */
 }
 
 .video-background {
@@ -65,16 +64,23 @@ html, body {
 
 .animation-section {
     position: relative;
+    min-height: 100vh; /* Each animation section is at least 1 viewport */
 }
 
-.model-canvas {
-    position: sticky;
+.canvas-container {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
-    object-fit: contain;
     z-index: 0; /* Below content, above background */
+    display: none; /* Controlled by JS */
+}
+
+.model-canvas {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     opacity: 0.9;
 }
 
@@ -82,7 +88,8 @@ html, body {
     position: relative;
     text-align: left;
     padding: 40px;
-    max-width: 50%;
+    max-width: 80%;
+    margin: 0 auto;
     background: rgba(0, 0, 0, 0.7);
     opacity: 1;
     transform: translateY(0);
@@ -91,8 +98,7 @@ html, body {
 }
 
 .content.blurb {
-    max-width: 60%;
-    margin: 0 auto;
+    max-width: 80%;
 }
 
 .page:not(.visible) .content {
@@ -333,7 +339,7 @@ a:hover {
     }
 
     .content {
-        max-width: 80%;
+        max-width: 90%;
     }
 
     .content.blurb {
