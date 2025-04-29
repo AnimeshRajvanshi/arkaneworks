@@ -36,7 +36,7 @@ html, body {
 }
 
 .page {
-    min-height: 100vh;
+    height: 100vh; /* Fixed height to eliminate blank space */
     position: relative;
     display: flex;
     align-items: center;
@@ -62,9 +62,14 @@ html, body {
     opacity: 0.8;
 }
 
+.animation-container {
+    min-height: 300vh; /* Spans pages 2-4 for animation */
+    position: relative;
+}
+
 .animation-section {
     position: relative;
-    min-height: 300vh; /* Spans pages 2-4 for animation */
+    height: 100vh; /* Each page is exactly 1 viewport */
 }
 
 .canvas-container {
@@ -88,11 +93,11 @@ html, body {
     position: relative;
     text-align: left; /* All text aligned left */
     padding: 40px;
-    max-width: 70%; /* Reduced to shift right margin left */
+    max-width: 70%; /* Shift right margin left */
     margin: 0 0 0 40px; /* Shift text leftward */
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Faster transition */
     z-index: 1; /* Above canvas */
 }
 
