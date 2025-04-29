@@ -14,10 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(`Viewport: innerHeight=${window.innerHeight}, clientHeight=${document.documentElement.clientHeight}, visualViewport=${window.visualViewport ? window.visualViewport.height : 'N/A'}`);
     console.log(`Document scrollHeight: ${document.body.scrollHeight}, Container scrollHeight: ${scrollContainer ? scrollContainer.scrollHeight : 'N/A'}`);
 
-    // Video error logging
+    // Video debugging
     if (video) {
         video.addEventListener('error', () => console.error('Video error:', video.error));
         video.addEventListener('loadeddata', () => console.log('Video loaded successfully'));
+        video.addEventListener('play', () => console.log('Video playing'));
+        video.addEventListener('stalled', () => console.log('Video stalled'));
+        // Attempt to play video manually for debugging
+        video.play().catch(err => console.error('Video play failed:', err));
     }
 
     // Raw scroll event debug
@@ -56,15 +60,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             console.log(`Section: ${entry.target.className}, Intersecting: ${entry.isIntersecting}, Ratio: ${entry.intersectionRatio}`);
-            if (entry.isIntersecting && entry.intersectionRatio >= 0.05) {
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.1) {
                 entry.target.classList.add('visible');
             } else {
                 entry.target.classList.remove('visible');
             }
         });
     }, { 
-        threshold: 0.05,
-        rootMargin: '-50px'
+        threshold: 0.1,
+        rootMargin: '0px' /* Faster trigger */
     });
 
     sections.forEach(section => observer.observe(section));
@@ -75,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const secondPage = document.querySelectorAll('.page')[1];
         const fifthPage = document.querySelectorAll('.page')[4];
         const totalFrames = 120; // 120 frames at 12 FPS
-        const animationDuration = 2400; // Span pages 2 to 4 (~3 viewports, slower scrub)
+        const animationDuration = 1200; // Span pages 2 to 4 (~3 viewports)
         const images = [];
         let aspectRatio = 16 / 9; // Default aspect ratio, updated on first image load
 
