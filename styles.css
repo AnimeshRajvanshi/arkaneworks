@@ -29,7 +29,7 @@ html, body {
 
 .scroll-container {
     height: auto;
-    min-height: 800vh; /* Ensure sufficient scrollable height */
+    min-height: 1000vh; /* Increased for sufficient scrollable height */
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
     scroll-behavior: smooth;
@@ -43,7 +43,7 @@ html, body {
 }
 
 .default-background {
-    background: url('synapse1.jpg') no-repeat center center/cover;
+    background: url('/assets/synapse1.jpg') no-repeat center center/cover;
 }
 
 .video-background {
