@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const dropdowns = document.querySelectorAll('.dropdown');
     const sections = document.querySelectorAll('.page');
     const canvas = document.querySelector('.model-canvas');
+    const canvasContainer = document.querySelector('.canvas-container');
     const scrollContainer = document.querySelector('.scroll-container');
 
     // Debug elements and dimensions
@@ -47,25 +48,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fade-in and fade-out animation for text
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.1) {
                 entry.target.classList.add('visible');
             } else {
                 entry.target.classList.remove('visible');
             }
         });
     }, { 
-        threshold: 0.3,
-        rootMargin: '0px'
+        threshold: 0.1,
+        rootMargin: '-50px'
     });
 
     sections.forEach(section => observer.observe(section));
 
     // Scroll-driven image sequence animation
-    if (canvas && scrollContainer && window.location.pathname.includes('wrongway.html')) {
+    if (canvas && canvasContainer && scrollContainer && window.location.pathname.includes('wrongway.html')) {
         const context = canvas.getContext('2d', { willReadFrequently: true }); // Safari compatibility
         const secondPage = document.querySelectorAll('.page')[1];
+        const fifthPage = document.querySelectorAll('.page')[4];
         const totalFrames = 120; // 120 frames at 12 FPS
-        const animationDuration = 2000; // Span pages 2 to 4 (~3 viewports)
+        const animationDuration = 1200; // Span pages 2 to 4 (~3 viewports)
         const images = [];
 
         // Preload images
@@ -84,14 +86,16 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        // Calculate second page offset
+        // Calculate page offsets
         let secondPageTop = secondPage.getBoundingClientRect().top + window.scrollY;
-        console.log(`Initial second page top: ${secondPageTop}, Animation duration: ${animationDuration}, Window innerHeight: ${window.innerHeight}`);
+        let fifthPageTop = fifthPage.getBoundingClientRect().top + window.scrollY;
+        console.log(`Initial second page top: ${secondPageTop}, Fifth page top: ${fifthPageTop}, Animation duration: ${animationDuration}, Window innerHeight: ${window.innerHeight}`);
 
-        // Update secondPageTop on resize
+        // Update offsets on resize
         window.addEventListener('resize', () => {
             secondPageTop = secondPage.getBoundingClientRect().top + window.scrollY;
-            console.log(`Updated second page top: ${secondPageTop}`);
+            fifthPageTop = fifthPage.getBoundingClientRect().top + window.scrollY;
+            console.log(`Updated second page top: ${secondPageTop}, Fifth page top: ${fifthPageTop}`);
         });
 
         // Draw frame on canvas
@@ -120,10 +124,18 @@ document.addEventListener('DOMContentLoaded', () => {
         let ticking = false;
 
         const updateFrame = () => {
-            const scrollPosition = Math.max(0, window.scrollY - secondPageTop);
+            const scrollY = window.scrollY;
+            // Show/hide canvas based on scroll position
+            if (scrollY >= secondPageTop && scrollY < fifthPageTop) {
+                canvasContainer.style.display = 'block';
+            } else {
+                canvasContainer.style.display = 'none';
+            }
+
+            const scrollPosition = Math.max(0, scrollY - secondPageTop);
             const progress = Math.min(Math.max(scrollPosition / animationDuration, 0), 1);
             const frameIndex = Math.floor(progress * (totalFrames - 1));
-            console.log(`ScrollY: ${window.scrollY}, SecondPageTop: ${secondPageTop}, ScrollPosition: ${scrollPosition}, Progress: ${progress}, FrameIndex: ${frameIndex}`);
+            console.log(`ScrollY: ${scrollY}, SecondPageTop: ${secondPageTop}, ScrollPosition: ${scrollPosition}, Progress: ${progress}, FrameIndex: ${frameIndex}`);
             drawFrame(frameIndex);
             ticking = false;
         };
@@ -155,6 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
             img.onerror = () => console.error(`Error loading frame ${index + 1}: ${img.src}`);
         });
     } else {
-        console.warn('Animation skipped: Canvas or scrollContainer missing, or not on wrongway.html');
+        console.warn('Animation skipped: Canvas, canvasContainer, or scrollContainer missing, or not on wrongway.html');
     }
 });
