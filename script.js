@@ -26,10 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Mobile menu toggle
-    menuButton.addEventListener('click', () => {
-        menuButton.classList.toggle('open');
-        menuLinks.classList.toggle('open');
-    });
+    if (menuButton && menuLinks) {
+        menuButton.addEventListener('click', () => {
+            menuButton.classList.toggle('open');
+            menuLinks.classList.toggle('open');
+        });
+    }
 
     // Mobile dropdown toggle
     dropdowns.forEach(dropdown => {
@@ -59,12 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach(section => observer.observe(section));
 
     // Scroll-driven image sequence animation
-    if (canvas && scrollContainer) {
-        const context = canvas.getContext('2d');
+    if (canvas && scrollContainer && window.location.pathname.includes('wrongway.html')) {
+        const context = canvas.getContext('2d', { willReadFrequently: true }); // Safari compatibility
         const secondPage = document.querySelectorAll('.page')[1];
         const totalFrames = 120; // 120 frames at 12 FPS
-        const animationDuration = Math.max(3 * window.innerHeight, 3000); // Span 3 pages
-        let secondPageTop = 0;
+        const animationDuration = Math.max(4.5 * window.innerHeight, 4500); // Span ~3 pages
         const images = [];
 
         // Preload images
@@ -84,13 +85,13 @@ document.addEventListener('DOMContentLoaded', () => {
         resizeCanvas();
 
         // Calculate second page offset
-        requestAnimationFrame(() => {
-            secondPageTop = secondPage.offsetTop;
-            if (secondPageTop <= 0) {
-                secondPageTop = secondPage.getBoundingClientRect().top + window.scrollY;
-            }
-            console.log(`Initial second page top: ${secondPageTop}, Animation duration: ${animationDuration}, Window innerHeight: ${window.innerHeight}`);
-            console.log(`Raw offsetTop: ${secondPage.offsetTop}, getBoundingClientRect: ${secondPage.getBoundingClientRect().top}, scrollY: ${window.scrollY}`);
+        let secondPageTop = secondPage.getBoundingClientRect().top + window.scrollY;
+        console.log(`Initial second page top: ${secondPageTop}, Animation duration: ${animationDuration}, Window innerHeight: ${window.innerHeight}`);
+
+        // Update secondPageTop on resize
+        window.addEventListener('resize', () => {
+            secondPageTop = secondPage.getBoundingClientRect().top + window.scrollY;
+            console.log(`Updated second page top: ${secondPageTop}`);
         });
 
         // Draw frame on canvas
@@ -140,6 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Attaching scroll listeners');
         window.addEventListener('scroll', handleScroll);
         document.addEventListener('touchmove', handleScroll);
+        document.addEventListener('touchstart', handleScroll); // Additional mobile support
 
         // Initial frame
         images[0].onload = () => {
@@ -153,6 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
             img.onerror = () => console.error(`Error loading frame ${index + 1}: ${img.src}`);
         });
     } else {
-        console.error('Missing elements:', { canvas: !!canvas, scrollContainer: !!scrollContainer });
+        console.warn('Animation skipped: Canvas or scrollContainer missing, or not on wrongway.html');
     }
 });
