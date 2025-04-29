@@ -64,7 +64,7 @@ html, body {
 
 .animation-section {
     position: relative;
-    min-height: 100vh; /* Each animation section is at least 1 viewport */
+    min-height: 300vh; /* Spans pages 2-4 for animation */
 }
 
 .canvas-container {
@@ -88,9 +88,8 @@ html, body {
     position: relative;
     text-align: left; /* All text aligned left */
     padding: 40px;
-    max-width: 80%;
-    margin: 0;
-    background: rgba(0, 0, 0, 0.7);
+    max-width: 70%; /* Reduced to shift right margin left */
+    margin: 0 0 0 40px; /* Shift text leftward */
     opacity: 1;
     transform: translateY(0);
     transition: opacity 0.5s ease, transform 0.5s ease;
@@ -98,7 +97,7 @@ html, body {
 }
 
 .content.blurb {
-    max-width: 80%;
+    max-width: 70%;
     text-align: left; /* Explicitly left-aligned */
 }
 
@@ -176,7 +175,7 @@ a:hover {
     left: 0;
     width: 100%;
     height: 60px;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.7); /* Keep overlay for header menu */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -263,7 +262,7 @@ a:hover {
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.9); /* Keep overlay for dropdown */
     min-width: 220px;
     z-index: 1;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -302,7 +301,7 @@ a:hover {
         left: 0;
         width: 100%;
         height: calc(100vh - 60px);
-        background-color: rgba(0, 0, 0, 0.95);
+        background-color: rgba(0, 0, 0, 0.95); /* Keep overlay for mobile menu */
         z-index: 1000;
     }
 
@@ -346,11 +345,12 @@ a:hover {
     }
 
     .content {
-        max-width: 90%;
+        max-width: 85%;
+        margin: 0 0 0 20px; /* Adjusted for mobile */
     }
 
     .content.blurb {
-        max-width: 90%;
+        max-width: 85%;
     }
 
     .model-canvas {
