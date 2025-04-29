@@ -3,11 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuLinks = document.querySelector('.menu-links');
     const dropdowns = document.querySelectorAll('.dropdown');
     const sections = document.querySelectorAll('.page');
-    const video = document.querySelector('.model-video');
+    const canvas = document.querySelector('.model-canvas');
     const scrollContainer = document.querySelector('.scroll-container');
 
     // Debug elements and dimensions
-    console.log('Video element:', video ? 'Found' : 'Not found', video);
+    console.log('Canvas element:', canvas ? 'Found' : 'Not found', canvas);
     console.log('Scroll container:', scrollContainer ? 'Found' : 'Not found', scrollContainer);
     console.log(`Viewport: innerHeight=${window.innerHeight}, clientHeight=${document.documentElement.clientHeight}, visualViewport=${window.visualViewport ? window.visualViewport.height : 'N/A'}`);
     console.log(`Document scrollHeight: ${document.body.scrollHeight}, Container scrollHeight: ${scrollContainer ? scrollContainer.scrollHeight : 'N/A'}`);
@@ -16,6 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', () => {
         console.log(`Raw scroll event (window): ${window.scrollY}`);
     });
+    document.addEventListener('touchmove', () => {
+        console.log(`Touchmove event: ${window.scrollY}`);
+    });
+
+    // Test scroll listener
+    window.onscroll = () => {
+        console.log(`Basic scroll test: ${window.scrollY}`);
+    };
 
     // Mobile menu toggle
     menuButton.addEventListener('click', () => {
@@ -50,12 +58,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     sections.forEach(section => observer.observe(section));
 
-    // Scroll-driven video scrubbing (EnduroSat-style)
-    if (video && scrollContainer) {
+    // Scroll-driven image sequence animation
+    if (canvas && scrollContainer) {
+        const context = canvas.getContext('2d');
         const secondPage = document.querySelectorAll('.page')[1];
-        const animationDuration = Math.max(4.5 * window.innerHeight, 4000); // Span pages 2-4
+        const totalFrames = 120; // 120 frames at 12 FPS
+        const animationDuration = Math.max(3 * window.innerHeight, 3000); // Span 3 pages
         let secondPageTop = 0;
-        let videoDuration = 10; // Default video duration in seconds
+        const images = [];
+
+        // Preload images
+        for (let i = 1; i <= totalFrames; i++) {
+            const img = new Image();
+            img.src = `/assets/wrongway_frames/frame_${i.toString().padStart(3, '0')}.png`;
+            images.push(img);
+        }
+
+        // Initialize canvas size
+        const resizeCanvas = () => {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            drawFrame(0); // Draw initial frame
+        };
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
         // Calculate second page offset
         requestAnimationFrame(() => {
@@ -67,55 +93,37 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(`Raw offsetTop: ${secondPage.offsetTop}, getBoundingClientRect: ${secondPage.getBoundingClientRect().top}, scrollY: ${window.scrollY}`);
         });
 
-        // Video event listeners
-        video.addEventListener('loadedmetadata', () => {
-            videoDuration = video.duration || 10;
-            video.currentTime = 0;
-            video.pause();
-            console.log(`Video loaded, duration: ${videoDuration}s, readyState: ${video.readyState}, paused: ${video.paused}`);
-        });
+        // Draw frame on canvas
+        function drawFrame(frameIndex) {
+            if (images[frameIndex] && images[frameIndex].complete) {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                const img = images[frameIndex];
+                const aspectRatio = img.width / img.height;
+                let drawWidth = canvas.width;
+                let drawHeight = canvas.width / aspectRatio;
+                if (drawHeight > canvas.height) {
+                    drawHeight = canvas.height;
+                    drawWidth = canvas.height * aspectRatio;
+                }
+                const offsetX = (canvas.width - drawWidth) / 2;
+                const offsetY = (canvas.height - drawHeight) / 2;
+                context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+                console.log(`Drawing frame: ${frameIndex}`);
+            } else {
+                console.warn(`Frame ${frameIndex} not loaded`);
+            }
+        }
 
-        video.addEventListener('canplay', () => {
-            console.log('Video can play, readyState:', video.readyState);
-            video.pause();
-            video.currentTime = 0;
-            console.log('Forced initial seek to 0s');
-        });
-
-        video.addEventListener('timeupdate', () => {
-            console.log(`Video time updated: ${video.currentTime}s`);
-        });
-
-        video.addEventListener('error', (e) => {
-            console.error('Video error:', e, 'Source:', video.currentSrc);
-        });
-
-        // Scroll handler with requestAnimationFrame
+        // Scroll handler
         let lastScrollY = window.scrollY;
         let ticking = false;
 
-        const updateVideoTime = () => {
+        const updateFrame = () => {
             const scrollPosition = Math.max(0, window.scrollY - secondPageTop);
             const progress = Math.min(Math.max(scrollPosition / animationDuration, 0), 1);
-            console.log(`ScrollY: ${window.scrollY}, SecondPageTop: ${secondPageTop}, ScrollPosition: ${scrollPosition}, Progress: ${progress}, ReadyState: ${video.readyState}, VideoSrc: ${video.currentSrc}`);
-            
-            if (!isNaN(videoDuration) && video.readyState >= 2) {
-                try {
-                    console.log(`Attempting to set currentTime: ${progress * videoDuration}`);
-                    video.currentTime = progress * videoDuration;
-                    console.log(`Video time set to: ${video.currentTime}s`);
-                } catch (e) {
-                    console.error('Error setting video time:', e);
-                }
-            } else {
-                console.warn('Video not ready for scrubbing:', { readyState: video.readyState, duration: videoDuration });
-                setTimeout(() => {
-                    if (video.readyState >= 2) {
-                        video.currentTime = progress * videoDuration;
-                        console.log(`Retry video time set to: ${video.currentTime}s`);
-                    }
-                }, 100);
-            }
+            const frameIndex = Math.floor(progress * (totalFrames - 1));
+            console.log(`ScrollY: ${window.scrollY}, SecondPageTop: ${secondPageTop}, ScrollPosition: ${scrollPosition}, Progress: ${progress}, FrameIndex: ${frameIndex}`);
+            drawFrame(frameIndex);
             ticking = false;
         };
 
@@ -123,20 +131,28 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Scroll event fired');
             lastScrollY = window.scrollY;
             if (!ticking) {
-                requestAnimationFrame(updateVideoTime);
+                requestAnimationFrame(updateFrame);
                 ticking = true;
             }
         };
 
-        // Attach scroll listener
-        console.log('Attaching scroll listener');
+        // Attach scroll listeners
+        console.log('Attaching scroll listeners');
         window.addEventListener('scroll', handleScroll);
         document.addEventListener('touchmove', handleScroll);
 
-        // Force video load
-        console.log('Loading video:', video.currentSrc || 'No source yet');
-        video.load();
+        // Initial frame
+        images[0].onload = () => {
+            drawFrame(0);
+            console.log('Initial frame loaded');
+        };
+
+        // Debug image loading
+        images.forEach((img, index) => {
+            img.onload = () => console.log(`Frame ${index + 1} loaded`);
+            img.onerror = () => console.error(`Error loading frame ${index + 1}: ${img.src}`);
+        });
     } else {
-        console.error('Missing elements:', { video: !!video, scrollContainer: !!scrollContainer });
+        console.error('Missing elements:', { canvas: !!canvas, scrollContainer: !!scrollContainer });
     }
 });
