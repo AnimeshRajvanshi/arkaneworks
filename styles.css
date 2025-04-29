@@ -29,7 +29,7 @@ html, body {
 
 .scroll-container {
     height: auto;
-    min-height: 1000vh; /* Increased for sufficient scrollable height */
+    min-height: 600vh; /* Ensures scrollable height for 5 pages */
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
     scroll-behavior: smooth;
@@ -44,6 +44,8 @@ html, body {
 
 .default-background {
     background: url('/assets/synapse1.jpg') no-repeat center center/cover;
+    /* Fallback if synapse1.jpg is missing */
+    background-color: #1a1a1a; /* Dark gray fallback */
 }
 
 .video-background {
@@ -61,15 +63,19 @@ html, body {
     opacity: 0.8;
 }
 
+.animation-section {
+    position: relative;
+}
+
 .model-canvas {
-    position: absolute;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     object-fit: contain;
     z-index: 0; /* Below content, above background */
-    opacity: 0.9; /* Matches previous model-video styling */
+    opacity: 0.9;
 }
 
 .content {
@@ -82,6 +88,11 @@ html, body {
     transform: translateY(0);
     transition: opacity 0.5s ease, transform 0.5s ease;
     z-index: 1; /* Above canvas */
+}
+
+.content.blurb {
+    max-width: 60%;
+    margin: 0 auto;
 }
 
 .page:not(.visible) .content {
@@ -146,29 +157,6 @@ a:hover {
     left: 0;
     color: #00aaff;
     font-size: 18px;
-}
-
-.showcase-container {
-    width: 100%;
-    text-align: center;
-    margin-top: 20px;
-}
-
-.showcase-image, .showcase-video {
-    width: 100%;
-    max-width: 800px;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
-
-.profile-image {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 300px;
-    height: auto;
-    z-index: 1;
 }
 
 .menu-bar {
@@ -348,12 +336,8 @@ a:hover {
         max-width: 80%;
     }
 
-    .showcase-image, .showcase-video {
-        max-width: 100%;
-    }
-
-    .profile-image {
-        width: 200px;
+    .content.blurb {
+        max-width: 90%;
     }
 
     .model-canvas {
