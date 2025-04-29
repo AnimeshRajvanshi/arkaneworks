@@ -48,14 +48,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fade-in and fade-out animation for text
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if (entry.isIntersecting && entry.intersectionRatio >= 0.1) {
+            console.log(`Section: ${entry.target.className}, Intersecting: ${entry.isIntersecting}, Ratio: ${entry.intersectionRatio}`);
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.05) {
                 entry.target.classList.add('visible');
             } else {
                 entry.target.classList.remove('visible');
             }
         });
     }, { 
-        threshold: 0.1,
+        threshold: 0.05,
         rootMargin: '-50px'
     });
 
@@ -79,12 +80,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Initialize canvas size
         const resizeCanvas = () => {
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
             drawFrame(0); // Draw initial frame
+            console.log(`Canvas resized: width=${canvas.width}, height=${canvas.height}`);
         };
         window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+        resizeCanvas(); // Initial call
 
         // Calculate page offsets
         let secondPageTop = secondPage.getBoundingClientRect().top + window.scrollY;
@@ -103,16 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (images[frameIndex] && images[frameIndex].complete) {
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 const img = images[frameIndex];
-                const aspectRatio = img.width / img.height;
-                let drawWidth = canvas.width;
-                let drawHeight = canvas.width / aspectRatio;
-                if (drawHeight > canvas.height) {
-                    drawHeight = canvas.height;
-                    drawWidth = canvas.height * aspectRatio;
-                }
-                const offsetX = (canvas.width - drawWidth) / 2;
-                const offsetY = (canvas.height - drawHeight) / 2;
-                context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+                context.drawImage(img, 0, 0, canvas.width, canvas.height); // Fill viewport
                 console.log(`Drawing frame: ${frameIndex}`);
             } else {
                 console.warn(`Frame ${frameIndex} not loaded`);
