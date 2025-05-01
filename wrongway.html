@@ -33,23 +33,25 @@
             </ul>
         </nav>
     </header>
+    <div class="canvas-wrapper">
+        <canvas class="model-canvas"></canvas>
+    </div>
+    <div class="loading-indicator">Loading animation...</div>
+    <div class="image-preload"></div>
     <main class="scroll-container">
         <section class="page video-background">
-            <video class="background-video" autoplay muted loop playsinline preload="auto">
-                <source src="/assets/wrongway-video1.mp4" type="video/mp4">
-                Your browser does not support the video tag. Please ensure your browser is up to date.
-            </video>
-            <img class="video-fallback" src="/assets/wrongway-video-fallback.jpg" alt="Video fallback image">
-            <button class="video-play-button">Play</button>
+            <div class="video-container">
+                <video class="background-video" autoplay muted loop playsinline preload="auto" poster="/assets/wrongway-video-fallback.jpg">
+                    <source src="/assets/wrongway-video1.mp4" type="video/mp4">
+                    Your browser does not support the video tag. Please ensure your browser is up to date.
+                </video>
+            </div>
             <div class="content">
                 <h1>Mechanical Wrong-Way Driving Prevention System</h1>
                 <p>The Mechanical Wrong-Way Driving Prevention System, my 2024 Mechanical Engineering capstone at Arizona State University, addresses the critical issue of wrong-way driving on highways, a problem causing numerous fatalities annually in Arizona. As the electronics subsystem lead within a seven-member team, I designed and integrated an Arduino-based alerting system to complement the mechanical speed hump design. This project showcases my skills in electronics integration, mechanical design, and active collaboration, contributing to a team effort aimed at enhancing public safety through innovative engineering.</p>
             </div>
         </section>
         <div class="animation-container">
-            <div class="canvas-container">
-                <canvas class="model-canvas"></canvas>
-            </div>
             <section class="page default-background animation-section">
                 <div class="content blurb">
                     <p>Wrong-way crashes are a significant safety concern, often caused by impaired drivers at night (Arizona DOT). Our team designed a pointed, hinged speed hump using SolidWorks, featuring steel plates and shoulder bolts for durability. I took sole responsibility for the electrical subsystem, integrating Arduino-based contact switches and LED alerts to detect and signal wrong-way movement. The system was developed within a $700 budget, with a final estimated cost of approximately $400, reflecting efficient resource use.</p>
