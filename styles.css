@@ -87,6 +87,7 @@ html, body {
     height: 100vh;
     z-index: 0; /* Below content, above background */
     display: none; /* Controlled by JS */
+    pointer-events: none; /* Prevent interaction blocking */
 }
 
 .model-canvas {
@@ -103,8 +104,11 @@ html, body {
     transform: translate(-50%, -50%);
     color: white;
     font-size: 18px;
-    z-index: 100;
+    z-index: 2; /* Below menu-bar, above canvas */
     display: none; /* Shown via JS during loading */
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    border-radius: 5px;
 }
 
 .image-preload {
