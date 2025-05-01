@@ -51,49 +51,22 @@ html, body {
     position: relative;
 }
 
-.background-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1; /* Behind content */
-    opacity: 0;
-    animation: fadeInVideo 1s ease forwards; /* Fade-in effect */
-    will-change: opacity, transform; /* Optimize rendering */
-}
-
-@keyframes fadeInVideo {
-    from { opacity: 0; }
-    to { opacity: 0.8; }
-}
-
-.video-fallback {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -2; /* Behind video */
-    display: none; /* Shown if video fails */
-}
-
-.video-play-button {
+.video-container {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 10px 20px;
-    background: rgba(255, 255, 255, 0.7);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 10; /* Above video */
-    display: none; /* Shown via JS if needed */
-    font-family: 'Barlow', sans-serif;
-    font-size: 16px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Above background, below content */
+}
+
+.background-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+    display: block; /* Ensure visibility */
+    will-change: transform; /* Optimize rendering */
 }
 
 .animation-container {
@@ -106,7 +79,7 @@ html, body {
     position: relative;
 }
 
-.canvas-container {
+.canvas-wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -123,6 +96,21 @@ html, body {
     opacity: 0.9;
 }
 
+.loading-indicator {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 18px;
+    z-index: 100;
+    display: none; /* Shown via JS during loading */
+}
+
+.image-preload {
+    display: none; /* Hidden preloading container */
+}
+
 .content {
     position: relative;
     text-align: left; /* All text aligned left */
@@ -132,7 +120,7 @@ html, body {
     opacity: 1;
     transform: translateY(0);
     transition: opacity 0.3s ease, transform 0.3s ease; /* Fast transition */
-    z-index: 1; /* Above canvas */
+    z-index: 1; /* Above canvas and video */
 }
 
 .content.blurb {
