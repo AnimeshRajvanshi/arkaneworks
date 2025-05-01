@@ -230,13 +230,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const canvasObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    canvasWrapper.style.display = 'block';
-                    canvasWrapper.style.zIndex = '100'; // Media layer
-                    canvasWrapper.style.visibility = 'visible';
-                    canvasWrapper.style.opacity = '1';
-                    console.log('Canvas wrapper display: block, z-index: 100, visibility: visible, opacity: 1');
-                    console.log(`Canvas wrapper computed style: display=${getComputedStyle(canvasWrapper).display}, z-index=${getComputedStyle(canvasWrapper).zIndex}, visibility=${getComputedStyle(canvasWrapper).visibility}, opacity=${getComputedStyle(canvasWrapper).opacity}`);
-                    updateFrame();
+                    setTimeout(() => {
+                        canvasWrapper.style.display = 'block';
+                        canvasWrapper.style.zIndex = '100'; // Media layer
+                        canvasWrapper.style.visibility = 'visible';
+                        canvasWrapper.style.opacity = '1';
+                        console.log('Canvas wrapper display: block, z-index: 100, visibility: visible, opacity: 1');
+                        console.log(`Canvas wrapper computed style: display=${getComputedStyle(canvasWrapper).display}, z-index=${getComputedStyle(canvasWrapper).zIndex}, visibility=${getComputedStyle(canvasWrapper).visibility}, opacity=${getComputedStyle(canvasWrapper).opacity}`);
+                        console.log(`Content z-index: ${getComputedStyle(document.querySelector('.content')).zIndex}`);
+                        console.log(`Page z-index: ${getComputedStyle(document.querySelector('.page')).zIndex}`);
+                        console.log(`Scroll container z-index: ${getComputedStyle(scrollContainer).zIndex}`);
+                        updateFrame();
+                    }, 100); // Delay to ensure CSS applies
                 } else {
                     canvasWrapper.style.display = 'none';
                     canvasWrapper.style.zIndex = '100'; // Maintain media layer
