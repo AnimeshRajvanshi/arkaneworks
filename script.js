@@ -239,11 +239,12 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     canvasWrapper.style.display = 'block';
-                    canvasWrapper.style.zIndex = '0'; // Below content
+                    canvasWrapper.style.zIndex = '0'; // Above background, below content
                     canvasWrapper.style.visibility = 'visible';
                     canvasWrapper.style.opacity = '0'; // Start faded out
                     console.log('Canvas wrapper display: block, z-index: 0, visibility: visible, opacity: 0');
                     console.log(`Canvas wrapper computed style: display=${getComputedStyle(canvasWrapper).display}, z-index=${getComputedStyle(canvasWrapper).zIndex}, visibility=${getComputedStyle(canvasWrapper).visibility}, opacity=${getComputedStyle(canvasWrapper).opacity}`);
+                    console.log(`Stacking context: page.zIndex=${getComputedStyle(document.querySelector('.page')).zIndex}, canvasWrapper.zIndex=${getComputedStyle(canvasWrapper).zIndex}, content.zIndex=${getComputedStyle(document.querySelector('.content')).zIndex}, videoContainer.zIndex=${getComputedStyle(document.querySelector('.video-container')).zIndex}`);
                     updateFrame();
                 } else {
                     canvasWrapper.style.display = 'none';
