@@ -130,7 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const resizeCanvas = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            drawFrame(0);
             console.log(`Canvas resized: width=${canvas.width}, height=${canvas.height}`);
         };
         window.addEventListener('resize', resizeCanvas);
@@ -139,7 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Draw frame on canvas
         function drawFrame(frameIndex) {
             if (images[frameIndex] && images[frameIndex].complete) {
-                context.clearRect(0, 0, canvas.width, canvas.height);
                 const img = images[frameIndex];
                 let drawWidth = canvas.width;
                 let drawHeight = canvas.width / aspectRatio;
@@ -150,7 +148,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const offsetX = (canvas.width - drawWidth) / 2;
                 const offsetY = (canvas.height - drawHeight) / 2;
                 context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
-                console.log(`Drawing frame: ${frameIndex}`);
+                console.log(`Drawing frame: ${frameIndex}, offsetX: ${offsetX}, offsetY: ${offsetY}, drawWidth: ${drawWidth}, drawHeight: ${drawHeight}`);
+                // Force repaint
+                canvas.style.display = 'none';
+                canvas.offsetHeight; // Trigger reflow
+                canvas.style.display = 'block';
             } else {
                 console.warn(`Frame ${frameIndex} not loaded`);
             }
@@ -191,29 +193,65 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     canvasWrapper.style.display = 'block';
-                    console.log('Canvas wrapper display: block');
+                    canvasWrapper.style.zIndex = '10'; // Above content
+                    console.log('Canvas wrapper display: block, z-index: 10');
+                    console.log(`Canvas wrapper computed style: display=${getComputedStyle(canvasWrapper).display}, z-index=${getComputedStyle(canvasWrapper).zIndex}`);
                     updateFrame();
                 } else {
                     canvasWrapper.style.display = 'none';
-                    console.log('Canvas wrapper display: none');
+                    canvasWrapper.style.zIndex = '0'; // Reset
+                    console.log('Canvas wrapper display: none, z-index: 0');
                 }
             });
         }, { threshold: 0.01 });
 
         // Start animation after images load
         loadImages().then(() => {
-            images[0].onload = () => {
+            // Wait for first frame to be fully loaded
+            if (images[0].complete) {
                 aspectRatio = images[0].width / images[0].height;
                 drawFrame(0);
                 console.log('Initial frame loaded, aspect ratio:', aspectRatio);
-            };
+            } else {
+                images[0].onload = () => {
+                    aspectRatio = images[0].width / images[0].height;
+                    drawFrame(0);
+                    console.log('Initial frame loaded, aspect ratio:', aspectRatio);
+                };
+            }
             canvasObserver.observe(animationContainer);
             window.addEventListener('scroll', throttle(updateFrame, 16));
             document.addEventListener('touchmove', throttle(updateFrame, 16));
+            // Fallback: Display static image if canvas fails
+            setTimeout(() => {
+                if (!context.getImageData(0, 0, 1, 1).data.some(val => val !== 0)) {
+                    console.warn('Canvas appears blank, adding fallback image');
+                    const fallbackImg = document.createElement('img');
+                    fallbackImg.src = '/assets/wrongway_frames/frame_001.png';
+                    fallbackImg.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 5; display: none;';
+                    canvasWrapper.appendChild(fallbackImg);
+                    canvasObserver.observe(animationContainer); // Re-observe to toggle fallback
+                    canvasObserver.disconnect(); // Disconnect original observer
+                    canvasObserver.observe(animationContainer, {
+                        callback: entries => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting) {
+                                    fallbackImg.style.display = 'block';
+                                    console.log('Fallback image display: block');
+                                } else {
+                                    fallbackImg.style.display = 'none';
+                                    console.log('Fallback image display: none');
+                                }
+                            });
+                        }
+                    });
+                }
+            }, 5000);
         }).catch(err => {
             console.error('Image loading failed:', err);
             if (loadingIndicator) {
                 loadingIndicator.textContent = 'Failed to load animation';
+                loadingIndicator.style.display = 'block';
             }
         });
     } else {
