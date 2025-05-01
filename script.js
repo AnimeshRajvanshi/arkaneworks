@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Scroll-driven image sequence animation
     if (canvas && canvasWrapper && scrollContainer && window.location.pathname.includes('wrongway.html')) {
-        const context = canvas.getContext('2d'); // Remove willReadFrequently
+        const context = canvas.getContext('2d');
         const animationContainer = document.querySelector('.animation-container');
         const totalFrames = 120;
         const animationDuration = window.innerHeight * 3; // 3 viewports (pages 2-4)
@@ -93,18 +93,43 @@ document.addEventListener('DOMContentLoaded', () => {
         let imagesLoaded = 0;
         let aspectRatio = 16 / 9;
 
-        // Preload images with Promise
-        const loadImages = () => {
+        // Load image with retries
+        const loadImageWithRetry = (src, maxRetries = 3, retryDelay = 1000) => {
             return new Promise((resolve, reject) => {
-                for (let i = 1; i <= totalFrames; i++) {
+                let attempts = 0;
+                const tryLoad = () => {
                     const img = document.createElement('img');
-                    img.src = `/assets/wrongway_frames/frame_${i.toString().padStart(3, '0')}.png`;
+                    img.src = src;
                     img.style.display = 'none';
                     imagePreload.appendChild(img);
-                    images.push(img);
                     img.onload = () => {
+                        console.log(`Frame ${src.match(/frame_\d+/)[0]} loaded`);
+                        resolve(img);
+                    };
+                    img.onerror = () => {
+                        attempts++;
+                        console.error(`Error loading frame ${src}, attempt ${attempts}/${maxRetries}`);
+                        if (attempts < maxRetries) {
+                            setTimeout(tryLoad, retryDelay);
+                        } else {
+                            console.error(`Failed to load frame ${src} after ${maxRetries} attempts`);
+                            reject(new Error(`Failed to load frame ${src}`));
+                        }
+                    };
+                };
+                tryLoad();
+            });
+        };
+
+        // Preload images with Promise
+        const loadImages = () => {
+            return new Promise((resolve) => {
+                const loadPromises = [];
+                for (let i = 1; i <= totalFrames; i++) {
+                    const src = `/assets/wrongway_frames/frame_${i.toString().padStart(3, '0')}.png`;
+                    loadPromises.push(loadImageWithRetry(src).then(img => {
+                        images.push(img);
                         imagesLoaded++;
-                        console.log(`Frame ${i} loaded`);
                         if (imagesLoaded === totalFrames) {
                             if (loadingIndicator) {
                                 loadingIndicator.style.display = 'none';
@@ -112,11 +137,20 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
                             resolve();
                         }
-                    };
-                    img.onerror = () => {
-                        console.error(`Error loading frame ${i}: ${img.src}`);
-                        reject(new Error(`Failed to load frame ${i}`));
-                    };
+                    }).catch(err => {
+                        console.warn(`Using fallback for ${src}: ${err.message}`);
+                        const fallbackImg = document.createElement('img');
+                        fallbackImg.src = '/assets/wrongway_frames/frame_001.png';
+                        images.push(fallbackImg);
+                        imagesLoaded++;
+                        if (imagesLoaded === totalFrames) {
+                            if (loadingIndicator) {
+                                loadingIndicator.style.display = 'none';
+                                console.log('All frames loaded with fallbacks, hiding loading indicator');
+                            }
+                            resolve();
+                        }
+                    }));
                 }
             });
         };
@@ -149,17 +183,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 drawHeight = Math.min(drawHeight, canvas.height);
                 const offsetX = (canvas.width - drawWidth) / 2;
                 const offsetY = (canvas.height - drawHeight) / 2;
+                context.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
                 context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
-                // Force repaint
+                // Log pixel data for debugging
+                const pixelData = context.getImageData(canvas.width / 2, canvas.height / 2, 1, 1).data;
                 requestAnimationFrame(() => {
                     canvas.style.display = 'none';
                     canvas.offsetHeight; // Trigger reflow
                     canvas.style.display = 'block';
-                    console.log(`Drawing frame: ${frameIndex}, offsetX: ${offsetX}, offsetY: ${offsetY}, drawWidth: ${drawWidth}, drawHeight: ${drawHeight}`);
+                    console.log(`Drawing frame: ${frameIndex}, offsetX: ${offsetX}, offsetY: ${offsetY}, drawWidth: ${drawWidth}, drawHeight: ${drawHeight}, centerPixel: ${pixelData}`);
                 });
             } else {
                 console.warn(`Frame ${frameIndex} not loaded`);
-                // Retry after delay
                 setTimeout(() => drawFrame(frameIndex), 100);
             }
         }
@@ -228,35 +263,60 @@ document.addEventListener('DOMContentLoaded', () => {
             canvasObserver.observe(animationContainer);
             window.addEventListener('scroll', debounce(updateFrame, 16));
             document.addEventListener('touchmove', debounce(updateFrame, 16));
-            // Fallback: Display static image if canvas fails
+            // Fallback: Display static image if canvas appears blank
             setTimeout(() => {
-                const pixelData = context.getImageData(0, 0, 1, 1).data;
-                console.log(`Canvas pixel data: ${pixelData}`);
-                if (!pixelData.some(val => val !== 0)) {
-                    console.warn('Canvas appears blank, adding fallback image');
-                    const fallbackImg = document.createElement('img');
-                    fallbackImg.src = '/assets/wrongway_frames/frame_001.png';
-                    fallbackImg.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; z-index: 5; display: none; object-fit: contain;';
-                    canvasWrapper.appendChild(fallbackImg);
-                    const fallbackObserver = new IntersectionObserver(entries => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                fallbackImg.style.display = 'block';
-                                console.log('Fallback image display: block');
-                            } else {
-                                fallbackImg.style.display = 'none';
-                                console.log('Fallback image display: none');
-                            }
-                        });
-                    }, { threshold: 0.1, rootMargin: '-10%' });
-                    fallbackObserver.observe(animationContainer);
+                if (lastFrameIndex === -1) {
+                    // Sample multiple pixels
+                    const pixels = [
+                        context.getImageData(canvas.width / 2, canvas.height / 2, 1, 1).data,
+                        context.getImageData(canvas.width - 10, 10, 1, 1).data,
+                        context.getImageData(10, canvas.height - 10, 1, 1).data
+                    ];
+                    console.log(`Canvas pixel data: center=${pixels[0]}, topRight=${pixels[1]}, bottomLeft=${pixels[2]}`);
+                    if (pixels.every(pixel => pixel.every(val => val === 0))) {
+                        console.warn('Canvas appears blank, adding fallback image');
+                        const fallbackImg = document.createElement('img');
+                        fallbackImg.src = '/assets/wrongway_frames/frame_001.png';
+                        fallbackImg.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; z-index: 5; display: none; object-fit: contain;';
+                        canvasWrapper.appendChild(fallbackImg);
+                        const fallbackObserver = new IntersectionObserver(entries => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting) {
+                                    fallbackImg.style.display = 'block';
+                                    console.log('Fallback image display: block');
+                                } else {
+                                    fallbackImg.style.display = 'none';
+                                    console.log('Fallback image display: none');
+                                }
+                            });
+                        }, { threshold: 0.1, rootMargin: '-10%' });
+                        fallbackObserver.observe(animationContainer);
+                    }
+                } else {
+                    console.log('Canvas rendering active, skipping fallback');
                 }
-            }, 2000);
+            }, 5000);
         }).catch(err => {
             console.error('Image loading failed:', err);
             if (loadingIndicator) {
-                loadingIndicator.textContent = 'Failed to load animation';
-                loadingIndicator.style.display = 'block';
+                loadingIndicator.textContent = 'Using static image';
+                loadingIndicator.style.display = 'none';
+                const fallbackImg = document.createElement('img');
+                fallbackImg.src = '/assets/wrongway_frames/frame_001.png';
+                fallbackImg.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; z-index: 5; display: none; object-fit: contain;';
+                canvasWrapper.appendChild(fallbackImg);
+                const fallbackObserver = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            fallbackImg.style.display = 'block';
+                            console.log('Fallback image display: block due to load failure');
+                        } else {
+                            fallbackImg.style.display = 'none';
+                            console.log('Fallback image display: none');
+                        }
+                    });
+                }, { threshold: 0.1, rootMargin: '-10%' });
+                fallbackObserver.observe(animationContainer);
             }
         });
     } else {
