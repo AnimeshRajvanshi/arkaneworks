@@ -92,7 +92,6 @@ html, body {
     pointer-events: none; /* Prevent interaction blocking */
     visibility: hidden; /* Controlled by JS */
     opacity: 1;
-    border: 2px solid red; /* Temporary for debugging */
 }
 
 .model-canvas {
