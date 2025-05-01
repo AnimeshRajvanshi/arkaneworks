@@ -244,8 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     canvasWrapper.style.opacity = '0'; // Start faded out
                     console.log('Canvas wrapper display: block, z-index: 0, visibility: visible, opacity: 0');
                     console.log(`Canvas wrapper computed style: display=${getComputedStyle(canvasWrapper).display}, z-index=${getComputedStyle(canvasWrapper).zIndex}, visibility=${getComputedStyle(canvasWrapper).visibility}, opacity=${getComputedStyle(canvasWrapper).opacity}`);
-                    console.log(`Stacking context: page.zIndex=${getComputedStyle(document.querySelector('.page')).zIndex}, canvasWrapper.zIndex=${getComputedStyle(canvasWrapper).zIndex}, content.zIndex=${getComputedStyle(document.querySelector('.content')).zIndex}, videoContainer.zIndex=${getComputedStyle(document.querySelector('.video-container')).zIndex}`);
-                    updateFrame();
+                    console.log(`Stacking context: page.zIndex=${getComputedStyle(document.querySelector('.page')).zIndex}, pageBackground.zIndex=${getComputedStyle(document.querySelector('.page-background') || document.body).zIndex}, canvasWrapper.zIndex=${getComputedStyle(canvasWrapper).zIndex}, content.zIndex=${getComputedStyle(document.querySelector('.content')).zIndex}, videoContainer.zIndex=${getComputedStyle(document.querySelector('.video-container')).zIndex}`);
                 } else {
                     canvasWrapper.style.display = 'none';
                     canvasWrapper.style.zIndex = '0';
