@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Debug elements and dimensions
     console.log('Canvas element:', canvas ? 'Found' : 'Not found', canvas);
     console.log('Scroll container:', scrollContainer ? 'Found' : 'Not found', scrollContainer);
-    console.log(`Viewport: innerHeight=${window.innerHeight}, clientHeight=${document.documentElement.clientHeight}, visualViewport=${window.visualViewport ? window.visualViewport.height : 'N/A'}`);
+    console.log(`Viewport: innerWidth=${window.innerWidth}, innerHeight=${window.innerHeight}, clientWidth=${document.documentElement.clientWidth}, clientHeight=${document.documentElement.clientHeight}, visualViewport=${window.visualViewport ? window.visualViewport.width + 'x' + window.visualViewport.height : 'N/A'}`);
     console.log(`Document scrollHeight: ${document.body.scrollHeight}, Container scrollHeight: ${scrollContainer ? scrollContainer.scrollHeight : 'N/A'}`);
 
     // Video playback
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Scroll-driven image sequence animation
     if (canvas && canvasWrapper && scrollContainer && window.location.pathname.includes('wrongway.html')) {
-        const context = canvas.getContext('2d', { willReadFrequently: true });
+        const context = canvas.getContext('2d'); // Remove willReadFrequently
         const animationContainer = document.querySelector('.animation-container');
         const totalFrames = 120;
         const animationDuration = window.innerHeight * 3; // 3 viewports (pages 2-4)
@@ -128,9 +128,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Initialize canvas size
         const resizeCanvas = () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            console.log(`Canvas resized: width=${canvas.width}, height=${canvas.height}`);
+            canvas.width = document.documentElement.clientWidth;
+            canvas.height = document.documentElement.clientHeight;
+            console.log(`Canvas resized: width=${canvas.width}, height=${canvas.height}, clientWidth=${document.documentElement.clientWidth}, clientHeight=${document.documentElement.clientHeight}`);
         };
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
@@ -141,32 +141,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 const img = images[frameIndex];
                 let drawWidth = canvas.width;
                 let drawHeight = canvas.width / aspectRatio;
-                if (drawHeight < canvas.height) {
+                if (drawHeight > canvas.height) {
                     drawHeight = canvas.height;
                     drawWidth = canvas.height * aspectRatio;
                 }
+                drawWidth = Math.min(drawWidth, canvas.width);
+                drawHeight = Math.min(drawHeight, canvas.height);
                 const offsetX = (canvas.width - drawWidth) / 2;
                 const offsetY = (canvas.height - drawHeight) / 2;
                 context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
-                console.log(`Drawing frame: ${frameIndex}, offsetX: ${offsetX}, offsetY: ${offsetY}, drawWidth: ${drawWidth}, drawHeight: ${drawHeight}`);
                 // Force repaint
-                canvas.style.display = 'none';
-                canvas.offsetHeight; // Trigger reflow
-                canvas.style.display = 'block';
+                requestAnimationFrame(() => {
+                    canvas.style.display = 'none';
+                    canvas.offsetHeight; // Trigger reflow
+                    canvas.style.display = 'block';
+                    console.log(`Drawing frame: ${frameIndex}, offsetX: ${offsetX}, offsetY: ${offsetY}, drawWidth: ${drawWidth}, drawHeight: ${drawHeight}`);
+                });
             } else {
                 console.warn(`Frame ${frameIndex} not loaded`);
+                // Retry after delay
+                setTimeout(() => drawFrame(frameIndex), 100);
             }
         }
 
-        // Throttle function
-        function throttle(func, limit) {
-            let inThrottle;
+        // Debounce function
+        function debounce(func, wait) {
+            let timeout;
             return function (...args) {
-                if (!inThrottle) {
-                    func.apply(this, args);
-                    inThrottle = true;
-                    setTimeout(() => (inThrottle = false), limit);
-                }
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
             };
         }
 
@@ -193,17 +196,20 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     canvasWrapper.style.display = 'block';
-                    canvasWrapper.style.zIndex = '10'; // Above content
-                    console.log('Canvas wrapper display: block, z-index: 10');
-                    console.log(`Canvas wrapper computed style: display=${getComputedStyle(canvasWrapper).display}, z-index=${getComputedStyle(canvasWrapper).zIndex}`);
+                    canvasWrapper.style.zIndex = '10';
+                    canvasWrapper.style.visibility = 'visible';
+                    canvasWrapper.style.opacity = '1';
+                    console.log('Canvas wrapper display: block, z-index: 10, visibility: visible, opacity: 1');
+                    console.log(`Canvas wrapper computed style: display=${getComputedStyle(canvasWrapper).display}, z-index=${getComputedStyle(canvasWrapper).zIndex}, visibility=${getComputedStyle(canvasWrapper).visibility}, opacity=${getComputedStyle(canvasWrapper).opacity}`);
                     updateFrame();
                 } else {
                     canvasWrapper.style.display = 'none';
-                    canvasWrapper.style.zIndex = '0'; // Reset
-                    console.log('Canvas wrapper display: none, z-index: 0');
+                    canvasWrapper.style.zIndex = '0';
+                    canvasWrapper.style.visibility = 'hidden';
+                    console.log('Canvas wrapper display: none, z-index: 0, visibility: hidden');
                 }
             });
-        }, { threshold: 0.01 });
+        }, { threshold: 0.1, rootMargin: '-10%' });
 
         // Start animation after images load
         loadImages().then(() => {
@@ -220,33 +226,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
             }
             canvasObserver.observe(animationContainer);
-            window.addEventListener('scroll', throttle(updateFrame, 16));
-            document.addEventListener('touchmove', throttle(updateFrame, 16));
+            window.addEventListener('scroll', debounce(updateFrame, 16));
+            document.addEventListener('touchmove', debounce(updateFrame, 16));
             // Fallback: Display static image if canvas fails
             setTimeout(() => {
-                if (!context.getImageData(0, 0, 1, 1).data.some(val => val !== 0)) {
+                const pixelData = context.getImageData(0, 0, 1, 1).data;
+                console.log(`Canvas pixel data: ${pixelData}`);
+                if (!pixelData.some(val => val !== 0)) {
                     console.warn('Canvas appears blank, adding fallback image');
                     const fallbackImg = document.createElement('img');
                     fallbackImg.src = '/assets/wrongway_frames/frame_001.png';
-                    fallbackImg.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 5; display: none;';
+                    fallbackImg.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; z-index: 5; display: none; object-fit: contain;';
                     canvasWrapper.appendChild(fallbackImg);
-                    canvasObserver.observe(animationContainer); // Re-observe to toggle fallback
-                    canvasObserver.disconnect(); // Disconnect original observer
-                    canvasObserver.observe(animationContainer, {
-                        callback: entries => {
-                            entries.forEach(entry => {
-                                if (entry.isIntersecting) {
-                                    fallbackImg.style.display = 'block';
-                                    console.log('Fallback image display: block');
-                                } else {
-                                    fallbackImg.style.display = 'none';
-                                    console.log('Fallback image display: none');
-                                }
-                            });
-                        }
-                    });
+                    const fallbackObserver = new IntersectionObserver(entries => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                fallbackImg.style.display = 'block';
+                                console.log('Fallback image display: block');
+                            } else {
+                                fallbackImg.style.display = 'none';
+                                console.log('Fallback image display: none');
+                            }
+                        });
+                    }, { threshold: 0.1, rootMargin: '-10%' });
+                    fallbackObserver.observe(animationContainer);
                 }
-            }, 5000);
+            }, 2000);
         }).catch(err => {
             console.error('Image loading failed:', err);
             if (loadingIndicator) {
