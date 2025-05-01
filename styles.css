@@ -40,18 +40,17 @@ html, body {
     position: relative;
     display: flex;
     align-items: center;
-    border: 2px solid blue; /* Temporary for debugging */
 }
 
-.page-background {
+.default-background {
     background: url('/assets/synapse1.jpg') no-repeat center center/cover;
     background-color: #1a1a1a; /* Fallback if synapse1.jpg is missing */
-    position: relative;
-    z-index: -2; /* Below video, canvas, content */
+    z-index: -100; /* Background layer */
 }
 
 .video-background {
     position: relative;
+    z-index: -50; /* Media layer */
 }
 
 .video-container {
@@ -60,7 +59,7 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Above background, below canvas */
+    z-index: -50; /* Media layer */
 }
 
 .background-video {
@@ -70,12 +69,12 @@ html, body {
     opacity: 0.8;
     display: block; /* Ensure visibility */
     will-change: transform; /* Optimize rendering */
-    z-index: -1; /* Match video-container */
 }
 
 .animation-container {
     height: 300vh; /* Spans pages 2-4 for animation */
     position: relative;
+    z-index: -50; /* Media layer */
 }
 
 .animation-section {
@@ -91,12 +90,12 @@ html, body {
     height: 100vh;
     max-width: 100vw; /* Prevent overflow */
     max-height: 100vh;
-    z-index: 0; /* Above background and video, below content */
+    z-index: -50; /* Media layer, controlled by JS */
     display: none; /* Controlled by JS */
     pointer-events: none; /* Prevent interaction blocking */
     visibility: hidden; /* Controlled by JS */
-    opacity: 0; /* Controlled by JS */
-    transition: opacity 0.5s ease; /* Smooth fade */
+    opacity: 0; /* For fade transitions */
+    transition: opacity 0.3s ease; /* Smooth fade */
 }
 
 .model-canvas {
@@ -107,7 +106,6 @@ html, body {
     display: block;
     visibility: visible;
     opacity: 1;
-    z-index: 0; /* Match canvas-wrapper */
 }
 
 .loading-indicator {
@@ -117,7 +115,7 @@ html, body {
     transform: translate(-50%, -50%);
     color: white;
     font-size: 18px;
-    z-index: 500; /* Below menu-bar, above canvas */
+    z-index: 500; /* Middle layer for visibility */
     display: none; /* Shown via JS during loading */
     background: rgba(0, 0, 0, 0.7);
     padding: 10px 20px;
@@ -137,8 +135,7 @@ html, body {
     opacity: 1;
     transform: translateY(0);
     transition: opacity 0.3s ease, transform 0.3s ease; /* Fast transition */
-    z-index: 10; /* Above canvas and video */
-    border: 2px solid green; /* Temporary for debugging */
+    z-index: 100; /* Text layer */
 }
 
 .content.blurb {
@@ -224,7 +221,7 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index: 1000; /* Topmost layer */
+    z-index: 1000; /* Top layer */
 }
 
 .website-name {
@@ -309,7 +306,7 @@ a:hover {
     left: 0;
     background-color: rgba(0, 0, 0, 0.9); /* Keep overlay for dropdown */
     min-width: 220px;
-    z-index: 1000; /* Match menu-bar */
+    z-index: 1100; /* Above all but menu-bar */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     opacity: 0;
@@ -347,7 +344,7 @@ a:hover {
         width: 100%;
         height: calc(100vh - 60px);
         background-color: rgba(0, 0, 0, 0.95); /* Keep overlay for mobile menu */
-        z-index: 1000;
+        z-index: 1000; /* Top layer */
     }
 
     .menu-links.open {
@@ -378,7 +375,7 @@ a:hover {
         transform: none;
         opacity: 1;
         pointer-events: auto;
-        z-index: 1000;
+        z-index: 1100; /* Above all but menu-bar */
     }
 
     .dropdown.open .dropdown-content {
