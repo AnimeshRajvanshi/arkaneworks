@@ -13,8 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Debug elements and dimensions
     console.log('Canvas element:', canvas ? 'Found' : 'Not found', canvas);
     console.log('Scroll container:', scrollContainer ? 'Found' : 'Not found', scrollContainer);
+    console.log('Video element:', video ? 'Found' : 'Not found', video);
+    console.log('Content elements:', document.querySelectorAll('.content').length);
     console.log(`Viewport: innerWidth=${window.innerWidth}, innerHeight=${window.innerHeight}, clientWidth=${document.documentElement.clientWidth}, clientHeight=${document.documentElement.clientHeight}, visualViewport=${window.visualViewport ? window.visualViewport.width + 'x' + window.visualViewport.height : 'N/A'}`);
     console.log(`Document scrollHeight: ${document.body.scrollHeight}, Container scrollHeight: ${scrollContainer ? scrollContainer.scrollHeight : 'N/A'}`);
+
+    // Debug computed styles
+    console.log(`Scroll container style: display=${getComputedStyle(scrollContainer).display}, opacity=${getComputedStyle(scrollContainer).opacity}, z-index=${getComputedStyle(scrollContainer).zIndex}`);
+    console.log(`Video background style: display=${getComputedStyle(document.querySelector('.video-background') || {}).display}, opacity=${getComputedStyle(document.querySelector('.video-background') || {}).opacity}, z-index=${getComputedStyle(document.querySelector('.video-background') || {}).zIndex}`);
+    console.log(`Content style: display=${getComputedStyle(document.querySelector('.content') || {}).display}, opacity=${getComputedStyle(document.querySelector('.content') || {}).opacity}, z-index=${getComputedStyle(document.querySelector('.content') || {}).zIndex}`);
 
     // Video playback
     if (video) {
@@ -35,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const videoObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
+                console.log(`Video section: Intersecting=${entry.isIntersecting}, Ratio=${entry.intersectionRatio}`);
                 if (entry.isIntersecting) {
                     tryPlay();
                     console.log('Video section visible, attempting to play');
@@ -72,8 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(`Section: ${entry.target.className}, Intersecting: ${entry.isIntersecting}, Ratio: ${entry.intersectionRatio}`);
             if (entry.isIntersecting && entry.intersectionRatio >= 0.1) {
                 entry.target.classList.add('visible');
+                console.log(`Adding visible class to ${entry.target.className}`);
             } else {
                 entry.target.classList.remove('visible');
+                console.log(`Removing visible class from ${entry.target.className}`);
             }
         });
     }, { 
@@ -160,12 +170,21 @@ document.addEventListener('DOMContentLoaded', () => {
             loadingIndicator.style.display = 'block';
         }
 
+        // Debounce function
+        function debounce(func, wait) {
+            let timeout;
+            return function (...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+
         // Initialize canvas size
-        const resizeCanvas = () => {
+        const resizeCanvas = debounce(() => {
             canvas.width = document.documentElement.clientWidth;
-            canvas.height = document.documentElement.clientHeight;
-            console.log(`Canvas resized: width=${canvas.width}, height=${canvas.height}, clientWidth=${document.documentElement.clientWidth}, clientHeight=${document.documentElement.clientHeight}`);
-        };
+            canvas.height = window.innerHeight; // Use innerHeight for dynamic viewports
+            console.log(`Canvas resized: width=${canvas.width}, height=${canvas.height}, clientWidth=${document.documentElement.clientWidth}, innerHeight=${window.innerHeight}`);
+        }, 100);
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
@@ -199,15 +218,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Debounce function
-        function debounce(func, wait) {
-            let timeout;
-            return function (...args) {
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(this, args), wait);
-            };
-        }
-
         // Scroll handler
         let lastFrameIndex = -1;
 
@@ -231,21 +241,21 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     canvasWrapper.style.display = 'block';
-                    canvasWrapper.style.zIndex = '-50'; // Below text
+                    canvasWrapper.style.zIndex = '50'; // Media layer
                     canvasWrapper.style.visibility = 'visible';
                     canvasWrapper.style.opacity = '0';
                     setTimeout(() => {
                         canvasWrapper.style.opacity = '1'; // Fade in
                         console.log('Canvas fade-in complete, opacity: 1');
                     }, 10);
-                    console.log('Canvas wrapper display: block, z-index: -50, visibility: visible, opacity: 0 -> 1');
+                    console.log('Canvas wrapper display: block, z-index: 50, visibility: visible, opacity: 0 -> 1');
                     console.log(`Canvas wrapper computed style: display=${getComputedStyle(canvasWrapper).display}, z-index=${getComputedStyle(canvasWrapper).zIndex}, visibility=${getComputedStyle(canvasWrapper).visibility}, opacity=${getComputedStyle(canvasWrapper).opacity}`);
                     updateFrame();
                 } else {
                     canvasWrapper.style.opacity = '0'; // Fade out
                     setTimeout(() => {
                         canvasWrapper.style.display = 'none';
-                        canvasWrapper.style.zIndex = '-50';
+                        canvasWrapper.style.zIndex = '50';
                         canvasWrapper.style.visibility = 'hidden';
                         console.log('Canvas fade-out complete, display: none');
                     }, 300); // Match CSS transition duration
@@ -285,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         console.warn('Canvas appears blank, adding fallback image');
                         const fallbackImg = document.createElement('img');
                         fallbackImg.src = '/assets/wrongway_frames/frame_001.png';
-                        fallbackImg.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; z-index: -50; display: none; object-fit: contain;';
+                        fallbackImg.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; z-index: 50; display: none; object-fit: contain;';
                         canvasWrapper.appendChild(fallbackImg);
                         const fallbackObserver = new IntersectionObserver(entries => {
                             entries.forEach(entry => {
@@ -320,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 loadingIndicator.style.display = 'none';
                 const fallbackImg = document.createElement('img');
                 fallbackImg.src = '/assets/wrongway_frames/frame_001.png';
-                fallbackImg.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; z-index: -50; display: none; object-fit: contain;';
+                fallbackImg.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; z-index: 50; display: none; object-fit: contain;';
                 canvasWrapper.appendChild(fallbackImg);
                 const fallbackObserver = new IntersectionObserver(entries => {
                     entries.forEach(entry => {
