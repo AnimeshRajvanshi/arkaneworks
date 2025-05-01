@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Video playback
     if (video) {
-        // Video debugging
         video.addEventListener('error', (e) => console.error('Video error:', e));
         video.addEventListener('loadeddata', () => console.log('Video loaded successfully'));
         video.addEventListener('canplay', () => console.log('Video can play'));
@@ -26,16 +25,14 @@ document.addEventListener('DOMContentLoaded', () => {
         video.addEventListener('pause', () => console.log('Video paused'));
         video.addEventListener('stalled', () => console.log('Video stalled'));
 
-        // Retry playback
         const tryPlay = () => {
             video.play().catch(err => {
                 console.error('Video play failed:', err);
-                setTimeout(tryPlay, 1000); // Retry after 1s
+                setTimeout(tryPlay, 1000);
             });
         };
         tryPlay();
 
-        // Pause/resume based on visibility
         const videoObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -88,32 +85,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Scroll-driven image sequence animation
     if (canvas && canvasWrapper && scrollContainer && window.location.pathname.includes('wrongway.html')) {
-        const context = canvas.getContext('2d', { willReadFrequently: true }); // Safari compatibility
-        const secondPage = document.querySelectorAll('.page')[1];
-        const fifthPage = document.querySelectorAll('.page')[4];
-        const totalFrames = 120; // 120 frames at 12 FPS
-        const animationDuration = 1170; // Span from page 2 to page 5 (~3 viewports)
+        const context = canvas.getContext('2d', { willReadFrequently: true });
+        const animationContainer = document.querySelector('.animation-container');
+        const totalFrames = 120;
+        const animationDuration = window.innerHeight * 3; // 3 viewports (pages 2-4)
         const images = [];
         let imagesLoaded = 0;
-        let aspectRatio = 16 / 9; // Default aspect ratio, updated on first image load
+        let aspectRatio = 16 / 9;
 
-        // Preload images via hidden div
-        for (let i = 1; i <= totalFrames; i++) {
-            const img = document.createElement('img');
-            img.src = `/assets/wrongway_frames/frame_${i.toString().padStart(3, '0')}.png`;
-            img.style.display = 'none';
-            imagePreload.appendChild(img);
-            images.push(img);
-            img.onload = () => {
-                imagesLoaded++;
-                console.log(`Frame ${i} loaded`);
-                if (imagesLoaded === totalFrames && loadingIndicator) {
-                    loadingIndicator.style.display = 'none';
-                    console.log('All frames loaded, hiding loading indicator');
+        // Preload images with Promise
+        const loadImages = () => {
+            return new Promise((resolve, reject) => {
+                for (let i = 1; i <= totalFrames; i++) {
+                    const img = document.createElement('img');
+                    img.src = `/assets/wrongway_frames/frame_${i.toString().padStart(3, '0')}.png`;
+                    img.style.display = 'none';
+                    imagePreload.appendChild(img);
+                    images.push(img);
+                    img.onload = () => {
+                        imagesLoaded++;
+                        console.log(`Frame ${i} loaded`);
+                        if (imagesLoaded === totalFrames) {
+                            if (loadingIndicator) {
+                                loadingIndicator.style.display = 'none';
+                                console.log('All frames loaded, hiding loading indicator');
+                            }
+                            resolve();
+                        }
+                    };
+                    img.onerror = () => {
+                        console.error(`Error loading frame ${i}: ${img.src}`);
+                        reject(new Error(`Failed to load frame ${i}`));
+                    };
                 }
-            };
-            img.onerror = () => console.error(`Error loading frame ${i}: ${img.src}`);
-        }
+            });
+        };
 
         // Show loading indicator
         if (loadingIndicator) {
@@ -124,30 +130,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const resizeCanvas = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            drawFrame(0); // Draw initial frame
+            drawFrame(0);
             console.log(`Canvas resized: width=${canvas.width}, height=${canvas.height}`);
         };
         window.addEventListener('resize', resizeCanvas);
-        resizeCanvas(); // Initial call
-
-        // Calculate page offsets
-        let secondPageTop = secondPage.getBoundingClientRect().top + window.scrollY;
-        let fifthPageTop = fifthPage.getBoundingClientRect().top + window.scrollY;
-        console.log(`Initial second page top: ${secondPageTop}, Fifth page top: ${fifthPageTop}, Animation duration: ${animationDuration}, Window innerHeight: ${window.innerHeight}`);
-
-        // Update offsets on resize
-        window.addEventListener('resize', () => {
-            secondPageTop = secondPage.getBoundingClientRect().top + window.scrollY;
-            fifthPageTop = fifthPage.getBoundingClientRect().top + window.scrollY;
-            console.log(`Updated second page top: ${secondPageTop}, Fifth page top: ${fifthPageTop}`);
-        });
+        resizeCanvas();
 
         // Draw frame on canvas
         function drawFrame(frameIndex) {
             if (images[frameIndex] && images[frameIndex].complete) {
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 const img = images[frameIndex];
-                // Calculate dimensions to fill viewport while preserving aspect ratio
                 let drawWidth = canvas.width;
                 let drawHeight = canvas.width / aspectRatio;
                 if (drawHeight < canvas.height) {
@@ -163,51 +156,70 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // Throttle function
+        function throttle(func, limit) {
+            let inThrottle;
+            return function (...args) {
+                if (!inThrottle) {
+                    func.apply(this, args);
+                    inThrottle = true;
+                    setTimeout(() => (inThrottle = false), limit);
+                }
+            };
+        }
+
         // Scroll handler
-        let lastScrollY = window.scrollY;
         let lastFrameIndex = -1;
 
         const updateFrame = () => {
+            const containerRect = animationContainer.getBoundingClientRect();
             const scrollY = window.scrollY;
-            // Show/hide canvas based on scroll position
-            if (scrollY >= secondPageTop && scrollY < fifthPageTop) {
-                canvasWrapper.style.display = 'block';
-                console.log(`Canvas wrapper display: block`);
-            } else {
-                canvasWrapper.style.display = 'none';
-                console.log(`Canvas wrapper display: none`);
-            }
-
-            const scrollPosition = Math.max(0, scrollY - secondPageTop);
+            const containerTop = containerRect.top + scrollY;
+            const containerHeight = containerRect.height;
+            const scrollPosition = Math.max(0, scrollY - containerTop);
             const progress = Math.min(Math.max(scrollPosition / animationDuration, 0), 1);
             const frameIndex = Math.floor(progress * (totalFrames - 1));
             if (frameIndex !== lastFrameIndex) {
                 drawFrame(frameIndex);
                 lastFrameIndex = frameIndex;
             }
-            console.log(`ScrollY: ${scrollY}, SecondPageTop: ${secondPageTop}, ScrollPosition: ${scrollPosition}, Progress: ${progress}, FrameIndex: ${frameIndex}`);
-            requestAnimationFrame(updateFrame);
+            console.log(`ScrollY: ${scrollY}, ContainerTop: ${containerTop}, ScrollPosition: ${scrollPosition}, Progress: ${progress}, FrameIndex: ${frameIndex}`);
         };
 
-        // Start animation loop
-        requestAnimationFrame(updateFrame);
+        // Canvas visibility observer
+        const canvasObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    canvasWrapper.style.display = 'block';
+                    console.log('Canvas wrapper display: block');
+                    updateFrame();
+                } else {
+                    canvasWrapper.style.display = 'none';
+                    console.log('Canvas wrapper display: none');
+                }
+            });
+        }, { threshold: 0.01 });
 
-        // Attach scroll listeners
-        console.log('Attaching scroll listeners');
-        window.addEventListener('scroll', () => {
-            lastScrollY = window.scrollY;
+        // Start animation after images load
+        loadImages().then(() => {
+            images[0].onload = () => {
+                aspectRatio = images[0].width / images[0].height;
+                drawFrame(0);
+                console.log('Initial frame loaded, aspect ratio:', aspectRatio);
+            };
+            canvasObserver.observe(animationContainer);
+            window.addEventListener('scroll', throttle(updateFrame, 16));
+            document.addEventListener('touchmove', throttle(updateFrame, 16));
+        }).catch(err => {
+            console.error('Image loading failed:', err);
+            if (loadingIndicator) {
+                loadingIndicator.textContent = 'Failed to load animation';
+            }
         });
-        document.addEventListener('touchmove', () => {
-            lastScrollY = window.scrollY;
-        });
-
-        // Initial frame and aspect ratio
-        images[0].onload = () => {
-            aspectRatio = images[0].width / images[0].height;
-            drawFrame(0);
-            console.log('Initial frame loaded, aspect ratio:', aspectRatio);
-        };
     } else {
         console.warn('Animation skipped: Canvas, canvasWrapper, or scrollContainer missing, or not on wrongway.html');
+        if (loadingIndicator) {
+            loadingIndicator.style.display = 'none';
+        }
     }
 });
