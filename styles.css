@@ -87,11 +87,12 @@ html, body {
     height: 100vh;
     max-width: 100vw; /* Prevent overflow */
     max-height: 100vh;
-    z-index: 0; /* Controlled by JS */
+    z-index: 0; /* Below content */
     display: none; /* Controlled by JS */
     pointer-events: none; /* Prevent interaction blocking */
     visibility: hidden; /* Controlled by JS */
-    opacity: 1;
+    opacity: 0; /* Controlled by JS */
+    transition: opacity 0.5s ease; /* Smooth fade */
 }
 
 .model-canvas {
