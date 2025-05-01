@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 drawWidth = Math.min(drawWidth, canvas.width);
                 drawHeight = Math.min(drawHeight, canvas.height);
                 const offsetX = (canvas.width - drawWidth) / 2;
-                const offsetY = (canvas.height - drawHeight) / 2;
+                const offsetY = drawHeight < canvas.height ? canvas.height - drawHeight : 0; // Align bottom
                 context.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
                 context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
                 // Log pixel data for debugging
@@ -219,11 +219,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const scrollPosition = Math.max(0, scrollY - containerTop);
             const progress = Math.min(Math.max(scrollPosition / animationDuration, 0), 1);
             const frameIndex = Math.floor(progress * (totalFrames - 1));
+            // Calculate opacity for fade-in/fade-out
+            let opacity = 1;
+            if (progress < 0.1) {
+                opacity = progress * 10; // Fade in over first 10%
+            } else if (progress > 0.9) {
+                opacity = (1 - progress) * 10; // Fade out over last 10%
+            }
+            canvasWrapper.style.opacity = opacity.toString();
             if (frameIndex !== lastFrameIndex) {
                 drawFrame(frameIndex);
                 lastFrameIndex = frameIndex;
             }
-            console.log(`ScrollY: ${scrollY}, ContainerTop: ${containerTop}, ScrollPosition: ${scrollPosition}, Progress: ${progress}, FrameIndex: ${frameIndex}`);
+            console.log(`ScrollY: ${scrollY}, ContainerTop: ${containerTop}, ScrollPosition: ${scrollPosition}, Progress: ${progress}, FrameIndex: ${frameIndex}, Opacity: ${opacity}`);
         };
 
         // Canvas visibility observer
@@ -231,17 +239,18 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     canvasWrapper.style.display = 'block';
-                    canvasWrapper.style.zIndex = '10';
+                    canvasWrapper.style.zIndex = '0'; // Below content
                     canvasWrapper.style.visibility = 'visible';
-                    canvasWrapper.style.opacity = '1';
-                    console.log('Canvas wrapper display: block, z-index: 10, visibility: visible, opacity: 1');
+                    canvasWrapper.style.opacity = '0'; // Start faded out
+                    console.log('Canvas wrapper display: block, z-index: 0, visibility: visible, opacity: 0');
                     console.log(`Canvas wrapper computed style: display=${getComputedStyle(canvasWrapper).display}, z-index=${getComputedStyle(canvasWrapper).zIndex}, visibility=${getComputedStyle(canvasWrapper).visibility}, opacity=${getComputedStyle(canvasWrapper).opacity}`);
                     updateFrame();
                 } else {
                     canvasWrapper.style.display = 'none';
                     canvasWrapper.style.zIndex = '0';
                     canvasWrapper.style.visibility = 'hidden';
-                    console.log('Canvas wrapper display: none, z-index: 0, visibility: hidden');
+                    canvasWrapper.style.opacity = '0';
+                    console.log('Canvas wrapper display: none, z-index: 0, visibility: hidden, opacity: 0');
                 }
             });
         }, { threshold: 0.1, rootMargin: '-10%' });
@@ -277,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         console.warn('Canvas appears blank, adding fallback image');
                         const fallbackImg = document.createElement('img');
                         fallbackImg.src = '/assets/wrongway_frames/frame_001.png';
-                        fallbackImg.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; z-index: 5; display: none; object-fit: contain;';
+                        fallbackImg.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; z-index: 0; display: none; object-fit: contain;';
                         canvasWrapper.appendChild(fallbackImg);
                         const fallbackObserver = new IntersectionObserver(entries => {
                             entries.forEach(entry => {
@@ -303,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 loadingIndicator.style.display = 'none';
                 const fallbackImg = document.createElement('img');
                 fallbackImg.src = '/assets/wrongway_frames/frame_001.png';
-                fallbackImg.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; z-index: 5; display: none; object-fit: contain;';
+                fallbackImg.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; z-index: 0; display: none; object-fit: contain;';
                 canvasWrapper.appendChild(fallbackImg);
                 const fallbackObserver = new IntersectionObserver(entries => {
                     entries.forEach(entry => {
