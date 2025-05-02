@@ -1,11 +1,12 @@
-html, body {
+body {
+    background: url('/assets/synapse1.jpg') no-repeat center center fixed;
+    background-size: cover;
+    background-color: #1a1a1a; /* Fallback if image is missing */
+    z-index: 0; /* Background layer */
     margin: 0;
     padding: 0;
     height: auto;
     overflow-y: visible;
-    background: url('/assets/synapse1.jpg') no-repeat center center/cover;
-    background-color: #1a1a1a; /* Fallback */
-    background-attachment: fixed; /* Static background */
     color: white;
     font-family: 'Barlow', sans-serif;
     font-weight: 300;
@@ -30,23 +31,32 @@ html, body {
 }
 
 .scroll-container {
-    height: auto;
-    min-height: 500vh; /* Ensure scrollable height */
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    scroll-behavior: smooth;
     position: relative;
+    z-index: 10; /* Content layer */
+    padding-top: 60px; /* Account for fixed header */
 }
 
-.page {
-    height: 100vh; /* For video section in wrongway.html */
+.content-block {
     position: relative;
-    display: flex;
-    align-items: center;
+    text-align: left;
+    padding: 40px;
+    max-width: 70%;
+    margin: 0 auto 100px auto; /* Space between blocks */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: 10; /* Content layer */
+}
+
+.content-block.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .video-background {
     position: relative;
+    height: 100vh;
+    z-index: 50; /* Media layer */
 }
 
 .video-container {
@@ -55,7 +65,7 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 100; /* Media layer */
+    z-index: 50; /* Media layer */
 }
 
 .background-video {
@@ -63,202 +73,6 @@ html, body {
     height: 100%;
     object-fit: cover;
     opacity: 0.8;
-    display: block;
-    will-change: transform; /* Optimize rendering */
-}
-
-.animation-container {
-    height: 300vh; /* Spans animation section in wrongway.html */
-    position: relative;
-}
-
-.canvas-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    max-width: 100vw;
-    max-height: 100vh;
-    z-index: 100; /* Media layer */
-    display: none; /* Controlled by JS */
-    pointer-events: none;
-    visibility: hidden;
-    opacity: 1;
-}
-
-.model-canvas {
-    width: 100%;
-    height: 100%;
-    max-width: 100vw;
-    max-height: 100vh;
-    display: block;
-    visibility: visible;
-    opacity: 1;
-}
-
-.loading-indicator {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 18px;
-    z-index: 300; /* Above content, below menu */
-    display: none;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 10px 20px;
-    border-radius: 5px;
-}
-
-.image-preload {
-    display: none; /* Hidden preloading container */
-}
-
-.content {
-    position: relative;
-    text-align: left;
-    padding: 40px;
-    max-width: 70%;
-    margin: 0 0 0 40px;
-    z-index: 200; /* Content layer */
-}
-
-.content.blurb {
-    max-width: 70%;
-    text-align: left;
-}
-
-.content-block {
-    opacity: 0;
-    transition: opacity var(--fade-duration, 0.5s) ease;
-    position: relative;
-    min-height: 100vh; /* Ensure each block takes at least one viewport */
-    display: flex;
-    align-items: center;
-}
-
-.content-block.visible {
-    opacity: 1;
-}
-
-.content-block-1 { top: 0; }
-.content-block-2 { top: 100vh; }
-.content-block-3 { top: 200vh; }
-.content-block-4 { top: 300vh; }
-
-.content-wrapper {
-    display: flex;
-    width: 100%;
-    max-width: 100%;
-    padding: 40px;
-    box-sizing: border-box;
-    align-items: flex-start;
-}
-
-.content-left {
-    max-width: 70%;
-    padding: 40px;
-    margin: 0 0 0 40px;
-}
-
-.content-right {
-    max-width: 20%;
-    margin-left: auto;
-    margin-right: 20px;
-    position: relative;
-    padding-top: 40px;
-}
-
-.profile-image {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 200px;
-    height: 200px;
-}
-
-.content h1 {
-    font-size: 32px;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin: 0 0 20px;
-    text-align: left;
-}
-
-.content h2 {
-    font-size: 24px;
-    font-weight: 500;
-    margin: 0 0 20px;
-    text-align: left;
-}
-
-.content p {
-    font-size: 18px;
-    margin: 0 0 20px;
-    text-align: left;
-}
-
-a {
-    color: white;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-.cta-button {
-    display: inline-block;
-    padding: 10px 20px;
-    border: 2px solid white;
-    color: white;
-    text-decoration: none;
-    transition: opacity 0.2s ease;
-}
-
-.cta-button:hover {
-    opacity: 0.7;
-    text-decoration: none;
-}
-
-.social-links {
-    display: flex;
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.social-logo {
-    width: 40px;
-    height: 40px;
-    transition: opacity 0.2s ease;
-}
-
-.social-logo:hover {
-    opacity: 0.7;
-}
-
-.custom-list {
-    list-style: none;
-    padding: 0;
-    margin: 20px 0;
-}
-
-.custom-list li {
-    position: relative;
-    padding-left: 30px;
-    margin-bottom: 15px;
-    font-size: 16px;
-    line-height: 1.5;
-    text-align: left;
-}
-
-.custom-list li::before {
-    content: '•';
-    position: absolute;
-    left: 0;
-    color: #00aaff;
-    font-size: 18px;
 }
 
 .menu-bar {
@@ -271,7 +85,7 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index: 1000;
+    z-index: 100; /* Header layer */
 }
 
 .website-name {
@@ -281,7 +95,6 @@ a:hover {
     text-transform: uppercase;
     color: white;
     text-decoration: none;
-    text-align: left;
 }
 
 .website-name:hover {
@@ -342,7 +155,6 @@ a:hover {
     font-weight: 500;
     padding: 10px 15px;
     transition: opacity 0.2s ease;
-    text-align: left;
 }
 
 .menu-links a:hover {
@@ -356,7 +168,7 @@ a:hover {
     left: 0;
     background-color: rgba(0, 0, 0, 0.9);
     min-width: 220px;
-    z-index: 1000;
+    z-index: 100; /* Header layer */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     opacity: 0;
@@ -394,7 +206,7 @@ a:hover {
         width: 100%;
         height: calc(100vh - 60px);
         background-color: rgba(0, 0, 0, 0.95);
-        z-index: 1000;
+        z-index: 100;
     }
 
     .menu-links.open {
@@ -436,62 +248,8 @@ a:hover {
         font-size: 14px;
     }
 
-    .content {
-        max-width: 85%;
-        margin: 0 0 0 20px;
-        padding: 20px;
-    }
-
-    .content.blurb {
-        max-width: 85%;
-    }
-
-    .content-wrapper {
-        flex-direction: column;
-        padding: 20px;
-    }
-
-    .content-left {
-        max-width: 85%;
-        padding: 20px;
-        margin: 0 0 0 20px;
-    }
-
-    .content-right {
-        max-width: 85%;
-        margin: 20px 0 0 20px;
-        padding: 0;
-    }
-
-    .profile-image {
-        position: static;
-        width: 120px;
-        height: 120px;
-        margin: 20px auto 0;
-    }
-
-    .model-canvas {
-        max-height: 80vh;
-    }
-
-    .content h1 {
-        font-size: 24px;
-    }
-
-    .content h2 {
-        font-size: 18px;
-    }
-
-    .content p {
-        font-size: 14px;
-    }
-
-    .social-links {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
     .content-block {
-        min-height: 80vh; /* Adjust for mobile */
+        max-width: 85%;
+        margin: 0 auto 50px auto;
     }
 }
