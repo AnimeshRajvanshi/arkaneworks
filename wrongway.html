@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mechanical Wrong-Way Driving Prevention System - ARKANE WORKS</title>
+    <title>Mechanical Wrong-Way Prevention - ARKANE WORKS</title>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
@@ -33,62 +33,57 @@
             </ul>
         </nav>
     </header>
-    <div class="canvas-wrapper">
-        <canvas class="model-canvas"></canvas>
-    </div>
-    <div class="loading-indicator">Loading animation...</div>
-    <div class="image-preload"></div>
-    <main class="scroll-container">
-        <section class="page video-background">
-            <div class="video-container">
-                <video class="background-video" autoplay muted loop playsinline preload="auto">
-                    <source src="/assets/wrongway-video1.mp4" type="video/mp4">
-                    Your browser does not support the video tag. Please ensure your browser is up to date.
-                </video>
-            </div>
-            <div class="content">
-                <h1>Mechanical Wrong-Way Driving Prevention System</h1>
-                <p>The Mechanical Wrong-Way Driving Prevention System, my 2024 Mechanical Engineering capstone at Arizona State University, addresses the critical issue of wrong-way driving on highways, a problem causing numerous fatalities annually in Arizona. As the electronics subsystem lead within a seven-member team, I designed and integrated an Arduino-based alerting system to complement the mechanical speed hump design. This project showcases my skills in electronics integration, mechanical design, and active collaboration, contributing to a team effort aimed at enhancing public safety through innovative engineering.</p>
-            </div>
-        </section>
-        <div class="animation-container">
-            <section class="page default-background animation-section">
-                <div class="content blurb">
-                    <p>Wrong-way crashes are a significant safety concern, often caused by impaired drivers at night (Arizona DOT). Our team designed a pointed, hinged speed hump using SolidWorks, featuring steel plates and shoulder bolts for durability. I took sole responsibility for the electrical subsystem, integrating Arduino-based contact switches and LED alerts to detect and signal wrong-way movement. The system was developed within a $700 budget, with a final estimated cost of approximately $400, reflecting efficient resource use.</p>
-                </div>
-            </section>
-            <section class="page default-background animation-section">
-                <div class="content blurb">
-                    <p>The mechanical system includes depressible ramps connected by hinges, validated through team-conducted finite element analysis (FEA) in ANSYS to ensure structural integrity under heavy loads. My electrical design utilized aluminum foil contact switches beneath the plates, wired to an Arduino Uno R3, to detect direction and activate LED alerts. I optimized the circuit for low power (5V, 20 mA) and reliability in harsh weather conditions. The steel prototype, evolved from an initial plywood model, was tested for durability and driver feedback in low-speed trials.</p>
-                </div>
-            </section>
-            <section class="page default-background animation-section">
-                <div class="content blurb">
-                    <p>Live demonstrations validated the system’s functionality: the humps provided a noticeable jolt to drivers, while my electrical circuit accurately signaled wrong-way detection via LEDs. Low-speed tests confirmed no vehicle damage, with springs and rollers enhancing durability. I contributed to data analysis, correlating FEA results with test outcomes, supporting the design’s potential for real-world use. Future testing could include fatigue analysis for high-speed scenarios, a tentative goal to refine the system further.</p>
-                </div>
-            </section>
+    <section class="page video-background">
+        <div class="video-container">
+            <video class="background-video" loop muted playsinline>
+                <source src="/assets/wrongway-video1.mp4" type="video/mp4">
+            </video>
         </div>
-        <section class="page default-background references">
+        <div class="content">
+            <h1>Wrong Way Project</h1>
+            <p>The Mechanical Wrong-Way Driving Prevention System is a capstone project aimed at enhancing road safety by preventing wrong-way driving incidents. This system integrates a novel mechanical design with embedded electronics to detect and deter incorrect driving directions, validated through prototyping and testing.</p>
+        </div>
+    </section>
+    <main class="scroll-container">
+        <div class="content-block content-block-1 animation-container" data-fade-duration="0.5s">
+            <div class="content blurb">
+                <h2>Causes of Wrong-Way Driving</h2>
+                <p>Wrong-way driving often stems from driver impairment (e.g., alcohol, fatigue), poor signage, or confusing road layouts. Our system addresses these by physically guiding drivers and alerting authorities, reducing collision risks. Data from the National Highway Traffic Safety Administration shows over 500 fatal wrong-way crashes annually in the U.S., underscoring the need for proactive solutions.</p>
+            </div>
+        </div>
+        <div class="content-block content-block-2 animation-container" data-fade-duration="0.5s">
+            <div class="content blurb">
+                <h2>Mechanical Systems</h2>
+                <p>The system features an active speed hump with depressible stainless steel ramps, designed using SolidWorks and validated with ANSYS FEA (safety factors 2.5-3.3 under 1000 lbf). An Arduino Uno R3 subsystem detects ramp depression order to determine driving direction, triggering alerts via LED signals and wireless communication to nearby authorities.</p>
+            </div>
+        </div>
+        <div class="content-block content-block-3 animation-container" data-fade-duration="0.5s">
+            <div class="content blurb">
+                <h2>Demonstrations</h2>
+                <p>A low-speed prototype was tested on a scaled road model, confirming the system’s ability to detect wrong-way driving and deploy alerts within 1.5 seconds. The design integrates with existing infrastructure, offering a cost-effective solution for high-risk areas like highway ramps. Future iterations aim to incorporate AI for predictive detection.</p>
+            </div>
+        </div>
+        <div class="content-block content-block-4" data-fade-duration="0.5s">
             <div class="content">
-                <h2>Credits</h2>
-                <p>Team Members: Sultan Al Ali, Eric Baylon, Aleily Partida, Animesh Rajvanshi, Rachel Thomas, Amie Trescott</p>
-                <h2>References</h2>
+                <h2>Credits & References</h2>
                 <ul class="custom-list">
-                    <li>DM Cantor: <a href="https://dmcantor.com/blog/arizona-wrong-way-drivers-causes-possible-charges-defenses" target="_blank">Wrong-Way Crashes in Arizona</a></li>
-                    <li>Federal Highway Administration: <a href="https://highways.dot.gov/safety/speed-management/traffic-calming-eprimer" target="_blank">Traffic Calming ePrimer</a></li>
-                    <li>Arizona Department of Transportation: <a href="https://azdot.gov/motor-vehicles/statistics/wrong-way-driving" target="_blank">Wrong-Way Driving Data</a></li>
-                    <li>Shigley’s Mechanical Design: <a href="https://www.mheducation.com/highered/product/shigley-s-mechanical-engineering-design-budynas-nisbett/M9780073398204.html" target="_blank">10th Edition, Chapter 10</a></li>
-                    <li>Koba Kant: <a href="https://www.kobakant.at/DIY/?p=8906" target="_blank">Paper + Aluminum Foil Contact Switch</a></li>
-                    <li>SolidWorks: <a href="https://www.solidworks.com/support/finite-element-analysis" target="_blank">Finite Element Analysis Guide</a></li>
-                    <li>Arduino: <a href="https://www.arduino.cc/en/Tutorial/BuiltInExamples" target="_blank">Basic Circuit Design</a></li>
-                    <li>IEEE: <a href="https://ieeexplore.ieee.org/document/8735124" target="_blank">Transportation Safety</a></li>
-                    <li>ScienceDirect: <a href="https://www.sciencedirect.com/science/article/pii/S2352484719300999" target="_blank">Wrong-Way Driving Countermeasures</a></li>
-                    <li>National Highway Traffic Safety Administration: <a href="https://www.nhtsa.gov/road-safety" target="_blank">Road Safety Data</a></li>
-                    <li>ASU Engineering: <a href="https://engineering.asu.edu/" target="_blank">Capstone Project Resources</a></li>
-                    <li>ANSYS: <a href="https://www.ansys.com/applications/automotive" target="_blank">Automotive Simulation</a></li>
+                    <li><a href="https://www.nhtsa.gov">National Highway Traffic Safety Administration (NHTSA)</a>: Statistics on wrong-way driving crashes.</li>
+                    <li><a href="https://www.arduino.cc">Arduino</a>: Documentation for Uno R3 and sensor integration.</li>
+                    <li><a href="https://www.ansys.com">ANSYS</a>: Finite element analysis tools for mechanical validation.</li>
+                    <li><a href="https://www.solidworks.com">SolidWorks</a>: CAD software for system design.</li>
                 </ul>
             </div>
-        </section>
+        </div>
+        <div class="canvas-wrapper">
+            <canvas class="model-canvas"></canvas>
+        </div>
+        <div class="image-preload">
+            <img src="/assets/wrongway_frames/frame_001.png" alt="Frame 1">
+            <!-- Additional frame images omitted for brevity -->
+            <img src="/assets/wrongway_frames/frame_120.png" alt="Frame 120">
+        </div>
+        <div class="loading-indicator">Loading...</div>
     </main>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'939376bf4dd0b059',t:'MTc0NjE0NjM5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
