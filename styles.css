@@ -36,12 +36,16 @@ body {
     padding-top: 60px; /* Account for fixed header */
 }
 
+.content-blocks {
+    padding-top: 100px; /* Consistent starting position */
+}
+
 .content-block {
     position: relative;
     text-align: left;
     padding: 40px;
     max-width: 70%;
-    margin: 0 auto 100px auto; /* Space between blocks */
+    margin: 0 0 100px 40px; /* Align left with 40px margin */
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.5s ease, transform 0.5s ease;
@@ -193,6 +197,59 @@ body {
     text-align: left;
 }
 
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.custom-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.custom-list li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.custom-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #00aaff;
+    font-size: 18px;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid white;
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.cta-button:hover {
+    opacity: 0.7;
+    text-decoration: none;
+}
+
+.profile-image {
+    float: right;
+    width: 200px;
+    height: 200px;
+    margin-left: 20px;
+}
+
 @media (max-width: 768px) {
     .menu-button {
         display: flex;
@@ -250,6 +307,13 @@ body {
 
     .content-block {
         max-width: 85%;
-        margin: 0 auto 50px auto;
+        margin: 0 0 50px 20px;
+    }
+
+    .profile-image {
+        width: 120px;
+        height: 120px;
+        float: none;
+        margin: 20px auto;
     }
 }
