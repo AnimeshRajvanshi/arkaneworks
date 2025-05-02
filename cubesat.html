@@ -34,14 +34,12 @@
         </nav>
     </header>
     <main class="scroll-container">
-        <section class="page default-background">
-            <div class="content">
+        <div class="content-blocks">
+            <div class="content-block">
                 <h1>Gorgon CubeSat</h1>
                 <p>The Gorgon CubeSat, proposed at Arizona State University’s Sun Devil Satellite Laboratory (SDSL) in 2023, is a 12U satellite designed to combat ocean plastic pollution through hyperspectral imaging and innovative communication. As a mechanical engineering student, I played a pivotal role in subsystem integration and proposed a Starlink-based data relay to eliminate ground stations. This project, born from a nearly canceled initiative I revived, reflects my passion for aerospace innovation and environmental stewardship, tackling the global “Missing Plastic Problem” with space-based technology.</p>
             </div>
-        </section>
-        <section class="page default-background cad-showcase">
-            <div class="content">
+            <div class="content-block">
                 <h2>Satellite Showcase</h2>
                 <div class="showcase-container">
                     <img src="cubesat.png" alt="Gorgon CubeSat Design" class="showcase-image">
@@ -49,24 +47,16 @@
                 </div>
                 <p>The CubeSat features a SWIR hyperspectral imager (1000-1700 nm, 50 m GSD, 50 km swath) for detecting macroplastics in a 500 km sun-synchronous orbit. I collaborated on specifying components like the Blue Canyon XACT-50 ADCS and DHV Technology solar panels (25 W), using SolidWorks for conceptual design. My key innovation was integrating a modified Starlink terminal (Ku-band) for space-to-space data relay, aiming to reduce latency and infrastructure costs. This required extensive research into orbital dynamics and subsystem compatibility, ensuring a cohesive 12U platform.</p>
             </div>
-        </section>
-        <section class="page default-background">
-            <div class="content">
+            <div class="content-block">
                 <p>Scaling from a 3U to a 12U design introduced power and thermal constraints. I addressed these by modeling thermal dissipation in SolidWorks, ensuring electronics stayed within operational temperatures. The Starlink integration posed a compatibility challenge, as its Ku-band system was untested in space-to-space contexts. I used hand calculations and RF propagation models to validate a high-bandwidth link, aiming for reliable data transfer. Coordinating with SDSL teammates, I balanced payload mass and power, optimizing for a 1-year mission life in a debris-heavy orbit.</p>
             </div>
-        </section>
-        <section class="page default-background">
-            <div class="content">
+            <div class="content-block">
                 <p>Though conceptual, the design underwent iterative refinement. I conducted trade studies to select the Unibap iX5-100 OBC for processing hyperspectral data and GOMspace NanoPower BPX for battery reliability. My Starlink proposal required simulating orbital passes to confirm coverage with existing constellations. I also led subsystem integration, ensuring the imager, ADCS, and communication systems aligned via MIL-STD-1553 protocols. This process extended the project’s life, enabling peers to gain hands-on experience and secure opportunities.</p>
             </div>
-        </section>
-        <section class="page default-background">
-            <div class="content">
+            <div class="content-block">
                 <p>The Gorgon CubeSat demonstrates my expertise in spacecraft design, systems engineering, and creative problem-solving. By targeting ocean plastics, it supports global environmental monitoring, with potential applications in climate research. My Starlink innovation could reduce costs for future missions, a tentative goal for CubeSat communications. Though not yet launched, the project positions me to contribute to aerospace advancements. Future steps include prototyping the communication system and securing a rideshare launch, potentially with NASA’s CubeSat Launch Initiative.</p>
             </div>
-        </section>
-        <section class="page default-background references">
-            <div class="content">
+            <div class="content-block">
                 <h2>References</h2>
                 <ul class="custom-list">
                     <li>Blue Canyon: <a href="https://bluecanyontech.com/products/xact" target="_blank">XACT-50 ADCS</a></li>
@@ -81,7 +71,7 @@
                     <li>Biermann et al., 2020: <a href="https://www.nature.com/articles/s41598-020-62215-8" target="_blank">Hyperspectral Plastic Signatures</a></li>
                 </ul>
             </div>
-        </section>
+        </div>
     </main>
 </body>
 </html>
