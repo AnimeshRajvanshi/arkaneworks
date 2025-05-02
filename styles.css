@@ -140,12 +140,43 @@ html, body {
     text-align: left; /* Explicitly left-aligned */
 }
 
-.page:not(.visible) .content {
+.content-wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.content-left {
+    flex: 1;
+    max-width: 50%;
+    margin-right: 40px;
+}
+
+.content-right {
+    flex: 1;
+    max-width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    align-self: flex-end;
+    margin-top: auto;
+}
+
+.page:not(.visible) .content,
+.page:not(.visible) .content-wrapper {
     opacity: 0;
     transform: translateY(20px);
 }
 
-.page.visible .content {
+.page.visible .content,
+.page.visible .content-wrapper {
     opacity: 1;
     transform: translateY(0);
 }
@@ -420,6 +451,27 @@ a:hover {
 
     .content.blurb {
         max-width: 85%;
+    }
+
+    .content-wrapper {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .content-left {
+        max-width: 85%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .content-right {
+        max-width: 85%;
+    }
+
+    .profile-image {
+        width: 100px;
+        height: 100px;
+        align-self: center;
     }
 
     .model-canvas {
