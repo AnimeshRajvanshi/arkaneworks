@@ -319,3 +319,12 @@ a:hover {
         position: static;
         background-color: transparent;
         box
+    .animation-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 5; /* Behind text, which is z-index: 10 */
+        pointer-events: none; /* Prevents interference with scrolling */
+    }
