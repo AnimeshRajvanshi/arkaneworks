@@ -151,7 +151,59 @@ body {
 .menu-links li {
     position: relative;
 }
+.about-contact-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 100px; /* Space before next content block */
+}
 
+.content-block--half {
+    max-width: 45%;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.contact-me-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Aligns content to the right */
+    position: relative;
+}
+
+.profile-image {
+    position: static; /* Changed from absolute to stack naturally below */
+    width: 200px;
+    height: 200px;
+    margin-top: 20px; /* Space between contact info and photo */
+    align-self: flex-end; /* Ensures it stays on the right */
+}
+
+.video-background .content {
+    padding-top: 100px; /* Lowers the paragraph to match other pages */
+    box-sizing: border-box;
+}
+
+/* Media query for mobile responsiveness */
+@media (max-width: 768px) {
+    .about-contact-wrapper {
+        flex-direction: column;
+    }
+    .content-block--half {
+        max-width: 85%;
+        margin: 0 0 50px 20px;
+    }
+    .contact-me-block {
+        align-items: center; /* Center content on mobile */
+    }
+    .profile-image {
+        width: 120px;
+        height: 120px;
+        margin: 20px auto;
+    }
+    .video-background .content {
+        padding-top: 50px; /* Adjusted for mobile */
+    }
+}
 .menu-links a {
     color: white;
     text-decoration: none;
