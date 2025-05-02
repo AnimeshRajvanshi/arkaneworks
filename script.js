@@ -1,328 +1,203 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Menu toggle for mobile
     const menuButton = document.querySelector('.menu-button');
     const menuLinks = document.querySelector('.menu-links');
-    const dropdowns = document.querySelectorAll('.dropdown');
-    const sections = document.querySelectorAll('.page');
-    const canvas = document.querySelector('.model-canvas');
-    const canvasWrapper = document.querySelector('.canvas-wrapper');
-    const scrollContainer = document.querySelector('.scroll-container');
-    const video = document.querySelector('.background-video');
-    const loadingIndicator = document.querySelector('.loading-indicator');
-    const imagePreload = document.querySelector('.image-preload');
+    const dropdown = document.querySelector('.dropdown');
+    const dropdownContent = document.querySelector('.dropdown-content');
 
-    // Debug elements and dimensions
-    console.log('Canvas element:', canvas ? 'Found' : 'Not found', canvas);
-    console.log('Scroll container:', scrollContainer ? 'Found' : 'Not found', scrollContainer);
-    console.log(`Viewport: innerWidth=${window.innerWidth}, innerHeight=${window.innerHeight}, clientWidth=${document.documentElement.clientWidth}, clientHeight=${document.documentElement.clientHeight}, visualViewport=${window.visualViewport ? window.visualViewport.width + 'x' + window.visualViewport.height : 'N/A'}`);
-    console.log(`Document scrollHeight: ${document.body.scrollHeight}, Container scrollHeight: ${scrollContainer ? scrollContainer.scrollHeight : 'N/A'}`);
-
-    // Video playback
-    if (video) {
-        video.addEventListener('error', (e) => console.error('Video error:', e));
-        video.addEventListener('loadeddata', () => console.log('Video loaded successfully'));
-        video.addEventListener('canplay', () => console.log('Video can play'));
-        video.addEventListener('play', () => console.log('Video playing'));
-        video.addEventListener('pause', () => console.log('Video paused'));
-        video.addEventListener('stalled', () => console.log('Video stalled'));
-
-        const tryPlay = () => {
-            video.play().catch(err => {
-                console.error('Video play failed:', err);
-                setTimeout(tryPlay, 1000);
-            });
-        };
-        tryPlay();
-
-        const videoObserver = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    tryPlay();
-                    console.log('Video section visible, attempting to play');
-                } else {
-                    video.pause();
-                    console.log('Video section hidden, paused');
-                }
-            });
-        }, { threshold: 0.5 });
-        videoObserver.observe(document.querySelector('.video-background'));
-    }
-
-    // Mobile menu toggle
     if (menuButton && menuLinks) {
         menuButton.addEventListener('click', () => {
             menuButton.classList.toggle('open');
             menuLinks.classList.toggle('open');
-        });
-    }
-
-    // Mobile dropdown toggle
-    dropdowns.forEach(dropdown => {
-        const link = dropdown.querySelector('a');
-        link.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
+            if (dropdown && dropdownContent) {
                 dropdown.classList.toggle('open');
             }
         });
-    });
+    }
 
-    // Fade-in and fade-out animation for text
-    const observer = new IntersectionObserver(entries => {
+    // Content block fade-in/out
+    const contentBlocks = document.querySelectorAll('.content-block');
+    const observerOptions = {
+        root: null,
+        rootMargin: '-10% 0px',
+        threshold: 0.1
+    };
+
+    const contentObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            console.log(`Section: ${entry.target.className}, Intersecting: ${entry.isIntersecting}, Ratio: ${entry.intersectionRatio}`);
-            if (entry.isIntersecting && entry.intersectionRatio >= 0.1) {
-                entry.target.classList.add('visible');
+            const block = entry.target;
+            const fadeDuration = block.dataset.fadeDuration || '0.5s';
+            block.style.transitionDuration = fadeDuration;
+            if (entry.isIntersecting) {
+                block.classList.add('visible');
+                console.log(`Content block visible: ${block.className}, ratio: ${entry.intersectionRatio}`);
             } else {
-                entry.target.classList.remove('visible');
+                block.classList.remove('visible');
             }
         });
-    }, { 
-        threshold: 0.1,
-        rootMargin: '0px' /* Fast trigger */
-    });
+    }, observerOptions);
 
-    sections.forEach(section => observer.observe(section));
+    contentBlocks.forEach(block => contentObserver.observe(block));
 
-    // Scroll-driven image sequence animation
-    if (canvas && canvasWrapper && scrollContainer && window.location.pathname.includes('wrongway.html')) {
-        const context = canvas.getContext('2d');
-        const animationContainer = document.querySelector('.animation-container');
-        const totalFrames = 120;
-        const animationDuration = window.innerHeight * 3; // 3 viewports (pages 2-4)
-        const images = [];
-        let imagesLoaded = 0;
-        let aspectRatio = 16 / 9;
+    // Video handling for wrongway.html
+    const video = document.querySelector('.background-video');
+    if (video) {
+        console.log('Video element found:', video);
 
-        // Load image with retries
-        const loadImageWithRetry = (src, maxRetries = 3, retryDelay = 1000) => {
-            return new Promise((resolve, reject) => {
-                let attempts = 0;
-                const tryLoad = () => {
-                    const img = document.createElement('img');
-                    img.src = src;
-                    img.style.display = 'none';
-                    imagePreload.appendChild(img);
-                    img.onload = () => {
-                        console.log(`Frame ${src.match(/frame_\d+/)[0]} loaded`);
-                        resolve(img);
-                    };
-                    img.onerror = () => {
-                        attempts++;
-                        console.error(`Error loading frame ${src}, attempt ${attempts}/${maxRetries}`);
-                        if (attempts < maxRetries) {
-                            setTimeout(tryLoad, retryDelay);
-                        } else {
-                            console.error(`Failed to load frame ${src} after ${maxRetries} attempts`);
-                            reject(new Error(`Failed to load frame ${src}`));
-                        }
-                    };
-                };
-                tryLoad();
+        const attemptVideoPlay = () => {
+            video.play().then(() => {
+                console.log('Video playing');
+            }).catch(err => {
+                console.error('Video play failed:', err);
+                setTimeout(attemptVideoPlay, 1000); // Retry after 1s
             });
         };
 
-        // Preload images with Promise
-        const loadImages = () => {
-            return new Promise((resolve) => {
-                const loadPromises = [];
-                for (let i = 1; i <= totalFrames; i++) {
-                    const src = `/assets/wrongway_frames/frame_${i.toString().padStart(3, '0')}.png`;
-                    loadPromises.push(loadImageWithRetry(src).then(img => {
-                        images.push(img);
-                        imagesLoaded++;
-                        if (imagesLoaded === totalFrames) {
-                            if (loadingIndicator) {
-                                loadingIndicator.style.display = 'none';
-                                console.log('All frames loaded, hiding loading indicator');
-                            }
-                            resolve();
-                        }
-                    }).catch(err => {
-                        console.warn(`Using fallback for ${src}: ${err.message}`);
-                        const fallbackImg = document.createElement('img');
-                        fallbackImg.src = '/assets/wrongway_frames/frame_001.png';
-                        images.push(fallbackImg);
-                        imagesLoaded++;
-                        if (imagesLoaded === totalFrames) {
-                            if (loadingIndicator) {
-                                loadingIndicator.style.display = 'none';
-                                console.log('All frames loaded with fallbacks, hiding loading indicator');
-                            }
-                            resolve();
-                        }
-                    }));
+        video.addEventListener('loadeddata', () => console.log('Video loaded'));
+        video.addEventListener('canplay', () => console.log('Video can play'));
+        video.addEventListener('playing', () => console.log('Video is playing'));
+        video.addEventListener('pause', () => console.log('Video paused'));
+
+        attemptVideoPlay();
+
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    attemptVideoPlay();
+                } else {
+                    video.pause();
+                    console.log('Video paused due to not being in view');
                 }
             });
+        }, { root: null, threshold: 0.5 });
+
+        videoObserver.observe(video);
+    }
+
+    // Canvas animation for wrongway.html
+    const canvas = document.querySelector('.model-canvas');
+    const canvasWrapper = document.querySelector('.canvas-wrapper');
+    const animationContainer = document.querySelector('.animation-container');
+    const loadingIndicator = document.querySelector('.loading-indicator');
+    const frames = Array.from({ length: 120 }, (_, i) => `/assets/wrongway_frames/frame_${(i + 1).toString().padStart(3, '0')}.png`);
+    const totalFrames = frames.length;
+
+    if (canvas && canvasWrapper && animationContainer) {
+        const context = canvas.getContext('2d', { willReadFrequently: true });
+        let currentFrame = 0;
+        let images = [];
+        let imagesLoaded = 0;
+        let fallbackUsed = false;
+
+        const updateCanvasSize = () => {
+            canvas.width = canvas.clientWidth;
+            canvas.height = canvas.clientHeight;
+            drawFrame(currentFrame);
         };
 
-        // Show loading indicator
-        if (loadingIndicator) {
-            loadingIndicator.style.display = 'block';
-        }
-
-        // Initialize canvas size
-        const resizeCanvas = () => {
-            canvas.width = document.documentElement.clientWidth;
-            canvas.height = document.documentElement.clientHeight;
-            console.log(`Canvas resized: width=${canvas.width}, height=${canvas.height}, clientWidth=${document.documentElement.clientWidth}, clientHeight=${document.documentElement.clientHeight}`);
+        const loadImageWithRetry = (src, retries = 3, delay = 1000) => {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.src = src;
+                img.onload = () => {
+                    console.log(`Frame loaded: ${src}`);
+                    resolve(img);
+                };
+                img.onerror = () => {
+                    if (retries > 0) {
+                        console.error(`Failed to load ${src}, retrying (${retries} left)`);
+                        setTimeout(() => loadImageWithRetry(src, retries - 1, delay).then(resolve).catch(reject), delay);
+                    } else {
+                        console.error(`Failed to load ${src} after retries`);
+                        reject(new Error(`Failed to load ${src}`));
+                    }
+                };
+            });
         };
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
 
-        // Draw frame on canvas
-        function drawFrame(frameIndex) {
-            if (images[frameIndex] && images[frameIndex].complete) {
+        const preloadImages = async () => {
+            if (loadingIndicator) loadingIndicator.style.display = 'block';
+            try {
+                images = await Promise.all(frames.map(src => loadImageWithRetry(src)));
+                imagesLoaded = images.length;
+                console.log('All frames loaded:', imagesLoaded);
+                if (loadingIndicator) loadingIndicator.style.display = 'none';
+            } catch (err) {
+                console.error('Some frames failed to load:', err);
+                if (loadingIndicator) loadingIndicator.textContent = 'Using static image';
+                images = [await loadImageWithRetry(frames[0])]; // Fallback to first frame
+                imagesLoaded = 1;
+                fallbackUsed = true;
+            }
+        };
+
+        const drawFrame = (frameIndex) => {
+            if (images[frameIndex] && context) {
+                context.clearRect(0, 0, canvas.width, canvas.height);
                 const img = images[frameIndex];
+                const aspectRatio = img.width / img.height;
                 let drawWidth = canvas.width;
                 let drawHeight = canvas.width / aspectRatio;
                 if (drawHeight > canvas.height) {
                     drawHeight = canvas.height;
                     drawWidth = canvas.height * aspectRatio;
                 }
-                drawWidth = Math.min(drawWidth, canvas.width);
-                drawHeight = Math.min(drawHeight, canvas.height);
                 const offsetX = (canvas.width - drawWidth) / 2;
                 const offsetY = (canvas.height - drawHeight) / 2;
-                context.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
                 context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
-                // Log pixel data for debugging
-                const pixelData = context.getImageData(canvas.width / 2, canvas.height / 2, 1, 1).data;
-                requestAnimationFrame(() => {
-                    canvas.style.display = 'none';
-                    canvas.offsetHeight; // Trigger reflow
-                    canvas.style.display = 'block';
-                    console.log(`Drawing frame: ${frameIndex}, offsetX: ${offsetX}, offsetY: ${offsetY}, drawWidth: ${drawWidth}, drawHeight: ${drawHeight}, centerPixel: ${pixelData}`);
-                });
-            } else {
-                console.warn(`Frame ${frameIndex} not loaded`);
-                setTimeout(() => drawFrame(frameIndex), 100);
+                console.log(`Drawing frame ${frameIndex + 1}`);
+
+                // Check if canvas is blank
+                setTimeout(() => {
+                    const pixelData = context.getImageData(canvas.width / 2, canvas.height / 2, 1, 1).data;
+                    const topRight = context.getImageData(canvas.width - 1, 0, 1, 1).data;
+                    const bottomLeft = context.getImageData(0, canvas.height - 1, 1, 1).data;
+                    const isBlank = pixelData.every(v => v === 0) && topRight.every(v => v === 0) && bottomLeft.every(v => v === 0);
+                    if (isBlank && !fallbackUsed) {
+                        console.error('Canvas is blank, switching to fallback');
+                        if (loadingIndicator) loadingIndicator.textContent = 'Using static image';
+                        images = [images[0]];
+                        imagesLoaded = 1;
+                        fallbackUsed = true;
+                        drawFrame(0);
+                    }
+                }, 5000);
             }
-        }
-
-        // Debounce function
-        function debounce(func, wait) {
-            let timeout;
-            return function (...args) {
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(this, args), wait);
-            };
-        }
-
-        // Scroll handler
-        let lastFrameIndex = -1;
-
-        const updateFrame = () => {
-            const containerRect = animationContainer.getBoundingClientRect();
-            const scrollY = window.scrollY;
-            const containerTop = containerRect.top + scrollY;
-            const containerHeight = containerRect.height;
-            const scrollPosition = Math.max(0, scrollY - containerTop);
-            const progress = Math.min(Math.max(scrollPosition / animationDuration, 0), 1);
-            const frameIndex = Math.floor(progress * (totalFrames - 1));
-            if (frameIndex !== lastFrameIndex) {
-                drawFrame(frameIndex);
-                lastFrameIndex = frameIndex;
-            }
-            console.log(`ScrollY: ${scrollY}, ContainerTop: ${containerTop}, ScrollPosition: ${scrollPosition}, Progress: ${progress}, FrameIndex: ${frameIndex}`);
         };
 
-        // Canvas visibility observer
-        const canvasObserver = new IntersectionObserver(entries => {
+        const updateAnimation = () => {
+            if (imagesLoaded === 0) return;
+            const rect = animationContainer.getBoundingClientRect();
+            const scrollTop = window.scrollY || window.pageYOffset;
+            const containerTop = rect.top + scrollTop;
+            const containerHeight = animationContainer.offsetHeight;
+            const progress = Math.min(Math.max((scrollTop - containerTop) / containerHeight, 0), 1);
+            currentFrame = Math.floor(progress * (totalFrames - 1));
+            drawFrame(currentFrame);
+        };
+
+        const animationObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     canvasWrapper.style.display = 'block';
-                    canvasWrapper.style.zIndex = '100'; // Media layer
                     canvasWrapper.style.visibility = 'visible';
-                    canvasWrapper.style.opacity = '1';
-                    console.log('Canvas wrapper display: block, z-index: 100, visibility: visible, opacity: 1');
-                    console.log(`Canvas wrapper computed style: display=${getComputedStyle(canvasWrapper).display}, z-index=${getComputedStyle(canvasWrapper).zIndex}, visibility=${getComputedStyle(canvasWrapper).visibility}, opacity=${getComputedStyle(canvasWrapper).opacity}`);
-                    updateFrame();
+                    updateCanvasSize();
+                    window.addEventListener('scroll', updateAnimation);
+                    window.addEventListener('resize', updateCanvasSize);
+                    console.log('Animation container visible');
                 } else {
                     canvasWrapper.style.display = 'none';
-                    canvasWrapper.style.zIndex = '100'; // Maintain media layer
                     canvasWrapper.style.visibility = 'hidden';
-                    console.log('Canvas wrapper display: none, z-index: 100, visibility: hidden');
+                    window.removeEventListener('scroll', updateAnimation);
+                    window.removeEventListener('resize', updateCanvasSize);
+                    console.log('Animation container hidden');
                 }
             });
-        }, { threshold: 0.1, rootMargin: '-10%' });
+        }, { root: null, rootMargin: '-10% 0px', threshold: 0.1 });
 
-        // Start animation after images load
-        loadImages().then(() => {
-            // Wait for first frame to be fully loaded
-            if (images[0].complete) {
-                aspectRatio = images[0].width / images[0].height;
-                drawFrame(0);
-                console.log('Initial frame loaded, aspect ratio:', aspectRatio);
-            } else {
-                images[0].onload = () => {
-                    aspectRatio = images[0].width / images[0].height;
-                    drawFrame(0);
-                    console.log('Initial frame loaded, aspect ratio:', aspectRatio);
-                };
-            }
-            canvasObserver.observe(animationContainer);
-            window.addEventListener('scroll', debounce(updateFrame, 16));
-            document.addEventListener('touchmove', debounce(updateFrame, 16));
-            // Fallback: Display static image if canvas appears blank
-            setTimeout(() => {
-                if (lastFrameIndex === -1) {
-                    // Sample multiple pixels
-                    const pixels = [
-                        context.getImageData(canvas.width / 2, canvas.height / 2, 1, 1).data,
-                        context.getImageData(canvas.width - 10, 10, 1, 1).data,
-                        context.getImageData(10, canvas.height - 10, 1, 1).data
-                    ];
-                    console.log(`Canvas pixel data: center=${pixels[0]}, topRight=${pixels[1]}, bottomLeft=${pixels[2]}`);
-                    if (pixels.every(pixel => pixel.every(val => val === 0))) {
-                        console.warn('Canvas appears blank, adding fallback image');
-                        const fallbackImg = document.createElement('img');
-                        fallbackImg.src = '/assets/wrongway_frames/frame_001.png';
-                        fallbackImg.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; z-index: 100; display: none; object-fit: contain;';
-                        canvasWrapper.appendChild(fallbackImg);
-                        const fallbackObserver = new IntersectionObserver(entries => {
-                            entries.forEach(entry => {
-                                if (entry.isIntersecting) {
-                                    fallbackImg.style.display = 'block';
-                                    console.log('Fallback image display: block');
-                                } else {
-                                    fallbackImg.style.display = 'none';
-                                    console.log('Fallback image display: none');
-                                }
-                            });
-                        }, { threshold: 0.1, rootMargin: '-10%' });
-                        fallbackObserver.observe(animationContainer);
-                    }
-                } else {
-                    console.log('Canvas rendering active, skipping fallback');
-                }
-            }, 5000);
-        }).catch(err => {
-            console.error('Image loading failed:', err);
-            if (loadingIndicator) {
-                loadingIndicator.textContent = 'Using static image';
-                loadingIndicator.style.display = 'none';
-                const fallbackImg = document.createElement('img');
-                fallbackImg.src = '/assets/wrongway_frames/frame_001.png';
-                fallbackImg.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; z-index: 100; display: none; object-fit: contain;';
-                canvasWrapper.appendChild(fallbackImg);
-                const fallbackObserver = new IntersectionObserver(entries => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            fallbackImg.style.display = 'block';
-                            console.log('Fallback image display: block due to load failure');
-                        } else {
-                            fallbackImg.style.display = 'none';
-                            console.log('Fallback image display: none');
-                        }
-                    });
-                }, { threshold: 0.1, rootMargin: '-10%' });
-                fallbackObserver.observe(animationContainer);
-            }
+        preloadImages().then(() => {
+            updateCanvasSize();
+            animationObserver.observe(animationContainer);
         });
-    } else {
-        console.warn('Animation skipped: Canvas, canvasWrapper, or scrollContainer missing, or not on wrongway.html');
-        if (loadingIndicator) {
-            loadingIndicator.style.display = 'none';
-        }
     }
 });
