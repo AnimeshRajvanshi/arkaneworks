@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nanoelectronics Ultrasonic NDT - ARKANE WORKS</title>
+    <title>Gorgon CubeSat - ARKANE WORKS</title>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
@@ -34,52 +34,44 @@
         </nav>
     </header>
     <main class="scroll-container">
-        <section class="page default-background">
-            <div class="content">
-                <h1>Nanoelectronics Ultrasonic NDT</h1>
-                <p>Since May 2024 at ASU’s Celano Lab, I’ve pioneered a novel scaling workflow for ultrasonic non-destructive testing (NDT) to detect defects in 10-micron pitch Cu-Cu hybrid bonds for advanced chiplet packaging. As a mechanical engineering student, I developed a simulation-based approach using CIVA NDT and SolidWorks, scaling microscale models to macroscale for faster, more accurate analysis. This project reflects my fascination with nanoelectronics, bridging the gap between theoretical physics and practical semiconductor reliability, crucial for next-generation electronics.</p>
+        <div class="content-blocks">
+            <div class="content-block">
+                <h1>Gorgon CubeSat</h1>
+                <p>The Gorgon CubeSat, proposed at Arizona State University’s Sun Devil Satellite Laboratory (SDSL) in 2023, is a 12U satellite designed to combat ocean plastic pollution through hyperspectral imaging and innovative communication. As a mechanical engineering student, I played a pivotal role in subsystem integration and proposed a Starlink-based data relay to eliminate ground stations. This project, born from a nearly canceled initiative I revived, reflects my passion for aerospace innovation and environmental stewardship, tackling the global “Missing Plastic Problem” with space-based technology.</p>
             </div>
-        </section>
-        <section class="page default-background cad-showcase">
-            <div class="content">
-                <h2>NDT Showcase</h2>
+            <div class="content-block">
+                <h2>Satellite Showcase</h2>
                 <div class="showcase-container">
-                    <img src="nano.png" alt="Nanoelectronics NDT Design" class="showcase-image">
+                    <img src="cubesat.png" alt="Gorgon CubeSat Design" class="showcase-image">
                     <p class="showcase-caption">[Placeholder: Add additional renders or videos here]</p>
                 </div>
-                <p>The workflow scales model dimensions by a factor of k=1000 (10 μm to 10 mm) and reduces frequency from 1 GHz to 1 MHz, preserving the d/λ ratio (~7.14) for equivalent wave physics. I modeled this in SolidWorks, visualizing defect detection in chiplets, and simulated wave propagation (∂²u/∂t² = c²∇²u) in CIVA, achieving 10-micron resolution. My approach bypasses CIVA’s microscale viewport limitations, enabling rapid iteration for semiconductor quality assurance.</p>
+                <p>The CubeSat features a SWIR hyperspectral imager (1000-1700 nm, 50 m GSD, 50 km swath) for detecting macroplastics in a 500 km sun-synchronous orbit. I collaborated on specifying components like the Blue Canyon XACT-50 ADCS and DHV Technology solar panels (25 W), using SolidWorks for conceptual design. My key innovation was integrating a modified Starlink terminal (Ku-band) for space-to-space data relay, aiming to reduce latency and infrastructure costs. This required extensive research into orbital dynamics and subsystem compatibility, ensuring a cohesive 12U platform.</p>
             </div>
-        </section>
-        <section class="page default-background">
-            <div class="content">
-                <p>Simulating ultrasonic waves at microscales posed significant challenges due to software resolution constraints and material nonlinearities (σ = Eε + βε²). I addressed this by deriving scaling equations, ensuring reflection coefficients (R = (Z₂ - Z₁)/(Z₂ + Z₁)) remained consistent across scales. Material properties (e.g., ρ=8700 kg/m³ for Cu, c=1400 m/s in water) were validated against literature. I also tackled transducer scaling, adjusting focal lengths to maintain beam accuracy, a critical step for detecting voids and delaminations in hybrid bonds.</p>
+            <div class="content-block">
+                <p>Scaling from a 3U to a 12U design introduced power and thermal constraints. I addressed these by modeling thermal dissipation in SolidWorks, ensuring electronics stayed within operational temperatures. The Starlink integration posed a compatibility challenge, as its Ku-band system was untested in space-to-space contexts. I used hand calculations and RF propagation models to validate a high-bandwidth link, aiming for reliable data transfer. Coordinating with SDSL teammates, I balanced payload mass and power, optimizing for a 1-year mission life in a debris-heavy orbit.</p>
             </div>
-        </section>
-        <section class="page default-background">
-            <div class="content">
-                <p>My simulations in CIVA confirmed defect visibility at scaled dimensions, with preliminary results showing a strong correlation to microscale models. I used SolidWorks to iterate transducer designs, reducing boundary effects through geometric optimization. Ongoing validation involves comparing scaled results to physical scanning acoustic microscopy (SAM) data, addressing nonlinearities via higher-order wave equations. This iterative process, driven by my independent research, positions the workflow as a scalable tool for industry adoption.</p>
+            <div class="content-block">
+                <p>Though conceptual, the design underwent iterative refinement. I conducted trade studies to select the Unibap iX5-100 OBC for processing hyperspectral data and GOMspace NanoPower BPX for battery reliability. My Starlink proposal required simulating orbital passes to confirm coverage with existing constellations. I also led subsystem integration, ensuring the imager, ADCS, and communication systems aligned via MIL-STD-1553 protocols. This process extended the project’s life, enabling peers to gain hands-on experience and secure opportunities.</p>
             </div>
-        </section>
-        <section class="page default-background">
-            <div class="content">
-                <p>This project showcases my expertise in simulation, materials science, and innovative problem-solving, directly applicable to semiconductor manufacturing. By accelerating defect detection, it supports the reliability of 3D packaging, critical for AI and high-performance computing. The workflow’s scalability extends to other NDT tools and pitches (e.g., 5 μm), with potential to enhance QA efficiency. Future work includes physical prototyping and collaboration with chipmakers like TSMC, a tentative goal to advance nanoelectronics reliability.</p>
+            <div class="content-block">
+                <p>The Gorgon CubeSat demonstrates my expertise in spacecraft design, systems engineering, and creative problem-solving. By targeting ocean plastics, it supports global environmental monitoring, with potential applications in climate research. My Starlink innovation could reduce costs for future missions, a tentative goal for CubeSat communications. Though not yet launched, the project positions me to contribute to aerospace advancements. Future steps include prototyping the communication system and securing a rideshare launch, potentially with NASA’s CubeSat Launch Initiative.</p>
             </div>
-        </section>
-        <section class="page default-background references">
-            <div class="content">
+            <div class="content-block">
                 <h2>References</h2>
                 <ul class="custom-list">
-                    <li>CIVA NDT: <a href="https://www.extende.com/civa" target="_blank">Simulation Software</a></li>
-                    <li>SolidWorks: <a href="https://www.solidworks.com/solution/industry/electronics" target="_blank">Electronics Design</a></li>
+                    <li>Blue Canyon: <a href="https://bluecanyontech.com/products/xact" target="_blank">XACT-50 ADCS</a></li>
+                    <li>DHV Technology: <a href="https://dhvtechnology.com/products/cubesat-solar-panels" target="_blank">Solar Panels</a></li>
+                    <li>Starlink: <a href="https://en.wikipedia.org/wiki/Starlink" target="_blank">Communication System</a></li>
+                    <li>Unibap: <a href="https://unibap.com/products/ix5-100" target="_blank">iX5-100 OBC</a></li>
+                    <li>GOMspace: <a href="https://gomspace.com/shop/subsystems/power-systems/nanopower-bpx.aspx" target="_blank">NanoPower BPX</a></li>
+                    <li>NASA: <a href="https://www.nasa.gov/directorates/spacetech/small_spacecraft/cubesat_launch_initiative" target="_blank">CubeSat Launch Initiative</a></li>
+                    <li>IEEE: <a href="https://ieeexplore.ieee.org/document/8735124" target="_blank">Space Systems Engineering</a></li>
+                    <li>ScienceDirect: <a href="https://www.sciencedirect.com/science/article/pii/S2352484719300999" target="_blank">CubeSat Design</a></li>
+                    <li>ASU Sun Devil Satellite Lab: <a href="https://sds.asu.edu/" target="_blank">Satellite Research</a></li>
                     <li>Biermann et al., 2020: <a href="https://www.nature.com/articles/s41598-020-62215-8" target="_blank">Hyperspectral Plastic Signatures</a></li>
-                    <li>IEEE: <a href="https://ieeexplore.ieee.org/document/8735124" target="_blank">Nanoelectronics</a></li>
-                    <li>ScienceDirect: <a href="https://www.sciencedirect.com/science/article/pii/S2352484719300999" target="_blank">Ultrasonic NDT</a></li>
-                    <li>TSMC: <a href="https://www.tsmc.com/english/dedicatedFoundry/technology/3d_ic.htm" target="_blank">3D Packaging Technology</a></li>
-                    <li>ASU Celano Lab: <a href="https://celano.engineering.asu.edu/" target="_blank">Nanoelectronics Research</a></li>
-                    <li>SPIE: <a href="https://spie.org/photonics-west" target="_blank">Photonics and NDT</a></li>
                 </ul>
             </div>
-        </section>
+        </div>
     </main>
 </body>
 </html>
