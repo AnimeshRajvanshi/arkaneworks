@@ -146,27 +146,29 @@ html, body {
     max-width: 100%;
     padding: 40px;
     box-sizing: border-box;
+    align-items: flex-start;
 }
 
 .content-left {
-    flex: 1;
-    max-width: 50%;
-    margin-right: 40px;
+    max-width: 70%;
+    padding: 40px;
+    margin: 0 0 0 40px; /* Match .content styling */
 }
 
 .content-right {
-    flex: 1;
-    max-width: 30%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    max-width: 20%;
+    margin-left: auto;
+    margin-right: 20px;
+    position: relative;
+    padding-top: 40px;
 }
 
 .profile-image {
-    width: 150px;
-    height: 150px;
-    align-self: flex-end;
-    margin-top: auto;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 200px;
+    height: 200px;
 }
 
 .page:not(.visible) .content,
@@ -460,18 +462,21 @@ a:hover {
 
     .content-left {
         max-width: 85%;
-        margin-right: 0;
-        margin-bottom: 20px;
+        padding: 20px;
+        margin: 0 0 0 20px;
     }
 
     .content-right {
         max-width: 85%;
+        margin: 20px 0 0 20px;
+        padding: 0;
     }
 
     .profile-image {
-        width: 100px;
-        height: 100px;
-        align-self: center;
+        position: static;
+        width: 120px;
+        height: 120px;
+        margin: 20px auto 0;
     }
 
     .model-canvas {
