@@ -3,7 +3,9 @@ html, body {
     padding: 0;
     height: auto;
     overflow-y: visible;
-    background-color: black;
+    background: url('/assets/synapse1.jpg') no-repeat center center/cover;
+    background-color: #1a1a1a; /* Fallback */
+    background-attachment: fixed; /* Static background */
     color: white;
     font-family: 'Barlow', sans-serif;
     font-weight: 300;
@@ -29,23 +31,18 @@ html, body {
 
 .scroll-container {
     height: auto;
-    min-height: 500vh; /* Ensures scrollable height for 5 pages */
+    min-height: 500vh; /* Ensure scrollable height */
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
     scroll-behavior: smooth;
+    position: relative;
 }
 
 .page {
-    height: 100vh; /* Fixed height to eliminate blank space */
+    height: 100vh; /* For video section in wrongway.html */
     position: relative;
     display: flex;
     align-items: center;
-}
-
-.default-background {
-    background: url('/assets/synapse1.jpg') no-repeat center center/cover;
-    background-color: #1a1a1a; /* Fallback if synapse1.jpg is missing */
-    z-index: 0; /* Background layer */
 }
 
 .video-background {
@@ -58,7 +55,7 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 100; /* Media layer, above background, below content */
+    z-index: 100; /* Media layer */
 }
 
 .background-video {
@@ -66,17 +63,12 @@ html, body {
     height: 100%;
     object-fit: cover;
     opacity: 0.8;
-    display: block; /* Ensure visibility */
+    display: block;
     will-change: transform; /* Optimize rendering */
 }
 
 .animation-container {
-    height: 300vh; /* Spans pages 2-4 for animation */
-    position: relative;
-}
-
-.animation-section {
-    height: 100vh; /* Each page is exactly 1 viewport */
+    height: 300vh; /* Spans animation section in wrongway.html */
     position: relative;
 }
 
@@ -86,12 +78,12 @@ html, body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    max-width: 100vw; /* Prevent overflow */
+    max-width: 100vw;
     max-height: 100vh;
-    z-index: 100; /* Media layer, controlled by JS */
+    z-index: 100; /* Media layer */
     display: none; /* Controlled by JS */
-    pointer-events: none; /* Prevent interaction blocking */
-    visibility: hidden; /* Controlled by JS */
+    pointer-events: none;
+    visibility: hidden;
     opacity: 1;
 }
 
@@ -113,7 +105,7 @@ html, body {
     color: white;
     font-size: 18px;
     z-index: 300; /* Above content, below menu */
-    display: none; /* Shown via JS during loading */
+    display: none;
     background: rgba(0, 0, 0, 0.7);
     padding: 10px 20px;
     border-radius: 5px;
@@ -125,20 +117,35 @@ html, body {
 
 .content {
     position: relative;
-    text-align: left; /* All text aligned left */
+    text-align: left;
     padding: 40px;
-    max-width: 70%; /* Shift right margin left */
-    margin: 0 0 0 40px; /* Shift text leftward */
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.3s ease, transform 0.3s ease; /* Fast transition */
-    z-index: 200; /* Content layer, above media */
+    max-width: 70%;
+    margin: 0 0 0 40px;
+    z-index: 200; /* Content layer */
 }
 
 .content.blurb {
     max-width: 70%;
-    text-align: left; /* Explicitly left-aligned */
+    text-align: left;
 }
+
+.content-block {
+    opacity: 0;
+    transition: opacity var(--fade-duration, 0.5s) ease;
+    position: relative;
+    min-height: 100vh; /* Ensure each block takes at least one viewport */
+    display: flex;
+    align-items: center;
+}
+
+.content-block.visible {
+    opacity: 1;
+}
+
+.content-block-1 { top: 0; }
+.content-block-2 { top: 100vh; }
+.content-block-3 { top: 200vh; }
+.content-block-4 { top: 300vh; }
 
 .content-wrapper {
     display: flex;
@@ -152,7 +159,7 @@ html, body {
 .content-left {
     max-width: 70%;
     padding: 40px;
-    margin: 0 0 0 40px; /* Match .content styling */
+    margin: 0 0 0 40px;
 }
 
 .content-right {
@@ -171,42 +178,25 @@ html, body {
     height: 200px;
 }
 
-.page:not(.visible) .content,
-.page:not(.visible) .content-wrapper {
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-.page.visible .content,
-.page.visible .content-wrapper {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
 .content h1 {
     font-size: 32px;
     font-weight: 600;
     text-transform: uppercase;
     margin: 0 0 20px;
-    text-align: left; /* Left-aligned */
+    text-align: left;
 }
 
 .content h2 {
     font-size: 24px;
     font-weight: 500;
     margin: 0 0 20px;
-    text-align: left; /* Left-aligned */
+    text-align: left;
 }
 
 .content p {
     font-size: 18px;
     margin: 0 0 20px;
-    text-align: left; /* Left-aligned */
+    text-align: left;
 }
 
 a {
@@ -260,7 +250,7 @@ a:hover {
     margin-bottom: 15px;
     font-size: 16px;
     line-height: 1.5;
-    text-align: left; /* Left-aligned */
+    text-align: left;
 }
 
 .custom-list li::before {
@@ -277,11 +267,11 @@ a:hover {
     left: 0;
     width: 100%;
     height: 60px;
-    background-color: rgba(0, 0, 0, 0.7); /* Keep overlay for header menu */
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index: 1000; /* Top layer */
+    z-index: 1000;
 }
 
 .website-name {
@@ -291,7 +281,7 @@ a:hover {
     text-transform: uppercase;
     color: white;
     text-decoration: none;
-    text-align: left; /* Left-aligned */
+    text-align: left;
 }
 
 .website-name:hover {
@@ -352,7 +342,7 @@ a:hover {
     font-weight: 500;
     padding: 10px 15px;
     transition: opacity 0.2s ease;
-    text-align: left; /* Left-aligned */
+    text-align: left;
 }
 
 .menu-links a:hover {
@@ -364,9 +354,9 @@ a:hover {
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.9); /* Keep overlay for dropdown */
+    background-color: rgba(0, 0, 0, 0.9);
     min-width: 220px;
-    z-index: 1000; /* Same as menu-bar for consistency */
+    z-index: 1000;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     opacity: 0;
@@ -388,7 +378,7 @@ a:hover {
     padding: 10px 20px;
     display: block;
     font-size: 13px;
-    text-align: left; /* Left-aligned */
+    text-align: left;
 }
 
 @media (max-width: 768px) {
@@ -403,7 +393,7 @@ a:hover {
         left: 0;
         width: 100%;
         height: calc(100vh - 60px);
-        background-color: rgba(0, 0, 0, 0.95); /* Keep overlay for mobile menu */
+        background-color: rgba(0, 0, 0, 0.95);
         z-index: 1000;
     }
 
@@ -448,7 +438,8 @@ a:hover {
 
     .content {
         max-width: 85%;
-        margin: 0 0 0 20px; /* Adjusted for mobile */
+        margin: 0 0 0 20px;
+        padding: 20px;
     }
 
     .content.blurb {
@@ -498,5 +489,9 @@ a:hover {
     .social-links {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .content-block {
+        min-height: 80vh; /* Adjust for mobile */
     }
 }
