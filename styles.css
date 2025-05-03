@@ -40,14 +40,16 @@ body {
 }
 
 .content-block {
-    position: relative;
+    position: sticky;
+    top: 160px;
     text-align: left;
     padding: 40px;
     max-width: 70%;
-    margin: 0 0 100px 40px;
+    margin: 0 0 20vh 40px;
+    min-height: 80vh;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
     z-index: 60;
 }
 
@@ -286,7 +288,7 @@ a:hover {
     z-index: 50;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.2s ease;
 }
 
 .animation-canvas.visible {
@@ -349,7 +351,7 @@ a:hover {
     }
 
     .content-block {
-        margin: 0 0 50px 20px;
+        margin: 0 0 20vh 20px;
         max-width: 85%;
     }
 
