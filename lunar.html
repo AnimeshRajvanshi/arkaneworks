@@ -9,6 +9,7 @@
     <script src="script.js" defer></script>
 </head>
 <body>
+    <canvas class="animation-canvas" data-frame-folder="lunar_frames"></canvas>
     <header class="menu-bar">
         <a href="index.html" class="website-name">ARKANE WORKS</a>
         <button class="menu-button" aria-label="Toggle menu">
@@ -41,10 +42,6 @@
             </div>
             <div class="content-block">
                 <h2>System Design</h2>
-                <div class="showcase-container">
-                    <img src="lunar.png" alt="Lunar Power Grid Design" class="showcase-image">
-                    <p class="showcase-caption">[Placeholder: Add additional renders or videos here]</p>
-                </div>
                 <p>Our design centered on a solar-powered rover equipped with a trenching tool to lay power cables, connecting solar arrays to habitats. I used SolidWorks to model the trenching mechanism, incorporating a scoop-and-conveyor system to displace regolith while minimizing dust generation. The rover’s chassis, designed for stability on uneven terrain, integrated heat pipes and multilayer insulation to protect electronics. ANSYS simulations validated structural integrity under lunar gravity (1/6th Earth’s) and thermal cycling (-173°C to 127°C). My contribution ensured the system could operate autonomously, aligning with NASA’s goal of scalable lunar infrastructure.</p>
             </div>
             <div class="content-block">
@@ -59,7 +56,7 @@
             <div class="content-block">
                 <h2>References</h2>
                 <ul class="custom-list">
-                    <li>NASA: <a href="https://www.nasa.gov/director-message-watts-on-the-moon-challenge/" target="_blank">Watts on the Moon Challenge</a></li>
+                    <li>NASA: <a href="https://www.nasa.gov/directors-message-watts-on-the-moon-challenge/" target="_blank">Watts on the Moon Challenge</a></li>
                     <li>SolidWorks: <a href="https://www.solidworks.com/solution/industry/aerospace-defense" target="_blank">Aerospace Design Solutions</a></li>
                     <li>ANSYS: <a href="https://www.ansys.com/applications/aerospace-defense" target="_blank">Thermal Analysis for Space</a></li>
                     <li>ESA: <a href="https://www.esa.int/Enabling_Support/Space_Engineering_Technology/Lunar_regolith" target="_blank">Lunar Regolith Properties</a></li>
@@ -72,5 +69,6 @@
             </div>
         </div>
     </main>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'939bfd2fc97612d3',t:'MTc0NjIzNTc4My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
