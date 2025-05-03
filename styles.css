@@ -52,13 +52,17 @@ body {
     z-index: 60;
     min-height: 100vh;
     box-sizing: border-box;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 4px;
 }
 
 .content-block.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+.text-container {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    padding: 20px;
 }
 
 .video-background {
@@ -90,8 +94,12 @@ body {
     max-width: 70%;
     z-index: 60;
     padding: 40px;
+}
+
+.video-background .content .text-container {
     background: rgba(0, 0, 0, 0.5);
     border-radius: 4px;
+    padding: 20px;
 }
 
 .menu-bar {
@@ -329,7 +337,9 @@ a:hover {
 .scroll-arrow svg {
     width: 20px;
     height: 20px;
-    fill: #00aaff;
+    fill: none;
+    stroke: #00aaff;
+    stroke-width: 2;
     animation: bounce 1.5s infinite;
 }
 
