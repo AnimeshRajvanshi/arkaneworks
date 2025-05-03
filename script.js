@@ -128,11 +128,17 @@ document.addEventListener('DOMContentLoaded', () => {
             if (scrollRange <= 0) return;
 
             const scrollProgress = Math.min(Math.max((scrollY - animationStart) / scrollRange, 0), 1);
-            const frameIndex = Math.floor(scrollProgress * (frameCount - 1));
-            const opacity = scrollProgress > 0 && scrollProgress < 1 ? 1 : 0;
+            let frameIndex = Math.floor(scrollProgress * (frameCount - 1));
+            let opacity = scrollProgress > 0 ? 1 : 0;
+
+            // Persist last frame after animation ends
+            if (scrollY >= animationEnd) {
+                frameIndex = frameCount - 1; // Last frame
+                opacity = 1; // Keep visible
+            }
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            if (frames[frameIndex] && opacity === 1) {
+            if (frames[frameIndex]) {
                 const img = frames[frameIndex];
                 const aspectRatio = 1280 / 720;
                 const canvasAspect = canvas.width / canvas.height;
