@@ -102,10 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const scrollProgress = Math.min(Math.max((scrollY - animationStart) / scrollRange, 0), 1);
             const frameIndex = Math.floor(scrollProgress * (frameCount - 1));
-            const opacity = Math.sin(scrollProgress * Math.PI);
+            const opacity = scrollProgress > 0 && scrollProgress < 1 ? 1 : 0;
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            if (frames[frameIndex]) {
+            if (frames[frameIndex] && opacity === 1) {
                 const img = frames[frameIndex];
                 const aspectRatio = 1280 / 720;
                 const canvasAspect = canvas.width / canvas.height;
