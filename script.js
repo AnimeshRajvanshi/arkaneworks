@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const contentBlocks = document.querySelectorAll('.content-block');
     const canvas = document.querySelector('.animation-canvas');
     const ctx = canvas ? canvas.getContext('2d') : null;
+    const scrollArrow = document.querySelector('.scroll-arrow');
 
     // Mobile menu toggle
     if (menuButton && menuLinks) {
@@ -30,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const scrollY = window.scrollY;
         const viewportHeight = window.innerHeight;
         let currentBlock = null;
+        let isLastBlock = false;
 
         contentBlocks.forEach((block, index) => {
             const blockStart = index * viewportHeight;
@@ -44,6 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (scrollY >= adjustedStart && scrollY < adjustedEnd) {
                 currentBlock = block;
                 block.classList.add('visible');
+                if (index === contentBlocks.length - 1) {
+                    isLastBlock = true;
+                }
             } else {
                 block.classList.remove('visible');
             }
@@ -55,6 +60,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 block.classList.remove('visible');
             }
         });
+
+        // Scroll arrow visibility
+        if (scrollArrow) {
+            const pageBottom = document.body.scrollHeight - viewportHeight;
+            if (isLastBlock || scrollY >= pageBottom) {
+                scrollArrow.classList.remove('visible');
+            } else {
+                scrollArrow.classList.add('visible');
+            }
+        }
     }
 
     // Initial visibility (first block only)
@@ -76,24 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
         loadingIndicator.textContent = 'Loading animation...';
         document.body.appendChild(loadingIndicator);
 
-        // Preload frames
-        for (let i = 1; i <= frameCount; i++) {
-            const img = new Image();
-            const paddedIndex = i.toString().padStart(3, '0');
-            img.src = `/assets/${frameFolder}/frame_${paddedIndex}.png`;
-            img.onload = () => {
-                loadedFrames++;
-                if (loadedFrames === frameCount) {
-                    loadingIndicator.remove();
-                    canvas.classList.add('visible');
-                }
-            };
-            img.onerror = () => {
-                loadingIndicator.textContent = 'Failed to load animation';
-            };
-            frames.push(img);
-        }
-
         // Resize canvas to viewport
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -101,6 +98,61 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
+
+        // Load and display first frame immediately
+        const firstFrame = new Image();
+        firstFrame.src = `/assets/${frameFolder}/frame_001.png`;
+        firstFrame.onload = () => {
+            canvas.classList.add('visible');
+            drawFrame(firstFrame, 1);
+        };
+        firstFrame.onerror = () => {
+            loadingIndicator.textContent = 'Failed to load animation';
+        };
+        frames[0] = firstFrame;
+
+        // Preload remaining frames
+        for (let i = 2; i <= frameCount; i++) {
+            const img = new Image();
+            const paddedIndex = i.toString().padStart(3, '0');
+            img.src = `/assets/${frameFolder}/frame_${paddedIndex}.png`;
+            img.onload = () => {
+                loadedFrames++;
+                if (loadedFrames === frameCount - 1) {
+                    loadingIndicator.remove();
+                }
+            };
+            img.onerror = () => {
+                loadingIndicator.textContent = 'Failed to load animation';
+            };
+            frames[i - 1] = img;
+        }
+
+        // Draw frame helper
+        function drawFrame(img, opacity) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (img) {
+                const aspectRatio = 1280 / 720;
+                const canvasAspect = canvas.width / canvas.height;
+                let drawWidth, drawHeight, offsetX, offsetY;
+
+                if (canvasAspect > aspectRatio) {
+                    drawWidth = canvas.height * aspectRatio;
+                    drawHeight = canvas.height;
+                    offsetX = (canvas.width - drawWidth) / 2;
+                    offsetY = 0;
+                } else {
+                    drawWidth = canvas.width;
+                    drawHeight = canvas.width / aspectRatio;
+                    offsetX = 0;
+                    offsetY = (canvas.height - drawHeight) / 2;
+                }
+
+                ctx.globalAlpha = opacity;
+                ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+                ctx.globalAlpha = 1;
+            }
+        }
 
         // Animation logic
         const isWrongWay = frameFolder === 'wrongway_frames';
@@ -137,29 +189,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 opacity = 1; // Keep visible
             }
 
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            if (frames[frameIndex]) {
-                const img = frames[frameIndex];
-                const aspectRatio = 1280 / 720;
-                const canvasAspect = canvas.width / canvas.height;
-                let drawWidth, drawHeight, offsetX, offsetY;
-
-                if (canvasAspect > aspectRatio) {
-                    drawWidth = canvas.height * aspectRatio;
-                    drawHeight = canvas.height;
-                    offsetX = (canvas.width - drawWidth) / 2;
-                    offsetY = 0;
-                } else {
-                    drawWidth = canvas.width;
-                    drawHeight = canvas.width / aspectRatio;
-                    offsetX = 0;
-                    offsetY = (canvas.height - drawHeight) / 2;
-                }
-
-                ctx.globalAlpha = opacity;
-                ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
-                ctx.globalAlpha = 1;
-            }
+            // Draw frame
+            drawFrame(frames[frameIndex], opacity);
 
             requestAnimationFrame(updateAnimation);
         }
@@ -169,8 +200,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const videoObserver = new IntersectionObserver(entries => {
                 if (!entries[0].isIntersecting) {
                     canvas.classList.add('visible');
+                    drawFrame(frames[0], 1); // Draw first frame when video is out of view
                 } else {
                     canvas.classList.remove('visible');
+                    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas during video
                 }
             }, { threshold: 0 });
             videoObserver.observe(videoSection);
