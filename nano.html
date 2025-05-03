@@ -35,35 +35,25 @@
         </nav>
     </header>
     <main class="scroll-container">
-        <section class="page default-background">
-            <div class="content">
+        <div class="content-blocks">
+            <div class="content-block">
                 <h1>Nanoelectronics Ultrasonic NDT</h1>
                 <p>Since May 2024 at ASU’s Celano Lab, I’ve pioneered a novel scaling workflow for ultrasonic non-destructive testing (NDT) to detect defects in 10-micron pitch Cu-Cu hybrid bonds for advanced chiplet packaging. As a mechanical engineering student, I developed a simulation-based approach using CIVA NDT and SolidWorks, scaling microscale models to macroscale for faster, more accurate analysis. This project reflects my fascination with nanoelectronics, bridging the gap between theoretical physics and practical semiconductor reliability, crucial for next-generation electronics.</p>
             </div>
-        </section>
-        <section class="page default-background cad-showcase">
-            <div class="content">
+            <div class="content-block">
                 <h2>NDT Showcase</h2>
                 <p>The workflow scales model dimensions by a factor of k=1000 (10 μm to 10 mm) and reduces frequency from 1 GHz to 1 MHz, preserving the d/λ ratio (~7.14) for equivalent wave physics. I modeled this in SolidWorks, visualizing defect detection in chiplets, and simulated wave propagation (∂²u/∂t² = c²∇²u) in CIVA, achieving 10-micron resolution. My approach bypasses CIVA’s microscale viewport limitations, enabling rapid iteration for semiconductor quality assurance.</p>
             </div>
-        </section>
-        <section class="page default-background">
-            <div class="content">
+            <div class="content-block">
                 <p>Simulating ultrasonic waves at microscales posed significant challenges due to software resolution constraints and material nonlinearities (σ = Eε + βε²). I addressed this by deriving scaling equations, ensuring reflection coefficients (R = (Z₂ - Z₁)/(Z₂ + Z₁)) remained consistent across scales. Material properties (e.g., ρ=8700 kg/m³ for Cu, c=1400 m/s in water) were validated against literature. I also tackled transducer scaling, adjusting focal lengths to maintain beam accuracy, a critical step for detecting voids and delaminations in hybrid bonds.</p>
             </div>
-        </section>
-        <section class="page default-background">
-            <div class="content">
+            <div class="content-block">
                 <p>My simulations in CIVA confirmed defect visibility at scaled dimensions, with preliminary results showing a strong correlation to microscale models. I used SolidWorks to iterate transducer designs, reducing boundary effects through geometric optimization. Ongoing validation involves comparing scaled results to physical scanning acoustic microscopy (SAM) data, addressing nonlinearities via higher-order wave equations. This iterative process, driven by my independent research, positions the workflow as a scalable tool for industry adoption.</p>
             </div>
-        </section>
-        <section class="page default-background">
-            <div class="content">
+            <div class="content-block">
                 <p>This project showcases my expertise in simulation, materials science, and innovative problem-solving, directly applicable to semiconductor manufacturing. By accelerating defect detection, it supports the reliability of 3D packaging, critical for AI and high-performance computing. The workflow’s scalability extends to other NDT tools and pitches (e.g., 5 μm), with potential to enhance QA efficiency. Future work includes physical prototyping and collaboration with chipmakers like TSMC, a tentative goal to advance nanoelectronics reliability.</p>
             </div>
-        </section>
-        <section class="page default-background references">
-            <div class="content">
+            <div class="content-block">
                 <h2>References</h2>
                 <ul class="custom-list">
                     <li>CIVA NDT: <a href="https://www.extende.com/civa" target="_blank">Simulation Software</a></li>
@@ -76,7 +66,7 @@
                     <li>SPIE: <a href="https://spie.org/photonics-west" target="_blank">Photonics and NDT</a></li>
                 </ul>
             </div>
-        </section>
+        </div>
     </main>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'939c1257dd53b03b',t:'MTc0NjIzNjY1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
