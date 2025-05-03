@@ -52,6 +52,8 @@ body {
     z-index: 60;
     min-height: 100vh;
     box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
 }
 
 .content-block.visible {
@@ -87,6 +89,9 @@ body {
     left: 40px;
     max-width: 70%;
     z-index: 60;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
 }
 
 .menu-bar {
@@ -322,8 +327,8 @@ a:hover {
 }
 
 .scroll-arrow svg {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     fill: #00aaff;
     animation: bounce 1.5s infinite;
 }
@@ -380,6 +385,11 @@ a:hover {
         max-width: 85%;
     }
 
+    .video-background .content {
+        margin: 0 0 50px 20px;
+        max-width: 85%;
+    }
+
     .about-contact-wrapper {
         flex-direction: column;
     }
@@ -400,7 +410,7 @@ a:hover {
     }
 
     .scroll-arrow svg {
-        width: 20px;
-        height: 20px;
+        width: 16px;
+        height: 16px;
     }
 }
