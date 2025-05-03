@@ -40,7 +40,8 @@ body {
 }
 
 .content-block {
-    position: relative;
+    position: sticky;
+    top: 160px;
     text-align: left;
     padding: 40px;
     max-width: 70%;
@@ -49,6 +50,8 @@ body {
     transform: translateY(20px);
     transition: opacity 0.5s ease, transform 0.5s ease;
     z-index: 60;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 .content-block.visible {
