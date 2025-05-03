@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Sticky content block visibility
+    // Sticky content block and scroll arrow visibility
     function updateContentVisibility() {
         const scrollY = window.scrollY;
         const viewportHeight = window.innerHeight;
@@ -64,7 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Scroll arrow visibility
         if (scrollArrow) {
             const pageBottom = document.body.scrollHeight - viewportHeight;
-            if (isLastBlock || scrollY >= pageBottom) {
+            const lastBlockTop = contentBlocks[contentBlocks.length - 1]?.getBoundingClientRect().top + scrollY;
+            if (isLastBlock && scrollY >= lastBlockTop - viewportHeight / 2 || scrollY >= pageBottom) {
                 scrollArrow.classList.remove('visible');
             } else {
                 scrollArrow.classList.add('visible');
@@ -72,9 +73,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Initial visibility (first block only)
+    // Initial visibility (first block and arrow)
     if (contentBlocks.length > 0) {
         contentBlocks[0].classList.add('visible');
+    }
+    if (scrollArrow) {
+        scrollArrow.classList.add('visible');
     }
 
     // Update visibility on scroll
@@ -137,15 +141,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 let drawWidth, drawHeight, offsetX, offsetY;
 
                 if (canvasAspect > aspectRatio) {
-                    drawWidth = canvas.height * aspectRatio;
                     drawHeight = canvas.height;
-                    offsetX = (canvas.width - drawWidth) / 2;
+                    drawWidth = drawHeight * aspectRatio;
+                    offsetX = canvas.width - drawWidth;
                     offsetY = 0;
                 } else {
                     drawWidth = canvas.width;
-                    drawHeight = canvas.width / aspectRatio;
+                    drawHeight = drawWidth / aspectRatio;
                     offsetX = 0;
-                    offsetY = (canvas.height - drawHeight) / 2;
+                    offsetY = canvas.height - drawHeight;
                 }
 
                 ctx.globalAlpha = opacity;
