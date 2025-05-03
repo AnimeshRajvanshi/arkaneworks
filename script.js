@@ -25,43 +25,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Content block fade-in/out with sequential visibility
-    const blockObserver = new IntersectionObserver(entries => {
-        const scrollY = window.scrollY;
-        const viewportHeight = window.innerHeight;
-        let activeBlock = null;
-
-        contentBlocks.forEach(block => {
-            const blockTop = block.getBoundingClientRect().top + scrollY;
-            const blockHeight = block.offsetHeight;
-            const isStatic = block.classList.contains('content-block--static');
-            const threshold = isStatic ? 0.1 : 0.6;
-            const progress = isStatic ? 1 : Math.min(Math.max((scrollY - blockTop + 160) / (blockHeight * threshold), 0), 1);
-
-            if (progress > 0 && progress < 1 && (!activeBlock || blockTop < activeBlock.getBoundingClientRect().top + scrollY)) {
-                activeBlock = block;
-            }
-        });
-
-        contentBlocks.forEach(block => {
-            const isStatic = block.classList.contains('content-block--static');
-            const blockTop = block.getBoundingClientRect().top + scrollY;
-            const blockHeight = block.offsetHeight;
-            const progress = isStatic ? 1 : Math.min(Math.max((scrollY - blockTop + 160) / (blockHeight * 0.6), 0), 1);
-
-            if (block === activeBlock) {
-                block.classList.add('visible');
-                block.style.opacity = isStatic ? 1 : Math.sin(progress * Math.PI * 0.8);
-                block.style.transform = isStatic ? 'translateY(0)' : `translateY(${(1 - progress) * 20}px)`;
+    // Content block fade-in/out
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
             } else {
-                block.classList.remove('visible');
-                block.style.opacity = 0;
-                block.style.transform = isStatic ? 'translateY(0)' : 'translateY(20px)';
+                entry.target.classList.remove('visible');
             }
         });
-    }, { threshold: [0.1, 0.6] });
+    }, { threshold: 0.1 });
 
-    contentBlocks.forEach(block => blockObserver.observe(block));
+    contentBlocks.forEach(block => observer.observe(block));
 
     // Animation sequence
     if (canvas && ctx) {
@@ -74,11 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
         loadingIndicator.textContent = 'Loading animation...';
         document.body.appendChild(loadingIndicator);
 
-        // Preload frames with corrected path
+        // Preload frames
         for (let i = 1; i <= frameCount; i++) {
             const img = new Image();
             const paddedIndex = i.toString().padStart(3, '0');
-            img.src = `/arkaneworks/assets/${frameFolder}/frame_${paddedIndex}.png`;
+            img.src = `/assets/${frameFolder}/frame_${paddedIndex}.png`;
             img.onload = () => {
                 loadedFrames++;
                 if (loadedFrames === frameCount) {
@@ -87,11 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             };
             img.onerror = () => {
-                console.error(`Failed to load frame: /arkaneworks/assets/${frameFolder}/frame_${paddedIndex}.png`);
-                loadedFrames++;
-                if (loadedFrames === frameCount) {
-                    loadingIndicator.textContent = 'Some frames failed to load';
-                }
+                loadingIndicator.textContent = 'Failed to load animation';
             };
             frames.push(img);
         }
@@ -131,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const scrollProgress = Math.min(Math.max((scrollY - animationStart) / scrollRange, 0), 1);
             const frameIndex = Math.floor(scrollProgress * (frameCount - 1));
-            const opacity = Math.sin(scrollProgress * Math.PI * 0.5);
+            const opacity = Math.sin(scrollProgress * Math.PI);
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             if (frames[frameIndex]) {
