@@ -9,6 +9,7 @@
     <script src="script.js" defer></script>
 </head>
 <body>
+    <canvas class="animation-canvas" data-frame-folder="cubesat_frames"></canvas>
     <header class="menu-bar">
         <a href="index.html" class="website-name">ARKANE WORKS</a>
         <button class="menu-button" aria-label="Toggle menu">
@@ -41,10 +42,6 @@
             </div>
             <div class="content-block">
                 <h2>Satellite Showcase</h2>
-                <div class="showcase-container">
-                    <img src="cubesat.png" alt="Gorgon CubeSat Design" class="showcase-image">
-                    <p class="showcase-caption">[Placeholder: Add additional renders or videos here]</p>
-                </div>
                 <p>The CubeSat features a SWIR hyperspectral imager (1000-1700 nm, 50 m GSD, 50 km swath) for detecting macroplastics in a 500 km sun-synchronous orbit. I collaborated on specifying components like the Blue Canyon XACT-50 ADCS and DHV Technology solar panels (25 W), using SolidWorks for conceptual design. My key innovation was integrating a modified Starlink terminal (Ku-band) for space-to-space data relay, aiming to reduce latency and infrastructure costs. This required extensive research into orbital dynamics and subsystem compatibility, ensuring a cohesive 12U platform.</p>
             </div>
             <div class="content-block">
@@ -64,7 +61,7 @@
                     <li>Starlink: <a href="https://en.wikipedia.org/wiki/Starlink" target="_blank">Communication System</a></li>
                     <li>Unibap: <a href="https://unibap.com/products/ix5-100" target="_blank">iX5-100 OBC</a></li>
                     <li>GOMspace: <a href="https://gomspace.com/shop/subsystems/power-systems/nanopower-bpx.aspx" target="_blank">NanoPower BPX</a></li>
-                    <li>NASA: <a href="https://www.nasa.gov/directorates/spacetech/small_spacecraft/cubesat_launch_initiative" target="_blank">CubeSat Launch Initiative</a></li>
+                    <li>NASA: <a href="https://www.nasa.gov/directors/spacetech/small_spacecraft/cubesat_launch_initiative" target="_blank">CubeSat Launch Initiative</a></li>
                     <li>IEEE: <a href="https://ieeexplore.ieee.org/document/8735124" target="_blank">Space Systems Engineering</a></li>
                     <li>ScienceDirect: <a href="https://www.sciencedirect.com/science/article/pii/S2352484719300999" target="_blank">CubeSat Design</a></li>
                     <li>ASU Sun Devil Satellite Lab: <a href="https://sds.asu.edu/" target="_blank">Satellite Research</a></li>
@@ -73,5 +70,6 @@
             </div>
         </div>
     </main>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'939bfd2f5af27221',t:'MTc0NjIzNTc4My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
