@@ -25,18 +25,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Content block fade-in/out
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            } else {
-                entry.target.classList.remove('visible');
-            }
-        });
-    }, { threshold: 0.1 });
+    // Sticky content block fade-in/out
+    contentBlocks.forEach((block, index) => {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                const scrollY = window.scrollY;
+                const blockTop = block.getBoundingClientRect().top + scrollY;
+                const blockHeight = block.offsetHeight;
+                const viewportHeight = window.innerHeight;
+                const progress = Math.min(Math.max((scrollY - blockTop + 160) / (blockHeight * 0.8), 0), 1);
 
-    contentBlocks.forEach(block => observer.observe(block));
+                if (entry.isIntersecting && progress < 1) {
+                    block.classList.add('visible');
+                    block.style.opacity = Math.sin(progress * Math.PI * 0.8);
+                } else {
+                    block.classList.remove('visible');
+                    block.style.opacity = 0;
+                }
+            });
+        }, { threshold: 0.8 });
+        observer.observe(block);
+    });
 
     // Animation sequence
     if (canvas && ctx) {
@@ -102,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const scrollProgress = Math.min(Math.max((scrollY - animationStart) / scrollRange, 0), 1);
             const frameIndex = Math.floor(scrollProgress * (frameCount - 1));
-            const opacity = Math.sin(scrollProgress * Math.PI);
+            const opacity = Math.sin(scrollProgress * Math.PI * 0.5);
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             if (frames[frameIndex]) {
