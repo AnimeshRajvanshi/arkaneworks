@@ -25,18 +25,45 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Content block fade-in/out
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+    // Sticky content block visibility
+    function updateContentVisibility() {
+        const scrollY = window.scrollY;
+        const viewportHeight = window.innerHeight;
+        let currentBlock = null;
+
+        contentBlocks.forEach((block, index) => {
+            const blockStart = index * viewportHeight;
+            const blockEnd = (index + 1) * viewportHeight;
+            const isWrongWay = document.querySelector('.video-background') !== null;
+            const videoSectionHeight = isWrongWay ? viewportHeight : 0;
+
+            // Adjust for wrongway.html video section
+            const adjustedStart = blockStart + videoSectionHeight;
+            const adjustedEnd = blockEnd + videoSectionHeight;
+
+            if (scrollY >= adjustedStart && scrollY < adjustedEnd) {
+                currentBlock = block;
+                block.classList.add('visible');
             } else {
-                entry.target.classList.remove('visible');
+                block.classList.remove('visible');
             }
         });
-    }, { threshold: 0.1 });
 
-    contentBlocks.forEach(block => observer.observe(block));
+        // Ensure only one block is visible at a time
+        contentBlocks.forEach(block => {
+            if (block !== currentBlock) {
+                block.classList.remove('visible');
+            }
+        });
+    }
+
+    // Initial visibility (first block only)
+    if (contentBlocks.length > 0) {
+        contentBlocks[0].classList.add('visible');
+    }
+
+    // Update visibility on scroll
+    window.addEventListener('scroll', updateContentVisibility);
 
     // Animation sequence
     if (canvas && ctx) {
