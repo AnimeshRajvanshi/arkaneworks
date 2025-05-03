@@ -25,27 +25,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Sticky content block fade-in/out
-    contentBlocks.forEach((block, index) => {
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                const scrollY = window.scrollY;
-                const blockTop = block.getBoundingClientRect().top + scrollY;
-                const blockHeight = block.offsetHeight;
-                const viewportHeight = window.innerHeight;
-                const progress = Math.min(Math.max((scrollY - blockTop + 160) / (blockHeight * 0.8), 0), 1);
+    // Content block fade-in/out with sequential visibility
+    const blockObserver = new IntersectionObserver(entries => {
+        const scrollY = window.scrollY;
+        const viewportHeight = window.innerHeight;
+        let activeBlock = null;
 
-                if (entry.isIntersecting && progress < 1) {
-                    block.classList.add('visible');
-                    block.style.opacity = Math.sin(progress * Math.PI * 0.8);
-                } else {
-                    block.classList.remove('visible');
-                    block.style.opacity = 0;
-                }
-            });
-        }, { threshold: 0.8 });
-        observer.observe(block);
-    });
+        contentBlocks.forEach(block => {
+            const blockTop = block.getBoundingClientRect().top + scrollY;
+            const blockHeight = block.offsetHeight;
+            const isStatic = block.classList.contains('content-block--static');
+            const threshold = isStatic ? 0.1 : 0.6;
+            const progress = isStatic ? 1 : Math.min(Math.max((scrollY - blockTop + 160) / (blockHeight * threshold), 0), 1);
+
+            if (progress > 0 && progress < 1 && (!activeBlock || blockTop < activeBlock.getBoundingClientRect().top + scrollY)) {
+                activeBlock = block;
+            }
+        });
+
+        contentBlocks.forEach(block => {
+            const isStatic = block.classList.contains('content-block--static');
+            const blockTop = block.getBoundingClientRect().top + scrollY;
+            const blockHeight = block.offsetHeight;
+            const progress = isStatic ? 1 : Math.min(Math.max((scrollY - blockTop + 160) / (blockHeight * 0.6), 0), 1);
+
+            if (block === activeBlock) {
+                block.classList.add('visible');
+                block.style.opacity = isStatic ? 1 : Math.sin(progress * Math.PI * 0.8);
+                block.style.transform = isStatic ? 'translateY(0)' : `translateY(${(1 - progress) * 20}px)`;
+            } else {
+                block.classList.remove('visible');
+                block.style.opacity = 0;
+                block.style.transform = isStatic ? 'translateY(0)' : 'translateY(20px)';
+            }
+        });
+    }, { threshold: [0.1, 0.6] });
+
+    contentBlocks.forEach(block => blockObserver.observe(block));
 
     // Animation sequence
     if (canvas && ctx) {
@@ -58,11 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
         loadingIndicator.textContent = 'Loading animation...';
         document.body.appendChild(loadingIndicator);
 
-        // Preload frames
+        // Preload frames with corrected path
         for (let i = 1; i <= frameCount; i++) {
             const img = new Image();
             const paddedIndex = i.toString().padStart(3, '0');
-            img.src = `/assets/${frameFolder}/frame_${paddedIndex}.png`;
+            img.src = `/arkaneworks/assets/${frameFolder}/frame_${paddedIndex}.png`;
             img.onload = () => {
                 loadedFrames++;
                 if (loadedFrames === frameCount) {
@@ -71,7 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             };
             img.onerror = () => {
-                loadingIndicator.textContent = 'Failed to load animation';
+                console.error(`Failed to load frame: /arkaneworks/assets/${frameFolder}/frame_${paddedIndex}.png`);
+                loadedFrames++;
+                if (loadedFrames === frameCount) {
+                    loadingIndicator.textContent = 'Some frames failed to load';
+                }
             };
             frames.push(img);
         }
