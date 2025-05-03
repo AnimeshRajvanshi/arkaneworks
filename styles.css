@@ -1,5 +1,5 @@
 body {
-    background: url('/arkaneworks/assets/synapse1.jpg') no-repeat center center fixed;
+    background: url('/assets/synapse1.jpg') no-repeat center center fixed;
     background-size: cover;
     background-color: #1a1a1a;
     z-index: 0;
@@ -44,18 +44,11 @@ body {
     text-align: left;
     padding: 40px;
     max-width: 70%;
-    margin: 0 0 10vh 40px;
-    min-height: 60vh;
+    margin: 0 0 100px 40px;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    z-index: 70;
-}
-
-.content-block--static {
-    position: relative;
-    min-height: auto;
-    margin-bottom: 100px;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: 60;
 }
 
 .content-block.visible {
@@ -293,7 +286,7 @@ a:hover {
     z-index: 50;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.5s ease;
 }
 
 .animation-canvas.visible {
@@ -356,12 +349,8 @@ a:hover {
     }
 
     .content-block {
-        margin: 0 0 10vh 20px;
+        margin: 0 0 50px 20px;
         max-width: 85%;
-    }
-
-    .content-block--static {
-        margin-bottom: 50px;
     }
 
     .about-contact-wrapper {
