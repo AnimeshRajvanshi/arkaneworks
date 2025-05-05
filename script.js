@@ -31,12 +31,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Debounce function to limit scroll event frequency
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
     // Sticky content block and scroll arrow visibility
     function updateContentVisibility() {
-        // Skip scroll-related logic for index.html and projects.html
         const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        
+        // Skip scroll-related logic for index.html, projects.html, and handle about.html specially
         if (currentPage === 'index.html' || currentPage === 'projects.html') {
             contentBlocks.forEach(block => block.classList.add('visible')); // Ensure content is visible
+            return;
+        }
+
+        if (currentPage === 'about.html') {
+            contentBlocks.forEach(block => block.classList.add('visible')); // Keep certifications block visible
             return;
         }
 
@@ -51,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const isWrongWay = document.querySelector('.video-background') !== null;
             const videoSectionHeight = isWrongWay ? viewportHeight : 0;
 
-            // Adjust for wrongway.html video section or about.html
+            // Adjust for wrongway.html video section
             const adjustedStart = blockStart + videoSectionHeight;
             const adjustedEnd = blockEnd + videoSectionHeight;
 
@@ -93,10 +112,15 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollArrow.classList.add('visible');
     }
 
-    // Update visibility on scroll
-    window.addEventListener('scroll', updateContentVisibility);
+    // Update visibility on scroll with debounce
+    window.addEventListener('scroll', debounce(updateContentVisibility, 16));
 
-    // Animation sequence
+    // Animation sequence (skip for about.html, index.html, projects.html)
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    if (currentPage === 'about.html' || currentPage === 'index.html' || currentPage === 'projects.html') {
+        return; // Skip canvas logic
+    }
+
     if (canvas && ctx) {
         const frameFolder = canvas.dataset.frameFolder;
         const frameCount = 120;
