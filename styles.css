@@ -17,6 +17,18 @@ body:where([href="index.html"], [href="projects.html"]) {
     overflow: hidden;
 }
 
+body[href="about.html"] {
+    height: auto;
+    overflow-y: auto;
+}
+
+body[href="about.html"] .content-block {
+    min-height: auto;
+    position: sticky;
+    top: 160px;
+    bottom: 20px;
+}
+
 ::-webkit-scrollbar {
     width: 8px;
 }
