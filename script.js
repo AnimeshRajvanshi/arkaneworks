@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const isWrongWay = document.querySelector('.video-background') !== null;
             const videoSectionHeight = isWrongWay ? viewportHeight : 0;
 
-            // Adjust for wrongway.html video section
+            // Adjust for wrongway.html video section or about.html
             const adjustedStart = blockStart + videoSectionHeight;
             const adjustedEnd = blockEnd + videoSectionHeight;
 
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Initial visibility (first block and arrow)
+    // Initial visibility
     if (contentBlocks.length > 0) {
         contentBlocks[0].classList.add('visible');
     }
