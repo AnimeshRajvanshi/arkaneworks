@@ -252,6 +252,15 @@ a:hover {
     font-size: 18px;
 }
 
+.resume-link {
+    color: #00aaff;
+    text-decoration: none;
+}
+
+.resume-link:hover {
+    text-decoration: underline;
+}
+
 .cta-button {
     display: inline-block;
     padding: 10px 20px;
@@ -269,7 +278,26 @@ a:hover {
 .about-contact-wrapper {
     display: flex;
     justify-content: space-between;
+    padding: 40px;
     margin-bottom: 100px;
+}
+
+.about-block {
+    max-width: 45%;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.contact-block {
+    max-width: 45%;
+    padding: 40px;
+    box-sizing: border-box;
+    text-align: right;
+}
+
+.contact-block .text-container {
+    display: inline-block;
+    text-align: left;
 }
 
 .content-block--half {
@@ -290,7 +318,7 @@ a:hover {
     width: 200px;
     height: 200px;
     margin-top: 20px;
-    align-self: flex-end;
+    align-self: center;
 }
 
 .animation-canvas {
@@ -402,6 +430,18 @@ a:hover {
 
     .about-contact-wrapper {
         flex-direction: column;
+        padding: 20px;
+    }
+
+    .about-block {
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .contact-block {
+        max-width: 100%;
+        padding: 20px;
+        text-align: left;
     }
 
     .content-block--half {
