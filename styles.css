@@ -350,7 +350,7 @@ a:hover {
 .profile-image {
     position: static;
     width: 200px;
-    height: 200px;
+    aspect-ratio: 2959 / 3699;
     margin-top: 20px;
     align-self: flex-end;
 }
@@ -503,7 +503,7 @@ a:hover {
     .profile-image {
         position: static;
         width: 120px;
-        height: 120px;
+        aspect-ratio: 2959 / 3699;
         align-self: flex-end;
         margin-top: 20px;
     }
