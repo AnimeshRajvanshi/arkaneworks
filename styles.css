@@ -6,13 +6,15 @@ body {
     margin: 0;
     padding: 0;
     height: auto;
+    overflow-y: visible;
     color: white;
     font-family: 'Barlow', sans-serif;
     font-weight: 300;
 }
 
-body.no-scroll {
-    overflow-y: hidden;
+body:where([href="index.html"], [href="projects.html"]) {
+    height: 100vh;
+    overflow: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -60,20 +62,6 @@ body.no-scroll {
 .content-block.visible {
     opacity: 1;
     transform: translateY(0);
-}
-
-.content-block.home-content,
-.content-block.projects-content {
-    position: static;
-    max-width: 70%;
-    margin: 0 auto;
-    min-height: calc(100vh - 60px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    opacity: 1;
-    transform: none;
-    padding: 20px;
 }
 
 .text-container {
@@ -468,13 +456,6 @@ a:hover {
     .content-block {
         margin: 0 0 50px 20px;
         max-width: 85%;
-    }
-
-    .content-block.home-content,
-    .content-block.projects-content {
-        max-width: 85%;
-        min-height: calc(100vh - 60px);
-        padding: 20px;
     }
 
     .video-background .content {
