@@ -183,11 +183,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const scrollRange = animationEnd - animationStart;
-            if (scrollRange <= 0) return;
+            if (scrollRange <= 0) {
+                // Ensure first frame is visible on load for non-video pages
+                if (!isWrongWay && frames[0]) {
+                    drawFrame(frames[0], 1);
+                    canvas.classList.add('visible');
+                }
+                return;
+            }
 
             const scrollProgress = Math.min(Math.max((scrollY - animationStart) / scrollRange, 0), 1);
             let frameIndex = Math.floor(scrollProgress * (frameCount - 1));
-            let opacity = scrollProgress > 0 ? 1 : 0;
+            let opacity = isWrongWay ? (scrollProgress > 0 ? 1 : 0) : 1;
 
             // Persist last frame after animation ends
             if (scrollY >= animationEnd) {
@@ -213,6 +220,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }, { threshold: 0 });
             videoObserver.observe(videoSection);
+        } else {
+            // Ensure canvas is visible on load for non-video pages
+            if (frames[0]) {
+                drawFrame(frames[0], 1);
+                canvas.classList.add('visible');
+            }
         }
 
         updateAnimation();
