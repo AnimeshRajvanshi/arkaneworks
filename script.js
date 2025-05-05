@@ -92,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let loadedFrames = 0;
         const loadingIndicator = document.createElement('div');
         loadingIndicator.className = 'loading-indicator';
-        loadingIndicator.textContent = 'Loading animation...';
         document.body.appendChild(loadingIndicator);
 
         // Resize canvas to viewport
@@ -113,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
         firstFrame.onerror = () => {
-            loadingIndicator.textContent = 'Failed to load animation';
+            loadingIndicator.innerHTML = '<span>Failed to load animation</span>';
         };
         frames[0] = firstFrame;
 
@@ -129,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             };
             img.onerror = () => {
-                loadingIndicator.textContent = 'Failed to load animation';
+                loadingIndicator.innerHTML = '<span>Failed to load animation</span>';
             };
             frames[i - 1] = img;
         }
