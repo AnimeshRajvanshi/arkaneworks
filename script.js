@@ -7,6 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const ctx = canvas ? canvas.getContext('2d') : null;
     const scrollArrow = document.querySelector('.scroll-arrow');
 
+    // Debug: Log if scrollArrow is found
+    if (!scrollArrow) {
+        console.warn('Scroll arrow element not found. Ensure <div class="scroll-arrow"> exists in HTML.');
+    }
+
     // Mobile menu toggle
     if (menuButton && menuLinks) {
         menuButton.addEventListener('click', () => {
@@ -65,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (scrollArrow) {
             const pageBottom = document.body.scrollHeight - viewportHeight;
             const lastBlockTop = contentBlocks[contentBlocks.length - 1]?.getBoundingClientRect().top + scrollY;
-            if (isLastBlock && scrollY >= lastBlockTop - viewportHeight / 2 || scrollY >= pageBottom) {
+            if (isLastBlock && lastBlockTop && scrollY >= lastBlockTop - viewportHeight / 2 || scrollY >= pageBottom) {
                 scrollArrow.classList.remove('visible');
             } else {
                 scrollArrow.classList.add('visible');
