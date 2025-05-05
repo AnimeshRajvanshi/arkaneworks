@@ -33,6 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Sticky content block and scroll arrow visibility
     function updateContentVisibility() {
+        // Skip scroll-related logic for index.html and projects.html
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        if (currentPage === 'index.html' || currentPage === 'projects.html') {
+            contentBlocks.forEach(block => block.classList.add('visible')); // Ensure content is visible
+            return;
+        }
+
         const scrollY = window.scrollY;
         const viewportHeight = window.innerHeight;
         let currentBlock = null;
