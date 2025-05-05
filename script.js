@@ -64,10 +64,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Scroll arrow visibility
         if (scrollArrow) {
             const pageBottom = document.body.scrollHeight - viewportHeight;
-            const lastBlockTop = contentBlocks[contentBlocks.length - 1]?.getBoundingClientRect().top + scrollY;
-            if (isLastBlock && scrollY >= lastBlockTop - viewportHeight / 2 || scrollY >= pageBottom) {
+            const lastBlockTop = contentBlocks.length > 0 ? contentBlocks[contentBlocks.length - 1].getBoundingClientRect().top + scrollY : pageBottom;
+            const isPageBottom = scrollY >= pageBottom - 10; // Small buffer for rounding
+            const isLastBlockCentered = contentBlocks.length > 0 && isLastBlock && scrollY >= lastBlockTop - viewportHeight / 2;
+
+            if (isLastBlockCentered || isPageBottom) {
                 scrollArrow.classList.remove('visible');
-            } else {
+            } else if (document.body.scrollHeight > viewportHeight) {
                 scrollArrow.classList.add('visible');
             }
         }
@@ -77,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (contentBlocks.length > 0) {
         contentBlocks[0].classList.add('visible');
     }
-    if (scrollArrow) {
+    if (scrollArrow && document.body.scrollHeight > window.innerHeight) {
         scrollArrow.classList.add('visible');
     }
 
