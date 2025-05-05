@@ -370,6 +370,33 @@ a:hover {
     display: none;
 }
 
+.scroll-arrow {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 150;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.scroll-arrow.visible {
+    opacity: 1;
+}
+
+.scroll-arrow svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: #00aaff;
+    stroke-width: 2;
+    animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
