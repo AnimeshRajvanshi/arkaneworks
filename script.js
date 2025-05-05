@@ -47,20 +47,29 @@ document.addEventListener('DOMContentLoaded', () => {
     // Sticky content block and scroll arrow visibility
     function updateContentVisibility() {
         const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const scrollY = window.scrollY;
+        const viewportHeight = window.innerHeight;
+        const bodyScrollHeight = document.body.scrollHeight;
         
-        // Skip scroll-related logic for index.html, projects.html, and handle about.html specially
+        // Skip scroll-related logic for index.html, projects.html
         if (currentPage === 'index.html' || currentPage === 'projects.html') {
             contentBlocks.forEach(block => block.classList.add('visible')); // Ensure content is visible
             return;
         }
 
+        // Handle about.html: keep certifications visible, hide arrow at page bottom
         if (currentPage === 'about.html') {
             contentBlocks.forEach(block => block.classList.add('visible')); // Keep certifications block visible
+            if (scrollArrow) {
+                if (scrollY >= bodyScrollHeight - viewportHeight) {
+                    scrollArrow.classList.remove('visible');
+                } else {
+                    scrollArrow.classList.add('visible');
+                }
+            }
             return;
         }
 
-        const scrollY = window.scrollY;
-        const viewportHeight = window.innerHeight;
         let currentBlock = null;
         let isLastBlock = false;
 
@@ -92,9 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Scroll arrow visibility
+        // Scroll arrow visibility for other pages
         if (scrollArrow) {
-            const pageBottom = document.body.scrollHeight - viewportHeight;
+            const pageBottom = bodyScrollHeight - viewportHeight;
             const lastBlockTop = contentBlocks[contentBlocks.length - 1]?.getBoundingClientRect().top + scrollY;
             if (isLastBlock && lastBlockTop && scrollY >= lastBlockTop - viewportHeight / 2 || scrollY >= pageBottom) {
                 scrollArrow.classList.remove('visible');
