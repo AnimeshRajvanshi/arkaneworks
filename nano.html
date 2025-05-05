@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heat Resilience Challenge - ARKANE WORKS</title>
+    <title>Nanoelectronics Ultrasonic NDT - ARKANE WORKS</title>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
 <body>
+    <canvas class="animation-canvas" data-frame-folder="nano_frames"></canvas>
     <header class="menu-bar">
         <a href="index.html" class="website-name">ARKANE WORKS</a>
         <button class="menu-button" aria-label="Toggle menu">
@@ -37,46 +38,43 @@
         <div class="content-blocks">
             <div class="content-block">
                 <div class="text-container">
-                    <h1>Heat Resilience Challenge</h1>
-                    <p>The Heat Resilience Challenge, undertaken in 2022 through ASU’s EPICS program, aimed to mitigate urban heat island effects for Arizona’s mobile home residents, a community vulnerable to extreme temperatures. As a mechanical engineering student, I collaborated with a team to evaluate cooling solutions, later independently designing a PC-inspired ventilation system using SolidWorks and ANSYS. This project reflects my commitment to sustainable engineering, blending thermal dynamics and community-focused design to improve livability in harsh climates.</p>
+                    <h1>Nanoelectronics Ultrasonic NDT</h1>
+                    <p>Since May 2024 at ASU’s Celano Lab, I’ve pioneered a novel scaling workflow for ultrasonic non-destructive testing (NDT) to detect defects in 10-micron pitch Cu-Cu hybrid bonds for advanced chiplet packaging. As a mechanical engineering student, I developed a simulation-based approach using CIVA NDT and SolidWorks, scaling microscale models to macroscale for faster, more accurate analysis. This project reflects my fascination with nanoelectronics, bridging the gap between theoretical physics and practical semiconductor reliability, crucial for next-generation electronics.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <h2>Ventilation Showcase</h2>
-                    <div class="showcase-container">
-                        <img src="heat.png" alt="Heat Resilience Design" class="showcase-image">
-                        <p class="showcase-caption">[Placeholder: Add additional renders or videos here]</p>
-                    </div>
-                    <p>Our team conducted a comprehensive market analysis using the Analytic Hierarchy Process (AHP) to compare portable ACs, misters, and solar panels for cost, efficiency, and scalability. I contributed to weighting criteria (e.g., energy use, installation cost), identifying portable ACs as the most viable for short-term relief. We presented findings to community stakeholders, securing feedback that shaped my independent design phase. This collaborative effort honed my ability to balance technical and social considerations in engineering solutions.</p>
+                    <h2>NDT Showcase</h2>
+                    <p>The workflow scales model dimensions by a factor of k=1000 (10 μm to 10 mm) and reduces frequency from 1 GHz to 1 MHz, preserving the d/λ ratio (~7.14) for equivalent wave physics. I modeled this in SolidWorks, visualizing defect detection in chiplets, and simulated wave propagation (∂²u/∂t² = c²∇²u) in CIVA, achieving 10-micron resolution. My approach bypasses CIVA’s microscale viewport limitations, enabling rapid iteration for semiconductor quality assurance.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <p>Inspired by PC cooling systems, I designed a mobile home ventilation unit in SolidWorks, integrating high-efficiency PC fans (120 mm, 80 CFM) and protective flaps to enhance airflow while blocking dust. The system, modeled for a 400 sq ft home, used a continuous loop to circulate cool air, with ANSYS simulations predicting a noticeable temperature reduction. I optimized fan placement to minimize power draw (15 W), making it solar-compatible, aligning with the project’s sustainability goals and community budget constraints.</p>
+                    <p>Simulating ultrasonic waves at microscales posed significant challenges due to software resolution constraints and material nonlinearities (σ = Eε + βε²). I addressed this by deriving scaling equations, ensuring reflection coefficients (R = (Z₂ - Z₁)/(Z₂ + Z₁)) remained consistent across scales. Material properties (e.g., ρ=8700 kg/m³ for Cu, c=1400 m/s in water) were validated against literature. I also tackled transducer scaling, adjusting focal lengths to maintain beam accuracy, a critical step for detecting voids and delaminations in hybrid bonds.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <p>ANSYS fluid dynamics simulations, validated with colored smoke visualization in a scaled prototype, confirmed the cooling loop’s efficacy, achieving consistent airflow. I iterated the design to reduce turbulence, adjusting flap angles based on CFD results. The system’s low-cost materials (e.g., ABS plastic, aluminum mesh) ensured affordability, with a projected cost of $150 per unit. This phase demonstrated my proficiency in thermal engineering and simulation-driven design optimization.</p>
+                    <p>My simulations in CIVA confirmed defect visibility at scaled dimensions, with preliminary results showing a strong correlation to microscale models. I used SolidWorks to iterate transducer designs, reducing boundary effects through geometric optimization. Ongoing validation involves comparing scaled results to physical scanning acoustic microscopy (SAM) data, addressing nonlinearities via higher-order wave equations. This iterative process, driven by my independent research, positions the workflow as a scalable tool for industry adoption.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <p>The Heat Resilience Challenge showcases my ability to deliver practical, scalable solutions for environmental challenges. The ventilation system offers a low-energy alternative to traditional cooling, directly improving quality of life for mobile home residents. My skills in CAD, CFD, and stakeholder engagement position me to advance sustainable engineering. Future steps include prototyping the unit and testing in Arizona’s summer heat, a tentative goal for broader deployment in urban heat-vulnerable regions.</p>
+                    <p>This project showcases my expertise in simulation, materials science, and innovative problem-solving, directly applicable to semiconductor manufacturing. By accelerating defect detection, it supports the reliability of 3D packaging, critical for AI and high-performance computing. The workflow’s scalability extends to other NDT tools and pitches (e.g., 5 μm), with potential to enhance QA efficiency. Future work includes physical prototyping and collaboration with chipmakers like TSMC, a tentative goal to advance nanoelectronics reliability.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
                     <h2>References</h2>
                     <ul class="custom-list">
-                        <li>ANSYS: <a href="https://www.ansys.com/products/fluids" target="_blank">Fluid Dynamics Simulation</a></li>
-                        <li>SolidWorks: <a href="https://www.solidworks.com/solution/industry/sustainability" target="_blank">Sustainable Design</a></li>
-                        <li>EPA: <a href="https://www.epa.gov/heatislands" target="_blank">Urban Heat Island Effects</a></li>
-                        <li>IEEE: <a href="https://ieeexplore.ieee.org/document/8735124" target="_blank">Sustainable Engineering</a></li>
-                        <li>ScienceDirect: <a href="https://www.sciencedirect.com/science/article/pii/S2352484719300999" target="_blank">Ventilation Systems</a></li>
-                        <li>ASU EPICS: <a href="https://epics.engineering.asu.edu/" target="_blank">Engineering Projects in Community Service</a></li>
-                        <li>ASHRAE: <a href="https://www.ashrae.org/technical-resources/standards-and-guidelines" target="_blank">Ventilation Standards</a></li>
+                        <li>CIVA NDT: <a href="https://www.extende.com/civa" target="_blank">Simulation Software</a></li>
+                        <li>SolidWorks: <a href="https://www.solidworks.com/solution/industry/electronics" target="_blank">Electronics Design</a></li>
+                        <li>Biermann et al., 2020: <a href="https://www.nature.com/articles/s41598-020-62215-8" target="_blank">Hyperspectral Plastic Signatures</a></li>
+                        <li>IEEE: <a href="https://ieeexplore.ieee.org/document/8735124" target="_blank">Nanoelectronics</a></li>
+                        <li>ScienceDirect: <a href="https://www.sciencedirect.com/science/article/pii/S2352484719300999" target="_blank">Ultrasonic NDT</a></li>
+                        <li>TSMC: <a href="https://www.tsmc.com/english/dedicatedFoundry/technology/3d_ic.htm" target="_blank">3D Packaging Technology</a></li>
+                        <li>ASU Celano Lab: <a href="https://celano.engineering.asu.edu/" target="_blank">Nanoelectronics Research</a></li>
+                        <li>SPIE: <a href="https://spie.org/photonics-west" target="_blank">Photonics and NDT</a></li>
                     </ul>
                 </div>
             </div>
@@ -87,6 +85,6 @@
             <path d="M12 20V4m0 16l-6-6m6 6l6-6"/>
         </svg>
     </div>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'939bfd2fdfe0b05b',t:'MTc0NjIzNTc4My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'939c1257dd53b03b',t:'MTc0NjIzNjY1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
