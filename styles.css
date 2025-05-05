@@ -335,7 +335,7 @@ a:hover {
     width: 200px;
     height: 200px;
     margin-top: 20px;
-    align-self: right;
+    align-self: center;
 }
 
 .animation-canvas {
