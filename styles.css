@@ -315,6 +315,7 @@ a:hover {
 .contact-block .text-container {
     display: inline-block;
     text-align: left;
+    position: relative;
 }
 
 .content-block--half {
@@ -331,11 +332,12 @@ a:hover {
 }
 
 .profile-image {
-    position: static;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
     width: 200px;
     height: 200px;
-    margin-top: 20px;
-    align-self: center;
+    z-index: 65;
 }
 
 .animation-canvas {
@@ -474,14 +476,20 @@ a:hover {
         text-align: left;
     }
 
+    .contact-block .text-container {
+        position: static;
+    }
+
     .content-block--half {
         max-width: 100%;
     }
 
     .profile-image {
+        position: static;
         width: 120px;
         height: 120px;
-        align-self: center;
+        align-self: flex-end;
+        margin-top: 20px;
     }
 
     .loading-indicator {
