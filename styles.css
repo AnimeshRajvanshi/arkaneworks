@@ -315,7 +315,6 @@ a:hover {
 .contact-block .text-container {
     display: inline-block;
     text-align: left;
-    position: relative;
 }
 
 .content-block--half {
@@ -332,12 +331,11 @@ a:hover {
 }
 
 .profile-image {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
+    position: static;
     width: 200px;
     height: 200px;
-    z-index: 65;
+    margin-top: 20px;
+    align-self: flex-end;
 }
 
 .animation-canvas {
@@ -477,7 +475,7 @@ a:hover {
     }
 
     .contact-block .text-container {
-        position: static;
+        display: block;
     }
 
     .content-block--half {
