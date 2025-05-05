@@ -107,8 +107,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const firstFrame = new Image();
         firstFrame.src = `/assets/${frameFolder}/frame_001.png`;
         firstFrame.onload = () => {
-            canvas.classList.add('visible');
             drawFrame(firstFrame, 1);
+            if (!isWrongWay) {
+                canvas.classList.add('visible');
+            }
         };
         firstFrame.onerror = () => {
             loadingIndicator.textContent = 'Failed to load animation';
@@ -211,8 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }, { threshold: 0 });
             videoObserver.observe(videoSection);
-        } else {
-            canvas.classList.add('visible');
         }
 
         updateAnimation();
