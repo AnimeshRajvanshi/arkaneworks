@@ -118,7 +118,13 @@ body[href="about.html"] .content-block {
     border-radius: 4px;
     padding: 20px;
 }
-
+.project-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 4px;
+}
 .menu-bar {
     position: fixed;
     top: 0;
