@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AX-1.0: Patriot - AsterX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="menu-bar">
+        <a href="index.html" class="website-name">ASTERX</a>
+        <button class="menu-button" aria-label="Toggle menu">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </button>
+        <nav class="menu-links">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="projects.html">Projects</a>
+                    <ul class="dropdown-content">
+                        <li><a href="lunar.html">Lunar Power Grid</a></li>
+                        <li><a href="cubesat.html">Gorgon CubeSat</a></li>
+                        <li><a href="nano.html">Nanoelectronics Ultrasonic NDT</a></li>
+                        <li><a href="heat.html">Heat Resilience Challenge</a></li>
+                        <li><a href="wrongway.html">Mechanical Wrong-Way Prevention</a></li>
+                        <li><a href="ax10.html">AX-1.0: Patriot</a></li>
+                        <li><a href="ax11.html">AX-1.1: DEMONstrator</a></li>
+                        <li><a href="slamdrone.html">SLAM Drone</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html">About Me</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="scroll-container">
+        <section class="page video-background">
+            <div class="video-container">
+                <video class="background-video" autoplay muted loop playsinline preload="auto">
+                    <source src="/assets/ax10-video.mp4" type="video/mp4">
+                    Your browser does not support the video tag. Please ensure your browser is up to date.
+                </video>
+            </div>
+            <div class="content">
+                <div class="text-container">
+                    <h1>AX-1.0: Patriot</h1>
+                    <p>This is the Level 1 kit I assembled and certified with as part of my high-powered rocketry mission under Arkane Works. As an Amateur Rocket & Payload Engineer with the Tripoli Rocketry Association, I assembled the LOC Patriot rocket (4" diameter, 40" length) for Level 1 certification, demonstrating skills in epoxy bonding, through-the-wall fins, rail buttons, and motor retainers.</p>
+                </div>
+            </div>
+        </section>
+        <div class="content-blocks">
+            <div class="content-block">
+                <div class="text-container">
+                    <p>Integrated an Aerotech H100W-14A motor (227 Ns impulse) with timed delay and ~1.2g black powder ejection charge, conducting ground tests for parachute reliability. This build serves as a foundational platform for rocketry certification and experimentation.</p>
+                </div>
+            </div>
+            <div class="content-block">
+                <div class="text-container">
+                    <p>Simulated flights in OpenRocket for stability margin (>1 caliber), apogee prediction, and CG/CP optimization. Used ANSYS Mechanical to test structural integrity under thrust.</p>
+                    <img src="/assets/ax10-cad.png" alt="CAD Design of Patriot Rocket" class="project-image">
+                    <img src="/assets/ax10-simulation-plot.png" alt="Simulation Plot from OpenRocket" class="project-image">
+                </div>
+            </div>
+            <div class="content-block">
+                <div class="text-container">
+                    <p>Conducted CFD in Fluent for airflow analysis and high-speed heating. This project links to broader aerospace applications, including payload integration and recovery systems.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="scroll-arrow">
+        <svg viewBox="0 0 24 24">
+            <path d="M12 20V4m0 16l-6-6m6 6l6-6"/>
+        </svg>
+    </div>
+</body>
+</html>
