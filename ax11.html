@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AX-1.1: DEMONstrator - AsterX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="menu-bar">
+        <a href="index.html" class="website-name">ASTERX</a>
+        <button class="menu-button" aria-label="Toggle menu">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </button>
+        <nav class="menu-links">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="projects.html">Projects</a>
+                    <ul class="dropdown-content">
+                        <li><a href="lunar.html">Lunar Power Grid</a></li>
+                        <li><a href="cubesat.html">Gorgon CubeSat</a></li>
+                        <li><a href="nano.html">Nanoelectronics Ultrasonic NDT</a></li>
+                        <li><a href="heat.html">Heat Resilience Challenge</a></li>
+                        <li><a href="wrongway.html">Mechanical Wrong-Way Prevention</a></li>
+                        <li><a href="ax10.html">AX-1.0: Patriot</a></li>
+                        <li><a href="ax11.html">AX-1.1: DEMONstrator</a></li>
+                        <li><a href="slamdrone.html">SLAM Drone</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html">About Me</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="scroll-container">
+        <section class="page video-background">
+            <div class="video-container">
+                <video class="background-video" autoplay muted loop playsinline preload="auto">
+                    <source src="/assets/ax11-video.mp4" type="video/mp4">
+                    Your browser does not support the video tag. Please ensure your browser is up to date.
+                </video>
+            </div>
+            <div class="content">
+                <div class="text-container">
+                    <h1>AX-1.1: DEMONstrator</h1>
+                    <p>This is the 3D-printed build acting as a proof of concept for innovative fastening and mounting methods, achieved with CAD, 3D printing, and filament experimentation under Arkane Works. Developed a modular 3D-printed rocket platform for parallel Level 1/2 missions using PETG-CF filament for the body tube and PPA-CF for the motor mount, optimizing strength-to-weight ratio and heat resistance.</p>
+                </div>
+            </div>
+        </section>
+        <div class="content-blocks">
+            <div class="content-block">
+                <div class="text-container">
+                    <p>Engineered threaded interfaces for motor mounts/centering rings to enhance reusability, integrating Raspberry Pi camera for video capture and adjustable nosecone ballast for stability. Designed biomimetic autorotating (samara) payload for aerodynamic descent, optimizing Drela HT12 airfoil wing for lift, spin stability, and ~2.5-3.5 m/s terminal velocity.</p>
+                </div>
+            </div>
+            <div class="content-block">
+                <div class="text-container">
+                    <p>Conducted ANSYS CFD simulations to refine geometry, with embedded electronics (ESP32 microcontroller, MPU6050 IMU, BMP280 barometer, LoRa SX1278 radio) for telemetry logging, validated via drop tests. Simulated flights in OpenRocket for stability margin (>1 caliber), apogee prediction, and CG/CP optimization.</p>
+                    <img src="/assets/ax11-cad.png" alt="CAD Design of DEMONstrator Rocket" class="project-image">
+                    <img src="/assets/ax11-simulation-plot.png" alt="CFD Simulation Plot" class="project-image">
+                </div>
+            </div>
+            <div class="content-block">
+                <div class="text-container">
+                    <p>Used ANSYS Mechanical for structural integrity of fastening solutions/modular mounts under thrust, and CFD in Fluent for airflow analysis and high-speed heating of 3D-printed rocket. This platform showcases innovative methods for reusable rocketry components.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="scroll-arrow">
+        <svg viewBox="0 0 24 24">
+            <path d="M12 20V4m0 16l-6-6m6 6l6-6"/>
+        </svg>
+    </div>
+</body>
+</html>
