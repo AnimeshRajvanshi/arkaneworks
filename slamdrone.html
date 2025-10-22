@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLAM Drone - AsterX</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="menu-bar">
+        <a href="index.html" class="website-name">ASTERX</a>
+        <button class="menu-button" aria-label="Toggle menu">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </button>
+        <nav class="menu-links">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="projects.html">Projects</a>
+                    <ul class="dropdown-content">
+                        <li><a href="lunar.html">Lunar Power Grid</a></li>
+                        <li><a href="cubesat.html">Gorgon CubeSat</a></li>
+                        <li><a href="nano.html">Nanoelectronics Ultrasonic NDT</a></li>
+                        <li><a href="heat.html">Heat Resilience Challenge</a></li>
+                        <li><a href="wrongway.html">Mechanical Wrong-Way Prevention</a></li>
+                        <li><a href="ax10.html">AX-1.0: Patriot</a></li>
+                        <li><a href="ax11.html">AX-1.1: DEMONstrator</a></li>
+                        <li><a href="slamdrone.html">SLAM Drone</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html">About Me</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="scroll-container">
+        <section class="page video-background">
+            <div class="video-container">
+                <video class="background-video" autoplay muted loop playsinline preload="auto">
+                    <source src="/assets/slamdrone-video.mp4" type="video/mp4">
+                    Your browser does not support the video tag. Please ensure your browser is up to date.
+                </video>
+            </div>
+            <div class="content">
+                <div class="text-container">
+                    <h1>SLAM Drone</h1>
+                    <p>This is the quadcopter with integrated Raspberry Pi for autonomy, performing visual SLAM under Arkane Works. As an Autonomous Systems Engineer at Anoop Singh Robotics, I developed a 250mm carbon fiber quadcopter for vision-based SLAM, integrating Raspberry Pi 4, Arducam IMX708 camera, SpeedyBee F405 controller, and ArduPilot firmware for autonomous waypoint navigation and obstacle avoidance.</p>
+                </div>
+            </div>
+        </section>
+        <div class="content-blocks">
+            <div class="content-block">
+                <div class="text-container">
+                    <p>Implemented EKF/Particle Filter algorithms in Python/MATLAB for real-time pose estimation and mapping, fusing IMU/camera data to minimize drift. Prototyped desktop SLAM with Arduino and ultrasonic sensor using 2D EKF in Python for landmark-based localization.</p>
+                </div>
+            </div>
+            <div class="content-block">
+                <div class="text-container">
+                    <p>Applied SLAM principles including IMU fusion for dead reckoning, Kalman filtering for noise reduction, and barometer integration for vertical pose estimation for autonomous hover and homing. Applied dynamics, control (PID tuning), and embedded systems, linking to aerospace uses like drone deployment and guided landing in rocketry.</p>
+                    <img src="/assets/slamdrone-cad.png" alt="CAD Design of SLAM Drone Frame" class="project-image">
+                    <img src="/assets/slamdrone-simulation-plot.png" alt="EKF Simulation Plot" class="project-image">
+                </div>
+            </div>
+            <div class="content-block">
+                <div class="text-container">
+                    <p>Used Fusion 360 CAD for frames/mounts, electrical wiring/soldering, propulsion tuning with brushless motors/LiPo batteries, and iterative prototyping/testing. This project demonstrates autonomous navigation for aerospace applications.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="scroll-arrow">
+        <svg viewBox="0 0 24 24">
+            <path d="M12 20V4m0 16l-6-6m6 6l6-6"/>
+        </svg>
+    </div>
+</body>
+</html>
