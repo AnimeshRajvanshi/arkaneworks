@@ -431,13 +431,15 @@ a:hover {
 
 /* Color Themes */
 body.non-arkane-project {
-  background-color: rgba(0, 170, 255, 0.2); /* Blue tint */
-  background-blend-mode: overlay;
+  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), linear-gradient(rgba(0, 170, 255, 0.05), rgba(0, 170, 255, 0.05)), url('/assets/synapse1.jpg') no-repeat center center fixed;
+  background-size: cover, cover, cover;
+  background-blend-mode: multiply, overlay;
 }
 
 body.arkane-project {
-  background-color: rgba(255, 77, 77, 0.2); /* Red tint */
-  background-blend-mode: overlay;
+  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), linear-gradient(rgba(255, 77, 77, 0.05), rgba(255, 77, 77, 0.05)), url('/assets/synapse1.jpg') no-repeat center center fixed;
+  background-size: cover, cover, cover;
+  background-blend-mode: multiply, overlay;
 }
 
 .non-arkane-project .custom-list li::before,
