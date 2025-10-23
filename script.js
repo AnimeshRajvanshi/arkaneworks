@@ -301,19 +301,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // For image stacks
   document.querySelectorAll('.image-stack').forEach(stack => {
     const images = stack.querySelectorAll('.stack-image');
-    images.forEach((img, idx) => {
-      img.style.position = 'absolute';
-      img.style.top = '0';
-      img.style.left = '0';
-      img.style.zIndex = images.length - idx; // Initial stacking
-
+    let zIndexCounter = images.length;
+    images.forEach(img => {
+      img.style.zIndex = zIndexCounter--;
       img.addEventListener('mouseover', () => {
-        img.style.transform = 'scale(1.02)';
+        img.style.transform = 'scale(1.05)';
       });
       img.addEventListener('mouseout', () => {
         img.style.transform = 'scale(1)';
       });
-
       img.addEventListener('dblclick', (e) => {
         e.stopPropagation();
         const clone = new Image();
@@ -326,18 +322,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     stack.addEventListener('click', (e) => {
-      if (e.target.classList.contains('stack-image')) return; // Avoid cycling on double click part
-      // Cycle z-index
-      const zIndices = Array.from(images, img => parseInt(img.style.zIndex));
-      const maxZ = Math.max(...zIndices);
-      images.forEach(img => {
-        let z = parseInt(img.style.zIndex);
-        if (z === maxZ) {
-          img.style.zIndex = Math.min(...zIndices) - 1; // Send to back
-        } else {
-          img.style.zIndex = z + 1;
-        }
-      });
+      if (e.target.classList.contains('stack-image')) {
+        // Cycle: Move the clicked image to the bottom
+        const clickedZ = parseInt(e.target.style.zIndex);
+        const minZ = Math.min(...Array.from(images, img => parseInt(img.style.zIndex)));
+        e.target.style.zIndex = minZ - 1;
+        // Normalize z-indices
+        const sortedImages = Array.from(images).sort((a, b) => parseInt(a.style.zIndex) - parseInt(b.style.zIndex));
+        let newZ = 1;
+        sortedImages.forEach(img => img.style.zIndex = newZ++);
+      }
     });
   });
 });
