@@ -69,6 +69,7 @@ body[href="about.html"] .content-block {
   z-index: 60;
   min-height: 100vh;
   box-sizing: border-box;
+  position: relative; /* For absolute positioning of media */
 }
 
 .content-block.visible {
@@ -80,22 +81,14 @@ body[href="about.html"] .content-block {
   background: rgba(0, 0, 0, 0.5);
   border-radius: 4px;
   padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-}
-
-.text-container p {
-  max-width: 60%;
-  margin-right: 20px;
 }
 
 .media-container {
-  max-width: 35%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  max-width: 40vw;
+  z-index: 65;
 }
 
 .video-background {
@@ -441,9 +434,7 @@ a:hover {
   max-width: 100%;
   height: auto;
   display: block;
-  margin: 20px auto;
   border-radius: 4px;
-  max-height: 300px; /* Limit size to prevent overflow */
   object-fit: contain;
 }
 
@@ -455,15 +446,20 @@ a:hover {
 
 .image-stack {
   position: relative;
-  width: max-content;
-  height: max-content;
+  width: 400px; /* Adjust based on desired size */
+  height: 300px; /* Adjust based on desired size */
   display: inline-block;
 }
 
 .stack-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   transition: transform 0.2s ease;
-  max-width: 100%;
-  height: auto;
+  border-radius: 4px;
+  object-fit: contain;
 }
 
 /* Color Themes */
@@ -629,7 +625,15 @@ body.arkane-project {
   }
 
   .media-container {
+    position: relative;
+    bottom: auto;
+    right: auto;
     max-width: 100%;
     margin-top: 20px;
+  }
+
+  .image-stack {
+    width: 100%;
+    height: auto;
   }
 }
