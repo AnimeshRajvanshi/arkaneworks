@@ -1,7 +1,7 @@
 body {
-  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), linear-gradient(rgba(0, 170, 255, 0.1), rgba(0, 170, 255, 0.1)), url('/assets/synapse1.jpg') no-repeat center center fixed;
-  background-size: cover, cover, cover;
-  background-blend-mode: multiply, overlay;
+  background: url('/assets/synapse1.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-color: #1a1a1a;
   z-index: 0;
   margin: 0;
   padding: 0;
@@ -80,6 +80,22 @@ body[href="about.html"] .content-block {
   background: rgba(0, 0, 0, 0.5);
   border-radius: 4px;
   padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.text-container p {
+  max-width: 60%;
+  margin-right: 20px;
+}
+
+.media-container {
+  max-width: 35%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
 }
 
 .video-background {
@@ -421,12 +437,33 @@ a:hover {
   100% { transform: rotate(360deg); }
 }
 
-.project-image {
+.project-image, .project-video {
   max-width: 100%;
   height: auto;
   display: block;
   margin: 20px auto;
   border-radius: 4px;
+  max-height: 300px; /* Limit size to prevent overflow */
+  object-fit: contain;
+}
+
+.project-media {
+  border: 1px solid var(--theme-color);
+  padding: 5px;
+  background: transparent;
+}
+
+.image-stack {
+  position: relative;
+  width: max-content;
+  height: max-content;
+  display: inline-block;
+}
+
+.stack-image {
+  transition: transform 0.2s ease;
+  max-width: 100%;
+  height: auto;
 }
 
 /* Color Themes */
@@ -476,25 +513,6 @@ body.arkane-project {
 
 .arkane-project .resume-link {
   color: #ff4d4d;
-}
-
-.project-media {
-  border: 1px solid var(--theme-color);
-  padding: 5px;
-  background: transparent;
-}
-
-.image-stack {
-  position: relative;
-  width: max-content;
-  height: max-content;
-  display: inline-block;
-}
-
-.stack-image {
-  transition: transform 0.2s ease;
-  max-width: 100%;
-  height: auto;
 }
 
 @media (max-width: 768px) {
@@ -599,5 +617,19 @@ body.arkane-project {
   .social-logo {
     width: 20px;
     height: 20px;
+  }
+
+  .text-container {
+    flex-direction: column;
+  }
+
+  .text-container p {
+    max-width: 100%;
+    margin-right: 0;
+  }
+
+  .media-container {
+    max-width: 100%;
+    margin-top: 20px;
   }
 }
