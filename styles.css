@@ -61,15 +61,17 @@ body[href="about.html"] .content-block {
   top: 160px;
   text-align: left;
   padding: 40px;
-  max-width: 100%;
-  margin: 0;
+  max-width: 70%;
+  margin: 0 0 100px 40px;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.5s ease, transform 0.5s ease;
   z-index: 60;
   min-height: 100vh;
   box-sizing: border-box;
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .content-block.visible {
@@ -78,21 +80,17 @@ body[href="about.html"] .content-block {
 }
 
 .text-container {
-  background: transparent;
+  background: rgba(0, 0, 0, 0.5);
   border-radius: 4px;
   padding: 20px;
-  position: absolute;
-  top: 0;
-  left: 40px;
   max-width: 50%;
 }
 
 .media-container {
-  position: absolute;
-  bottom: 40px;
-  right: 40px;
   max-width: 40%;
-  z-index: 65;
+  margin-left: 20px;
+  align-self: flex-end;
+  margin-bottom: 40px;
 }
 
 .video-background {
@@ -130,6 +128,7 @@ body[href="about.html"] .content-block {
   background: rgba(0, 0, 0, 0.5);
   border-radius: 4px;
   padding: 20px;
+  max-width: 60%; /* Adjust for better fit */
 }
 
 .menu-bar {
@@ -466,10 +465,6 @@ a:hover {
   object-fit: contain;
 }
 
-.stack-image:not(:first-child) {
-  transform: rotate(3deg) translate(5px, 5px);
-}
-
 /* Color Themes */
 body.non-arkane-project {
   background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), linear-gradient(rgba(0, 170, 255, 0.1), rgba(0, 170, 255, 0.1)), url('/assets/synapse1.jpg') no-repeat center center fixed;
@@ -567,6 +562,7 @@ body.arkane-project {
   .content-block {
     margin: 0 0 50px 20px;
     max-width: 85%;
+    display: block;
   }
 
   .video-background .content {
