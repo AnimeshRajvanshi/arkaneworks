@@ -81,14 +81,19 @@ body[href="about.html"] .content-block {
   background: rgba(0, 0, 0, 0.5);
   border-radius: 4px;
   padding: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 50%;
 }
 
 .media-container {
   position: absolute;
   bottom: 40px;
   right: 40px;
-  max-width: 40vw;
   z-index: 65;
+  max-width: 45vw;
+  max-height: 50vh;
 }
 
 .video-background {
@@ -446,8 +451,8 @@ a:hover {
 
 .image-stack {
   position: relative;
-  width: 400px; /* Adjust based on desired size */
-  height: 300px; /* Adjust based on desired size */
+  max-width: 600px; /* Larger size */
+  max-height: 400px; /* Larger size */
   display: inline-block;
 }
 
@@ -460,6 +465,10 @@ a:hover {
   transition: transform 0.2s ease;
   border-radius: 4px;
   object-fit: contain;
+}
+
+.stack-image:not(:first-child) {
+  transform: translate(5px, 5px);
 }
 
 /* Color Themes */
@@ -616,12 +625,9 @@ body.arkane-project {
   }
 
   .text-container {
-    flex-direction: column;
-  }
-
-  .text-container p {
+    top: 0;
+    left: 0;
     max-width: 100%;
-    margin-right: 0;
   }
 
   .media-container {
@@ -629,11 +635,12 @@ body.arkane-project {
     bottom: auto;
     right: auto;
     max-width: 100%;
+    max-height: none;
     margin-top: 20px;
   }
 
   .image-stack {
-    width: 100%;
-    height: auto;
+    max-width: 100%;
+    max-height: none;
   }
 }
