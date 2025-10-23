@@ -1,7 +1,7 @@
 body {
-  background: url('/assets/synapse1.jpg') no-repeat center center fixed;
-  background-size: cover;
-  background-color: #1a1a1a;
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), linear-gradient(rgba(0, 170, 255, 0.1), rgba(0, 170, 255, 0.1)), url('/assets/synapse1.jpg') no-repeat center center fixed;
+  background-size: cover, cover, cover;
+  background-blend-mode: multiply, overlay;
   z-index: 0;
   margin: 0;
   padding: 0;
@@ -434,12 +434,14 @@ body.non-arkane-project {
   background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), linear-gradient(rgba(0, 170, 255, 0.1), rgba(0, 170, 255, 0.1)), url('/assets/synapse1.jpg') no-repeat center center fixed;
   background-size: cover, cover, cover;
   background-blend-mode: multiply, overlay;
+  --theme-color: #00aaff;
 }
 
 body.arkane-project {
   background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), linear-gradient(rgba(255, 77, 77, 0.1), rgba(255, 77, 77, 0.1)), url('/assets/synapse1.jpg') no-repeat center center fixed;
   background-size: cover, cover, cover;
   background-blend-mode: multiply, overlay;
+  --theme-color: #ff4d4d;
 }
 
 .non-arkane-project .custom-list li::before,
@@ -474,6 +476,25 @@ body.arkane-project {
 
 .arkane-project .resume-link {
   color: #ff4d4d;
+}
+
+.project-media {
+  border: 1px solid var(--theme-color);
+  padding: 5px;
+  background: transparent;
+}
+
+.image-stack {
+  position: relative;
+  width: max-content;
+  height: max-content;
+  display: inline-block;
+}
+
+.stack-image {
+  transition: transform 0.2s ease;
+  max-width: 100%;
+  height: auto;
 }
 
 @media (max-width: 768px) {
