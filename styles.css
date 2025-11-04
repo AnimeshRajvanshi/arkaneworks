@@ -26,6 +26,11 @@ body:where([href="index.html"], [href="projects.html"]) {
 body[href="about.html"] {
   height: auto;
   overflow-y: auto;
+  padding-top: 40px; /* Smaller header for about page */
+}
+
+body[href="about.html"] .menu-bar {
+  height: 40px; /* Reduced header height for about page */
 }
 
 body[href="about.html"] .content-block {
