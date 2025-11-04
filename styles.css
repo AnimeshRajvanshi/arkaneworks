@@ -42,7 +42,7 @@ body[href="about.html"] .content-block {
 .about-contact-wrapper {
   display: flex;
   justify-content: space-between;
-  padding: 25vh 8vw 10vh 8vw;
+  padding: 5vh 8vw 10vh 8vw;
   margin-bottom: 0;
   align-items: flex-start;
 }
