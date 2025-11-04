@@ -313,4 +313,51 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
+
+  // Smart video background resizing
+  const backgroundVideos = document.querySelectorAll('.background-video');
+
+  function smartVideoResize() {
+    backgroundVideos.forEach(video => {
+      if (!video.videoWidth || !video.videoHeight) return; // Wait for metadata
+
+      const container = video.parentElement;
+      const containerWidth = container.offsetWidth;
+      const containerHeight = container.offsetHeight;
+
+      const videoAspect = video.videoWidth / video.videoHeight;
+      const containerAspect = containerWidth / containerHeight;
+
+      // Calculate how much would be cropped with 'cover'
+      // and how much empty space with 'contain'
+      let coverCropPercent, containEmptyPercent;
+
+      if (videoAspect > containerAspect) {
+        // Video is wider - cover crops sides, contain shows top/bottom bars
+        coverCropPercent = ((videoAspect / containerAspect) - 1) * 100;
+        containEmptyPercent = ((containerAspect / videoAspect) - 1) * 100 * -1;
+      } else {
+        // Video is taller - cover crops top/bottom, contain shows side bars
+        coverCropPercent = ((containerAspect / videoAspect) - 1) * 100;
+        containEmptyPercent = ((videoAspect / containerAspect) - 1) * 100 * -1;
+      }
+
+      // If contain would show less than 5% empty space, use contain (show full video)
+      // Otherwise use cover (fill page, crop video)
+      if (containEmptyPercent < 5) {
+        video.style.objectFit = 'contain';
+      } else {
+        video.style.objectFit = 'cover';
+      }
+    });
+  }
+
+  // Run on load and resize
+  backgroundVideos.forEach(video => {
+    video.addEventListener('loadedmetadata', smartVideoResize);
+  });
+  window.addEventListener('resize', debounce(smartVideoResize, 100));
+
+  // Initial check
+  smartVideoResize();
 });
