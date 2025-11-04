@@ -328,26 +328,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const videoAspect = video.videoWidth / video.videoHeight;
       const containerAspect = containerWidth / containerHeight;
 
-      // Calculate how much would be cropped with 'cover'
-      // and how much empty space with 'contain'
-      let coverCropPercent, containEmptyPercent;
+      // Always prefer showing the full video (object-fit: contain)
+      // This ensures no cropping and all video content is visible
+      video.style.objectFit = 'contain';
+      video.style.objectPosition = 'center center';
 
-      if (videoAspect > containerAspect) {
-        // Video is wider - cover crops sides, contain shows top/bottom bars
-        coverCropPercent = ((videoAspect / containerAspect) - 1) * 100;
-        containEmptyPercent = ((containerAspect / videoAspect) - 1) * 100 * -1;
-      } else {
-        // Video is taller - cover crops top/bottom, contain shows side bars
-        coverCropPercent = ((containerAspect / videoAspect) - 1) * 100;
-        containEmptyPercent = ((videoAspect / containerAspect) - 1) * 100 * -1;
-      }
-
-      // If contain would show less than 5% empty space, use contain (show full video)
-      // Otherwise use cover (fill page, crop video)
-      if (containEmptyPercent < 5) {
-        video.style.objectFit = 'contain';
-      } else {
-        video.style.objectFit = 'cover';
+      // Optional: Log aspect ratio difference for debugging
+      const aspectDiff = Math.abs(videoAspect - containerAspect) / containerAspect * 100;
+      if (aspectDiff > 10) {
+        console.log(`Video aspect ratio differs from container by ${aspectDiff.toFixed(1)}%`);
       }
     });
   }
