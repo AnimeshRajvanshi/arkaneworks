@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: url('/assets/synapse1.jpg') no-repeat center center fixed;
   background-size: cover;
@@ -24,9 +28,8 @@ body[href="about.html"] {
 
 body[href="about.html"] .content-block {
   min-height: auto;
-  position: sticky;
-  top: 160px;
-  bottom: 20px;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 ::-webkit-scrollbar {
@@ -53,23 +56,22 @@ body[href="about.html"] .content-block {
 }
 
 .content-blocks {
-  padding-top: 100px;
+  padding-top: 0;
 }
 
 .content-block {
-  position: sticky;
-  top: 160px;
-  text-align: left;
-  padding: 40px;
-  max-width: 100%;
-  margin: 0 auto;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  padding: 80px 60px;
   min-height: 100vh;
   box-sizing: border-box;
-  position: relative; /* For absolute positioning of media */
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  position: relative;
+  z-index: 60;
 }
 
 .content-block.visible {
@@ -77,26 +79,61 @@ body[href="about.html"] .content-block {
   transform: translateY(0);
 }
 
+/* Alternate layout: media on right (default) */
+.content-block {
+  flex-direction: row;
+}
+
+/* Alternate layout: media on left */
+.content-block:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
 .text-container {
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 4px;
-  padding: 20px;
-  max-width: 50%;
+  flex: 1;
+  max-width: 600px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+}
+
+.text-container h1 {
+  font-size: 2.5em;
+  font-weight: 600;
   margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.text-container h2 {
+  font-size: 1.8em;
+  font-weight: 600;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+.text-container p {
+  font-size: 1.1em;
+  line-height: 1.7;
+  margin-bottom: 16px;
 }
 
 .media-container {
-  position: absolute;
-  bottom: 40px;
-  right: 40px;
-  max-width: 40vw;
-  z-index: 65;
+  flex: 1;
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .video-background {
   position: relative;
   height: 100vh;
   z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 80px;
 }
 
 .video-container {
@@ -116,18 +153,16 @@ body[href="about.html"] .content-block {
 }
 
 .video-background .content {
-  position: absolute;
-  top: 160px;
-  left: 40px;
-  max-width: 70%;
+  position: relative;
+  max-width: 700px;
   z-index: 60;
-  padding: 40px;
 }
 
 .video-background .content .text-container {
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 4px;
-  padding: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+  padding: 40px;
+  backdrop-filter: blur(10px);
 }
 
 .menu-bar {
@@ -432,18 +467,29 @@ a:hover {
   100% { transform: rotate(360deg); }
 }
 
+/* Content blocks without media should center text */
+.content-block:not(:has(.media-container)) {
+  justify-content: center;
+}
+
+.content-block:not(:has(.media-container)) .text-container {
+  max-width: 800px;
+}
+
 .project-image, .project-video {
   max-width: 100%;
   height: auto;
   display: block;
-  border-radius: 4px;
+  border-radius: 8px;
   object-fit: contain;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
 .project-media {
-  border: 1px solid var(--theme-color);
-  padding: 5px;
-  background: transparent;
+  border: 2px solid var(--theme-color);
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
 }
 
 .image-stack {
@@ -559,24 +605,49 @@ body.arkane-project {
   }
 
   .content-block {
-    max-width: 85%;
-    margin: 0 auto;
-    padding: 20px;
+    flex-direction: column !important;
+    padding: 40px 20px;
+    min-height: auto;
+    gap: 30px;
   }
 
   .text-container {
     max-width: 100%;
+    padding: 30px 20px;
+  }
+
+  .text-container h1 {
+    font-size: 2em;
+  }
+
+  .text-container h2 {
+    font-size: 1.5em;
+  }
+
+  .text-container p {
+    font-size: 1em;
   }
 
   .media-container {
-    position: relative;
-    bottom: auto;
-    right: auto;
     max-width: 100%;
-    margin-top: 20px;
+    width: 100%;
   }
 
   .image-stack {
     height: 200px;
+  }
+
+  .video-background {
+    padding-left: 20px;
+    padding-right: 20px;
+    justify-content: center;
+  }
+
+  .video-background .content {
+    max-width: 100%;
+  }
+
+  .video-background .content .text-container {
+    padding: 30px 20px;
   }
 }
