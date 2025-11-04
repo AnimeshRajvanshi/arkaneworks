@@ -101,6 +101,7 @@ body[href="about.html"] .content-block {
   align-self: flex-start;
 }
 
+/* Typography System - Based on Patriot Page Standards */
 .text-container h1 {
   font-size: 2.5em;
   font-weight: 600;
@@ -121,14 +122,35 @@ body[href="about.html"] .content-block {
   margin-top: 0;
 }
 
+.text-container h3 {
+  font-size: 1.4em;
+  font-weight: 500;
+  margin-top: 30px;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.text-container h3:first-child {
+  margin-top: 0;
+}
+
 .text-container p {
   font-size: 1.1em;
+  font-weight: 300;
   line-height: 1.7;
   margin-bottom: 16px;
+  margin-top: 0;
 }
 
 .text-container p:first-child {
   margin-top: 0;
+}
+
+.text-container ul, .text-container ol {
+  font-size: 1.1em;
+  font-weight: 300;
+  line-height: 1.7;
+  margin-bottom: 16px;
 }
 
 .media-container {
@@ -329,8 +351,9 @@ a:hover {
   position: relative;
   padding-left: 30px;
   margin-bottom: 15px;
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: inherit; /* Inherit from text-container (1.1em) */
+  font-weight: 300;
+  line-height: 1.7; /* Match paragraph line-height */
   text-align: left;
 }
 
@@ -393,13 +416,13 @@ a:hover {
 
 .about-block {
   max-width: 45%;
-  padding: 40px;
+  padding: 0;
   box-sizing: border-box;
 }
 
 .contact-block {
   max-width: 45%;
-  padding: 40px;
+  padding: 0;
   box-sizing: border-box;
   text-align: right;
 }
@@ -665,6 +688,7 @@ body.arkane-project {
     flex: 1 1 auto;
   }
 
+  /* Mobile Typography - Scaled down proportionally */
   .text-container h1 {
     font-size: 2em;
   }
@@ -673,7 +697,15 @@ body.arkane-project {
     font-size: 1.5em;
   }
 
+  .text-container h3 {
+    font-size: 1.25em;
+  }
+
   .text-container p {
+    font-size: 1em;
+  }
+
+  .text-container ul, .text-container ol {
     font-size: 1em;
   }
 
@@ -716,7 +748,7 @@ body.arkane-project {
   .about-block,
   .contact-block {
     max-width: 100%;
-    padding: 20px;
+    padding: 0;
   }
 
   .contact-block {
