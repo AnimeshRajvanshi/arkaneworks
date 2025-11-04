@@ -165,7 +165,7 @@ body[href="about.html"] .content-block {
   width: 100%;
   height: 100%;
   object-fit: contain; /* Show full video without cropping */
-  object-position: center center;
+  object-position: top center; /* Align to top, bars appear at bottom/sides */
   opacity: 0.8;
 }
 
