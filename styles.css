@@ -32,7 +32,6 @@ body[href="about.html"] .content-block {
   min-height: auto;
   opacity: 1;
   transform: translateY(0);
-  padding-top: 10vh; /* Reduced from 25vh to close gap with about-contact-wrapper */
 }
 
 ::-webkit-scrollbar {
@@ -407,33 +406,6 @@ a:hover {
   text-decoration: none;
 }
 
-.about-contact-wrapper {
-  display: flex;
-  justify-content: space-between;
-  padding: 25vh 8vw 10vh 8vw;
-  margin-bottom: 0;
-  min-height: auto; /* Changed from 100vh to auto to prevent excessive height */
-  align-items: flex-start;
-}
-
-.about-block {
-  max-width: 45%;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.contact-block {
-  max-width: 45%;
-  padding: 0;
-  box-sizing: border-box;
-  text-align: right;
-}
-
-.contact-block .text-container {
-  display: inline-block;
-  text-align: left;
-}
-
 .content-block--half {
   max-width: 45%;
   padding: 40px;
@@ -739,22 +711,6 @@ body.arkane-project {
 
   .video-background .content .text-container {
     padding: 30px 24px;
-  }
-
-  .about-contact-wrapper {
-    flex-direction: column;
-    padding: 15vh 5vw 8vh 5vw;
-    min-height: auto;
-  }
-
-  .about-block,
-  .contact-block {
-    max-width: 100%;
-    padding: 0;
-  }
-
-  .contact-block {
-    text-align: left;
   }
 
   .profile-image {
