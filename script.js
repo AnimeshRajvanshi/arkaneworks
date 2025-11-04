@@ -44,85 +44,58 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  // Sticky content block and scroll arrow visibility
-  function updateContentVisibility() {
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  // Intersection Observer for smooth content reveal
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+  // For index.html and projects.html, make all content visible
+  if (currentPage === 'index.html' || currentPage === 'projects.html') {
+    contentBlocks.forEach(block => block.classList.add('visible'));
+  } else {
+    // Use Intersection Observer for progressive reveal on project pages
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    contentBlocks.forEach(block => {
+      observer.observe(block);
+    });
+  }
+
+  // Scroll arrow visibility
+  function updateScrollArrow() {
+    if (!scrollArrow) return;
+
     const scrollY = window.scrollY;
     const viewportHeight = window.innerHeight;
     const bodyScrollHeight = document.body.scrollHeight;
+    const pageBottom = bodyScrollHeight - viewportHeight;
 
-    // Skip scroll-related logic for index.html, projects.html
-    if (currentPage === 'index.html' || currentPage === 'projects.html') {
-      contentBlocks.forEach(block => block.classList.add('visible')); // Ensure content is visible
-      return;
-    }
-
-    // Handle about.html: keep certifications visible, hide arrow at page bottom
-    if (currentPage === 'about.html') {
-      contentBlocks.forEach(block => block.classList.add('visible')); // Keep certifications block visible
-      if (scrollArrow) {
-        if (scrollY >= bodyScrollHeight - viewportHeight) {
-          scrollArrow.classList.remove('visible');
-        } else {
-          scrollArrow.classList.add('visible');
-        }
-      }
-      return;
-    }
-
-    let currentBlock = null;
-    let isLastBlock = false;
-    contentBlocks.forEach((block, index) => {
-      const blockStart = index * viewportHeight;
-      const blockEnd = (index + 1) * viewportHeight;
-      const isWrongWay = document.querySelector('.video-background') !== null;
-      const videoSectionHeight = isWrongWay ? viewportHeight : 0; // Adjust for wrongway.html video section
-      const adjustedStart = blockStart + videoSectionHeight;
-      const adjustedEnd = blockEnd + videoSectionHeight;
-
-      if (scrollY >= adjustedStart && scrollY < adjustedEnd) {
-        currentBlock = block;
-        block.classList.add('visible');
-        if (index === contentBlocks.length - 1) {
-          isLastBlock = true;
-        }
-      } else {
-        block.classList.remove('visible');
-      }
-    });
-
-    // Ensure only one block is visible at a time
-    contentBlocks.forEach(block => {
-      if (block !== currentBlock) {
-        block.classList.remove('visible');
-      }
-    });
-
-    // Scroll arrow visibility for other pages
-    if (scrollArrow) {
-      const pageBottom = bodyScrollHeight - viewportHeight;
-      const lastBlockTop = contentBlocks[contentBlocks.length - 1]?.getBoundingClientRect().top + scrollY;
-      if (isLastBlock && lastBlockTop && scrollY >= lastBlockTop - viewportHeight / 2 || scrollY >= pageBottom) {
-        scrollArrow.classList.remove('visible');
-      } else {
-        scrollArrow.classList.add('visible');
-      }
+    // Hide arrow when near bottom of page
+    if (scrollY >= pageBottom - 100) {
+      scrollArrow.classList.remove('visible');
+    } else {
+      scrollArrow.classList.add('visible');
     }
   }
 
-  // Initial visibility
-  if (contentBlocks.length > 0) {
-    contentBlocks[0].classList.add('visible');
-  }
+  // Initial scroll arrow visibility
   if (scrollArrow) {
     scrollArrow.classList.add('visible');
   }
 
-  // Update visibility on scroll with debounce
-  window.addEventListener('scroll', debounce(updateContentVisibility, 16));
+  // Update arrow on scroll with debounce
+  window.addEventListener('scroll', debounce(updateScrollArrow, 16));
 
   // Animation sequence (skip for about.html, index.html, projects.html)
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
   if (currentPage === 'about.html' || currentPage === 'index.html' || currentPage === 'projects.html') {
     return; // Skip canvas logic
   }
