@@ -10,6 +10,7 @@ body {
   z-index: 0;
   margin: 0;
   padding: 0;
+  padding-top: 60px; /* Account for fixed header */
   height: auto;
   overflow-y: visible;
   color: white;
@@ -53,7 +54,7 @@ body[href="about.html"] .content-block {
 .scroll-container {
   position: relative;
   z-index: 10;
-  padding-top: 60px;
+  padding-top: 0; /* Removed - body now has padding-top: 60px */
 }
 
 .content-blocks {
