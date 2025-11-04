@@ -34,6 +34,19 @@ body[href="about.html"] .content-block {
   transform: translateY(0);
 }
 
+.about-row {
+  display: flex;
+  gap: 4vw;
+  padding: 25vh 8vw 10vh 8vw;
+  align-items: flex-start;
+}
+
+.about-row .content-block {
+  flex: 1;
+  padding: 0;
+  min-height: auto;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -716,5 +729,14 @@ body.arkane-project {
   .profile-image {
     width: 150px;
     align-self: center;
+  }
+
+  .about-row {
+    flex-direction: column;
+    padding: 15vh 5vw 8vh 5vw;
+  }
+
+  .about-row .content-block {
+    padding: 0;
   }
 }
