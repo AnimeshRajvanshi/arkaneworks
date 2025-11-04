@@ -330,8 +330,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Always prefer showing the full video (object-fit: contain)
       // This ensures no cropping and all video content is visible
+      // Position at top so bars appear at bottom (vertical) or sides (horizontal)
       video.style.objectFit = 'contain';
-      video.style.objectPosition = 'center center';
+      video.style.objectPosition = 'top center';
 
       // Optional: Log aspect ratio difference for debugging
       const aspectDiff = Math.abs(videoAspect - containerAspect) / containerAspect * 100;
