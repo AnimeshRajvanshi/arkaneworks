@@ -26,6 +26,11 @@ body:where([href="index.html"], [href="projects.html"]) {
 body[href="about.html"] {
   height: auto;
   overflow-y: auto;
+  padding-top: 40px; /* Smaller header for about page */
+}
+
+body[href="about.html"] .menu-bar {
+  height: 40px; /* Reduced header height for about page */
 }
 
 body[href="about.html"] .content-block {
@@ -34,17 +39,30 @@ body[href="about.html"] .content-block {
   transform: translateY(0);
 }
 
-.about-row {
+.about-contact-wrapper {
   display: flex;
-  gap: 4vw;
+  justify-content: space-between;
   padding: 25vh 8vw 10vh 8vw;
+  margin-bottom: 0;
   align-items: flex-start;
 }
 
-.about-row .content-block {
-  flex: 1;
+.about-block {
+  max-width: 45%;
   padding: 0;
-  min-height: auto;
+  box-sizing: border-box;
+}
+
+.contact-block {
+  max-width: 45%;
+  padding: 0;
+  box-sizing: border-box;
+  text-align: right;
+}
+
+.contact-block .text-container {
+  display: inline-block;
+  text-align: left;
 }
 
 ::-webkit-scrollbar {
@@ -731,12 +749,18 @@ body.arkane-project {
     align-self: center;
   }
 
-  .about-row {
+  .about-contact-wrapper {
     flex-direction: column;
     padding: 15vh 5vw 8vh 5vw;
   }
 
-  .about-row .content-block {
+  .about-block,
+  .contact-block {
+    max-width: 100%;
     padding: 0;
+  }
+
+  .contact-block {
+    text-align: left;
   }
 }
