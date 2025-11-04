@@ -112,9 +112,13 @@ body[href="about.html"] .content-block {
 .text-container h2 {
   font-size: 1.8em;
   font-weight: 600;
-  margin-top: 0;
+  margin-top: 40px;
   margin-bottom: 16px;
   line-height: 1.3;
+}
+
+.text-container h2:first-child {
+  margin-top: 0;
 }
 
 .text-container p {
@@ -364,6 +368,7 @@ a:hover {
 .cta-button {
   display: inline-block;
   padding: 10px 20px;
+  margin-top: 20px;
   border: 2px solid white;
   color: white;
   text-decoration: none;
@@ -489,15 +494,16 @@ a:hover {
   100% { transform: rotate(360deg); }
 }
 
-/* Content blocks without media should center text and maintain consistent top alignment */
+/* Content blocks without media should position text slightly left of center and maintain consistent top alignment */
 .content-block:not(:has(.media-container)) {
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
 }
 
 .content-block:not(:has(.media-container)) .text-container {
   max-width: 900px;
   flex: 1 1 auto;
+  margin-left: 20vw;
 }
 
 .project-image, .project-video {
@@ -718,5 +724,10 @@ body.arkane-project {
   .profile-image {
     width: 150px;
     align-self: center;
+  }
+
+  /* Remove left margin on text-only blocks for mobile */
+  .content-block:not(:has(.media-container)) .text-container {
+    margin-left: 0;
   }
 }
