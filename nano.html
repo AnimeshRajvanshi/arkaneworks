@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nanoelectronics Ultrasonic NDT - Accretion Technologies</title>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;500;600&display=swap" rel="stylesheet">
+    <title>Nanoelectronics Ultrasonic NDT — Arkane Works</title>
+    <meta name="description" content="A scaling workflow for ultrasonic NDT of 10 µm-pitch Cu–Cu hybrid bonds: k = 1000 geometry scaling with preserved wave physics, simulated in CIVA NDT.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d0d0d'/%3E%3Cpath d='M7 7h18v12l-6 6H7z' fill='%23e7e7e2'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
-<body class="non-arkane-project">
+<body>
     <canvas class="animation-canvas" data-frame-folder="nano_frames"></canvas>
     <header class="menu-bar">
-        <a href="index.html" class="website-name">ACCRETION TECHNOLOGIES</a>
+        <a href="index.html" class="website-name">
+            <span class="brand-glyph" aria-hidden="true"><svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M0 0H14V9L9 14H0Z"/></svg></span>
+            Arkane Works
+        </a>
+        <span class="doc-code">AW–05 · Archived Record</span>
         <button class="menu-button" aria-label="Toggle menu">
             <span class="line"></span>
             <span class="line"></span>
@@ -21,67 +29,97 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li class="dropdown">
-                    <a href="projects.html">Projects</a>
+                    <a href="projects.html">Index<span class="nav-caret">+</span></a>
                     <ul class="dropdown-content">
-                        <li><a href="ax10.html">AX-1.0: Patriot Rocket</a></li>
-                        <li><a href="ax11.html">AX-1.1: DEMONstrator Rocket</a></li>
-                        <li><a href="slamdrone.html">SLAM Drone</a></li>
-                        <li><a href="lunar.html">Moon Presence</a></li>
-                        <li><a href="cubesat.html">Gorgon CubeSat</a></li>
-                        <li><a href="nano.html">Nanoelectronics Ultrasonic NDT</a></li>
-                        <li><a href="heat.html">Heat Resilience Challenge</a></li>
-                        <li><a href="wrongway.html">Mechanical Wrong-Way Prevention</a></li>
+                        <li class="dropdown-group">Present</li>
+                        <li><a href="aft.html"><span class="dd-code">P-01</span>Aerondight Flight Technologies</a></li>
+                        <li><a href="ape.html"><span class="dd-code">P-02</span>Aether Planetary Engine</a></li>
+                        <li><a href="sus.html"><span class="dd-code">P-03</span>Stormveil UAV Systems</a></li>
+                        <li class="dropdown-group">Past</li>
+                        <li><a href="lunar.html"><span class="dd-code">01</span>Moon Presence</a></li>
+                        <li><a href="heat.html"><span class="dd-code">02</span>Heat Resilience Challenge</a></li>
+                        <li><a href="cubesat.html"><span class="dd-code">03</span>Gorgon CubeSat</a></li>
+                        <li><a href="wrongway.html"><span class="dd-code">04</span>Wrong-Way Prevention</a></li>
+                        <li><a href="nano.html"><span class="dd-code">05</span>Ultrasonic NDT</a></li>
+                        <li><a href="slamdrone.html"><span class="dd-code">06</span>SLAM Drone</a></li>
+                        <li><a href="ax10.html"><span class="dd-code">07</span>AX-1.0 Patriot</a></li>
+                        <li><a href="ax11.html"><span class="dd-code">08</span>AX-1.1 DEMONstrator</a></li>
                     </ul>
                 </li>
-                <li><a href="about.html">About Me</a></li>
+                <li><a href="about.html">About</a></li>
             </ul>
         </nav>
     </header>
+    <div class="scroll-progress" aria-hidden="true"></div>
+
     <main class="scroll-container">
+        <section class="project-hero reveal">
+            <p class="crumbs micro">Index <span class="sep">/</span> Past <span class="sep">/</span> №05 <span class="sep">/</span> Semiconductor Metrology</p>
+            <h1 class="project-title">Nanoelectronics Ultrasonic NDT</h1>
+            <div class="hero-panel">
+                <p>An ultrasonic non-destructive testing workflow for finding defects in 10&nbsp;µm-pitch Cu–Cu hybrid bonds — the interconnects underneath advanced chiplet packaging. Direct simulation at that scale defeats standard NDT tooling, so the work develops a scaling transform: grow the geometry by k&nbsp;=&nbsp;1000, drop frequency from 1&nbsp;GHz to 1&nbsp;MHz, and preserve the d/λ ratio (~7.14) so the wave physics carries over exactly. Conducted at ASU's Celano Lab, where the CAD models supported two lab research publications.</p>
+            </div>
+            <div class="spec-row">
+                <div class="spec"><span class="micro">Bond Pitch</span><span class="spec-value">10 µm</span></div>
+                <div class="spec"><span class="micro">Scale Factor</span><span class="spec-value">k = 1000</span></div>
+                <div class="spec"><span class="micro">Frequency</span><span class="spec-value">1 GHz → 1 MHz</span></div>
+                <div class="spec"><span class="micro">Invariant</span><span class="spec-value">d/λ ≈ 7.14</span></div>
+            </div>
+        </section>
         <div class="content-blocks">
             <div class="content-block">
                 <div class="text-container">
-                    <h1>Nanoelectronics Ultrasonic NDT</h1>
-                    <p>Since May 2024 at ASU’s Celano Lab, I’ve pioneered a novel scaling workflow for ultrasonic non-destructive testing (NDT) to detect defects in 10-micron pitch Cu-Cu hybrid bonds for advanced chiplet packaging. As a mechanical engineering student, I developed a simulation-based approach using CIVA NDT and SolidWorks, scaling microscale models to macroscale for faster, more accurate analysis. This project reflects my fascination with nanoelectronics, bridging the gap between theoretical physics and practical semiconductor reliability, crucial for next-generation electronics.</p>
+                    <div class="panel-head"><span>Scaling Model</span><span class="idx">.02</span></div>
+                    <p>Models are built in SolidWorks and solved in CIVA NDT, simulating scanning acoustic microscopy with wave propagation (∂²u/∂t² = c²∇²u) through the scaled bond stack at 10&nbsp;µm-equivalent resolution. The transform sidesteps CIVA's microscale viewport limits entirely, turning setups that fought the software into fast iterations for SAM inspection planning.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <p>The workflow scales model dimensions by a factor of k=1000 (10 μm to 10 mm) and reduces frequency from 1 GHz to 1 MHz, preserving the d/λ ratio (~7.14) for equivalent wave physics. I modeled this in SolidWorks, visualizing defect detection in chiplets, and simulated wave propagation (∂²u/∂t² = c²∇²u) in CIVA, achieving 10-micron resolution. My approach bypasses CIVA’s microscale viewport limitations, enabling rapid iteration for semiconductor quality assurance.</p>
+                    <div class="panel-head"><span>Wave Physics</span><span class="idx">.03</span></div>
+                    <p>The scaling holds only if the physics does. Reflection coefficients R = (Z₂−Z₁)/(Z₂+Z₁) are invariant under the transform; material properties (Cu at ρ = 8700&nbsp;kg/m³, water coupling) were validated against literature; and transducer focal geometry was re-derived at scale to keep beam behavior faithful. Material nonlinearity (σ = Eε + βε²) is the main fidelity limit being worked, handled with higher-order wave equations.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <p>Simulating ultrasonic waves at microscales posed significant challenges due to software resolution constraints and material nonlinearities (σ = Eε + βε²). I addressed this by deriving scaling equations, ensuring reflection coefficients (R = (Z₂ - Z₁)/(Z₂ + Z₁)) remained consistent across scales. Material properties (e.g., ρ=8700 kg/m³ for Cu, c=1400 m/s in water) were validated against literature. I also tackled transducer scaling, adjusting focal lengths to maintain beam accuracy, a critical step for detecting voids and delaminations in hybrid bonds.</p>
+                    <div class="panel-head"><span>Failure Analysis</span><span class="idx">.04</span></div>
+                    <p>In parallel, a comprehensive literature review of Cu–Cu hybrid bonding failure mechanisms mapped the defect landscape the simulations target: thermal-mechanical stresses from CTE mismatch, warpage, voids, and delamination in 3D stacks. That work extended into a technical presentation on through-silicon vias and interposer design for heterogeneous integration — the same solid mechanics, applied from nanoscale to aerospace structures.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <p>My simulations in CIVA confirmed defect visibility at scaled dimensions, with preliminary results showing a strong correlation to microscale models. Ongoing validation involves comparing scaled results to physical scanning acoustic microscopy (SAM) data, addressing nonlinearities via higher-order wave equations. This iterative process, driven by my independent research, positions the workflow as a scalable tool for industry adoption.</p>
+                    <div class="panel-head"><span>Validation &amp; Application</span><span class="idx">.05</span></div>
+                    <p>Scaled CIVA results resolve voids and delaminations at dimensions equivalent to the 10&nbsp;µm pitch, correlating with microscale reference models; ongoing validation compares simulated C-scans against physical SAM data on industry chiplet samples. The payoff is QA throughput for 3D packaging — the reliability bottleneck for AI and high-performance silicon — and the workflow generalizes to finer pitches and other NDT modalities.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <p>This project showcases my expertise in simulation, materials science, and innovative problem-solving, directly applicable to semiconductor manufacturing. By accelerating defect detection, it supports the reliability of 3D packaging, critical for AI and high-performance computing. The workflow’s scalability extends to other NDT tools and pitches (e.g., 5 μm), with potential to enhance QA efficiency.</p>
-                </div>
-            </div>
-            <div class="content-block">
-                <div class="text-container">
-                    <h2>References</h2>
+                    <div class="panel-head"><span>References</span><span class="idx">.06</span></div>
                     <ul class="custom-list">
-                        <li>CIVA NDT: <a href="https://www.extende.com/civa" target="_blank">Simulation Software</a></li>
-                        <li>SolidWorks: <a href="https://www.solidworks.com/solution/industry/electronics" target="_blank">Electronics Design</a></li>
-                        <li>Biermann et al., 2020: <a href="https://www.nature.com/articles/s41598-020-62215-8" target="_blank">Hyperspectral Plastic Signatures</a></li>
-                        <li>IEEE: <a href="https://ieeexplore.ieee.org/document/8735124" target="_blank">Nanoelectronics</a></li>
-                        <li>ScienceDirect: <a href="https://www.sciencedirect.com/science/article/pii/S2352484719300999" target="_blank">Ultrasonic NDT</a></li>
-                        <li>TSMC: <a href="https://www.tsmc.com/english/dedicatedFoundry/technology/3d_ic.htm" target="_blank">3D Packaging Technology</a></li>
-                        <li>ASU Celano Lab: <a href="https://celano.engineering.asu.edu/" target="_blank">Nanoelectronics Research</a></li>
-                        <li>SPIE: <a href="https://spie.org/photonics-west" target="_blank">Photonics and NDT</a></li>
+                        <li>CIVA NDT: <a href="https://www.extende.com/civa" target="_blank" rel="noopener">Simulation Software</a></li>
+                        <li>SolidWorks: <a href="https://www.solidworks.com/solution/industry/electronics" target="_blank" rel="noopener">Electronics Design</a></li>
+                        <li>IEEE: <a href="https://ieeexplore.ieee.org/document/8735124" target="_blank" rel="noopener">Nanoelectronics</a></li>
+                        <li>ScienceDirect: <a href="https://www.sciencedirect.com/science/article/pii/S2352484719300999" target="_blank" rel="noopener">Ultrasonic NDT</a></li>
+                        <li>TSMC: <a href="https://www.tsmc.com/english/dedicatedFoundry/technology/3d_ic.htm" target="_blank" rel="noopener">3D Packaging Technology</a></li>
+                        <li>ASU Celano Lab: <a href="https://celano.engineering.asu.edu/" target="_blank" rel="noopener">Nanoelectronics Research</a></li>
+                        <li>SPIE: <a href="https://spie.org/photonics-west" target="_blank" rel="noopener">Photonics and NDT</a></li>
                     </ul>
                 </div>
             </div>
         </div>
+
+        <nav class="pager">
+            <a href="wrongway.html" class="prev"><span class="label">← Prev</span>№04 Wrong-Way Prevention</a>
+            <a href="projects.html" class="home">Index</a>
+            <a href="slamdrone.html" class="next"><span class="label">Next →</span>№06 SLAM Drone</a>
+        </nav>
     </main>
+
+    <footer class="site-footer">
+        <span>Arkane Works — Independent Engineering Practice</span>
+        <span>Tempe, AZ — 33.42°N 111.94°W</span>
+        <span>Est. 2020 — KM7BER</span>
+    </footer>
+
     <div class="scroll-arrow">
         <svg viewBox="0 0 24 24">
             <path d="M12 20V4m0 16l-6-6m6 6l6-6"/>

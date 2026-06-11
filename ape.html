@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether Planetary Engine — Arkane Works</title>
+    <meta name="description" content="A.P.E. — a simulation-first study of planetary-surface infrastructure at Arkane Works. Details published as milestones are met.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d0d0d'/%3E%3Cpath d='M7 7h18v12l-6 6H7z' fill='%23e7e7e2'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="menu-bar">
+        <a href="index.html" class="website-name">
+            <span class="brand-glyph" aria-hidden="true"><svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M0 0H14V9L9 14H0Z"/></svg></span>
+            Arkane Works
+        </a>
+        <span class="doc-code">AW–P02 · Active Program</span>
+        <button class="menu-button" aria-label="Toggle menu">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </button>
+        <nav class="menu-links">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="projects.html">Index<span class="nav-caret">+</span></a>
+                    <ul class="dropdown-content">
+                        <li class="dropdown-group">Present</li>
+                        <li><a href="aft.html"><span class="dd-code">P-01</span>Aerondight Flight Technologies</a></li>
+                        <li><a href="ape.html"><span class="dd-code">P-02</span>Aether Planetary Engine</a></li>
+                        <li><a href="sus.html"><span class="dd-code">P-03</span>Stormveil UAV Systems</a></li>
+                        <li class="dropdown-group">Past</li>
+                        <li><a href="lunar.html"><span class="dd-code">01</span>Moon Presence</a></li>
+                        <li><a href="heat.html"><span class="dd-code">02</span>Heat Resilience Challenge</a></li>
+                        <li><a href="cubesat.html"><span class="dd-code">03</span>Gorgon CubeSat</a></li>
+                        <li><a href="wrongway.html"><span class="dd-code">04</span>Wrong-Way Prevention</a></li>
+                        <li><a href="nano.html"><span class="dd-code">05</span>Ultrasonic NDT</a></li>
+                        <li><a href="slamdrone.html"><span class="dd-code">06</span>SLAM Drone</a></li>
+                        <li><a href="ax10.html"><span class="dd-code">07</span>AX-1.0 Patriot</a></li>
+                        <li><a href="ax11.html"><span class="dd-code">08</span>AX-1.1 DEMONstrator</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+    <main class="scroll-container">
+        <section class="project-hero reveal">
+            <p class="crumbs micro">Index <span class="sep">/</span> Present <span class="sep">/</span> P-02 <span class="sep">/</span> <span class="status"><span class="status-dot"></span>Active</span></p>
+            <h1 class="project-title">Aether Planetary Engine</h1>
+            <div class="hero-panel">
+                <p>A.P.E. is a simulation-first study of planetary-surface infrastructure, growing out of the Moon Presence work: power generation and distribution, regolith handling, and the thermal realities of operating machines through a 14-day lunar night. The current aim is narrow by design — build models worth trusting, validate them against published mission data, and let the scope earn its way up. Anything more specific would be a promise the models haven't earned yet.</p>
+            </div>
+            <div class="spec-row">
+                <div class="spec"><span class="micro">Phase</span><span class="spec-value">Study</span></div>
+                <div class="spec"><span class="micro">Lineage</span><span class="spec-value">Moon Presence</span></div>
+                <div class="spec"><span class="micro">Disclosure</span><span class="spec-value">Limited</span></div>
+                <div class="spec"><span class="micro">Next Update</span><span class="spec-value">Model Validation</span></div>
+            </div>
+            <div class="btn-row" style="margin-top: 36px;">
+                <a href="projects.html" class="btn">← Back to Index</a>
+                <a href="lunar.html" class="btn">Prior Work: Moon Presence →</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <span>Arkane Works — Independent Engineering Practice</span>
+        <span>Tempe, AZ — 33.42°N 111.94°W</span>
+        <span>Est. 2020 — KM7BER</span>
+    </footer>
+</body>
+</html>

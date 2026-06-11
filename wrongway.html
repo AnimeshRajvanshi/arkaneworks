@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mechanical Wrong-Way Driving Prevention System - Accretion Technologies</title>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;500;600&display=swap" rel="stylesheet">
+    <title>Wrong-Way Prevention — Arkane Works</title>
+    <meta name="description" content="ASU capstone: an active speed hump rated to 1000 lbf with Arduino-based direction detection achieving under 1% false detections.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d0d0d'/%3E%3Cpath d='M7 7h18v12l-6 6H7z' fill='%23e7e7e2'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
-<body class="non-arkane-project">
+<body>
     <canvas class="animation-canvas" data-frame-folder="wrongway_frames"></canvas>
     <header class="menu-bar">
-        <a href="index.html" class="website-name">ACCRETION TECHNOLOGIES</a>
+        <a href="index.html" class="website-name">
+            <span class="brand-glyph" aria-hidden="true"><svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M0 0H14V9L9 14H0Z"/></svg></span>
+            Arkane Works
+        </a>
+        <span class="doc-code">AW–04 · Archived Record</span>
         <button class="menu-button" aria-label="Toggle menu">
             <span class="line"></span>
             <span class="line"></span>
@@ -21,76 +29,104 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li class="dropdown">
-                    <a href="projects.html">Projects</a>
+                    <a href="projects.html">Index<span class="nav-caret">+</span></a>
                     <ul class="dropdown-content">
-                        <li><a href="ax10.html">AX-1.0: Patriot Rocket</a></li>
-                        <li><a href="ax11.html">AX-1.1: DEMONstrator Rocket</a></li>
-                        <li><a href="slamdrone.html">SLAM Drone</a></li>
-                        <li><a href="lunar.html">Moon Presence</a></li>
-                        <li><a href="cubesat.html">Gorgon CubeSat</a></li>
-                        <li><a href="nano.html">Nanoelectronics Ultrasonic NDT</a></li>
-                        <li><a href="heat.html">Heat Resilience Challenge</a></li>
-                        <li><a href="wrongway.html">Mechanical Wrong-Way Prevention</a></li>
+                        <li class="dropdown-group">Present</li>
+                        <li><a href="aft.html"><span class="dd-code">P-01</span>Aerondight Flight Technologies</a></li>
+                        <li><a href="ape.html"><span class="dd-code">P-02</span>Aether Planetary Engine</a></li>
+                        <li><a href="sus.html"><span class="dd-code">P-03</span>Stormveil UAV Systems</a></li>
+                        <li class="dropdown-group">Past</li>
+                        <li><a href="lunar.html"><span class="dd-code">01</span>Moon Presence</a></li>
+                        <li><a href="heat.html"><span class="dd-code">02</span>Heat Resilience Challenge</a></li>
+                        <li><a href="cubesat.html"><span class="dd-code">03</span>Gorgon CubeSat</a></li>
+                        <li><a href="wrongway.html"><span class="dd-code">04</span>Wrong-Way Prevention</a></li>
+                        <li><a href="nano.html"><span class="dd-code">05</span>Ultrasonic NDT</a></li>
+                        <li><a href="slamdrone.html"><span class="dd-code">06</span>SLAM Drone</a></li>
+                        <li><a href="ax10.html"><span class="dd-code">07</span>AX-1.0 Patriot</a></li>
+                        <li><a href="ax11.html"><span class="dd-code">08</span>AX-1.1 DEMONstrator</a></li>
                     </ul>
                 </li>
-                <li><a href="about.html">About Me</a></li>
+                <li><a href="about.html">About</a></li>
             </ul>
         </nav>
     </header>
+    <div class="scroll-progress" aria-hidden="true"></div>
+
     <main class="scroll-container">
         <section class="page video-background">
             <div class="video-container">
                 <video class="background-video" autoplay muted loop playsinline preload="auto">
                     <source src="/assets/wrongway-video1.mp4" type="video/mp4">
-                    Your browser does not support the video tag. Please ensure your browser is up to date.
+                    Your browser does not support the video tag.
                 </video>
             </div>
             <div class="content">
-                <div class="text-container">
-                    <h1>Mechanical Wrong-Way Driving Prevention System</h1>
-                    <p>The Mechanical Wrong-Way Driving Prevention System, my 2024 Mechanical Engineering capstone at Arizona State University, addresses the critical issue of wrong-way driving on highways, a problem causing numerous fatalities annually in Arizona. As the electronics subsystem lead within a seven-member team, I designed and integrated an Arduino-based alerting system to complement the mechanical speed hump design. This project showcases my skills in electronics integration, mechanical design, and active collaboration, contributing to a team effort aimed at enhancing public safety through innovative engineering.</p>
+                <p class="crumbs micro">Index <span class="sep">/</span> Past <span class="sep">/</span> №04 <span class="sep">/</span> Mechatronics / Road Safety</p>
+                <h1 class="project-title">Wrong-Way Prevention</h1>
+                <div class="hero-panel">
+                    <p>My 2024 mechanical engineering capstone at ASU: a mechanical countermeasure for wrong-way driving — an active speed hump with spring-actuated, depressible stainless-steel ramps that read as a jolt to a wrong-way vehicle and pass benignly under correct traffic. Within the seven-member team I owned the electrical subsystem end to end: detection, control logic, and alerting. Built within a $700 budget; final cost roughly $400.</p>
+                </div>
+                <div class="spec-row">
+                    <div class="spec"><span class="micro">Load Capacity</span><span class="spec-value">1000 lbf</span></div>
+                    <div class="spec"><span class="micro">FEA Safety Factor</span><span class="spec-value">2.5–3.3</span></div>
+                    <div class="spec"><span class="micro">False Detections</span><span class="spec-value">&lt; 1%</span></div>
+                    <div class="spec"><span class="micro">Controller</span><span class="spec-value">Arduino Uno R3</span></div>
                 </div>
             </div>
         </section>
         <div class="content-blocks">
             <div class="content-block">
                 <div class="text-container">
-                    <p>Wrong-way crashes are a significant safety concern, often caused by impaired drivers at night (Arizona DOT). Our team designed a pointed, hinged speed hump using SolidWorks, featuring steel plates and shoulder bolts for durability. I took sole responsibility for the electrical subsystem, integrating Arduino-based contact switches and LED alerts to detect and signal wrong-way movement. The system was developed within a $700 budget, with a final estimated cost of approximately $400, reflecting efficient resource use.</p>
+                    <div class="panel-head"><span>Mechanical Design</span><span class="idx">.02</span></div>
+                    <p>The hump uses pointed, hinged ramp plates in stainless steel with shoulder bolts for durability, achieving a 1000&nbsp;lbf load capacity with controlled vertical displacement under vehicle weight. ANSYS FEA validated the structure at safety factors of 2.5–3.3 under maximum design loads. The prototype evolved from a plywood mock-up to a steel build, with springs and rollers added for actuation life.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <p>The mechanical system includes depressible ramps connected by hinges, validated through team-conducted finite element analysis (FEA) in ANSYS to ensure structural integrity under heavy loads. My electrical design utilized aluminum foil contact switches beneath the plates, wired to an Arduino Uno R3, to detect direction and activate LED alerts. I optimized the circuit for low power (5V, 20 mA) and reliability in harsh weather conditions. The steel prototype, evolved from an initial plywood model, was tested for durability and driver feedback in low-speed trials.</p>
+                    <div class="panel-head"><span>Detection Electronics</span><span class="idx">.03</span></div>
+                    <p>Direction sensing uses contact-switch sequencing beneath the plates — aluminum-foil switches chosen deliberately for cost and weather tolerance — wired to an Arduino Uno R3 that discriminates approach direction from differential ramp-depression timing and drives LED alerts. The circuit runs at 5&nbsp;V / 20&nbsp;mA and was designed for reliability outdoors rather than elegance on a bench.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <p>Live demonstrations validated the system’s functionality: the humps provided a noticeable jolt to drivers, while my electrical circuit accurately signaled wrong-way detection via LEDs. Low-speed tests confirmed no vehicle damage, with springs and rollers enhancing durability. I contributed to data analysis, correlating FEA results with test outcomes, supporting the design’s potential for real-world use. Future testing could include fatigue analysis for high-speed scenarios, a tentative goal to refine the system further.</p>
+                    <div class="panel-head"><span>Testing</span><span class="idx">.04</span></div>
+                    <p>Live low-speed demonstrations validated both halves of the system: reliable ramp actuation with an unmistakable jolt in the wrong-way direction, and direction discrimination with under 1% false detections across passes — with no vehicle damage. FEA predictions were correlated against test outcomes; high-speed fatigue testing is the known next step the archive leaves open.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <h2>Credits</h2>
-                    <p>Team Members: Sultan Al Ali, Eric Baylon, Aleily Partida, Animesh Rajvanshi, Rachel Thomas, Amie Trescott</p>
+                    <div class="panel-head"><span>Credits &amp; References</span><span class="idx">.05</span></div>
+                    <h2>Team</h2>
+                    <p>Sultan Al Ali, Eric Baylon, Aleily Partida, Animesh Rajvanshi, Rachel Thomas, Amie Trescott</p>
                     <h2>References</h2>
                     <ul class="custom-list">
-                        <li>DM Cantor: <a href="https://dmcantor.com/blog/arizona-wrong-way-drivers-causes-possible-charges-defenses" target="_blank">Wrong-Way Crashes in Arizona</a></li>
-                        <li>Federal Highway Administration: <a href="https://highways.dot.gov/safety/speed-management/traffic-calming-eprimer" target="_blank">Traffic Calming ePrimer</a></li>
-                        <li>Arizona Department of Transportation: <a href="https://azdot.gov/motor-vehicles/statistics/wrong-way-driving" target="_blank">Wrong-Way Driving Data</a></li>
-                        <li>Shigley’s Mechanical Design: <a href="https://www.mheducation.com/highered/product/shigley-s-mechanical-engineering-design-budynas-nisbett/M9780073398204.html" target="_blank">10th Edition, Chapter 10</a></li>
-                        <li>Koba Kant: <a href="https://www.kobakant.at/DIY/?p=8906" target="_blank">Paper + Aluminum Foil Contact Switch</a></li>
-                        <li>SolidWorks: <a href="https://www.solidworks.com/support/finite-element-analysis" target="_blank">Finite Element Analysis Guide</a></li>
-                        <li>Arduino: <a href="https://www.arduino.cc/en/Tutorial/BuiltInExamples" target="_blank">Basic Circuit Design</a></li>
-                        <li>IEEE: <a href="https://ieeexplore.ieee.org/document/8735124" target="_blank">Transportation Safety</a></li>
-                        <li>ScienceDirect: <a href="https://www.sciencedirect.com/science/article/pii/S2352484719300999" target="_blank">Wrong-Way Driving Countermeasures</a></li>
-                        <li>National Highway Traffic Safety Administration: <a href="https://www.nhtsa.gov/road-safety" target="_blank">Road Safety Data</a></li>
-                        <li>ASU Engineering: <a href="https://engineering.asu.edu/" target="_blank">Capstone Project Resources</a></li>
-                        <li>ANSYS: <a href="https://www.ansys.com/applications/automotive" target="_blank">Automotive Simulation</a></li>
+                        <li>Arizona DOT: <a href="https://azdot.gov/motor-vehicles/statistics/wrong-way-driving" target="_blank" rel="noopener">Wrong-Way Driving Data</a></li>
+                        <li>FHWA: <a href="https://highways.dot.gov/safety/speed-management/traffic-calming-eprimer" target="_blank" rel="noopener">Traffic Calming ePrimer</a></li>
+                        <li>NHTSA: <a href="https://www.nhtsa.gov/road-safety" target="_blank" rel="noopener">Road Safety Data</a></li>
+                        <li>Shigley's Mechanical Design: <a href="https://www.mheducation.com/highered/product/shigley-s-mechanical-engineering-design-budynas-nisbett/M9780073398204.html" target="_blank" rel="noopener">10th Edition, Chapter 10</a></li>
+                        <li>Koba Kant: <a href="https://www.kobakant.at/DIY/?p=8906" target="_blank" rel="noopener">Aluminum Foil Contact Switch</a></li>
+                        <li>SolidWorks: <a href="https://www.solidworks.com/support/finite-element-analysis" target="_blank" rel="noopener">Finite Element Analysis Guide</a></li>
+                        <li>Arduino: <a href="https://www.arduino.cc/en/Tutorial/BuiltInExamples" target="_blank" rel="noopener">Basic Circuit Design</a></li>
+                        <li>ANSYS: <a href="https://www.ansys.com/applications/automotive" target="_blank" rel="noopener">Automotive Simulation</a></li>
+                        <li>ASU Engineering: <a href="https://engineering.asu.edu/" target="_blank" rel="noopener">Capstone Project Resources</a></li>
                     </ul>
                 </div>
             </div>
         </div>
+
+        <nav class="pager">
+            <a href="cubesat.html" class="prev"><span class="label">← Prev</span>№03 Gorgon CubeSat</a>
+            <a href="projects.html" class="home">Index</a>
+            <a href="nano.html" class="next"><span class="label">Next →</span>№05 Ultrasonic NDT</a>
+        </nav>
     </main>
+
+    <footer class="site-footer">
+        <span>Arkane Works — Independent Engineering Practice</span>
+        <span>Tempe, AZ — 33.42°N 111.94°W</span>
+        <span>Est. 2020 — KM7BER</span>
+    </footer>
+
     <div class="scroll-arrow">
         <svg viewBox="0 0 24 24">
             <path d="M12 20V4m0 16l-6-6m6 6l6-6"/>
