@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moon Presence - Accretion Technologies</title>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;500;600&display=swap" rel="stylesheet">
+    <title>Moon Presence — Arkane Works</title>
+    <meta name="description" content="Moon Presence: lunar surface power infrastructure for NASA's Watts on the Moon — cable-laying rover, fission architecture, and regolith-tolerant mobility.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d0d0d'/%3E%3Cpath d='M7 7h18v12l-6 6H7z' fill='%23e7e7e2'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
-<body class="non-arkane-project">
+<body>
     <canvas class="animation-canvas" data-frame-folder="lunar_frames"></canvas>
     <header class="menu-bar">
-        <a href="index.html" class="website-name">ACCRETION TECHNOLOGIES</a>
+        <a href="index.html" class="website-name">
+            <span class="brand-glyph" aria-hidden="true"><svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M0 0H14V9L9 14H0Z"/></svg></span>
+            Arkane Works
+        </a>
+        <span class="doc-code">AW–01 · Archived Record</span>
         <button class="menu-button" aria-label="Toggle menu">
             <span class="line"></span>
             <span class="line"></span>
@@ -21,63 +29,99 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li class="dropdown">
-                    <a href="projects.html">Projects</a>
+                    <a href="projects.html">Index<span class="nav-caret">+</span></a>
                     <ul class="dropdown-content">
-                        <li><a href="ax10.html">AX-1.0: Patriot Rocket</a></li>
-                        <li><a href="ax11.html">AX-1.1: DEMONstrator Rocket</a></li>
-                        <li><a href="slamdrone.html">SLAM Drone</a></li>
-                        <li><a href="lunar.html">Moon Presence</a></li>
-                        <li><a href="cubesat.html">Gorgon CubeSat</a></li>
-                        <li><a href="nano.html">Nanoelectronics Ultrasonic NDT</a></li>
-                        <li><a href="heat.html">Heat Resilience Challenge</a></li>
-                        <li><a href="wrongway.html">Mechanical Wrong-Way Prevention</a></li>
+                        <li class="dropdown-group">Present</li>
+                        <li><a href="aft.html"><span class="dd-code">P-01</span>Aerondight Flight Technologies</a></li>
+                        <li><a href="ape.html"><span class="dd-code">P-02</span>Aether Planetary Engine</a></li>
+                        <li><a href="sus.html"><span class="dd-code">P-03</span>Stormveil UAV Systems</a></li>
+                        <li class="dropdown-group">Past</li>
+                        <li><a href="lunar.html"><span class="dd-code">01</span>Moon Presence</a></li>
+                        <li><a href="heat.html"><span class="dd-code">02</span>Heat Resilience Challenge</a></li>
+                        <li><a href="cubesat.html"><span class="dd-code">03</span>Gorgon CubeSat</a></li>
+                        <li><a href="wrongway.html"><span class="dd-code">04</span>Wrong-Way Prevention</a></li>
+                        <li><a href="nano.html"><span class="dd-code">05</span>Ultrasonic NDT</a></li>
+                        <li><a href="slamdrone.html"><span class="dd-code">06</span>SLAM Drone</a></li>
+                        <li><a href="ax10.html"><span class="dd-code">07</span>AX-1.0 Patriot</a></li>
+                        <li><a href="ax11.html"><span class="dd-code">08</span>AX-1.1 DEMONstrator</a></li>
                     </ul>
                 </li>
-                <li><a href="about.html">About Me</a></li>
+                <li><a href="about.html">About</a></li>
             </ul>
         </nav>
     </header>
+    <div class="scroll-progress" aria-hidden="true"></div>
+
     <main class="scroll-container">
+        <section class="project-hero reveal">
+            <p class="crumbs micro">Index <span class="sep">/</span> Past <span class="sep">/</span> №01 <span class="sep">/</span> Lunar Infrastructure</p>
+            <h1 class="project-title">Moon Presence</h1>
+            <div class="hero-panel">
+                <p>Moon Presence began as an entry to NASA's Watts on the Moon Challenge: a cable-laying rover system for distributing power across the lunar surface to Artemis-era sites, connecting 100&nbsp;kWh battery hubs into a scalable network. The design problem is the environment — −180&nbsp;°C nights, +130&nbsp;°C days, abrasive regolith, 14-day light/dark cycles — and the work centered on a trenching mechanism and thermal resilience that survive it. I served as project manager on a small multidisciplinary team, and the study kept growing for five years.</p>
+            </div>
+            <div class="spec-row">
+                <div class="spec"><span class="micro">Environment</span><span class="spec-value">−180 / +130 °C</span></div>
+                <div class="spec"><span class="micro">Battery Hubs</span><span class="spec-value">100 kWh</span></div>
+                <div class="spec"><span class="micro">Fission Study</span><span class="spec-value">40–100 kW</span></div>
+                <div class="spec"><span class="micro">Fidelity</span><span class="spec-value">TRL 4–5</span></div>
+            </div>
+        </section>
         <div class="content-blocks">
             <div class="content-block">
                 <div class="text-container">
-                    <h1>Moon Presence</h1>
-                    <p>The Moon Presence, developed for NASA’s 2023 Watts on the Moon Challenge, is a conceptual design to establish a sustainable energy infrastructure on the lunar surface, delivering power to Artemis mission sites. As a mechanical engineering student at Arizona State University, I collaborated with a small multidisciplinary team to create a cable-laying rover system capable of operating in the Moon’s extreme environment. My focus was on designing a robust trenching mechanism and ensuring thermal resilience, addressing challenges like -173°C temperatures, abrasive regolith, and 14-day light-dark cycles.</p>
+                    <div class="panel-head"><span>Trenching &amp; Mobility</span><span class="idx">.02</span></div>
+                    <p>The rover lays cable with a scoop-and-conveyor trenching tool adapted from an electric dog-fence cable layer — displacing regolith while keeping dust generation low. The chassis adapts the JAXA–Toyota Lunar Cruiser platform for stability on uneven terrain. Early ANSYS cases on ceramic cable coatings checked structural integrity under 1/6&nbsp;g loading and thermal cycling across the full lunar swing.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <p>Our design centered on a solar-powered rover equipped with a trenching tool to lay power cables, connecting solar arrays to habitats. We modeled the trenching mechanism after an electric dog collar laying mechanism, incorporating a scoop-and-conveyor system to displace regolith while minimizing dust generation. The rover’s chassis, modeled after JAXA-Toyota Artemis Rover, was designed for stability on uneven terrain. Primitive ANSYS simulations on ceramic cable coatings validated structural integrity under lunar gravity (1/6th Earth’s) and thermal cycling (-173°C to 127°C). My contribution, as project manager, ensured the system could operate autonomously, aligning with NASA’s goal of scalable lunar infrastructure.</p>
+                    <div class="panel-head"><span>Environment &amp; Materials</span><span class="idx">.03</span></div>
+                    <p>Abrasive regolith drives wear; lunar night drives storage. Titanium alloys were selected for trenching surfaces, cable insulation was sized for thermal extremes, and preliminary ANSYS thermal runs predicted manageable conductor temperatures through the 14-day night. As project manager I carried the power-delivery budget against NASA's mass and cost constraints — systems-level bookkeeping that decided more of the design than any single component did.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <p>The lunar environment posed unique hurdles: abrasive regolith threatened mechanical wear, while prolonged darkness demanded efficient energy storage. We tackled these by selecting abrasion-resistant materials (e.g., titanium alloys) for the trenching tool and optimizing cable insulation for thermal extremes. Preliminary thermal analysis in ANSYS predicted effective heat management, critical for maintaining cable performance during lunar nights. Coordinating with teammates on power distribution, I ensured the system met NASA’s power delivery target while staying within mass and cost constraints, demonstrating systems-level thinking.</p>
+                    <div class="panel-head"><span>Expanded Architecture</span><span class="idx">.04</span></div>
+                    <p>For Amentum's "Back to the Moon" Challenge, the study grew past cable-laying into a nuclear-enhanced power architecture: an in-situ 40–100&nbsp;kW fission reactor integrated with ISRU regolith processing, plasma boring for lava-tube habitat excavation, and electrostatic dust mitigation — carried to TRL&nbsp;4–5 concept fidelity, with on-site generation cutting projected mission resupply by 20–30%.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <p>The Moon Presence showcases the ability to blend mechanical design, thermal engineering, and systems integration for space applications. By addressing energy delivery for Artemis missions, this project supports NASA’s vision for sustainable lunar exploration, potentially powering habitats, rovers, and scientific experiments. My contributions highlight skills in CAD, simulation, and creative problem-solving, applicable to aerospace challenges. Future work could involve prototyping the rover and encorporating a real dog-collar trencher into the scaled model, a tentative goal to pave the way for lunar deployment and beyond.</p>
+                    <div class="panel-head"><span>MicroChariot Wheels</span><span class="idx">.05</span></div>
+                    <p>A parallel thread for NASA's Rock and Roll Challenge developed compliant, lightweight wheel/tire prototypes for the MicroChariot rover — 19-inch wheels carrying a 100&nbsp;lb payload across simulated regolith, designed for a −250&nbsp;°F to +250&nbsp;°F operating range. The geometry trades shock absorption against regolith durability, and scales toward Artemis-class mobility requirements.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <h2>References</h2>
+                    <div class="panel-head"><span>References</span><span class="idx">.06</span></div>
                     <ul class="custom-list">
-                        <li>NASA: <a href="https://www.nasa.gov/directors-message-watts-on-the-moon-challenge/" target="_blank">Watts on the Moon Challenge</a></li>
-                        <li>SolidWorks: <a href="https://www.solidworks.com/solution/industry/aerospace-defense" target="_blank">Aerospace Design Solutions</a></li>
-                        <li>ANSYS: <a href="https://www.ansys.com/applications/aerospace-defense" target="_blank">Thermal Analysis for Space</a></li>
-                        <li>ESA: <a href="https://www.esa.int/Enabling_Support/Space_Engineering_Technology/Lunar_regolith" target="_blank">Lunar Regolith Properties</a></li>
-                        <li>Apollo Lunar Surface Journal: <a href="https://www.hq.nasa.gov/alsj/" target="_blank">Apollo Mission Data</a></li>
-                        <li>IEEE: <a href="https://ieeexplore.ieee.org/document/8735124" target="_blank">Space Systems Engineering</a></li>
-                        <li>ScienceDirect: <a href="https://www.sciencedirect.com/science/article/pii/S2352484719300999" target="_blank">Lunar Surface Engineering</a></li>
-                        <li>ASU SpaceWorks: <a href="https://spaceworks.asu.edu/" target="_blank">Space Technology Research</a></li>
-                        <li>JPL: <a href="https://www.jpl.nasa.gov/missions/artemis" target="_blank">Artemis Program Overview</a></li>
+                        <li>NASA: <a href="https://www.nasa.gov/directors-message-watts-on-the-moon-challenge/" target="_blank" rel="noopener">Watts on the Moon Challenge</a></li>
+                        <li>SolidWorks: <a href="https://www.solidworks.com/solution/industry/aerospace-defense" target="_blank" rel="noopener">Aerospace Design Solutions</a></li>
+                        <li>ANSYS: <a href="https://www.ansys.com/applications/aerospace-defense" target="_blank" rel="noopener">Thermal Analysis for Space</a></li>
+                        <li>ESA: <a href="https://www.esa.int/Enabling_Support/Space_Engineering_Technology/Lunar_regolith" target="_blank" rel="noopener">Lunar Regolith Properties</a></li>
+                        <li>Apollo Lunar Surface Journal: <a href="https://www.hq.nasa.gov/alsj/" target="_blank" rel="noopener">Apollo Mission Data</a></li>
+                        <li>IEEE: <a href="https://ieeexplore.ieee.org/document/8735124" target="_blank" rel="noopener">Space Systems Engineering</a></li>
+                        <li>ScienceDirect: <a href="https://www.sciencedirect.com/science/article/pii/S2352484719300999" target="_blank" rel="noopener">Lunar Surface Engineering</a></li>
+                        <li>ASU SpaceWorks: <a href="https://spaceworks.asu.edu/" target="_blank" rel="noopener">Space Technology Research</a></li>
+                        <li>JPL: <a href="https://www.jpl.nasa.gov/missions/artemis" target="_blank" rel="noopener">Artemis Program Overview</a></li>
                     </ul>
                 </div>
             </div>
         </div>
+
+        <nav class="pager">
+            <a href="ax11.html" class="prev"><span class="label">← Prev</span>№08 AX-1.1 DEMONstrator</a>
+            <a href="projects.html" class="home">Index</a>
+            <a href="heat.html" class="next"><span class="label">Next →</span>№02 Heat Resilience</a>
+        </nav>
     </main>
+
+    <footer class="site-footer">
+        <span>Arkane Works — Independent Engineering Practice</span>
+        <span>Tempe, AZ — 33.42°N 111.94°W</span>
+        <span>Est. 2020 — KM7BER</span>
+    </footer>
+
     <div class="scroll-arrow">
         <svg viewBox="0 0 24 24">
             <path d="M12 20V4m0 16l-6-6m6 6l6-6"/>

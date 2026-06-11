@@ -3,14 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heat Resilience Challenge - Accretion Technologies</title>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;500;600&display=swap" rel="stylesheet">
+    <title>Heat Resilience Challenge — Arkane Works</title>
+    <meta name="description" content="A low-energy ventilation system for Arizona mobile homes: PC-inspired airflow design validated to a 12–18 °C interior reduction in ANSYS Fluent.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d0d0d'/%3E%3Cpath d='M7 7h18v12l-6 6H7z' fill='%23e7e7e2'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
-<body class="non-arkane-project">
+<body>
     <header class="menu-bar">
-        <a href="index.html" class="website-name">ACCRETION TECHNOLOGIES</a>
+        <a href="index.html" class="website-name">
+            <span class="brand-glyph" aria-hidden="true"><svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M0 0H14V9L9 14H0Z"/></svg></span>
+            Arkane Works
+        </a>
+        <span class="doc-code">AW–02 · Archived Record</span>
         <button class="menu-button" aria-label="Toggle menu">
             <span class="line"></span>
             <span class="line"></span>
@@ -20,74 +28,99 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li class="dropdown">
-                    <a href="projects.html">Projects</a>
+                    <a href="projects.html">Index<span class="nav-caret">+</span></a>
                     <ul class="dropdown-content">
-                        <li><a href="ax10.html">AX-1.0: Patriot Rocket</a></li>
-                        <li><a href="ax11.html">AX-1.1: DEMONstrator Rocket</a></li>
-                        <li><a href="slamdrone.html">SLAM Drone</a></li>
-                        <li><a href="lunar.html">Moon Presence</a></li>
-                        <li><a href="cubesat.html">Gorgon CubeSat</a></li>
-                        <li><a href="nano.html">Nanoelectronics Ultrasonic NDT</a></li>
-                        <li><a href="heat.html">Heat Resilience Challenge</a></li>
-                        <li><a href="wrongway.html">Mechanical Wrong-Way Prevention</a></li>
+                        <li class="dropdown-group">Present</li>
+                        <li><a href="aft.html"><span class="dd-code">P-01</span>Aerondight Flight Technologies</a></li>
+                        <li><a href="ape.html"><span class="dd-code">P-02</span>Aether Planetary Engine</a></li>
+                        <li><a href="sus.html"><span class="dd-code">P-03</span>Stormveil UAV Systems</a></li>
+                        <li class="dropdown-group">Past</li>
+                        <li><a href="lunar.html"><span class="dd-code">01</span>Moon Presence</a></li>
+                        <li><a href="heat.html"><span class="dd-code">02</span>Heat Resilience Challenge</a></li>
+                        <li><a href="cubesat.html"><span class="dd-code">03</span>Gorgon CubeSat</a></li>
+                        <li><a href="wrongway.html"><span class="dd-code">04</span>Wrong-Way Prevention</a></li>
+                        <li><a href="nano.html"><span class="dd-code">05</span>Ultrasonic NDT</a></li>
+                        <li><a href="slamdrone.html"><span class="dd-code">06</span>SLAM Drone</a></li>
+                        <li><a href="ax10.html"><span class="dd-code">07</span>AX-1.0 Patriot</a></li>
+                        <li><a href="ax11.html"><span class="dd-code">08</span>AX-1.1 DEMONstrator</a></li>
                     </ul>
                 </li>
-                <li><a href="about.html">About Me</a></li>
+                <li><a href="about.html">About</a></li>
             </ul>
         </nav>
     </header>
+    <div class="scroll-progress" aria-hidden="true"></div>
+
     <main class="scroll-container">
         <section class="page video-background">
             <div class="video-container">
                 <video class="background-video" autoplay muted loop playsinline preload="auto">
                     <source src="/assets/heat-video.mp4" type="video/mp4">
-                    Your browser does not support the video tag. Please ensure your browser is up to date.
+                    Your browser does not support the video tag.
                 </video>
             </div>
             <div class="content">
-                <div class="text-container">
-                    <h1>Heat Resilience Challenge</h1>
-                    <p>The Heat Resilience Challenge, undertaken in 2022 through ASU’s EPICS program, aimed to mitigate urban heat island effects for Arizona’s mobile home residents, a community vulnerable to extreme temperatures. As a mechanical engineering student, I collaborated with a team to evaluate cooling solutions, later independently designing a PC-inspired ventilation system using SolidWorks and ANSYS. This project reflects my commitment to sustainable engineering, blending thermal dynamics and community-focused design to improve livability in harsh climates.</p>
+                <p class="crumbs micro">Index <span class="sep">/</span> Past <span class="sep">/</span> №02 <span class="sep">/</span> Thermal / Community Systems</p>
+                <h1 class="project-title">Heat Resilience Challenge</h1>
+                <div class="hero-panel">
+                    <p>A low-energy cooling study for Arizona's mobile-home residents — among the most heat-exposed housing stock in the country — run through ASU's EPICS program, where I led the thermal-management sub-team. Phase one was a structured comparison of cooling options using the Analytic Hierarchy Process; phase two, an independently designed PC-inspired ventilation system modeled in SolidWorks and verified with ANSYS Fluent under Arizona summer conditions.</p>
+                </div>
+                <div class="spec-row">
+                    <div class="spec"><span class="micro">Interior ΔT</span><span class="spec-value">12–18 °C</span></div>
+                    <div class="spec"><span class="micro">Ambient Case</span><span class="spec-value">45 °C</span></div>
+                    <div class="spec"><span class="micro">Fans</span><span class="spec-value">120 mm · 80 CFM</span></div>
+                    <div class="spec"><span class="micro">Power Draw</span><span class="spec-value">15 W</span></div>
                 </div>
             </div>
         </section>
         <div class="content-blocks">
             <div class="content-block">
                 <div class="text-container">
-                    <p>Our team conducted a comprehensive market analysis using the Analytic Hierarchy Process (AHP) to compare portable ACs, misters, and solar panels for cost, efficiency, and scalability. I contributed to weighting criteria (e.g., energy use, installation cost), identifying portable ACs as the most viable for short-term relief. We presented findings to community stakeholders, securing feedback that shaped my independent design phase. This collaborative effort honed my ability to balance technical and social considerations in engineering solutions.</p>
+                    <div class="panel-head"><span>Trade Study</span><span class="idx">.02</span></div>
+                    <p>The team evaluated air-conditioning units, evaporative coolers, and photovoltaic systems with AHP — weighting cost, energy efficiency, and cooling effectiveness as a multi-criteria optimization rather than a gut call. Portable AC scored best for short-term relief, and presenting the findings to community stakeholders produced the feedback that shaped the independent design phase that followed.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <p>Inspired by PC cooling systems, I designed a mobile home ventilation unit in SolidWorks, integrating high-efficiency PC fans (120 mm, 80 CFM) and protective flaps to enhance airflow while blocking dust. The system, modeled for a 400 sq ft home, used a continuous loop to circulate cool air, with ANSYS simulations predicting a noticeable temperature reduction. I optimized fan placement to minimize power draw (15 W), making it solar-compatible, aligning with the project’s sustainability goals and community budget constraints.</p>
+                    <div class="panel-head"><span>Ventilation Design</span><span class="idx">.03</span></div>
+                    <p>The unit moves air the way a PC case does: high-efficiency 120&nbsp;mm fans (80&nbsp;CFM each) in an intake/exhaust configuration driving a continuous circulation loop sized for a 400&nbsp;sq&nbsp;ft home, with protective flaps blocking dust ingress. Total draw is 15&nbsp;W — low enough to run from a small solar panel — with fan placement optimized in CFD before any hardware was cut.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <p>ANSYS fluid dynamics simulations, validated with colored smoke visualization in a scaled prototype, confirmed the cooling loop’s efficacy, achieving consistent airflow. I iterated the design to reduce turbulence, adjusting flap angles based on CFD results. The system’s low-cost materials (e.g., ABS plastic, aluminum mesh) ensured affordability, with a projected cost of $150 per unit. This phase demonstrated my proficiency in thermal engineering and simulation-driven design optimization.</p>
+                    <div class="panel-head"><span>Verification</span><span class="idx">.04</span></div>
+                    <p>ANSYS Fluent simulations under a 45&nbsp;°C ambient case predicted a 12–18&nbsp;°C interior temperature reduction; a scaled prototype with colored-smoke flow visualization confirmed the loop pattern, and flap angles were iterated against the CFD to cut turbulence. ABS construction and aluminum mesh keep projected unit cost near $150 — the constraint that mattered most to the community it was designed for.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <p>The Heat Resilience Challenge showcases my ability to deliver practical, scalable solutions for environmental challenges. The ventilation system offers a low-energy alternative to traditional cooling, directly improving quality of life for mobile home residents. My skills in CAD, CFD, and stakeholder engagement position me to advance sustainable engineering. Future steps include prototyping the unit and testing in Arizona’s summer heat, a tentative goal for broader deployment in urban heat-vulnerable regions.</p>
-                </div>
-            </div>
-            <div class="content-block">
-                <div class="text-container">
-                    <h2>References</h2>
+                    <div class="panel-head"><span>References</span><span class="idx">.05</span></div>
                     <ul class="custom-list">
-                        <li>ANSYS: <a href="https://www.ansys.com/products/fluids" target="_blank">Fluid Dynamics Simulation</a></li>
-                        <li>SolidWorks: <a href="https://www.solidworks.com/solution/industry/sustainability" target="_blank">Sustainable Design</a></li>
-                        <li>EPA: <a href="https://www.epa.gov/heatislands" target="_blank">Urban Heat Island Effects</a></li>
-                        <li>IEEE: <a href="https://ieeexplore.ieee.org/document/8735124" target="_blank">Sustainable Engineering</a></li>
-                        <li>ScienceDirect: <a href="https://www.sciencedirect.com/science/article/pii/S2352484719300999" target="_blank">Ventilation Systems</a></li>
-                        <li>ASU EPICS: <a href="https://epics.engineering.asu.edu/" target="_blank">Engineering Projects in Community Service</a></li>
-                        <li>ASHRAE: <a href="https://www.ashrae.org/technical-resources/standards-and-guidelines" target="_blank">Ventilation Standards</a></li>
+                        <li>ANSYS: <a href="https://www.ansys.com/products/fluids" target="_blank" rel="noopener">Fluid Dynamics Simulation</a></li>
+                        <li>SolidWorks: <a href="https://www.solidworks.com/solution/industry/sustainability" target="_blank" rel="noopener">Sustainable Design</a></li>
+                        <li>EPA: <a href="https://www.epa.gov/heatislands" target="_blank" rel="noopener">Urban Heat Island Effects</a></li>
+                        <li>IEEE: <a href="https://ieeexplore.ieee.org/document/8735124" target="_blank" rel="noopener">Sustainable Engineering</a></li>
+                        <li>ScienceDirect: <a href="https://www.sciencedirect.com/science/article/pii/S2352484719300999" target="_blank" rel="noopener">Ventilation Systems</a></li>
+                        <li>ASU EPICS: <a href="https://epics.engineering.asu.edu/" target="_blank" rel="noopener">Engineering Projects in Community Service</a></li>
+                        <li>ASHRAE: <a href="https://www.ashrae.org/technical-resources/standards-and-guidelines" target="_blank" rel="noopener">Ventilation Standards</a></li>
                     </ul>
                 </div>
             </div>
         </div>
+
+        <nav class="pager">
+            <a href="lunar.html" class="prev"><span class="label">← Prev</span>№01 Moon Presence</a>
+            <a href="projects.html" class="home">Index</a>
+            <a href="cubesat.html" class="next"><span class="label">Next →</span>№03 Gorgon CubeSat</a>
+        </nav>
     </main>
+
+    <footer class="site-footer">
+        <span>Arkane Works — Independent Engineering Practice</span>
+        <span>Tempe, AZ — 33.42°N 111.94°W</span>
+        <span>Est. 2020 — KM7BER</span>
+    </footer>
+
     <div class="scroll-arrow">
         <svg viewBox="0 0 24 24">
             <path d="M12 20V4m0 16l-6-6m6 6l6-6"/>

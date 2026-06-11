@@ -3,14 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects - Accretion Technologies</title>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;500;600&display=swap" rel="stylesheet">
+    <title>Index of Works — Arkane Works</title>
+    <meta name="description" content="The complete index of Arkane Works projects — active programs and archived records across rocketry, autonomous systems, spacecraft, and metrology.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d0d0d'/%3E%3Cpath d='M7 7h18v12l-6 6H7z' fill='%23e7e7e2'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
 <body>
     <header class="menu-bar">
-        <a href="index.html" class="website-name">ACCRETION TECHNOLOGIES</a>
+        <a href="index.html" class="website-name">
+            <span class="brand-glyph" aria-hidden="true"><svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M0 0H14V9L9 14H0Z"/></svg></span>
+            Arkane Works
+        </a>
+        <span class="doc-code">AW–IDX · Index of Works</span>
         <button class="menu-button" aria-label="Toggle menu">
             <span class="line"></span>
             <span class="line"></span>
@@ -20,45 +28,155 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li class="dropdown">
-                    <a href="projects.html">Projects</a>
+                    <a href="projects.html">Index<span class="nav-caret">+</span></a>
                     <ul class="dropdown-content">
-                        <li><a href="ax10.html">AX-1.0: Patriot Rocket</a></li>
-                        <li><a href="ax11.html">AX-1.1: DEMONstrator Rocket</a></li>
-                        <li><a href="slamdrone.html">SLAM Drone</a></li>
-                        <li><a href="lunar.html">Moon Presence</a></li>
-                        <li><a href="cubesat.html">Gorgon CubeSat</a></li>
-                        <li><a href="nano.html">Nanoelectronics Ultrasonic NDT</a></li>
-                        <li><a href="heat.html">Heat Resilience Challenge</a></li>
-                        <li><a href="wrongway.html">Mechanical Wrong-Way Prevention</a></li>
+                        <li class="dropdown-group">Present</li>
+                        <li><a href="aft.html"><span class="dd-code">P-01</span>Aerondight Flight Technologies</a></li>
+                        <li><a href="ape.html"><span class="dd-code">P-02</span>Aether Planetary Engine</a></li>
+                        <li><a href="sus.html"><span class="dd-code">P-03</span>Stormveil UAV Systems</a></li>
+                        <li class="dropdown-group">Past</li>
+                        <li><a href="lunar.html"><span class="dd-code">01</span>Moon Presence</a></li>
+                        <li><a href="heat.html"><span class="dd-code">02</span>Heat Resilience Challenge</a></li>
+                        <li><a href="cubesat.html"><span class="dd-code">03</span>Gorgon CubeSat</a></li>
+                        <li><a href="wrongway.html"><span class="dd-code">04</span>Wrong-Way Prevention</a></li>
+                        <li><a href="nano.html"><span class="dd-code">05</span>Ultrasonic NDT</a></li>
+                        <li><a href="slamdrone.html"><span class="dd-code">06</span>SLAM Drone</a></li>
+                        <li><a href="ax10.html"><span class="dd-code">07</span>AX-1.0 Patriot</a></li>
+                        <li><a href="ax11.html"><span class="dd-code">08</span>AX-1.1 DEMONstrator</a></li>
                     </ul>
                 </li>
-                <li><a href="about.html">About Me</a></li>
+                <li><a href="about.html">About</a></li>
             </ul>
         </nav>
     </header>
+    <div class="scroll-progress" aria-hidden="true"></div>
+
     <main class="scroll-container">
-        <div class="content-blocks">
-            <div class="content-block">
-                <div class="text-container">
-                    <h1>Arkane Works</h1>
-                    <p>Advanced projects division focusing on high-powered rocketry builds and autonomous drones, pushing the boundaries of aerospace innovation.</p>
-                    <ul class="custom-list arkane-list">
-                        <li><a href="ax10.html">AX-1.0: Patriot Rocket</a></li>
-                        <li><a href="ax11.html">AX-1.1: DEMONstrator Rocket</a></li>
-                        <li><a href="slamdrone.html">SLAM Drone</a></li>
-                    </ul>
-                    <h1>Additional Projects</h1>
-                    <p>Other innovative engineering projects designed to solve unique challenges in aerospace, nanotechnology, and sustainable systems.</p>
-                    <ul class="custom-list non-arkane-list">
-                        <li><a href="lunar.html">Moon Presence</a></li>
-                        <li><a href="cubesat.html">Gorgon CubeSat</a></li>
-                        <li><a href="nano.html">Nanoelectronics Ultrasonic NDT</a></li>
-                        <li><a href="heat.html">Heat Resilience Challenge</a></li>
-                        <li><a href="wrongway.html">Mechanical Wrong-Way Prevention</a></li>
-                    </ul>
-                </div>
+        <section class="hero reveal">
+            <p class="micro hero-kicker">Complete record — 03 active programs / 08 archived works</p>
+            <h1 class="hero-title">Index of<br>Works</h1>
+        </section>
+
+        <section class="section reveal">
+            <div class="section-head">
+                <h2 class="section-title">Present</h2>
+                <span class="section-index">.01</span>
             </div>
-        </div>
+            <p class="section-note micro">Programs in active development. Each brief states what the program is and no more — specifics are published as milestones are met.</p>
+            <div class="program-grid">
+                <a href="aft.html" class="program-card">
+                    <div class="card-top">
+                        <span class="card-code">AW–P01</span>
+                        <span class="status"><span class="status-dot"></span>Active</span>
+                    </div>
+                    <div class="card-acronym">A.F.T.</div>
+                    <div class="card-name">Aerondight Flight Technologies</div>
+                    <p class="card-desc">Flight vehicles and avionics, continuing the AX lineage toward progressively more capable airframes.</p>
+                    <span class="card-cta"><span>Read Brief</span><span>→</span></span>
+                </a>
+                <a href="ape.html" class="program-card">
+                    <div class="card-top">
+                        <span class="card-code">AW–P02</span>
+                        <span class="status"><span class="status-dot"></span>Active</span>
+                    </div>
+                    <div class="card-acronym">A.P.E.</div>
+                    <div class="card-name">Aether Planetary Engine</div>
+                    <p class="card-desc">Simulation-first studies of planetary-surface infrastructure: power, regolith, and surviving the lunar night.</p>
+                    <span class="card-cta"><span>Read Brief</span><span>→</span></span>
+                </a>
+                <a href="sus.html" class="program-card">
+                    <div class="card-top">
+                        <span class="card-code">AW–P03</span>
+                        <span class="status"><span class="status-dot"></span>Active</span>
+                    </div>
+                    <div class="card-acronym">S.U.S.</div>
+                    <div class="card-name">Stormveil UAV Systems</div>
+                    <p class="card-desc">Small autonomous aircraft that keep their own estimate of the world when GPS and lighting can't be trusted.</p>
+                    <span class="card-cta"><span>Read Brief</span><span>→</span></span>
+                </a>
+            </div>
+        </section>
+
+        <section class="section reveal">
+            <div class="section-head">
+                <h2 class="section-title">Past</h2>
+                <span class="section-index">.02</span>
+            </div>
+            <p class="section-note micro">Archived records, in chronological order. Each entry is a complete account of the work: design, simulation, hardware, and results.</p>
+            <div class="manifest">
+                <a href="lunar.html" class="manifest-row">
+                    <span class="m-idx">№01</span>
+                    <span class="m-name">Moon Presence</span>
+                    <span class="m-domain">Lunar Infrastructure</span>
+                    <span class="m-period">2020–2025</span>
+                    <span class="m-status">Archived</span>
+                    <span class="m-arrow">→</span>
+                </a>
+                <a href="heat.html" class="manifest-row">
+                    <span class="m-idx">№02</span>
+                    <span class="m-name">Heat Resilience Challenge</span>
+                    <span class="m-domain">Thermal / Community Systems</span>
+                    <span class="m-period">2020–2021</span>
+                    <span class="m-status">Archived</span>
+                    <span class="m-arrow">→</span>
+                </a>
+                <a href="cubesat.html" class="manifest-row">
+                    <span class="m-idx">№03</span>
+                    <span class="m-name">Gorgon CubeSat</span>
+                    <span class="m-domain">Spacecraft / Remote Sensing</span>
+                    <span class="m-period">2021–2022</span>
+                    <span class="m-status">Archived</span>
+                    <span class="m-arrow">→</span>
+                </a>
+                <a href="wrongway.html" class="manifest-row">
+                    <span class="m-idx">№04</span>
+                    <span class="m-name">Wrong-Way Prevention</span>
+                    <span class="m-domain">Mechatronics / Road Safety</span>
+                    <span class="m-period">2024</span>
+                    <span class="m-status">Archived</span>
+                    <span class="m-arrow">→</span>
+                </a>
+                <a href="nano.html" class="manifest-row">
+                    <span class="m-idx">№05</span>
+                    <span class="m-name">Nanoelectronics Ultrasonic NDT</span>
+                    <span class="m-domain">Semiconductor Metrology</span>
+                    <span class="m-period">2024–2025</span>
+                    <span class="m-status">Archived</span>
+                    <span class="m-arrow">→</span>
+                </a>
+                <a href="slamdrone.html" class="manifest-row">
+                    <span class="m-idx">№06</span>
+                    <span class="m-name">SLAM Drone</span>
+                    <span class="m-domain">Autonomous Systems</span>
+                    <span class="m-period">2025</span>
+                    <span class="m-status">Archived</span>
+                    <span class="m-arrow">→</span>
+                </a>
+                <a href="ax10.html" class="manifest-row">
+                    <span class="m-idx">№07</span>
+                    <span class="m-name">AX-1.0 Patriot</span>
+                    <span class="m-domain">High-Power Rocketry</span>
+                    <span class="m-period">2025</span>
+                    <span class="m-status">Archived</span>
+                    <span class="m-arrow">→</span>
+                </a>
+                <a href="ax11.html" class="manifest-row">
+                    <span class="m-idx">№08</span>
+                    <span class="m-name">AX-1.1 DEMONstrator</span>
+                    <span class="m-domain">High-Power Rocketry</span>
+                    <span class="m-period">2025</span>
+                    <span class="m-status">Archived</span>
+                    <span class="m-arrow">→</span>
+                </a>
+            </div>
+        </section>
     </main>
+
+    <div class="footer-mark" aria-hidden="true">Arkane Works</div>
+    <footer class="site-footer">
+        <span>Arkane Works — Independent Engineering Practice</span>
+        <span>Tempe, AZ — 33.42°N 111.94°W</span>
+        <span>Est. 2020 — KM7BER</span>
+    </footer>
 </body>
 </html>

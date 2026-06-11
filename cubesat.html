@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gorgon CubeSat - Accretion Technologies</title>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;500;600&display=swap" rel="stylesheet">
+    <title>Gorgon CubeSat — Arkane Works</title>
+    <meta name="description" content="Gorgon: a hyperspectral CubeSat concept for cataloguing ocean plastics from a 500 km sun-synchronous orbit, with an Iridium relay replacing ground stations.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d0d0d'/%3E%3Cpath d='M7 7h18v12l-6 6H7z' fill='%23e7e7e2'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
-<body class="non-arkane-project">
+<body>
     <canvas class="animation-canvas" data-frame-folder="cubesat_frames"></canvas>
     <header class="menu-bar">
-        <a href="index.html" class="website-name">ACCRETION TECHNOLOGIES</a>
+        <a href="index.html" class="website-name">
+            <span class="brand-glyph" aria-hidden="true"><svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M0 0H14V9L9 14H0Z"/></svg></span>
+            Arkane Works
+        </a>
+        <span class="doc-code">AW–03 · Archived Record</span>
         <button class="menu-button" aria-label="Toggle menu">
             <span class="line"></span>
             <span class="line"></span>
@@ -21,69 +29,99 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li class="dropdown">
-                    <a href="projects.html">Projects</a>
+                    <a href="projects.html">Index<span class="nav-caret">+</span></a>
                     <ul class="dropdown-content">
-                        <li><a href="ax10.html">AX-1.0: Patriot Rocket</a></li>
-                        <li><a href="ax11.html">AX-1.1: DEMONstrator Rocket</a></li>
-                        <li><a href="slamdrone.html">SLAM Drone</a></li>
-                        <li><a href="lunar.html">Moon Presence</a></li>
-                        <li><a href="cubesat.html">Gorgon CubeSat</a></li>
-                        <li><a href="nano.html">Nanoelectronics Ultrasonic NDT</a></li>
-                        <li><a href="heat.html">Heat Resilience Challenge</a></li>
-                        <li><a href="wrongway.html">Mechanical Wrong-Way Prevention</a></li>
+                        <li class="dropdown-group">Present</li>
+                        <li><a href="aft.html"><span class="dd-code">P-01</span>Aerondight Flight Technologies</a></li>
+                        <li><a href="ape.html"><span class="dd-code">P-02</span>Aether Planetary Engine</a></li>
+                        <li><a href="sus.html"><span class="dd-code">P-03</span>Stormveil UAV Systems</a></li>
+                        <li class="dropdown-group">Past</li>
+                        <li><a href="lunar.html"><span class="dd-code">01</span>Moon Presence</a></li>
+                        <li><a href="heat.html"><span class="dd-code">02</span>Heat Resilience Challenge</a></li>
+                        <li><a href="cubesat.html"><span class="dd-code">03</span>Gorgon CubeSat</a></li>
+                        <li><a href="wrongway.html"><span class="dd-code">04</span>Wrong-Way Prevention</a></li>
+                        <li><a href="nano.html"><span class="dd-code">05</span>Ultrasonic NDT</a></li>
+                        <li><a href="slamdrone.html"><span class="dd-code">06</span>SLAM Drone</a></li>
+                        <li><a href="ax10.html"><span class="dd-code">07</span>AX-1.0 Patriot</a></li>
+                        <li><a href="ax11.html"><span class="dd-code">08</span>AX-1.1 DEMONstrator</a></li>
                     </ul>
                 </li>
-                <li><a href="about.html">About Me</a></li>
+                <li><a href="about.html">About</a></li>
             </ul>
         </nav>
     </header>
+    <div class="scroll-progress" aria-hidden="true"></div>
+
     <main class="scroll-container">
+        <section class="project-hero reveal">
+            <p class="crumbs micro">Index <span class="sep">/</span> Past <span class="sep">/</span> №03 <span class="sep">/</span> Spacecraft / Remote Sensing</p>
+            <h1 class="project-title">Gorgon CubeSat</h1>
+            <div class="hero-panel">
+                <p>Gorgon is a CubeSat mission concept developed at ASU's Sun Devil Satellite Laboratory to catalogue ocean macroplastics from orbit. Detection rides on shortwave-infrared hyperspectral imaging — polymers show distinct absorption peaks at 1215&nbsp;nm and 1410&nbsp;nm — from a 500&nbsp;km sun-synchronous orbit at 50&nbsp;m ground sample distance over a 50&nbsp;km swath. I directed the interdisciplinary team and the mission architecture, growing the concept from an initial 3U design into a 12U platform as the payload demanded it.</p>
+            </div>
+            <div class="spec-row">
+                <div class="spec"><span class="micro">Bus</span><span class="spec-value">3U → 12U</span></div>
+                <div class="spec"><span class="micro">Imager</span><span class="spec-value">SWIR 1000–1700 nm</span></div>
+                <div class="spec"><span class="micro">Orbit</span><span class="spec-value">500 km SSO</span></div>
+                <div class="spec"><span class="micro">GSD</span><span class="spec-value">50 m</span></div>
+            </div>
+        </section>
         <div class="content-blocks">
             <div class="content-block">
                 <div class="text-container">
-                    <h1>Gorgon CubeSat</h1>
-                    <p>The Gorgon CubeSat, proposed at Arizona State University’s Sun Devil Satellite Laboratory (SDSL) in 2021, is a 12U satellite designed to combat ocean plastic pollution through hyperspectral imaging and innovative communication. As a mechanical engineering student, I collaborated with a team of engineering students, initially designing a 3U CubeSat before modifying it to a 12U platform, and proposed an Iridium-based data relay to eliminate ground stations. This project reflects my passion for aerospace innovation and environmental stewardship, tackling the global “Missing Plastic Problem” with space-based technology.</p>
+                    <div class="panel-head"><span>Payload &amp; Bus</span><span class="idx">.02</span></div>
+                    <p>The bus pairs the SWIR hyperspectral imager with a Blue Canyon XACT-50 ADCS for pointing and DHV body-mounted solar panels delivering ~25&nbsp;W, with the power budget and pointing requirements derived from the camera's duty cycle. Conceptual structure and packaging were modeled in SolidWorks and Onshape, and thermal-dissipation checks kept the electronics stack inside operating limits after the 3U→12U scale-up.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <p>The CubeSat, in proposal form, features a SWIR hyperspectral imager (1000-1700 nm, 50 m GSD, 50 km swath) for detecting macroplastics in a 500 km sun-synchronous orbit. I collaborated on specifying components like the Blue Canyon XACT-50 ADCS and DHV Technology solar panels (25 W), using SolidWorks for conceptual design. My key contribution was proposing an Iridium satellite terminal for space-to-space data relay, aiming to reduce infrastructure costs. This required extensive research into orbital dynamics and subsystem compatibility, ensuring a cohesive 12U platform.</p>
+                    <div class="panel-head"><span>Comms Architecture</span><span class="idx">.03</span></div>
+                    <p>The defining trade of the mission: an integrated Iridium satellite terminal for space-to-space data relay, removing the dedicated ground-station requirement entirely. Validating it meant simulating orbital passes against the Iridium constellation to confirm contact coverage from 500&nbsp;km SSO — infrastructure cost traded against link availability, in favor of a mission a student lab could actually operate.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <p>Scaling from a 3U to a 12U design introduced power and thermal constraints. I addressed these by modeling thermal dissipation in SolidWorks, ensuring electronics stayed within operational temperatures. The Iridium terminal integration required validating compatibility with the Iridium constellation for space-to-space communication. Coordinating with SDSL teammates, I balanced payload mass and power, optimizing for a proposed 1-year mission life in a debris-heavy orbit.</p>
+                    <div class="panel-head"><span>Trades &amp; Integration</span><span class="idx">.04</span></div>
+                    <p>Trade studies selected the Unibap iX5-100 onboard computer for hyperspectral processing and GOMspace NanoPower BPX batteries for eclipse reliability, with subsystems aligned over MIL-STD-1553. Payload mass and power were balanced for a one-year mission life in a debris-conscious orbit. Alongside the engineering, I served as Vice President of the lab — running workshop operations, procurement, and the sponsorship package that funded active projects.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <p>As a conceptual proposal, the design underwent iterative refinement. I conducted trade studies to select the Unibap iX5-100 OBC for processing hyperspectral data and GOMspace NanoPower BPX for battery reliability. My Iridium proposal required simulating orbital passes to confirm coverage with the Iridium constellation. I also led subsystem integration, ensuring the imager, ADCS, and communication systems aligned via MIL-STD-1553 protocols. This process strengthened the proposal, enabling peers to gain experience and explore opportunities.</p>
+                    <div class="panel-head"><span>Outcome</span><span class="idx">.05</span></div>
+                    <p>Gorgon remains a proposal — deliberately so. It was built to be a complete, defensible mission concept rather than a partial prototype, and it gave a student team end-to-end systems experience: requirements, trades, budgets, and a design review that holds together. The Iridium relay architecture is the piece most worth carrying forward; NASA's CubeSat Launch Initiative is the natural next step for a concept like it.</p>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <p>The Gorgon CubeSat demonstrates my expertise in spacecraft design, systems engineering, and creative problem-solving. By targeting ocean plastics, it supports global environmental monitoring, with potential applications in climate research. My Iridium innovation could simplify communications for future CubeSat missions. Though in proposal form, the project positions me to contribute to aerospace advancements. Future steps include refining the proposal and seeking partnerships, potentially with NASA’s CubeSat Launch Initiative.</p>
-                </div>
-            </div>
-            <div class="content-block">
-                <div class="text-container">
-                    <h2>References</h2>
+                    <div class="panel-head"><span>References</span><span class="idx">.06</span></div>
                     <ul class="custom-list">
-                        <li>Blue Canyon: <a href="https://bluecanyontech.com/products/xact" target="_blank">XACT-50 ADCS</a></li>
-                        <li>DHV Technology: <a href="https://dhvtechnology.com/products/cubesat-solar-panels" target="_blank">Solar Panels</a></li>
-                        <li>Iridium: <a href="https://www.iridium.com/solutions/satellite-iot/" target="_blank">Satellite IoT Solutions</a></li>
-                        <li>Unibap: <a href="https://unibap.com/products/ix5-100" target="_blank">iX5-100 OBC</a></li>
-                        <li>GOMspace: <a href="https://gomspace.com/shop/subsystems/power-systems/nanopower-bpx.aspx" target="_blank">NanoPower BPX</a></li>
-                        <li>NASA: <a href="https://www.nasa.gov/directors/spacetech/small_spacecraft/cubesat_launch_initiative" target="_blank">CubeSat Launch Initiative</a></li>
-                        <li>IEEE: <a href="https://ieeexplore.ieee.org/document/8735124" target="_blank">Space Systems Engineering</a></li>
-                        <li>ScienceDirect: <a href="https://www.sciencedirect.com/science/article/pii/S2352484719300999" target="_blank">CubeSat Design</a></li>
-                        <li>ASU Sun Devil Satellite Lab: <a href="https://sds.asu.edu/" target="_blank">Satellite Research</a></li>
-                        <li>Biermann et al., 2020: <a href="https://www.nature.com/articles/s41598-020-62215-8" target="_blank">Hyperspectral Plastic Signatures</a></li>
+                        <li>Blue Canyon: <a href="https://bluecanyontech.com/products/xact" target="_blank" rel="noopener">XACT-50 ADCS</a></li>
+                        <li>DHV Technology: <a href="https://dhvtechnology.com/products/cubesat-solar-panels" target="_blank" rel="noopener">CubeSat Solar Panels</a></li>
+                        <li>Iridium: <a href="https://www.iridium.com/solutions/satellite-iot/" target="_blank" rel="noopener">Satellite IoT Solutions</a></li>
+                        <li>Unibap: <a href="https://unibap.com/products/ix5-100" target="_blank" rel="noopener">iX5-100 OBC</a></li>
+                        <li>GOMspace: <a href="https://gomspace.com/shop/subsystems/power-systems/nanopower-bpx.aspx" target="_blank" rel="noopener">NanoPower BPX</a></li>
+                        <li>NASA: <a href="https://www.nasa.gov/directors/spacetech/small_spacecraft/cubesat_launch_initiative" target="_blank" rel="noopener">CubeSat Launch Initiative</a></li>
+                        <li>IEEE: <a href="https://ieeexplore.ieee.org/document/8735124" target="_blank" rel="noopener">Space Systems Engineering</a></li>
+                        <li>ASU Sun Devil Satellite Lab: <a href="https://sds.asu.edu/" target="_blank" rel="noopener">Satellite Research</a></li>
+                        <li>Biermann et al., 2020: <a href="https://www.nature.com/articles/s41598-020-62215-8" target="_blank" rel="noopener">Hyperspectral Plastic Signatures</a></li>
                     </ul>
                 </div>
             </div>
         </div>
+
+        <nav class="pager">
+            <a href="heat.html" class="prev"><span class="label">← Prev</span>№02 Heat Resilience</a>
+            <a href="projects.html" class="home">Index</a>
+            <a href="wrongway.html" class="next"><span class="label">Next →</span>№04 Wrong-Way Prevention</a>
+        </nav>
     </main>
+
+    <footer class="site-footer">
+        <span>Arkane Works — Independent Engineering Practice</span>
+        <span>Tempe, AZ — 33.42°N 111.94°W</span>
+        <span>Est. 2020 — KM7BER</span>
+    </footer>
+
     <div class="scroll-arrow">
         <svg viewBox="0 0 24 24">
             <path d="M12 20V4m0 16l-6-6m6 6l6-6"/>

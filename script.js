@@ -2,15 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const menuButton = document.querySelector('.menu-button');
   const menuLinks = document.querySelector('.menu-links');
   const dropdowns = document.querySelectorAll('.dropdown');
-  const contentBlocks = document.querySelectorAll('.content-block');
+  const revealTargets = document.querySelectorAll('.content-block, .reveal');
   const canvas = document.querySelector('.animation-canvas');
   const ctx = canvas ? canvas.getContext('2d') : null;
   const scrollArrow = document.querySelector('.scroll-arrow');
-
-  // Debug: Log if scrollArrow is found
-  if (!scrollArrow) {
-    console.warn('Scroll arrow element not found. Ensure <div class="scroll-arrow"> exists in HTML.');
-  }
+  const scrollProgress = document.querySelector('.scroll-progress');
 
   // Mobile menu toggle
   if (menuButton && menuLinks) {
@@ -24,14 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
   dropdowns.forEach(dropdown => {
     const link = dropdown.querySelector('a');
     link.addEventListener('click', (e) => {
-      if (window.innerWidth <= 768) {
+      if (window.innerWidth <= 860) {
         e.preventDefault();
         dropdown.classList.toggle('open');
       }
     });
   });
 
-  // Debounce function to limit scroll event frequency
+  // Debounce helper
   function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -44,62 +40,52 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  // Intersection Observer for smooth content reveal
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-
-  // For index.html and projects.html, make all content visible
-  if (currentPage === 'index.html' || currentPage === 'projects.html') {
-    contentBlocks.forEach(block => block.classList.add('visible'));
-  } else {
-    // Use Intersection Observer for progressive reveal on project pages
-    const observerOptions = {
-      threshold: 0.15,
-      rootMargin: '0px 0px -100px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, observerOptions);
-
-    contentBlocks.forEach(block => {
-      observer.observe(block);
-    });
+  // Scroll progress hairline under the header
+  function updateProgress() {
+    if (!scrollProgress) return;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const p = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+    scrollProgress.style.transform = `scaleX(${p})`;
   }
+
+  // Reveal-on-scroll with a slight stagger for elements entering together
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.transitionDelay = `${Math.min(i * 70, 280)}ms`;
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  revealTargets.forEach(el => revealObserver.observe(el));
 
   // Scroll arrow visibility
   function updateScrollArrow() {
     if (!scrollArrow) return;
-
-    const scrollY = window.scrollY;
-    const viewportHeight = window.innerHeight;
-    const bodyScrollHeight = document.body.scrollHeight;
-    const pageBottom = bodyScrollHeight - viewportHeight;
-
-    // Hide arrow when near bottom of page
-    if (scrollY >= pageBottom - 100) {
+    const pageBottom = document.body.scrollHeight - window.innerHeight;
+    if (window.scrollY >= pageBottom - 100) {
       scrollArrow.classList.remove('visible');
     } else {
       scrollArrow.classList.add('visible');
     }
   }
 
-  // Initial scroll arrow visibility
   if (scrollArrow) {
     scrollArrow.classList.add('visible');
+    updateScrollArrow();
   }
 
-  // Update arrow on scroll with debounce
-  window.addEventListener('scroll', debounce(updateScrollArrow, 16));
+  window.addEventListener('scroll', () => {
+    updateProgress();
+  }, { passive: true });
+  window.addEventListener('scroll', debounce(updateScrollArrow, 16), { passive: true });
+  updateProgress();
 
-  // Animation sequence (skip for about.html, index.html, projects.html)
-  if (currentPage === 'about.html' || currentPage === 'index.html' || currentPage === 'projects.html') {
-    return; // Skip canvas logic
-  }
-
+  // ------------------------------------------------------------
+  // Scroll-driven frame animation (project pages with a canvas)
+  // ------------------------------------------------------------
   if (canvas && ctx) {
     const frameFolder = canvas.dataset.frameFolder;
     const frameCount = 120;
@@ -148,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
       frames[i - 1] = img;
     }
 
-    // Draw frame helper
+    // Draw frame helper — anchored to the bottom-right of the viewport
     function drawFrame(img, opacity) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       if (img) {
@@ -172,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Animation logic
+    // Animation scrub logic
     const isWrongWay = frameFolder === 'wrongway_frames';
     const videoSection = document.querySelector('.video-background');
     const referencesSection = document.querySelector('.content-block:last-child');
@@ -192,22 +178,20 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       const scrollRange = animationEnd - animationStart;
       if (scrollRange <= 0) {
-        // Ensure first frame is visible on load for non-video pages
         if (!isWrongWay && frames[0]) {
           drawFrame(frames[0], 1);
           canvas.classList.add('visible');
         }
         return;
       }
-      const scrollProgress = Math.min(Math.max((scrollY - animationStart) / scrollRange, 0), 1);
-      let frameIndex = Math.floor(scrollProgress * (frameCount - 1));
-      let opacity = isWrongWay ? (scrollProgress > 0 ? 1 : 0) : 1;
+      const scrollProgressRatio = Math.min(Math.max((scrollY - animationStart) / scrollRange, 0), 1);
+      let frameIndex = Math.floor(scrollProgressRatio * (frameCount - 1));
+      let opacity = isWrongWay ? (scrollProgressRatio > 0 ? 1 : 0) : 1;
       // Persist last frame after animation ends
       if (scrollY >= animationEnd) {
-        frameIndex = frameCount - 1; // Last frame
-        opacity = 1; // Keep visible
+        frameIndex = frameCount - 1;
+        opacity = 1;
       }
-      // Draw frame
       drawFrame(frames[frameIndex], opacity);
       requestAnimationFrame(updateAnimation);
     }
@@ -217,15 +201,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const videoObserver = new IntersectionObserver(entries => {
         if (!entries[0].isIntersecting) {
           canvas.classList.add('visible');
-          drawFrame(frames[0], 1); // Draw first frame when video is out of view
+          drawFrame(frames[0], 1);
         } else {
           canvas.classList.remove('visible');
-          ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas during video
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
       }, { threshold: 0 });
       videoObserver.observe(videoSection);
     } else {
-      // Ensure canvas is visible on load for non-video pages
       if (frames[0]) {
         drawFrame(frames[0], 1);
         canvas.classList.add('visible');
@@ -234,7 +217,9 @@ document.addEventListener('DOMContentLoaded', () => {
     updateAnimation();
   }
 
-  // New JS for media interactions
+  // ------------------------------------------------------------
+  // Media interactions
+  // ------------------------------------------------------------
   const modal = document.createElement('div');
   modal.className = 'enlarge-modal';
   modal.style.position = 'fixed';
@@ -242,11 +227,12 @@ document.addEventListener('DOMContentLoaded', () => {
   modal.style.left = '0';
   modal.style.width = '100vw';
   modal.style.height = '100vh';
-  modal.style.background = 'rgba(0,0,0,0.8)';
+  modal.style.background = 'rgba(8,8,8,0.92)';
   modal.style.zIndex = '1000';
   modal.style.display = 'none';
   modal.style.justifyContent = 'center';
   modal.style.alignItems = 'center';
+  modal.style.cursor = 'zoom-out';
   document.body.appendChild(modal);
 
   modal.addEventListener('click', () => {
@@ -254,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.innerHTML = '';
   });
 
-  // Double click to enlarge for images and videos
+  // Double click to enlarge images and videos (full colour in the modal)
   document.querySelectorAll('.project-image, .project-video').forEach(el => {
     el.addEventListener('dblclick', () => {
       let clone;
@@ -266,19 +252,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       clone.style.maxWidth = '90%';
       clone.style.maxHeight = '90%';
+      clone.style.filter = 'none';
       modal.appendChild(clone);
       modal.style.display = 'flex';
     });
   });
 
-  // For image stacks
+  // Image stacks: click to cycle, double-click to enlarge
   document.querySelectorAll('.image-stack').forEach(stack => {
     const images = stack.querySelectorAll('.stack-image');
     images.forEach((img, idx) => {
-      img.style.position = 'absolute';
-      img.style.top = '0';
-      img.style.left = '0';
-      img.style.zIndex = images.length - idx; // Initial stacking
+      img.style.zIndex = images.length - idx;
 
       img.addEventListener('mouseover', () => {
         img.style.transform = 'scale(1.02)';
@@ -299,55 +283,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     stack.addEventListener('click', (e) => {
-      if (e.target.classList.contains('stack-image')) return; // Avoid cycling on double click part
-      // Cycle z-index
+      if (!e.target.classList.contains('stack-image')) return;
       const zIndices = Array.from(images, img => parseInt(img.style.zIndex));
       const maxZ = Math.max(...zIndices);
       images.forEach(img => {
-        let z = parseInt(img.style.zIndex);
-        if (z === maxZ) {
-          img.style.zIndex = Math.min(...zIndices) - 1; // Send to back
-        } else {
-          img.style.zIndex = z + 1;
-        }
+        const z = parseInt(img.style.zIndex);
+        img.style.zIndex = z === maxZ ? Math.min(...zIndices) - 1 : z + 1;
       });
     });
   });
 
-  // Smart video background resizing
+  // Background video sizing: always show the full frame, anchored top
   const backgroundVideos = document.querySelectorAll('.background-video');
 
   function smartVideoResize() {
     backgroundVideos.forEach(video => {
-      if (!video.videoWidth || !video.videoHeight) return; // Wait for metadata
-
-      const container = video.parentElement;
-      const containerWidth = container.offsetWidth;
-      const containerHeight = container.offsetHeight;
-
-      const videoAspect = video.videoWidth / video.videoHeight;
-      const containerAspect = containerWidth / containerHeight;
-
-      // Always prefer showing the full video (object-fit: contain)
-      // This ensures no cropping and all video content is visible
-      // Position at top so bars appear at bottom (vertical) or sides (horizontal)
+      if (!video.videoWidth || !video.videoHeight) return;
       video.style.objectFit = 'contain';
       video.style.objectPosition = 'top center';
-
-      // Optional: Log aspect ratio difference for debugging
-      const aspectDiff = Math.abs(videoAspect - containerAspect) / containerAspect * 100;
-      if (aspectDiff > 10) {
-        console.log(`Video aspect ratio differs from container by ${aspectDiff.toFixed(1)}%`);
-      }
     });
   }
 
-  // Run on load and resize
   backgroundVideos.forEach(video => {
     video.addEventListener('loadedmetadata', smartVideoResize);
   });
   window.addEventListener('resize', debounce(smartVideoResize, 100));
-
-  // Initial check
   smartVideoResize();
 });

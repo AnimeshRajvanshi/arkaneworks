@@ -3,14 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me - Accretion Technologies</title>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;500;600&display=swap" rel="stylesheet">
+    <title>Operator Profile — Arkane Works</title>
+    <meta name="description" content="Animesh Rajvanshi — mechanical engineer (B.S.M.E., Arizona State University; EIT). Profile, contact, and credentials.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d0d0d'/%3E%3Cpath d='M7 7h18v12l-6 6H7z' fill='%23e7e7e2'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
 <body>
     <header class="menu-bar">
-        <a href="index.html" class="website-name">ACCRETION TECHNOLOGIES</a>
+        <a href="index.html" class="website-name">
+            <span class="brand-glyph" aria-hidden="true"><svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M0 0H14V9L9 14H0Z"/></svg></span>
+            Arkane Works
+        </a>
+        <span class="doc-code">AW–BIO · Operator Profile</span>
         <button class="menu-button" aria-label="Toggle menu">
             <span class="line"></span>
             <span class="line"></span>
@@ -20,75 +28,115 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li class="dropdown">
-                    <a href="projects.html">Projects</a>
+                    <a href="projects.html">Index<span class="nav-caret">+</span></a>
                     <ul class="dropdown-content">
-                        <li><a href="ax10.html">AX-1.0: Patriot Rocket</a></li>
-                        <li><a href="ax11.html">AX-1.1: DEMONstrator Rocket</a></li>
-                        <li><a href="slamdrone.html">SLAM Drone</a></li>
-                        <li><a href="lunar.html">Moon Presence</a></li>
-                        <li><a href="cubesat.html">Gorgon CubeSat</a></li>
-                        <li><a href="nano.html">Nanoelectronics Ultrasonic NDT</a></li>
-                        <li><a href="heat.html">Heat Resilience Challenge</a></li>
-                        <li><a href="wrongway.html">Mechanical Wrong-Way Prevention</a></li>
+                        <li class="dropdown-group">Present</li>
+                        <li><a href="aft.html"><span class="dd-code">P-01</span>Aerondight Flight Technologies</a></li>
+                        <li><a href="ape.html"><span class="dd-code">P-02</span>Aether Planetary Engine</a></li>
+                        <li><a href="sus.html"><span class="dd-code">P-03</span>Stormveil UAV Systems</a></li>
+                        <li class="dropdown-group">Past</li>
+                        <li><a href="lunar.html"><span class="dd-code">01</span>Moon Presence</a></li>
+                        <li><a href="heat.html"><span class="dd-code">02</span>Heat Resilience Challenge</a></li>
+                        <li><a href="cubesat.html"><span class="dd-code">03</span>Gorgon CubeSat</a></li>
+                        <li><a href="wrongway.html"><span class="dd-code">04</span>Wrong-Way Prevention</a></li>
+                        <li><a href="nano.html"><span class="dd-code">05</span>Ultrasonic NDT</a></li>
+                        <li><a href="slamdrone.html"><span class="dd-code">06</span>SLAM Drone</a></li>
+                        <li><a href="ax10.html"><span class="dd-code">07</span>AX-1.0 Patriot</a></li>
+                        <li><a href="ax11.html"><span class="dd-code">08</span>AX-1.1 DEMONstrator</a></li>
                     </ul>
                 </li>
-                <li><a href="about.html">About Me</a></li>
+                <li><a href="about.html">About</a></li>
             </ul>
         </nav>
     </header>
+    <div class="scroll-progress" aria-hidden="true"></div>
+
     <main class="scroll-container">
-        <div class="about-contact-wrapper">
-            <div class="about-block">
-                <div class="text-container">
-                    <h1>About Me</h1>
-                    <p>Looking up at the stars, I have for long believed that these astronomical objects have been put in our vision's confines for a reason. Combined with the belief that as humans our role in nature is to build technology, I took to engineering to help me contribute to this grand design. I am a graduate with a Bachelor of Science in Mechanical Engineering, having always fostered a growth mindset as one of my prime directives, I have dedicated myself to learning information and creating systems to meaningfully contribute to our world. Being in a field where things are prioritized over people, I still love humanity and value relationships. And as a result, even though I have never shied away from undertaking solo projects, I thrive in collaborative environments. With an affinity for problem solving, which is why I gravitate to Jiu Jitsu as my foremost hobby, and a commitment to pushing boundaries, I'm excited to shape the future of engineering. And someday find the answer to the great question, "Why is there something rather than nothing?"</p>
-                </div>
+        <section class="about-grid">
+            <div class="text-container reveal">
+                <div class="panel-head"><span>Profile</span><span class="idx">.01</span></div>
+                <h1>Animesh Rajvanshi</h1>
+                <p>Looking up at the stars, I have for long believed that these astronomical objects have been put in our vision's confines for a reason. Combined with the belief that as humans our role in nature is to build technology, I took to engineering to help me contribute to this grand design.</p>
+                <p>I am a graduate with a Bachelor of Science in Mechanical Engineering. Having always fostered a growth mindset as one of my prime directives, I have dedicated myself to learning information and creating systems to meaningfully contribute to our world. Being in a field where things are prioritized over people, I still love humanity and value relationships — and as a result, even though I have never shied away from undertaking solo projects, I thrive in collaborative environments.</p>
+                <p>With an affinity for problem solving — which is why I gravitate to Jiu Jitsu as my foremost hobby — and a commitment to pushing boundaries, I'm excited to shape the future of engineering. And someday find the answer to the great question: "Why is there something rather than nothing?"</p>
             </div>
-            <div class="contact-block">
-                <div class="text-container">
-                    <h2>Contact Information</h2>
-                    <ul class="custom-list">
-                        <li>Email: <a href="mailto:rajvanshianimesh@gmail.com" class="resume-link">rajvanshianimesh@gmail.com</a></li>
-                        <li>Phone: <a href="tel:+16024596108" class="resume-link">(602) 459-6108</a></li>
-                        <li>Website: <a href="https://www.arkaneworks.co" target="_blank" class="resume-link">www.arkaneworks.co</a></li>
-                        <li>Download <a href="/assets/AAE_Resume.pdf" download class="resume-link">Resume</a></li>
-                    </ul>
-                    <div class="social-links">
-                        <a href="https://x.com/arkanehuman?s=21&t=qLPtt3uUb6BML9CHXdEA9w" target="_blank">
-                            <img src="/assets/x-logo.png" alt="X Profile" class="social-logo" loading="lazy">
-                        </a>
-                        <a href="https://www.linkedin.com/in/animeshrajvanshi" target="_blank">
-                            <img src="/assets/linkedin-logo.png" alt="LinkedIn Profile" class="social-logo" loading="lazy">
-                        </a>
-                        <a href="https://www.instagram.com/animesh.rajvanshi?igsh=Z3o1OWVha3BxeTBo&utm_source=qr" target="_blank">
-                            <img src="/assets/instagram-logo.png" alt="Instagram Profile" class="social-logo" loading="lazy">
-                        </a>
+            <div class="text-container reveal">
+                <div class="panel-head"><span>Contact</span><span class="idx">.02</span></div>
+                <div class="contact-rows">
+                    <div class="contact-row">
+                        <span class="micro">Email</span>
+                        <a href="mailto:rajvanshianimesh@gmail.com">rajvanshianimesh@gmail.com</a>
                     </div>
-                    <img src="/assets/profile-pic.png" alt="Profile Image" class="profile-image" loading="lazy">
+                    <div class="contact-row">
+                        <span class="micro">Phone</span>
+                        <a href="tel:+16024596108">(602) 459-6108</a>
+                    </div>
+                    <div class="contact-row">
+                        <span class="micro">Site</span>
+                        <a href="https://www.arkaneworks.co" target="_blank" rel="noopener">arkaneworks.co</a>
+                    </div>
+                    <div class="contact-row">
+                        <span class="micro">Radio</span>
+                        <span>KM7BER — Amateur Extra</span>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="https://x.com/arkanehuman?s=21&t=qLPtt3uUb6BML9CHXdEA9w" target="_blank" rel="noopener">X ↗</a>
+                    <a href="https://www.linkedin.com/in/animeshrajvanshi" target="_blank" rel="noopener">LinkedIn ↗</a>
+                    <a href="https://www.instagram.com/animesh.rajvanshi?igsh=Z3o1OWVha3BxeTBo&utm_source=qr" target="_blank" rel="noopener">Instagram ↗</a>
+                </div>
+                <img src="/assets/profile-pic.png" alt="Portrait of Animesh Rajvanshi" class="profile-image" loading="lazy">
+                <a href="/assets/Animesh_Rajvanshi_CV.pdf" download class="btn">Download CV ↓</a>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="text-container reveal" style="max-width: none;">
+                <div class="panel-head"><span>Experience</span><span class="idx">.03</span></div>
+                <div class="contact-rows">
+                    <div class="contact-row">
+                        <span class="micro">2026</span>
+                        <span>Mechanical Engineer — Temple Allen Industries, Rockville, MD · EMMA™ / SAM™ aircraft servicing platforms</span>
+                    </div>
+                    <div class="contact-row">
+                        <span class="micro">2025–26</span>
+                        <span>Autonomous Systems Engineer — Anoop Singh Robotics, ASU · vision-based SLAM flight platform</span>
+                    </div>
+                    <div class="contact-row">
+                        <span class="micro">2024–25</span>
+                        <span>Nanoelectronics Metrology &amp; Failure Analysis Engineer — Celano Lab, ASU · SAM simulation, hybrid bonding</span>
+                    </div>
+                    <div class="contact-row">
+                        <span class="micro">2021–24</span>
+                        <span>Executive Learning Assistant — Fulton Schools of Engineering Tutoring Centers, ASU · 180+ students, Fall 2024</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="content-blocks">
-            <div class="content-block">
-                <div class="text-container">
-                    <h2>Certifications & Achievements</h2>
-                    <ul class="custom-list">
-                        <li>Engineer In-Training (EIT), Arizona State Board of Technical Registration, March 2025</li>
-                        <li>Certified SolidWorks Professional (CSWP), Dassault Systèmes - SolidWorks Corporation</li>
-                        <li>Amateur Extra Class Amateur Radio License, Call Sign: KM7BER, Federal Communications Commission</li>
-                        <li>Astrophysics XSeries Course, Australian National University, edX</li>
-                        <li>Google IT Support Professional Certificate, Google Career Certificates, Coursera</li>
-                        <li>Proficiency in Chemical Sciences, Seth M.R. Jaipuria School, Lucknow</li>
-                        <li>Purple Belt, Brazilian Jiu Jitsu, Gustavo Dantas Jiu Jitsu Academy</li>
-                    </ul>
-                </div>
+        </section>
+
+        <section class="section">
+            <div class="text-container reveal" style="max-width: none;">
+                <div class="panel-head"><span>Credentials &amp; Achievements</span><span class="idx">.04</span></div>
+                <ul class="custom-list">
+                    <li>Engineer In-Training (EIT), Arizona State Board of Technical Registration, March 2025</li>
+                    <li>Certified SolidWorks Professional (CSWP), Dassault Systèmes – SolidWorks Corporation</li>
+                    <li>Amateur Extra Class Amateur Radio License, Call Sign KM7BER, Federal Communications Commission</li>
+                    <li>Tripoli Rocketry Association Level 1 Certification, High-Power Rocketry</li>
+                    <li>Astrophysics XSeries Course, Australian National University, edX</li>
+                    <li>Google IT Support Professional Certificate, Coursera</li>
+                    <li>Introduction to Programming the Internet of Things (IoT) Specialization, UC Irvine, Coursera</li>
+                    <li>Python for Everybody Specialization, University of Michigan, Coursera</li>
+                    <li>Dean's List — Fall 2020, Spring 2021, Fall 2021; Tutor of the Month, January 2023</li>
+                    <li>Purple Belt, Brazilian Jiu Jitsu, GD Jiu-Jitsu Academy — 4 Gold, 2 Silver, 4 Bronze, 1 MVP Competitor Award</li>
+                </ul>
             </div>
-        </div>
-        <div class="scroll-arrow">
-            <svg viewBox="0 0 24 24">
-                <path d="M12 20V4m0 16l-6-6m6 6l6-6"/>
-            </svg>
-        </div>
+        </section>
     </main>
+
+    <footer class="site-footer">
+        <span>Arkane Works — Independent Engineering Practice</span>
+        <span>Tempe, AZ — 33.42°N 111.94°W</span>
+        <span>Est. 2020 — KM7BER</span>
+    </footer>
 </body>
 </html>
