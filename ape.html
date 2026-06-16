@@ -13,8 +13,8 @@
     <script src="script.js" defer></script>
     <style>
         /* Scoped to ape.html only — composed from the shared design tokens in styles.css
-           (--ink, --line, --panel, --font-mono …). Adds NOTHING to the shared stylesheet,
-           and uses no colour from the dashboard's amber/cyan HUD. */
+           (--ink, --line, --panel, --paper, --font-mono …). Adds NOTHING to the shared
+           stylesheet, and uses no colour from the dashboard's amber/cyan HUD. */
         .ape-results { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 14px; }
         .ape-results th, .ape-results td {
             text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line);
@@ -31,18 +31,17 @@
             text-transform: uppercase; color: var(--ink-dim);
         }
         .ape-note { color: var(--ink-dim); font-size: 13px; margin-top: 12px; }
-        /* Click-to-load FACADE: a static preview that launches the live tool in a NEW TAB
-           (no iframe — the dashboard API's origin allowlist forbids framing it here). */
-        .ape-launch { position: relative; display: block; }
-        .ape-launch .ape-launch-cta {
-            position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%);
-            font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em;
-            text-transform: uppercase; color: var(--ink);
-            background: var(--panel-glass); border: 1px solid var(--line-strong);
-            padding: 10px 18px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-            transition: background 0.3s var(--ease), color 0.3s var(--ease);
+        /* Side-by-side partner panel (the combined Lineage / roadmap box) fills its
+           column instead of the default fixed text-container width. */
+        .ape-sidecol { flex: 1 1 auto; max-width: 100%; }
+        /* The single launch CTA pulses by REUSING the site's existing `blink` keyframe
+           (the same animation the active-page status dot uses) — no new keyframe added. */
+        .ape-pulse {
+            background: var(--paper); border-color: var(--paper); color: #101010;
+            animation: blink 1.6s steps(2, start) infinite;
         }
-        .ape-launch:hover .ape-launch-cta { background: var(--paper); color: #111; }
+        .ape-pulse:hover { background: var(--paper); border-color: var(--paper); color: #101010; }
+        @media (prefers-reduced-motion: reduce) { .ape-pulse { animation: none; } }
     </style>
 </head>
 <body>
@@ -85,21 +84,26 @@
     <div class="scroll-progress" aria-hidden="true"></div>
 
     <main class="scroll-container">
-        <section class="project-hero reveal">
-            <p class="crumbs micro">Index <span class="sep">/</span> Present <span class="sep">/</span> P-02 <span class="sep">/</span> <span class="status"><span class="status-dot"></span>Active</span></p>
-            <h1 class="project-title">Aether Planetary Engine</h1>
-            <div class="hero-panel">
-                <p>Aether is a working Earth-observation dashboard that detects and quantifies methane super-emitter plumes and reconstructs heat-wave events — and every number it shows traces back to a committed data artifact, with the scientific caveats carried all the way to the screen. It runs on public satellite data, it is live, and the part worth judging is not that it produces numbers but that it refuses to produce ones it cannot defend. (A.P.E. is the acronym; the work is an Earth methane-and-heat monitoring engine.)</p>
+        <section class="page video-background">
+            <div class="video-container">
+                <img src="/assets/aether/preview-hero.png" alt="The live Aether dashboard — the three-event globe and inspector" class="background-video">
             </div>
-            <div class="spec-row">
-                <div class="spec"><span class="micro">Domain</span><span class="spec-value">Methane + Heat</span></div>
-                <div class="spec"><span class="micro">Events</span><span class="spec-value">Three</span></div>
-                <div class="spec"><span class="micro">Data</span><span class="spec-value">Public EO</span></div>
-                <div class="spec"><span class="micro">Status</span><span class="spec-value">Live demo</span></div>
-            </div>
-            <div class="btn-row" style="margin-top: 36px;">
-                <a href="https://aether.arkaneworks.co" class="btn" target="_blank" rel="noopener">Open the live demo →</a>
-                <a href="https://github.com/AnimeshRajvanshi/aether" class="btn" target="_blank" rel="noopener">Source on GitHub</a>
+            <div class="content">
+                <p class="crumbs micro">Index <span class="sep">/</span> Present <span class="sep">/</span> P-02 <span class="sep">/</span> <span class="status"><span class="status-dot"></span>Active</span></p>
+                <h1 class="project-title">Aether Planetary Engine</h1>
+                <div class="hero-panel">
+                    <p>Aether is a working Earth-observation dashboard that detects and quantifies methane super-emitter plumes and reconstructs heat-wave events — and every number it shows traces back to a committed data artifact, with the scientific caveats carried all the way to the screen. It runs on public satellite data, it is live, and the part worth judging is not that it produces numbers but that it refuses to produce ones it cannot defend. (A.P.E. is the acronym; the work is an Earth methane-and-heat monitoring engine.)</p>
+                </div>
+                <div class="spec-row">
+                    <div class="spec"><span class="micro">Domain</span><span class="spec-value">Methane + Heat</span></div>
+                    <div class="spec"><span class="micro">Events</span><span class="spec-value">Three</span></div>
+                    <div class="spec"><span class="micro">Data</span><span class="spec-value">Public EO</span></div>
+                    <div class="spec"><span class="micro">Status</span><span class="spec-value">Live demo</span></div>
+                </div>
+                <div class="btn-row" style="margin-top: 32px;">
+                    <a href="https://aether.arkaneworks.co" class="btn ape-pulse" target="_blank" rel="noopener">Open the live demo →</a>
+                    <a href="https://github.com/AnimeshRajvanshi/aether" class="btn" target="_blank" rel="noopener">Source on GitHub</a>
+                </div>
             </div>
         </section>
 
@@ -168,30 +172,20 @@
                     </table>
                     <p class="ape-note">Figures as of aether <code>91620d5</code>, drawn from the repository's committed key-results snippet (<code>docs/key_results.json</code>) — each value traces to a Stage&nbsp;A/B artifact, not to this page.</p>
                 </div>
-            </div>
-            <div class="content-block">
-                <div class="text-container">
-                    <div class="panel-head"><span>See It Live</span><span class="idx">.07</span></div>
-                    <p>This page is the case study; the working software is the live demo. They are different things — <strong>arkaneworks.co/ape</strong> is this write-up, <strong>aether.arkaneworks.co</strong> is the running dashboard — and the dashboard is where the numbers above are rendered with their full provenance and caveats.</p>
-                    <p>It opens in its own tab rather than embedded here, by design: the dashboard's API enforces a strict origin allowlist (the same hardening this case study describes), so framing it on another site would mean loosening the very guard that makes it trustworthy. The frame below is a static preview; the launch control opens the live tool.</p>
-                </div>
                 <div class="media-container">
-                    <a class="ape-launch" href="https://aether.arkaneworks.co" target="_blank" rel="noopener" aria-label="Launch the live Aether dashboard in a new tab">
-                        <img src="/assets/aether/preview-hero.png" alt="Preview of the live Aether dashboard — opens in a new tab" class="project-media project-image">
-                        <span class="ape-launch-cta">Launch live dashboard ↗</span>
-                    </a>
+                    <div class="text-container ape-sidecol">
+                        <div class="panel-head"><span>Lineage</span><span class="idx">.07</span></div>
+                        <p>Aether uses public EMIT data and open methods; it is <strong>complementary to and inspired by</strong> operational methane-monitoring programs such as Carbon Mapper — <strong>not affiliated with, endorsed by, or a replication of</strong> them. EMIT and the Tanager-class instruments share JPL imaging-spectrometer <em>heritage</em>, which is worth noting; equivalence of pipelines or products is not claimed.</p>
+                        <div class="panel-head" style="margin-top: 30px;"><span>Where This Is Headed</span><span class="idx">.08</span></div>
+                        <p>A short, honest roadmap — not a delivered claim. More events through the same provenance-traceable pipeline; more sensors in the existing lanes (TROPOMI for methane context, additional thermal sources for heat); and the items already logged as debt in the repository: the residual retrieval physics behind the +1.46× systematic, and an automated visual-fidelity check so an unstyled dashboard panel fails a test rather than a human eye. Each earns its way in the same manner the current work did — against committed references, with the caveats kept.</p>
+                    </div>
                 </div>
             </div>
             <div class="content-block">
                 <div class="text-container">
-                    <div class="panel-head"><span>Lineage</span><span class="idx">.08</span></div>
-                    <p>Aether uses public EMIT data and open methods; it is <strong>complementary to and inspired by</strong> operational methane-monitoring programs such as Carbon Mapper — <strong>not affiliated with, endorsed by, or a replication of</strong> them. EMIT and the Tanager-class instruments share JPL imaging-spectrometer <em>heritage</em>, which is worth noting; equivalence of pipelines or products is not claimed.</p>
-                </div>
-            </div>
-            <div class="content-block">
-                <div class="text-container">
-                    <div class="panel-head"><span>Where This Is Headed</span><span class="idx">.09</span></div>
-                    <p>A short, honest roadmap — not a delivered claim. More events through the same provenance-traceable pipeline; more sensors in the existing lanes (TROPOMI for methane context, additional thermal sources for heat); and the items already logged as debt in the repository: the residual retrieval physics behind the +1.46× systematic, and an automated visual-fidelity check so an unstyled dashboard panel fails a test rather than a human eye. Each earns its way in the same manner the current work did — against committed references, with the caveats kept.</p>
+                    <div class="panel-head"><span>See It Live</span><span class="idx">.09</span></div>
+                    <p>This page is the case study; the working software is the live demo. They are different things — <strong>arkaneworks.co/ape</strong> is this write-up, <strong>aether.arkaneworks.co</strong> is the running dashboard — and the dashboard is where the numbers above are rendered with their full provenance and caveats.</p>
+                    <p>The launch at the top of this page opens it in a new tab rather than embedding it, by design: the dashboard's API enforces a strict origin allowlist (the same hardening this case study describes), so framing it on another site would mean loosening the very guard that makes it trustworthy.</p>
                 </div>
             </div>
             <div class="content-block">
