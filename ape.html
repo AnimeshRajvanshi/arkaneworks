@@ -4,13 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aether Planetary Engine — Arkane Works</title>
-    <meta name="description" content="A.P.E. — a simulation-first study of planetary-surface infrastructure at Arkane Works. Details published as milestones are met.">
+    <meta name="description" content="Aether Planetary Engine (A.P.E.) — a provenance-traceable Earth-observation dashboard that detects and quantifies methane super-emitter plumes and reconstructs heat-wave events, with every value traceable to a committed artifact.">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d0d0d'/%3E%3Cpath d='M7 7h18v12l-6 6H7z' fill='%23e7e7e2'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
+    <style>
+        /* Scoped to ape.html only — composed from the shared design tokens in styles.css
+           (--ink, --line, --font-mono, --panel …). Adds NOTHING to the shared stylesheet,
+           and uses no colour from the dashboard's amber/cyan HUD. */
+        .ape-results { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 14px; }
+        .ape-results caption { text-align: left; }
+        .ape-results th, .ape-results td {
+            text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line);
+            vertical-align: top;
+        }
+        .ape-results thead th {
+            font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em;
+            text-transform: uppercase; color: var(--ink-dim); font-weight: 400;
+        }
+        .ape-results td:first-child { color: var(--ink-soft); }
+        .ape-results .ape-fig { color: var(--ink); white-space: nowrap; }
+        .ape-tier {
+            font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em;
+            text-transform: uppercase; color: var(--ink-dim);
+        }
+        .ape-note { color: var(--ink-dim); font-size: 13px; margin-top: 12px; }
+        .ape-callout {
+            border: 1px solid var(--line-strong); background: var(--panel);
+            padding: 22px 24px; margin-top: 14px;
+        }
+        .ape-callout .micro { display: block; margin-bottom: 10px; }
+        .ape-callout ul { margin: 10px 0 0; padding-left: 18px; color: var(--ink-soft); }
+        .ape-callout li { margin: 4px 0; }
+    </style>
 </head>
 <body>
     <header class="menu-bar">
@@ -56,19 +85,111 @@
             <p class="crumbs micro">Index <span class="sep">/</span> Present <span class="sep">/</span> P-02 <span class="sep">/</span> <span class="status"><span class="status-dot"></span>Active</span></p>
             <h1 class="project-title">Aether Planetary Engine</h1>
             <div class="hero-panel">
-                <p>A.P.E. is a simulation-first study of planetary-surface infrastructure, growing out of the Moon Presence work: power generation and distribution, regolith handling, and the thermal realities of operating machines through a 14-day lunar night. The current aim is narrow by design — build models worth trusting, validate them against published mission data, and let the scope earn its way up. Anything more specific would be a promise the models haven't earned yet.</p>
+                <p>Aether is a working Earth-observation dashboard that detects and quantifies methane super-emitter plumes and reconstructs heat-wave events — and every number it shows traces back to a committed data artifact, with the scientific caveats carried all the way to the screen. It runs on public satellite data, it is live, and the part worth judging is not that it produces numbers but that it refuses to produce ones it cannot defend. (A.P.E. is the acronym; the work is an Earth methane-and-heat monitoring engine.)</p>
             </div>
             <div class="spec-row">
-                <div class="spec"><span class="micro">Phase</span><span class="spec-value">Study</span></div>
-                <div class="spec"><span class="micro">Lineage</span><span class="spec-value">Moon Presence</span></div>
-                <div class="spec"><span class="micro">Disclosure</span><span class="spec-value">Limited</span></div>
-                <div class="spec"><span class="micro">Next Update</span><span class="spec-value">Model Validation</span></div>
+                <div class="spec"><span class="micro">Domain</span><span class="spec-value">Methane + Heat</span></div>
+                <div class="spec"><span class="micro">Events</span><span class="spec-value">Three</span></div>
+                <div class="spec"><span class="micro">Data</span><span class="spec-value">Public EO</span></div>
+                <div class="spec"><span class="micro">Status</span><span class="spec-value">Live demo</span></div>
             </div>
             <div class="btn-row" style="margin-top: 36px;">
-                <a href="projects.html" class="btn">← Back to Index</a>
-                <a href="lunar.html" class="btn">Prior Work: Moon Presence →</a>
+                <a href="https://aether.arkaneworks.co" class="btn" target="_blank" rel="noopener">Open the live demo →</a>
+                <a href="https://github.com/AnimeshRajvanshi/aether" class="btn" target="_blank" rel="noopener">Source on GitHub</a>
             </div>
         </section>
+
+        <div class="content-blocks">
+            <div class="content-block">
+                <div class="text-container">
+                    <div class="panel-head"><span>The Problem</span><span class="idx">.01</span></div>
+                    <p>Methane super-emitters and extreme heat are both quantification problems with a trust problem attached. A satellite sees a faint plume or a hot anomaly; turning that into a defensible number — a flux in tonnes per hour, a temperature anomaly in kelvin — means a chain of retrieval, calibration, wind, and baseline choices, each carrying uncertainty. The characteristic failure in this field is not the missing number, it is the over-confident one. Aether is built so a reader can follow any number on the screen back to the artifact and the assumption it came from, and so the dashboard says &ldquo;cross-checked, not validated&rdquo; where that is the honest ceiling.</p>
+                </div>
+            </div>
+            <div class="content-block">
+                <div class="text-container">
+                    <div class="panel-head"><span>What Was Built</span><span class="idx">.02</span></div>
+                    <p>Three real events across two phenomenon domains, end to end. <strong>Methane:</strong> two EMIT overpasses — the Goturdepe (Turkmenistan) and Permian (Carlsbad, NM) oil-and-gas plumes — detected with a per-column matched filter, quantified by integrated mass enhancement, and attributed against an open oil-and-gas infrastructure database. The matched-filter target spectrum is generated independently from HITRAN2020 line-by-line data; NASA's per-granule file is never read, and is kept only as a spectral-shape cross-check (r&nbsp;0.993). <strong>Heat:</strong> the March–April 2022 northwest-India heat wave, with a 2&nbsp;m air-temperature lane validated against ground stations and a separate land-surface-temperature lane that is never conflated with it. The pipeline runs on public data (EMIT, ERA5, MODIS); the dashboard serves committed artifacts only — no runtime fetching — and renders the results, and their caveats, verbatim.</p>
+                </div>
+            </div>
+            <div class="content-block">
+                <div class="text-container">
+                    <div class="panel-head"><span>The Rigor</span><span class="idx">.03</span></div>
+                    <p>The validation tier is earned by evidence, never asserted, and the failures ship next to the successes. For the India heat wave the pass/fail criteria were <strong>committed before the station data was read</strong>: the peak 2&nbsp;m temperature (46.68&nbsp;°C) and the regional anomaly (+5.67&nbsp;K) passed against ground stations and the independent IMD product, and are tier <strong>VALIDATED</strong> — but the event's <strong>duration and extent FAILED</strong> their pre-registered criteria across two station datasets, and that criterion-edge fragility is reported as a finding, not hidden.</p>
+                    <p>The methane flux is <strong>CROSS-CHECKED, not VALIDATED</strong>: it agrees spatially and in integrated mass with NASA's independent product, but absolute accuracy is unproven — and a <strong>+1.46× matched-filter amplitude systematic</strong> is reported and left uncorrected, because correcting it would forfeit the retrieval's independence, and it does not even transfer to the second scene. The Delhi daytime <strong>urban heat-island result is negative</strong> (−0.77&nbsp;K — an urban <em>cool</em> island), carried as counter-evidence to the obvious prior. Event-level VALIDATED is deliberately held by no event. And the live demo proves this about itself: a committed verifier checks that the deployed service serves byte-identical committed results at the git commit it reports, and that non-redistributable raw data is provably absent — the dashboard cannot quietly drift from the repository.</p>
+                </div>
+            </div>
+            <div class="content-block">
+                <div class="text-container">
+                    <div class="panel-head"><span>The Numbers</span><span class="idx">.04</span></div>
+                    <table class="ape-results">
+                        <thead>
+                            <tr><th>Result</th><th>Figure</th><th>Tier / note</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Goturdepe methane flux (EMIT 2022-08-15)</td><td class="ape-fig">23.4 t/hr</td><td><span class="ape-tier">Cross-checked (strong)</span> — 16.0 t/hr NASA-anchored; ±12.8%</td></tr>
+                            <tr><td>Goturdepe spatial agreement vs NASA L2B</td><td class="ape-fig">r = 0.731</td><td>independent retrieval; k-shape vs NASA r = 0.993</td></tr>
+                            <tr><td>Matched-filter amplitude systematic</td><td class="ape-fig">1.46×</td><td>reproduced, left uncorrected; does not transfer</td></tr>
+                            <tr><td>Permian methane flux (EMIT 2022-08-26)</td><td class="ape-fig">0.85 t/hr</td><td><span class="ape-tier">Cross-checked (weaker)</span> — integrated mass 0.96× vs NASA; pixel r = 0.137</td></tr>
+                            <tr><td>NW-India peak 2&nbsp;m Tmax</td><td class="ape-fig">46.68&nbsp;°C</td><td><span class="ape-tier">Validated</span> — pre-registered vs ISD stations</td></tr>
+                            <tr><td>NW-India regional anomaly</td><td class="ape-fig">+5.67&nbsp;K</td><td><span class="ape-tier">Validated</span> — pre-registered vs IMD (independent)</td></tr>
+                            <tr><td>NW-India duration / extent</td><td class="ape-fig">26 d / 889,700 km²</td><td><span class="ape-tier">Not validated</span> — pre-registered criteria FAILED (the finding)</td></tr>
+                            <tr><td>Delhi daytime surface UHI</td><td class="ape-fig">−0.77&nbsp;K</td><td>negative — counter-evidence to the urban-heat prior</td></tr>
+                            <tr><td>Heat factor attribution (ridge)</td><td class="ape-fig">ranked #1, capped</td><td>presence &amp; rarity, not a quantified contribution</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="ape-note">Figures as of aether <code>91620d5</code>, drawn from the repository's committed key-results snippet (<code>docs/key_results.json</code>) — each value traces to a Stage&nbsp;A/B artifact, not to this page.</p>
+                </div>
+            </div>
+            <div class="content-block">
+                <div class="text-container">
+                    <div class="panel-head"><span>See It Live</span><span class="idx">.05</span></div>
+                    <p>This page is the case study; the working software is the live demo. They are different things — <strong>arkaneworks.co/ape</strong> is this write-up, <strong>aether.arkaneworks.co</strong> is the running dashboard — and the dashboard is where the numbers above are rendered with their full provenance and caveats.</p>
+                    <div class="ape-callout">
+                        <span class="micro">On the live dashboard</span>
+                        <ul>
+                            <li>The three-event globe — fly to Goturdepe, Permian, and the India heat wave.</li>
+                            <li>The per-quantity tier table — VALIDATED on C1/C2, the honest C3/C4 failures attached to their criteria.</li>
+                            <li>The two-lanes heat block — 2&nbsp;m air temperature and land-surface temperature, never conflated.</li>
+                            <li>The factor-attribution panel — the ranked ridge, the negative-UHI counter-evidence, and the cited external-attribution result kept outside the engine's own scores.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="content-block">
+                <div class="text-container">
+                    <div class="panel-head"><span>Lineage</span><span class="idx">.06</span></div>
+                    <p>Aether uses public EMIT data and open methods; it is <strong>complementary to and inspired by</strong> operational methane-monitoring programs such as Carbon Mapper — <strong>not affiliated with, endorsed by, or a replication of</strong> them. EMIT and the Tanager-class instruments share JPL imaging-spectrometer <em>heritage</em>, which is worth noting; equivalence of pipelines or products is not claimed.</p>
+                </div>
+            </div>
+            <div class="content-block">
+                <div class="text-container">
+                    <div class="panel-head"><span>Where This Is Headed</span><span class="idx">.07</span></div>
+                    <p>A short, honest roadmap — not a delivered claim. More events through the same provenance-traceable pipeline; more sensors in the existing lanes (TROPOMI for methane context, additional thermal sources for heat); and the items already logged as debt in the repository: the residual retrieval physics behind the +1.46× systematic, and an automated visual-fidelity check so an unstyled dashboard panel fails a test rather than a human eye. Each earns its way in the same manner the current work did — against committed references, with the caveats kept.</p>
+                </div>
+            </div>
+            <div class="content-block">
+                <div class="text-container">
+                    <div class="panel-head"><span>References</span><span class="idx">.08</span></div>
+                    <ul class="custom-list">
+                        <li>Live demo: <a href="https://aether.arkaneworks.co" target="_blank" rel="noopener">aether.arkaneworks.co</a></li>
+                        <li>Source &amp; reproducibility: <a href="https://github.com/AnimeshRajvanshi/aether" target="_blank" rel="noopener">github.com/AnimeshRajvanshi/aether</a></li>
+                        <li>README (the dev-facing front door): <a href="https://github.com/AnimeshRajvanshi/aether/blob/main/README.md" target="_blank" rel="noopener">README.md</a></li>
+                        <li>Scientific validation write-up (the rigor story in depth): <a href="https://github.com/AnimeshRajvanshi/aether/blob/main/docs/science/sprint11_validation_writeup.md" target="_blank" rel="noopener">sprint11_validation_writeup.md</a></li>
+                        <li>Thorpe et&nbsp;al. 2023, EMIT emission-source attribution: <a href="https://doi.org/10.1126/sciadv.adh2391" target="_blank" rel="noopener">doi:10.1126/sciadv.adh2391</a></li>
+                        <li>Gordon et&nbsp;al. 2022, HITRAN2020: <a href="https://doi.org/10.1016/j.jqsrt.2021.107949" target="_blank" rel="noopener">doi:10.1016/j.jqsrt.2021.107949</a></li>
+                        <li>Zachariah et&nbsp;al. 2023, India 2022 heat attribution (cited external): <a href="https://doi.org/10.1088/2752-5295/acf4b6" target="_blank" rel="noopener">doi:10.1088/2752-5295/acf4b6</a></li>
+                        <li>OGIM v2.7 oil-&amp;-gas infrastructure: <a href="https://doi.org/10.5281/zenodo.15103476" target="_blank" rel="noopener">doi:10.5281/zenodo.15103476</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <nav class="pager">
+            <a href="aft.html" class="prev"><span class="label">← Prev</span>P-01 Aerondight Flight Technologies</a>
+            <a href="projects.html" class="home">Index</a>
+            <a href="sus.html" class="next"><span class="label">Next →</span>P-03 Stormveil UAV Systems</a>
+        </nav>
     </main>
 
     <footer class="site-footer">
@@ -76,5 +197,11 @@
         <span>Tempe, AZ — 33.42°N 111.94°W</span>
         <span>Est. 2020 — KM7BER</span>
     </footer>
+
+    <div class="scroll-arrow">
+        <svg viewBox="0 0 24 24">
+            <path d="M12 20V4m0 16l-6-6m6 6l6-6"/>
+        </svg>
+    </div>
 </body>
 </html>
